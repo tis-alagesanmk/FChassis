@@ -1,0 +1,426 @@
+1(SM LH IC356716_E-(LH).din)
+N1
+CNC_ID=1
+Job_Length = 8110
+Job_Width = 230
+Job_Height = 76
+Job_Thickness = 6
+X_Partition = 4055
+Job_O_Radius = 16
+Job_Type  = 1
+Marking_X_Pos = 700.4
+Marking_Y_Pos = 10
+Marking_Angle = 0
+G253 F="ModelTag:Deluxe" E0
+(BF-Soffset:S1, TF-Soffset:S2, WEB_BF-Soffset:S3, WEB_TF-Soffset:S4, Marking:S3)
+(Block No - BF:N1001~N1999, TF:N2001~N2999, WEB:N3001~N3999, Notch:N4001~N4999, CutOut:N5001~N5999)
+(BlockType - 0:Flange Holes, 1:Web Block with BF reference, -1:Web Block with TF reference, 2:Notch, 3:Cutout, 4:Marking)
+(PM:Pierce Method, CM:Cutting Method, EM:End Method, ZRH: Z/Y Retract Height)
+(M50 - Sync On command, only in Tandem job Programs)
+(Job_TYPE - 1:LH JOB, 2:RH_JOB)
+(X_Correction & YZ_Correction Limit +/-5mm)
+
+(---Don't alter above Parameters---)
+
+M15
+H=LaserTableID
+G61
+G40 E0
+
+(Cutting with head 1)
+(N4001 to N4003 for notches)
+
+
+(( **Tooling Name : Tooling-2 - Flex - Notch** ))
+G253 E0 F="0=1:SM LH IC356716_E:638.86,0"
+G20 X=BlockID
+
+
+
+(( ** Tool Block Initialization ** ))
+START_X=-0.000 END_X=0.000
+N4001(Notch)
+BlockID=4001
+PathLength=24.12
+
+
+S0
+G93 Z=-Head_Height T1
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=F3)
+(( ** End - Tool Block Initialization ** ))
+
+ToolPlane
+G1 X-0.000 Y214.000 Z16.000 A-0 F8000
+BlockType=2
+X_Correction=0
+YZ_Correction=0
+ToolCorrection
+
+G1 X-0.000 Y214.000 Z6.000 F8000 ((Linear move to the start of tooling))
+(( ** Machining Block **))
+M14
+G1 X-0.000 Y215.339 Z5.944 A-4.800 
+G1 X0.000 Y216.668 Z5.776 A-9.600 
+G1 X0.000 Y217.979 Z5.497 A-14.400 
+G1 X0.000 Y219.262 Z5.110 A-19.200 
+G1 X0.000 Y220.508 Z4.617 A-24.000 
+G1 X0.000 Y221.708 Z4.021 A-28.800 
+G1 X0.000 Y222.854 Z3.327 A-33.600 
+G1 X0.000 Y223.938 Z2.539 A-38.400 
+G1 X0.000 Y224.953 Z1.663 A-43.200 
+G1 X0.000 Y225.890 Z0.706 A-48.000 
+G1 X0.000 Y226.744 Z-0.326 A-52.800 
+G1 X0.000 Y227.509 Z-1.427 A-57.600 
+G1 X0.000 Y228.179 Z-2.587 A-62.400 
+G1 X0.000 Y228.750 Z-3.800 A-67.200 
+G1 X0.000 Y229.217 Z-5.056 A-72.000 
+G1 X0.000 Y229.577 Z-6.346 A-76.800 
+G1 X0.000 Y229.828 Z-7.663 A-81.600 
+G1 X0.000 Y229.968 Z-8.995 A-86.400 
+M15
+
+(( ** Tooling Block Finalization ** )
+G253 E0 F="2=1:1:4"
+G40 E1
+
+
+
+(( **Tooling Name : Tooling-3 - Flex - Notch** ))
+
+PlaneTransfer
+G1 X0.000 Y239.949 Z28.000 A0 F8000
+G0 X21.522 Y89.503 Z28.000 A0
+G1 X21.522 Y89.503 Z16.000 A0 F8000
+EndPlaneTransfer
+(-----CUTTING ON FLEX FLANGE-----)
+BlockType=2
+X_Correction=0
+YZ_Correction=0
+ToolCorrection
+
+G1 X21.522 Y89.503 Z6.000 F8000 ((Linear move to the start of tooling))
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Wire Joint Approach to the Tooling))
+START_X=23.522 END_X=43.044
+N4002(HoleShape)
+BlockID=4002
+PathLength=184.69
+
+(( Machining on the Web Flange ))
+S3
+G93 Z0 T1
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=5.000
+
+(( ** Machining Block **))
+M14
+G1 X21.522 Y84.503 A0.000 
+G1 X0.000 Y84.503 A0.000 
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:8"
+G40 E1
+G1 X23.522 Y89.503 Z6.000 F8000 ((Linear move to the start of tooling))
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Wire Joint Approach to the Tooling))
+START_X=21.522 END_X=43.044
+N4004(HoleShape)
+BlockID=4004
+PathLength=184.69
+
+(( Machining on the Web Flange ))
+S3
+G93 Z0 T1
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=5.000
+
+(( ** Machining Block **))
+M14
+G1 X23.522 Y84.503 A0.000 
+G1 X43.044 Y84.503 A0.000 
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:12"
+G40 E1
+G2 I-19.078 J-6.003 X43.552 Y82.548
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:12"
+G40 E1
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Machining Reverse Direction))
+
+START_X=0.000 END_X=43.552
+N4006(HoleShape)
+BlockID=4006
+PathLength=184.69
+
+(( Machining on the Web Flange ))
+S3
+G93 Z0 T1
+G17
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=F3)
+
+(( ** Machining Block **))
+M14
+G3 I-19.586 J-4.048 X43.044 Y84.503
+G3 I-19.078 J-6.003 X42.344 Y86.389
+G3 I-18.378 J-7.889 X39.330 Y91.304
+G1 X16.225 Y119.031 
+G2 I53.776 J44.813 X0.000 Y163.843
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:27"
+G40 E1
+ToolPlane
+G1 X23.522 Y84.503 Z16.000 A0 F8000
+G1 X23.522 Y84.503 Z6.000 F8000 ((Linear move to the start of tooling))
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Direct Approach to the Tooling))
+START_X=21.522 END_X=43.044
+N4007(HoleShape)
+BlockID=4007
+PathLength=184.69
+
+(( Machining on the Web Flange ))
+S3
+G93 Z0 T1
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=5.000
+
+(( ** Machining Block **))
+M14
+G1 X43.044 Y84.503 A0.000 
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:30"
+G40 E1
+G3 I-19.078 J-6.003 X42.344 Y86.389
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:30"
+G40 E1
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Machining Forward Direction))
+
+START_X=0.000 END_X=43.552
+N4009(HoleShape)
+BlockID=4009
+PathLength=184.69
+
+(( Machining on the Web Flange ))
+S3
+G93 Z0 T1
+G17
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=F3)
+
+(( ** Machining Block **))
+M14
+G2 I-18.378 J-7.889 X43.044 Y84.503
+G2 I-19.078 J-6.003 X43.552 Y82.548
+G2 I-19.586 J-4.048 X39.330 Y65.696
+G1 X4.636 Y24.063 
+G3 I15.365 J-12.804 X0.570 Y16.000
+G1 X0.000 Y11.443 A16.547 
+G1 X0.030 Y12.193 A13.766 
+G1 X0.060 Y12.951 A10.984 
+G1 X0.156 Y13.712 A8.221 
+G1 X0.251 Y14.478 A5.457 
+G1 X0.411 Y15.238 A2.729 
+G1 X0.570 Y16.000 A0.000 
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:45"
+G40 E1
+
+
+(( **Tooling Name : Tooling-1 - Top - Notch** ))
+G4 X2
+
+PlaneTransfer
+G1 X0.570 Y16.000 Z28.000 A0 F8000
+G0 X1050.000 Y245.000 Z28.000 A0
+G1 X1050.000 Y245.000 Z-62.500 A-90 F8000
+EndPlaneTransfer
+(-----CUTTING ON TOP FLANGE-----)
+BlockType=-2
+X_Correction=0
+YZ_Correction=0
+ToolCorrection
+
+G1 X1050.000 Y235.000 Z-62.500 F8000 ((Linear move to the start of tooling))
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Wire Joint Approach to the Tooling))
+START_X=1050.000 END_X=1050.000
+N4011(HoleShape)
+BlockID=4011
+PathLength=302.99
+
+(( Machining on the Top Flange ))
+S2
+G93 Z=-Head_Height T1
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=5.000
+
+(( ** Machining Block **))
+M14
+G1 X1050.000 Z-62.500 A-90.000 
+G1 X1050.000 Z-70.000 A-90.000 
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:48"
+G40 E1
+G1 X1050.000 Y235.000 Z-60.500 F8000 ((Linear move to the start of tooling))
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Wire Joint Approach to the Tooling))
+START_X=1050.000 END_X=1050.000
+N4013(HoleShape)
+BlockID=4013
+PathLength=302.99
+
+(( Machining on the Top Flange ))
+S2
+G93 Z=-Head_Height T1
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=5.000
+
+(( ** Machining Block **))
+M14
+G1 X1050.000 Z-60.500 A-90.000 
+G1 X1050.000 Z-55.000 A-90.000 
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:50"
+G40 E1
+G1 X1052.000 Z-55.000 
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:50"
+G40 E1
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Machining Forward Direction))
+
+START_X=900.000 END_X=1052.000
+N4015(HoleShape)
+BlockID=4015
+PathLength=302.99
+
+(( Machining on the Top Flange ))
+S2
+G93 Z=-Head_Height T1
+G18
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=F3)
+
+(( ** Machining Block **))
+M14
+G1 X1050.000 Z-55.000 
+G1 X1048.000 Z-55.000 
+G1 X993.675 Z-55.000 
+G2 I0.000 K-300.000 X900.000 Z-70.000
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:74"
+G40 E1
+ToolPlane
+G1 X1050.000 Y240.000 Z-60.500 A-90 F8000
+G1 X1050.000 Y230.000 Z-60.500 F8000 ((Linear move to the start of tooling))
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Direct Approach to the Tooling))
+START_X=1050.000 END_X=1050.000
+N4016(HoleShape)
+BlockID=4016
+PathLength=302.99
+
+(( Machining on the Top Flange ))
+S2
+G93 Z=-Head_Height T1
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=5.000
+
+(( ** Machining Block **))
+M14
+G1 X1050.000 Z-55.000 A-90.000 
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:75"
+G40 E1
+G1 X1048.000 Z-55.000 
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:75"
+G40 E1
+
+(( ** Notch: Tool Block Initialization ** ))
+((Notch: Machining Reverse Direction))
+
+START_X=1048.000 END_X=1200.000
+N4018(HoleShape)
+BlockID=4018
+PathLength=302.99
+
+(( Machining on the Top Flange ))
+S2
+G93 Z=-Head_Height T1
+G18
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=F3)
+
+(( ** Machining Block **))
+M14
+G1 X1050.000 Z-55.000 
+G1 X1052.000 Z-55.000 
+G1 X1106.325 Z-55.000 
+G3 I0.000 K-300.000 X1200.000 Z-70.000
+M15
+
+(( ** Tooling Block Finalization ** ))
+G253 E0 F="2=1:1:99"
+G40 E1
+
+N10000
+EndOfJob
+G99

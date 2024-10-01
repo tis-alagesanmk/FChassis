@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <UseWindowsForms>True</UseWindowsForms>
+    <UseWPF>True</UseWPF>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+	<OutDir>C:\FluxSDK\Bin</OutDir>
+
+	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
+	<IntermediateOutputPath>$(SolutionDir)\output\intermediate\$(MSBuildProjectName)</IntermediateOutputPath>
+	<BaseOutputPath>C:\FluxSDK\Bin</BaseOutputPath>
+	<PackageOutputPath>$(SolutionDir)\output\$(OutputPath)</PackageOutputPath>
+	
+	<PlatformTarget>x64</PlatformTarget>
+	<StartupObject>Avalonia.Desktop.Program</StartupObject>
+	  
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="11.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FChassis\FChassis.csproj" />
+  </ItemGroup>
+</Project>

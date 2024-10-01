@@ -1,0 +1,96 @@
+1(FGJ04513_05-(LH).din)
+N1
+CNC_ID=2
+Job_Length = 9466.1
+Job_Width = 286
+Job_Height = 77
+Job_Thickness = 8
+X_Partition = 4733
+Job_O_Radius = 20
+Job_Type  = 1
+Marking_X_Pos = 700.4
+Marking_Y_Pos = 10
+Marking_Angle = 0
+G253 F="ModelTag:Deluxe" E0
+(BF-Soffset:S1, TF-Soffset:S2, WEB_BF-Soffset:S3, WEB_TF-Soffset:S4, Marking:S3)
+(Block No - BF:N1001~N1999, TF:N2001~N2999, WEB:N3001~N3999, Notch:N4001~N4999, CutOut:N5001~N5999)
+(BlockType - 0:Flange Holes, 1:Web Block with BF reference, -1:Web Block with TF reference, 2:Notch, 3:Cutout, 4:Marking)
+(PM:Pierce Method, CM:Cutting Method, EM:End Method, ZRH: Z/Y Retract Height)
+(M50 - Sync On command, only in Tandem job Programs)
+(Job_TYPE - 1:LH JOB, 2:RH_JOB)
+(X_Correction & YZ_Correction Limit +/-5mm)
+
+(---Don't alter above Parameters---)
+
+M50
+M15
+H=LaserTableID
+G61
+G40 E0
+
+(Cutting with head 2)
+(N4016 to N4016 for notches)
+
+
+(( **Tooling Name : Tooling-1 - Flex - Notch** ))
+G253 E0 F="0=1:FGJ04513_05:29.92,0"
+G20 X=BlockID
+
+
+
+(( ** Tool Block Initialization ** ))
+START_X=9466.054 END_X=9466.054
+N4016(Notch)
+BlockID=4016
+PathLength=29.92
+
+
+S0
+G93 Z=-Head_Height T1
+G61
+PM=Notch_PM CM=Notch_CM EM=Notch_EM ZRH=Notch_YRH
+Update_Param
+Lead_In=F3)
+(( ** End - Tool Block Initialization ** ))
+
+PlaneTransfer
+G0 X9466.054 Y295.917 Z28.000 A0
+G1 X9466.054 Y295.917 Z-9.764 A-85.7250000536442 F8000
+EndPlaneTransfer
+(-----CUTTING ON FLEX FLANGE-----)
+BlockType=2
+X_Correction=0
+YZ_Correction=0
+ToolCorrection
+
+G1 X9466.054 Y285.944 Z-10.509 F8000 ((Linear move to the start of tooling))
+(( ** Machining Block **))
+M14
+G1 X9466.054 Y285.752 Z-8.858 A-80.963 
+G1 X9466.054 Y285.423 Z-7.229 A-76.200 
+G1 X9466.054 Y284.960 Z-5.633 A-71.438 
+G1 X9466.054 Y284.365 Z-4.081 A-66.675 
+G1 X9466.054 Y283.645 Z-2.584 A-61.913 
+G1 X9466.054 Y282.802 Z-1.151 A-57.150 
+G1 X9466.054 Y281.843 Z0.206 A-52.388 
+G1 X9466.054 Y280.775 Z1.480 A-47.625 
+G1 X9466.054 Y279.605 Z2.660 A-42.863 
+G1 X9466.054 Y278.341 Z3.739 A-38.100 
+G1 X9466.054 Y276.991 Z4.709 A-33.338 
+G1 X9466.054 Y275.566 Z5.564 A-28.575 
+G1 X9466.054 Y274.075 Z6.297 A-23.813 
+G1 X9466.054 Y272.528 Z6.905 A-19.050 
+G1 X9466.054 Y270.936 Z7.381 A-14.288 
+G1 X9466.054 Y269.310 Z7.724 A-9.525 
+G1 X9466.054 Y267.661 Z7.931 A-4.763 
+G1 X9466.054 Y266.000 Z8.000 A0.000 
+M15
+
+(( ** Tooling Block Finalization ** )
+G253 E0 F="2=1:1:100"
+G40 E1
+
+
+N10000
+EndOfJob
+G99
