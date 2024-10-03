@@ -1,7 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Platform;
 
-using System.Windows;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.Integration;
 
