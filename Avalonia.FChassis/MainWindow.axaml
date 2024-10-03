@@ -22,7 +22,7 @@
 					<MenuItem Header="Close"/>
 				</MenuItem>
 				<MenuItem Header="Options">
-					<MenuItem Header="Settings"/>
+					<MenuItem Header="Settings" Click="SettingsClick"/>
 					<MenuItem Header="Sanity Check"/>
 				</MenuItem>
 			</Menu>

@@ -39,4 +39,10 @@ public partial class MainWindow : Window {
                Logger.Instance.Add (Logger.LogType.Error, $"Test Error{i}");
       }
    }
+
+    private void SettingsClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+      SettingsDlg dlg = new SettingsDlg();
+      dlg.ShowDialog (this);
+    }
 }

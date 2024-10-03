@@ -157,7 +157,7 @@ public class Logger {
    // Private Data ---------------------------------------------------------
    static Logger logger;                     // Class Singleton Instance
 
-   const string FontFamily = "CONSOLAS";     // Equal spaced character font name
+   const string FontFamily = "Lucida Console";     // Equal spaced character font name
    const int LineMax = 50;                   // Line Max is Log entries count to retain in display
 
    TextBlock textBlock;                      // TextBlock Instance to which Log entries managed
