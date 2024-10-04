@@ -9,12 +9,8 @@ using FChassis.Processes;
 using FChassis.Core;
 
 using static FChassis.Processes.Processor;
-using System.Collections.ObjectModel;
-using System;
-using System.Windows.Controls;
 
 namespace FChassis.ViewModels;
-
 public class MainWindow : MainWindowBase {
    #region "Proptery" ---------------------------------------------------------
    public string SelectedFileItem {

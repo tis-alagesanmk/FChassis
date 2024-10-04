@@ -30,4 +30,17 @@
   <ItemGroup>
     <ProjectReference Include="..\FChassis\FChassis.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ModelViewer\ModelViewer.axaml.cs">
+      <DependentUpon>ModelViewer.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanel\WorkOffsetSettingPanel.axaml.cs">
+      <DependentUpon>WorkOffsetSettingPanel.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
 </Project>

@@ -1,21 +1,21 @@
-using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 
 using FChassis;
 
 namespace Avalonia.Desktop;
-
-public partial class SceneViewer : UserControl {
+public partial class ModelViewer : MainChildPanel {
 
    FChassis.ViewModels.MainWindow vm = new FChassis.ViewModels.MainWindow ();
-   public SceneViewer () {
-      InitializeComponent ();
+   public ModelViewer () {
+      AvaloniaXamlLoader.Load (this);
       this.DataContext = vm;
 
       initializeControls ();
    }
+
    void initializeControls () {
-      Logger.SetControl (this.LogTextBlock);
+      /*Logger.SetControl (this.LogTextBlock);
 
       this.FChassisHost.Content = new FChassisMainWindowHost { };
       vm.Initialize (Dispatcher.UIThread, this.Files);
@@ -37,6 +37,6 @@ public partial class SceneViewer : UserControl {
          if (true)
             for (int i = 0; i < 20; i++)
                Logger.Instance.Add (Logger.LogType.Error, $"Test Error{i}");
-      }
+      }*/
    }
 }

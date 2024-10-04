@@ -1,10 +1,3 @@
-using Avalonia.Controls;
-
 namespace Avalonia.Desktop;
-public partial class SettingPanelBase : UserControl
-{
-    public SettingPanelBase()
-    {
-        InitializeComponent();
-    }
+public partial class SettingPanelBase : MainChildPanel {
 }
