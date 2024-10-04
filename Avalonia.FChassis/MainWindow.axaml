@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
 		x:Class="Avalonia.Desktop.MainWindow"
-	
+	    xmlns:panels="using:avalonia.Desktop.Panels"
 		d:DesignWidth="800" d:DesignHeight="450"
         Title="Avalonia.FChassis"
 		>
+	<ContentControl x:Name="maincontent" Content="panels.MainPanel"/>
 </Window>

@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Avalonia.Desktop.MainPanel">
+	<Grid>
+		<StackPanel Orientation="Vertical">
+			<Button Content="Local DataBase" Margin="10" Tag="1" Width="150" Height="75" Click="Button_Click"/>
+			<Button Content="SceneViewr DataBase" Margin="10" Tag="1" Width="150" Height="75" Tag="2"  Click="Button_Click"/>
+			<Button Content="Settings" Tag="3" Margin="10" Tag="1" Width="150" Height="75"  Click="Button_Click"/>
+		</StackPanel>
+	</Grid>
+</UserControl>
