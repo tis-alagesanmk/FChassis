@@ -1,10 +1,7 @@
 using Avalonia.Markup.Xaml;
-using Avalonia.Threading;
 
-using FChassis;
-
-namespace Avalonia.Desktop;
-public partial class ModelViewer : MainChildPanel {
+namespace FChassis.UI;
+public partial class ModelViewer : FChassis.UI.Panels.Child {
 
    FChassis.ViewModels.MainWindow vm = new FChassis.ViewModels.MainWindow ();
    public ModelViewer () {

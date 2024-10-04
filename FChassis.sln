@@ -5,7 +5,9 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FChassis", "FChassis\FChassis.csproj", "{02B78A70-58D9-47F1-A90A-B5F946A9DD96}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.FChassis", "Avalonia.FChassis\Avalonia.FChassis.csproj", "{F619DFD7-FB2F-48D2-B82F-E3902E8345C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FChassis.UI", "FChassis.UI\FChassis.UI.csproj", "{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia", "Avalonia", "{E93025EC-C266-4E53-BA0E-1BE97B5E2231}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +19,16 @@ Global
 		{02B78A70-58D9-47F1-A90A-B5F946A9DD96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02B78A70-58D9-47F1-A90A-B5F946A9DD96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02B78A70-58D9-47F1-A90A-B5F946A9DD96}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F619DFD7-FB2F-48D2-B82F-E3902E8345C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F619DFD7-FB2F-48D2-B82F-E3902E8345C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F619DFD7-FB2F-48D2-B82F-E3902E8345C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F619DFD7-FB2F-48D2-B82F-E3902E8345C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D} = {E93025EC-C266-4E53-BA0E-1BE97B5E2231}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D1F4E69-AD6C-4223-B2EE-D7A4D7A79327}

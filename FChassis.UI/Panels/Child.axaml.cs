@@ -1,13 +1,13 @@
 using Avalonia.Controls;
 
-namespace Avalonia.Desktop;
-public partial class MainChildPanel : UserControl {
+namespace FChassis.UI.Panels;
+public partial class Child : UserControl {
    static internal MainWindow? mainWindow = null;
-   public MainChildPanel () {
+   public Child () {
       InitializeComponent ();
    }
 
-   public void switchPanel(MainChildPanel panel) {
+   public void switchPanel(Child panel) {
       if (panel == null || panel == this.currentPanel)
          return;
 
@@ -15,5 +15,5 @@ public partial class MainChildPanel : UserControl {
       mainWindow.Content = panel;
    }
 
-  MainChildPanel currentPanel = null;
+  Child currentPanel = null;
 }

@@ -1,0 +1,20 @@
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+		     d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FChassis.UI.Settings.Laser.Panel"
+			 xmlns:base="FChassis.UI.Panels">
+	<TabControl Margin="5">
+		<TabItem Header="Laser Cutting">
+			<TextBlock Margin="5">This is tab 'Laser Cutting' content</TextBlock>
+		</TabItem>
+		<TabItem Header="DCA Page">
+			<TextBlock Margin="5">This is tab 'DCA Page' content</TextBlock>
+		</TabItem>
+		<TabItem Header="Ramp Cyles">
+			<TextBlock Margin="5">This is tab 'Ramp Cyles' content</TextBlock>
+		</TabItem>
+	</TabControl>
+</base:Panel>

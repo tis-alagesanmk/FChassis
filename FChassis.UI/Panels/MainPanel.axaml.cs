@@ -1,10 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using FChassis;
-using System;
 
-namespace Avalonia.Desktop;
-public partial class MainPanel : MainChildPanel {
+namespace FChassis.UI.Panels;
+public partial class MainPanel : Child {
  
    public MainPanel () : base() {
       this.mainPanel = this;
@@ -16,12 +14,12 @@ public partial class MainPanel : MainChildPanel {
    }
 
    void switchPanel (string name) {
-      MainChildPanel panel = name switch {
-         "Main Panel"          => this.mainPanel,
-         "Model Viewer"        => this.modelViewer,
-         "Laser DataBases"      => this.laserSettingPanel,
-         "Work Offsets"  => this.workOffsetSettingPanel,
-         "Machine Settings"     => this.machineSettingPanel,
+      Child panel = name switch {
+         "Main Panel"         => this.mainPanel,
+         "Model Viewer"       => this.modelViewer,
+         "Laser DataBases"    => this.laserSettingPanel,
+         "Work Offsets"       => this.workOffsetSettingPanel,
+         "Machine Settings"   => this.machineSettingPanel,
       };
 
       this.switchPanel (panel);
@@ -37,8 +35,8 @@ public partial class MainPanel : MainChildPanel {
    MainPanel mainPanel;
    ModelViewer modelViewer = new ModelViewer ();
 
-   LaserSettingPanel laserSettingPanel = new LaserSettingPanel ();
-   WorkOffsetSettingPanel workOffsetSettingPanel = new WorkOffsetSettingPanel ();
-   MachineSettingPanel machineSettingPanel = new MachineSettingPanel ();
+   Settings.Laser.Panel laserSettingPanel = new Settings.Laser.Panel ();
+   Settings.WorkOffsets.Panel workOffsetSettingPanel = new Settings.WorkOffsets.Panel ();
+   Settings.Machine.Panel machineSettingPanel = new Settings.Machine.Panel ();
    #endregion "Field" 
 }

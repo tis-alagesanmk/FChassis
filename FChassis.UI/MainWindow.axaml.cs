@@ -1,13 +1,12 @@
 using Avalonia.Controls;
-using System;
 
-namespace Avalonia.Desktop;
+namespace FChassis.UI;
 public partial class MainWindow : Window {
-   MainPanel mainPanel = new ();
+   FChassis.UI.Panels.MainPanel mainPanel = new ();
    public MainWindow () {
       InitializeComponent ();
 
-      MainChildPanel.mainWindow = this;
+      FChassis.UI.Panels.Child.mainWindow = this;
       mainPanel.switchPanel ();
    }
 }
