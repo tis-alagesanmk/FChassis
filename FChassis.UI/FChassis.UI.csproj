@@ -54,6 +54,9 @@
     <Compile Update="SettingPanels\MachineSettings\Panel.axaml.cs">
       <DependentUpon>Panel.axaml</DependentUpon>
     </Compile>
+    <Compile Update="SettingPanels\Machine\General\HMISettings.axaml.cs">
+      <DependentUpon>HMISettings.axaml</DependentUpon>
+    </Compile>
     <Compile Update="SettingPanels\Panel.axaml.cs">
       <DependentUpon>Panel.axaml</DependentUpon>
     </Compile>
