@@ -7,7 +7,7 @@ public partial class Child : UserControl {
       InitializeComponent ();
    }
 
-   public void switchPanel(Child panel) {
+   public void switchPanel(Child panel = null) {
       if (panel == null || panel == this.currentPanel)
          return;
 

@@ -51,11 +51,47 @@
     <Compile Update="SettingPanels\LaserSettings\Panel.axaml.cs">
       <DependentUpon>Panel.axaml</DependentUpon>
     </Compile>
+    <Compile Update="SettingPanels\Laser\DCAPage\Panel.axaml.cs">
+      <DependentUpon>Panel.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\CuttingSettings.axaml.cs">
+      <DependentUpon>CuttingSettings.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\LargeSettings.axaml.cs">
+      <DependentUpon>LargeSettings.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\MediumSettings.axaml.cs">
+      <DependentUpon>MediumSettings.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\PreholeSettings.axaml.cs">
+      <DependentUpon>PreholeSettings.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\SpecialSettings.axaml.cs">
+      <DependentUpon>SpecialSettings.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\SmallSettings.axaml.cs">
+      <DependentUpon>SmallSettings.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\Piercing\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\LaserCutting\PiercingSettings.axaml.cs">
+      <DependentUpon>PiercingSettings.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Laser\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
+    </Compile>
     <Compile Update="SettingPanels\MachineSettings\Panel.axaml.cs">
       <DependentUpon>Panel.axaml</DependentUpon>
     </Compile>
     <Compile Update="SettingPanels\Machine\General\HMISettings.axaml.cs">
       <DependentUpon>HMISettings.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Machine\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
     </Compile>
     <Compile Update="SettingPanels\Panel.axaml.cs">
       <DependentUpon>Panel.axaml</DependentUpon>

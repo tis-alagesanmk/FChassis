@@ -12,7 +12,7 @@ using static FChassis.Processes.Processor;
 
 namespace FChassis.ViewModels;
 public class MainWindow : MainWindowBase {
-   #region "Proptery" ---------------------------------------------------------
+   #region "Property" ---------------------------------------------------------
    public string SelectedFileItem {
       get => selectedFileItem;
       set {
@@ -62,7 +62,7 @@ public class MainWindow : MainWindowBase {
       }
    }
    Workpiece mWork;
-   #endregion "Proteries"
+   #endregion "Property"
 
    #region "Method" -----------------------------------------------------------
    static public UIElement CreateViewerPanel () {
@@ -82,6 +82,10 @@ public class MainWindow : MainWindowBase {
       Sys.SelectionChanged += OnSelectionChanged;
 
       files.ItemsSource = Directory.GetFiles (mSrcDir, "*.fx").Select (Path.GetFileName);
+
+      mProcess = new Processor ();
+      mProcess.TriggerRedraw += TriggerRedraw;
+      mProcess.SetSimulationStatus += status => SimulationStatus = status;
    }
    #endregion "Method"
 

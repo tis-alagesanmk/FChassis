@@ -1,14 +1,42 @@
 using Avalonia.Controls;
-using System;
+using Avalonia.Markup.Xaml;
+using FChassis.UI.Panels;
 
 namespace FChassis.UI.Settings;
 public partial class TabPanel : Panel {
-   protected void PopulateTabItemContent(Panel[] panels) {
+   public TabPanel () {
+      AvaloniaXamlLoader.Load (this); }
+
+   virtual protected TabControl GetTabControl () {
+      TabControl tabControl = (TabControl)this.LogicalChildren[0];
+      return tabControl;
+   }
+
+   protected void PopulateTabItemContent (Panel[] panels) {
+      this.panels = panels;
+      TabControl tabControl = this.GetTabControl ();
+      this.PopulateTabItemContent (tabControl, this.panels);
+   }
+
+   protected void PopulateTabItemContent (TabControl tabControl, Panel[] panels) {
+      if (panels == null)
+         return;
+
       int t = 0;
-      Avalonia.Controls.TabControl tabControl = (Avalonia.Controls.TabControl)this.LogicalChildren[0];
       foreach (var panel in panels) {
-         Avalonia.Controls.TabItem tabItem = tabControl.Items[t++] as Avalonia.Controls.TabItem;
+         TabItem tabItem = tabControl.Items[t++] as TabItem;
          tabItem.Content = panel;
+      }
+   }
+
+  protected void TabItemSelected_Default (TabItem? tabItem, string? tabName) {
+      if (tabName == "Close") {
+         // Select first tab
+         TabControl tabControl = this.GetTabControl ();
+         TabItem? firstTabItem = tabControl.Items[0] as TabItem;
+         tabControl.SelectedItem = firstTabItem;
+
+         Child.mainWindow?.Switch2MainPanel ();
       }
    }
 
@@ -18,4 +46,8 @@ public partial class TabPanel : Panel {
       TabItem tabItem = (sender as TabControl).SelectedItem as TabItem;
       this.TabItemSelected (tabItem, tabItem.Header as string);
    }
+
+   #region "Fields"
+   protected Panel[] panels = null;
+   #endregion 
 }

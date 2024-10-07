@@ -7,6 +7,10 @@ public partial class MainWindow : Window {
       InitializeComponent ();
 
       FChassis.UI.Panels.Child.mainWindow = this;
-      mainPanel.switchPanel ();
+      this.mainPanel.switchPanel ();
+   }
+
+   internal void Switch2MainPanel () {
+      this.mainPanel.switchPanel ();
    }
 }

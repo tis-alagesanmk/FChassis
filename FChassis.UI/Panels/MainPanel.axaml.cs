@@ -35,8 +35,8 @@ public partial class MainPanel : Child {
    MainPanel mainPanel;
    ModelViewer modelViewer = new ModelViewer ();
 
-   Settings.Laser.Panel laserSettingPanel = new Settings.Laser.Panel ();
-   Settings.WorkOffsets.Panel workOffsetSettingPanel = new Settings.WorkOffsets.Panel ();
-   Settings.Machine.Panel machineSettingPanel = new Settings.Machine.Panel ();
+   Settings.Laser.TabPanel laserSettingPanel = new ();
+   Settings.WorkOffsets.Panel workOffsetSettingPanel = new ();
+   Settings.Machine.TabPanel machineSettingPanel = new ();
    #endregion "Field" 
 }

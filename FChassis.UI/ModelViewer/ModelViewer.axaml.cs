@@ -1,4 +1,5 @@
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 
 namespace FChassis.UI;
 public partial class ModelViewer : FChassis.UI.Panels.Child {
@@ -12,10 +13,12 @@ public partial class ModelViewer : FChassis.UI.Panels.Child {
    }
 
    void initializeControls () {
+      //vm.Initialize (Avalonia.Threading.Dispatcher.UIThread, this.Files);
+
       /*Logger.SetControl (this.LogTextBlock);
 
       this.FChassisHost.Content = new FChassisMainWindowHost { };
-      vm.Initialize (Dispatcher.UIThread, this.Files);
+      
 
       // [TODO:Alag] remove if Test not required
       if (true) {
