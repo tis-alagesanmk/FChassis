@@ -8,19 +8,26 @@
         x:Class="FChassis.UI.Settings.WorkOffsets.Panel"
 	    xmlns:base="FChassis.UI.Settings"
         >
-	<DockPanel LastChildFill="True">
-		<DockPanel DockPanel.Dock="Right" Width="100" LastChildFill="True">
-			<Button DockPanel.Dock="Bottom" 
+	<Grid x:Name="Grid">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="100"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="40"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Panel Background="AliceBlue" Grid.RowSpan="2"/>
+		<TextBlock DockPanel.Dock="Bottom"
+				   Grid.Column="1"				   
+				   HorizontalAlignment="Center"
+				   Height="32">Import Position</TextBlock>
+		<Button DockPanel.Dock="Bottom" 
+					Grid.Row="1"
+					Grid.Column="1"
 					Margin="5"
 					Height="32"
 					Background="Black" Foreground="White"
 					Click="CloseBtn_Click">Close</Button>
-			<TextBlock DockPanel.Dock="Bottom" 
-					   HorizontalAlignment="Center"
-					   Height="32">Import Position</TextBlock>
-		</DockPanel>
-		<DockPanel Background="AliceBlue"
-				   Margin="5">
-		</DockPanel>
-	</DockPanel>
+		</Grid>
 </base:Panel>

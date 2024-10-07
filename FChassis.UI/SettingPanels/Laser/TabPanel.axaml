@@ -10,6 +10,7 @@
 		>
 	<TabControl 
 			Margin="5"
+			TabStripPlacement="Bottom" 
 			SelectionChanged="TabControl_SelectionChanged">
 		<TabItem Header="Laser Cutting"/>
 		<TabItem Header="DCA Page"/>
