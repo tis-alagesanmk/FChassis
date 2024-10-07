@@ -5,16 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="FChassis.UI.Settings.Machine.General.Panel"
+        x:Class="FChassis.UI.Settings.Machine.PLCOptions.Panel"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	<TabControl x:Name="Tab1" Margin="5"
+	<TabControl Margin="5"
 				TabStripPlacement="Left">
-		<TabItem Header="HMI Settings">
-			<TextBlock Margin="5">This is tab 'General' content</TextBlock>
+		<TabItem Header="Function Parameters">
+			<TextBlock Margin="5">This is tab 'Function Parameters' content</TextBlock>
 		</TabItem>
-		<TabItem Header="Machine Settings">
-			<TextBlock Margin="5">This is tab 'Axis Paramaraters' content</TextBlock>
+		<TabItem Header="Control Parameters">
+			<TextBlock Margin="5">This is tab 'Control Parameters' content</TextBlock>
+		</TabItem>
+		<TabItem Header="PLC Keys">
+			<TextBlock Margin="5">This is tab 'PLC Keys' content</TextBlock>
 		</TabItem>
 	</TabControl>
 </base:Panel>
