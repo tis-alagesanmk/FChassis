@@ -15,6 +15,11 @@
 				<Setter Property="HorizontalAlignment" Value="Right"/>
 				<Setter Property="VerticalAlignment" Value="Center"/>
 			</ControlTheme>
+			<ControlTheme x:Key="lblHeaderBlue" TargetType="{x:Type Label}">
+				<Setter Property="Foreground" Value="blue"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+			</ControlTheme>
 			<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
 				<Setter Property="Foreground" Value="White"/>
 				<Setter Property="HorizontalAlignment" Value="Left"/>
@@ -90,10 +95,15 @@
 				<Label Content="Can open bit rate"
 					   Theme="{StaticResource lblHeader}"
 					   Grid.Column="0" Grid.Row="4"/>
-				<TextBox x:Name="txtCanopenbitrate"
+				<StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4" Margin="5">
+					<TextBox x:Name="txtCanopenbitrate"
 						 HorizontalAlignment="Left"
-						 Margin="5" Width="150" Height="25"
-						 Grid.Column="1" Grid.Row="4" />
+						 Width="150" Height="25"/>
+					<Label Content="kbps"
+							   Margin="2,0,0,0"
+							   Theme="{StaticResource lblHeaderBlue}"/>
+				</StackPanel>
+				
 
 				<Label Content="Netdisk server IP address"
 					   Theme="{StaticResource lblHeader}"
@@ -119,6 +129,7 @@
 						 Margin="5" Width="150" Height="25"
 						 Grid.Column="1" Grid.Row="7" />
 
+				
 
 			</Grid>
 
