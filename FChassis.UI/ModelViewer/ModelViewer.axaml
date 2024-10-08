@@ -12,6 +12,9 @@
 		xmlns:vmd="using:FChassis.ViewModels"
 		x:DataType="vmd:MainWindow"
 		>
+	<Design.DataContext>
+		<vmd:MainWindow/>
+	</Design.DataContext>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="200"></ColumnDefinition>
@@ -34,7 +37,7 @@
 				<MenuItem Header="Sanity Check"/>
 			</MenuItem>
 		</Menu>
-		<Grid Grid.RowSpan="3" Grid.Row="1">
+		<Grid Grid.RowSpan="3" Grid.Row="1"> 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="auto"></RowDefinition>
@@ -44,32 +47,23 @@
 					 SelectedItem="{Binding SelectedFileItem}"/>
 			<StackPanel Grid.Row="1">
 				<Button Content="Align" Margin="4,4,4,0"
-						Command="{Binding AlignCommand}"
-						CommandParameter="{x:True}"/>
+						Command="{Binding AlignCommand}"/>
 				<Button Content="Cut Holes"  Margin="4,4,4,0"
-						Command="{Binding AddHolesCommand}"
-						CommandParameter="{x:True}"/>
+						Command="{Binding AddHolesCommand}"/>
 				<Button Content="Text Marking"  Margin="4,4,4,0"
-						Command="{Binding TextMarkingCommand}"
-						CommandParameter="{x:True}"/>
+						Command="{Binding TextMarkingCommand}"/>
 				<Button Content="Cut Notches"  Margin="4,4,4,0"
-						Command="{Binding CutNotchesCommand}"
-						CommandParameter="{x:True}"/>
+						Command="{Binding CutNotchesCommand}"/>
 				<Button Content="Sequence"  Margin="4,4,4,0"
-						Command="{Binding SortingCommand}"
-						CommandParameter="{x:True}"/>
+						Command="{Binding SortingCommand}"/>
 				<Button Content="Generate G Code" Margin="4,4,4,0"
-						Command="{Binding GenerateGCodeCommand}"
-						CommandParameter="{x:True}"/>
+						Command="{Binding GenerateGCodeCommand}"/>
 				<Button Content="Simulate" Margin="4,4,4,0"
-						Command="{Binding SimulateCommand}"
-						CommandParameter="{x:True}"/>
+						Command="{Binding SimulateCommand}"/>
 				<Button Content="PauseSimulation" Margin="4,4,4,0"
-						d:Command="{Binding PauseSimulationCommand}"
-						CommandParameter="{x:True}"/>
+						d:Command="{Binding PauseSimulationCommand}"/>
 				<Button Content="StopSimulation" Margin="4"
-						d:Command="{Binding StopSimulationCommand}"
-						CommandParameter="{x:True}"/>
+						d:Command="{Binding StopSimulationCommand}"/>
 				<Button Content="Close" Margin="4"
 						Background="Black" Foreground="White"
 						Click="CloseBtn_Click"/>
