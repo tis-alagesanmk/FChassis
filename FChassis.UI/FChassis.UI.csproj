@@ -68,4 +68,8 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="SettingPanels\Machine\TechParams\XParams.axaml" />
+  </ItemGroup>
 </Project>

@@ -27,7 +27,27 @@
 					<Setter Property="VerticalAlignment" Value="Center"/>
 					<Setter Property="Margin" Value="5,0,0,0"/>
 				</ControlTheme>
+				<ControlTheme x:Key="textboxEntry" TargetType="{x:Type TextBox}">
+					<Setter Property="Foreground" Value="Black"/>
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="Width" Value="150"/>
+					<Setter Property="Height" Value="27"/>
+				</ControlTheme>
 			</Grid.Resources>
+			<Grid.Styles>
+				<Style Selector="TextBox">
+					<Setter Property="Foreground" Value="Black"/>
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="Width" Value="150"/>
+					<Setter Property="Height" Value="27"/>
+					<Setter Property="Padding" Value="2,2,0,0"/>
+					<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+				</Style>
+			</Grid.Styles>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="60*"/>
 				<RowDefinition Height="40*"/>
@@ -72,28 +92,23 @@
 					<Label Content="Step size to incremeant"
 						   Theme="{StaticResource lblHeader}"
 						   Grid.Column="0" Grid.Row="1"/>
-					<TextBox x:Name="txtSizetoincreament"
-							 HorizontalAlignment="Left"
-							 Margin="5" Width="150"	Height="25"						
+					<TextBox x:Name="txtSizetoincreament"						
 							 Grid.Column="1" Grid.Row="1" />
 
 					<Label Content="Maximun days to keep backup up files"
 						   Theme="{StaticResource lblHeader}"
 						   Grid.Column="0" Grid.Row="2"/>
 					<TextBox x:Name="txtMaximundayskeepupfiles"
-							 HorizontalAlignment="Left"
-							 Margin="5" Width="150" Height="25"
 							 Grid.Column="1" Grid.Row="2" />
 
 					<Label Content="Maximun storage to keep backup up files"
 						   Theme="{StaticResource lblHeader}"
 						   Grid.Column="0" Grid.Row="3"/>
 					<StackPanel Orientation="Horizontal" 
-								Margin="5"
+								Margin="0,5,0,5"
 								Grid.Column="1" Grid.Row="3">
 						<TextBox x:Name="txtMaximumstoragekeepfiles"
-							 HorizontalAlignment="Left"
-							  Width="150" Height="25"/>
+								 />
 						<Label Content="GB"
 							   Margin="2,0,0,0"
 							   Theme="{StaticResource lblHeaderBlue}"/>
@@ -134,10 +149,7 @@
 							 Grid.Column="1" Grid.Row="8" />
 					
 				</Grid>
-
-				<Grid>
-					
-				</Grid>
+				
 			</Grid>
 			<!-- Screen Size -->
 			<Grid Grid.Row="1">
@@ -163,21 +175,16 @@
 						<RowDefinition Height="25"/>
 					</Grid.RowDefinitions>
 
-
 					<Label Content="Width"
 						    Theme="{StaticResource lblHeader}"
 						   Grid.Column="0" Grid.Row="0"/>
 					<TextBox x:Name="txtWidth"
-							 HorizontalAlignment="Left"
-							 Margin="5" Width="150" Height="25"
 							 Grid.Column="1" Grid.Row="0" />
 
 					<Label Content="Height"
 						   Theme="{StaticResource lblHeader}"
 						   Grid.Column="0" Grid.Row="1"/>
 					<TextBox x:Name="txtHeight"
-							 HorizontalAlignment="Left"
-							 Margin="5" Width="150" Height="25"
 							 Grid.Column="1" Grid.Row="1" />
 				</Grid>
 			</Grid>
