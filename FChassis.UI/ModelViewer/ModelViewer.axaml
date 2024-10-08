@@ -29,23 +29,35 @@
 		<DockPanel DockPanel.Dock="Left" >
 			<StackPanel DockPanel.Dock="Bottom">
 				<Button Content="Align" Margin="4,4,4,0"
-						Command="{Binding AlignCommand}" CommandParameter="{x:True}"/>
+						Command="{Binding AlignCommand}" 
+						CommandParameter="{x:True}"/>
 				<Button Content="Cut Holes"  Margin="4,4,4,0"
-						Command="{Binding AddHolesCommand}" CommandParameter="{x:True}"/>
+						Command="{Binding AddHolesCommand}" 
+						CommandParameter="{x:True}"/>
 				<Button Content="Text Marking"  Margin="4,4,4,0"
-						Command="{Binding TextMarkingCommand}" CommandParameter="{x:True}"/>
+						Command="{Binding TextMarkingCommand}" 
+						CommandParameter="{x:True}"/>
 				<Button Content="Cut Notches"  Margin="4,4,4,0"
-						Command="{Binding CutNotchesCommand}" CommandParameter="{x:True}"/>
+						Command="{Binding CutNotchesCommand}" 
+						CommandParameter="{x:True}"/>
 				<Button Content="Sequence"  Margin="4,4,4,0"
-						Command="{Binding SortingCommand}" CommandParameter="{x:True}"/>
+						Command="{Binding SortingCommand}" 
+						CommandParameter="{x:True}"/>
 				<Button Content="Generate G Code" Margin="4,4,4,0"
-						Command="{Binding GenerateGCodeCommand}" CommandParameter="{x:True}"/>
+						Command="{Binding GenerateGCodeCommand}" 
+						CommandParameter="{x:True}"/>
 				<Button Content="Simulate" Margin="4,4,4,0"
-						d:Command="{Binding SimulateCommand}" CommandParameter="{x:True}"/>
+						d:Command="{Binding SimulateCommand}" 
+						CommandParameter="{x:True}"/>
 				<Button Content="PauseSimulation" Margin="4,4,4,0"
-						d:Command="{Binding PauseSimulationCommand}" CommandParameter="{x:True}"/>
+						d:Command="{Binding PauseSimulationCommand}" 
+						CommandParameter="{x:True}"/>
 				<Button Content="StopSimulation" Margin="4"
-						d:Command="{Binding StopSimulationCommand}" CommandParameter="{x:True}"/>
+						d:Command="{Binding StopSimulationCommand}" 
+						CommandParameter="{x:True}"/>
+				<Button Content="Close" Margin="4"
+						Background="Black" Foreground="White"
+						Click="CloseBtn_Click"/>						
 			</StackPanel>
 			<ListBox x:Name="Files" MinWidth="150"
 					 d:Items="{Binding FileItems}"

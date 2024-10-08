@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="FChassis.UI.Settings.Machine.General.MachineSettings"
+        x:Class="FChassis.UI.Settings.Machine.AxisParams.Pallet1Settings"
 		xmlns:base="FChassis.UI.Settings"
 		Background="White"
 		>
-	Machine Settings
+	Pallet1 Settings
 </base:Panel>

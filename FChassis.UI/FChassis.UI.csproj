@@ -87,10 +87,25 @@
     <Compile Update="SettingPanels\MachineSettings\Panel.axaml.cs">
       <DependentUpon>Panel.axaml</DependentUpon>
     </Compile>
+    <Compile Update="SettingPanels\Machine\AxisParams\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
+    </Compile>
     <Compile Update="SettingPanels\Machine\General\HMISettings.axaml.cs">
       <DependentUpon>HMISettings.axaml</DependentUpon>
     </Compile>
+    <Compile Update="SettingPanels\Machine\General\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Machine\PLCOptions\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Machine\ProcessingDefaults\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
+    </Compile>
     <Compile Update="SettingPanels\Machine\TabPanel.axaml.cs">
+      <DependentUpon>TabPanel.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="SettingPanels\Machine\TechParams\TabPanel.axaml.cs">
       <DependentUpon>TabPanel.axaml</DependentUpon>
     </Compile>
     <Compile Update="SettingPanels\Panel.axaml.cs">

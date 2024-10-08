@@ -17,7 +17,8 @@
 		</Grid.RowDefinitions>
 		<Panel Background="AliceBlue"/>
 		<TabControl x:Name="Tab1" Margin="5"
-					Grid.Row="1">
+					Grid.Row="1"
+					TabStripPlacement="Left">
 			<TabItem Header="Large"/>
 			<TabItem Header="Medium"/>
 			<TabItem Header="Small"/>

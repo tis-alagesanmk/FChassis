@@ -1,5 +1,6 @@
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
+using FChassis.UI.Panels;
 
 namespace FChassis.UI;
 public partial class ModelViewer : FChassis.UI.Panels.Child {
@@ -39,4 +40,7 @@ public partial class ModelViewer : FChassis.UI.Panels.Child {
                Logger.Instance.Add (Logger.LogType.Error, $"Test Error{i}");
       }*/
    }
+
+   private void CloseBtn_Click (object? sender, Avalonia.Interactivity.RoutedEventArgs e) {
+      Child.mainWindow?.Switch2MainPanel (); }
 }

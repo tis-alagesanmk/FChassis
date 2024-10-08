@@ -5,17 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="FChassis.UI.Settings.Laser.LaserCutting.Piercing.TabPanel"
+        x:Class="FChassis.UI.Settings.Machine.TechParams.TabPanel"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	<TabControl x:Name="Tab1" Margin="5"
+	<TabControl Margin="5"
+				Background="AliceBlue"
 				TabStripPlacement="Left">
-		<TabItem Header="Peck"/>
-		<TabItem Header="Multiple"/>
-		<TabItem Header="Ramp"/>
-		<TabItem Header="Single"/>
-		<TabItem Header="Normal"/>
-		<TabItem Header="Gentle"/>
-		<TabItem Header="Dot Punch"/>
+		<TabItem Header="Analog Scaling"/>
+		<TabItem Header="M Functions"/>
+		<TabItem Header="Laser Technology"/>
+		<TabItem Header="Exhaust System"/>
+		<TabItem Header="Machine Database"/>
 	</TabControl>
 </base:TabPanel>
