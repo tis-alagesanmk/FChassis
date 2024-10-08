@@ -4,36 +4,30 @@ namespace FChassis.ViewModels;
 
 public class MainWindowBase : ViewModelBase {
    #region "FileOpenCommand"
-   private ICommand fileOpenCommand;
+   virtual protected void FileOpen () { }
    public ICommand FileOpenCommand {
       get {
-         fileOpenCommand = fileOpenCommand ?? new Base.Command (param => this.FileOpen (), null);
-         return fileOpenCommand;
-      }
-   }
-   virtual protected void FileOpen () { }
+         _fileOpenCommand = _fileOpenCommand ?? new Base.Command (param => this.FileOpen (), null);
+         return _fileOpenCommand; }}
+   private ICommand _fileOpenCommand;
    #endregion "FileOpenCommand"
 
    #region "FileSaveCommand"
-   private ICommand fileSaveCommand;
+   virtual protected void FileSave () { }
    public ICommand FileSaveCommand {
       get {
-         fileSaveCommand = fileSaveCommand ?? new Base.Command (param => this.FileSave (), null);
-         return fileSaveCommand;
-      }
-   }
-   virtual protected void FileSave () { }
+         _fileSaveCommand = _fileSaveCommand ?? new Base.Command (param => this.FileSave (), null);
+         return _fileSaveCommand; }}
+   private ICommand _fileSaveCommand;
    #endregion "FileSaveCommand"
 
    #region "ImportFileCommand"
-   private ICommand importFileCommand;
+   virtual protected void ImportFile () { }
    public ICommand ImportFileCommand {
       get {
-         importFileCommand = importFileCommand ?? new Base.Command (param => this.ImportFile (), null);
-         return importFileCommand;
-      }
-   }
-   virtual protected void ImportFile () { }
+         _importFileCommand = _importFileCommand ?? new Base.Command (param => this.ImportFile (), null);
+         return _importFileCommand; }}
+   private ICommand _importFileCommand;
    #endregion "ImportFileCommand"
 
    #region "AlignCommand"
@@ -59,50 +53,67 @@ public class MainWindowBase : ViewModelBase {
    #endregion "AddHolesCommand"
 
    #region "TextMarkingCommand"
-   private ICommand textMarkingCommand;
+   virtual protected void TextMarking () { }
    public ICommand TextMarkingCommand {
       get {
-         textMarkingCommand = textMarkingCommand ?? new Base.Command (param => this.TextMarking (), null);
-         return textMarkingCommand;
-      }
-   }
-   virtual protected void TextMarking () { }
+         _textMarkingCommand = _textMarkingCommand ?? new Base.Command (param => this.TextMarking (), null);
+         return _textMarkingCommand; }}
+   private ICommand _textMarkingCommand;
    #endregion "TextMarkingCommand"
 
    #region "CutNotchesCommand"
-   private ICommand cutNotchesCommand;
+   virtual protected void CutNotches () { }
    public ICommand CutNotchesCommand {
       get {
-         cutNotchesCommand = cutNotchesCommand ?? new Base.Command (param => this.TextMarking (), null);
-         return cutNotchesCommand;
+         _cutNotchesCommand = _cutNotchesCommand ?? new Base.Command (param => this.TextMarking (), null);
+         return _cutNotchesCommand;
       }
    }
-   virtual protected void CutNotches () { }
+   private ICommand _cutNotchesCommand;
    #endregion "CutNotchesCommand"
 
    #region "SortingCommand"
-   private ICommand sortingCommand;
+   virtual protected void Sorting () { }
    public ICommand SortingCommand {
       get {
-         sortingCommand = sortingCommand ?? new Base.Command (param => this.Sorting (), null);
-         return sortingCommand;
-      }
-   }
-   virtual protected void Sorting () { }
+         _sortingCommand = _sortingCommand ?? new Base.Command (param => this.Sorting (), null);
+         return _sortingCommand; }}
+   private ICommand _sortingCommand;
    #endregion "SortingCommand"
 
    #region "GenerateGCodeCommand"
-   private ICommand generateGCodeCommand;
+   virtual protected void GenerateGCode () { }
    public ICommand GenerateGCodeCommand {
       get {
-         generateGCodeCommand = generateGCodeCommand ?? new Base.Command (param => this.GenerateGCode (), null);
-         return generateGCodeCommand;
-      }
-   }
-   virtual protected void GenerateGCode () { }
+         _generateGCodeCommand = _generateGCodeCommand ?? new Base.Command (param => this.GenerateGCode (), null);
+         return _generateGCodeCommand; }}
+   private ICommand _generateGCodeCommand;
    #endregion "GenerateGCodeCommand"
 
+   #region "SimulateCommand"
    virtual protected void Simulate () { }
+   public ICommand SimulateCommand {
+      get {
+         _simulateCommand = _simulateCommand ?? new Base.Command (param => this.Simulate (), null);
+         return _simulateCommand; }}
+   private ICommand _simulateCommand;
+   #endregion "SimulateCommand"
+
+   #region "PauseSimulationCommand"
    virtual protected void PauseSimulation () { }
+   public ICommand PauseSimulationCommand {
+      get {
+         _pauseSimulationCommand = _pauseSimulationCommand ?? new Base.Command (param => this.PauseSimulation (), null);
+         return _pauseSimulationCommand; }}
+   private ICommand _pauseSimulationCommand;
+   #endregion "PauseSimulationCommand"
+
+   #region "StopSimulationCommand"
    virtual protected void StopSimulation () { }
+   public ICommand StopSimulationCommand {
+      get {
+         _stopSimulationCommand = _stopSimulationCommand ?? new Base.Command (param => this.StopSimulation (), null);
+         return _stopSimulationCommand; }}
+   private ICommand _stopSimulationCommand;
+   #endregion "StopSimulationCommand"
 }

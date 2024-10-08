@@ -65,6 +65,7 @@ public class MainWindow : MainWindowBase {
    #endregion "Property"
 
    #region "Method" -----------------------------------------------------------
+   public MainWindow () {}
    static public UIElement CreateViewerPanel () {
       UIElement viewerPanel = (UIElement)Lux.CreatePanel ();
       return viewerPanel;
@@ -191,7 +192,7 @@ public class MainWindow : MainWindowBase {
             else MessageBox.Show ("G Code generation failed", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
          }
 #endif
-         mOverlay.Redraw ();
+         mOverlay.Redraw ();  
       }
    }
 

@@ -1,25 +1,28 @@
 using Avalonia.Markup.Xaml;
-using Avalonia.Threading;
+using Avalonia.Controls;
+
+
 using FChassis.UI.Panels;
 
 namespace FChassis.UI;
 public partial class ModelViewer : FChassis.UI.Panels.Child {
 
-   FChassis.ViewModels.MainWindow vm = new FChassis.ViewModels.MainWindow ();
    public ModelViewer () {
       AvaloniaXamlLoader.Load (this);
-      this.DataContext = vm;
+      this.DataContext = ViewModels.Context.MainWindow;
 
-      initializeControls ();
+      this.initializeControls ();
    }
 
    void initializeControls () {
-      //vm.Initialize (Avalonia.Threading.Dispatcher.UIThread, this.Files);
+      this.Files = this.FindControl<ListBox> ("Files");
+      ViewModels.Context.MainWindow.Initialize (Avalonia.Threading.Dispatcher.UIThread, this.Files);
 
-      /*Logger.SetControl (this.LogTextBlock);
+      this.LogTextBlock = this.FindControl<TextBlock> ("LogTextBlock");
+      Logger.SetControl (this.LogTextBlock);
 
-      this.FChassisHost.Content = new FChassisMainWindowHost { };
-      
+      this.FChassisHost = this.FindControl<ContentControl> ("FChassisHost");
+      this.FChassisHost.Content = new FChassisMainWindowHost ();
 
       // [TODO:Alag] remove if Test not required
       if (true) {
@@ -38,9 +41,15 @@ public partial class ModelViewer : FChassis.UI.Panels.Child {
          if (true)
             for (int i = 0; i < 20; i++)
                Logger.Instance.Add (Logger.LogType.Error, $"Test Error{i}");
-      }*/
+      }
    }
 
    private void CloseBtn_Click (object? sender, Avalonia.Interactivity.RoutedEventArgs e) {
       Child.mainWindow?.Switch2MainPanel (); }
+
+   #region "Control Variable" -------------------------------------------------
+   ContentControl FChassisHost;
+   TextBlock LogTextBlock;
+   ListBox Files;
+   #endregion "Control Variable"
 }
