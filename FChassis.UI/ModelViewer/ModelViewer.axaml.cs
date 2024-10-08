@@ -1,7 +1,6 @@
 using Avalonia.Markup.Xaml;
 using Avalonia.Controls;
 
-
 using FChassis.UI.Panels;
 
 namespace FChassis.UI;
@@ -14,15 +13,15 @@ public partial class ModelViewer : FChassis.UI.Panels.Child {
       this.initializeControls ();
    }
 
+
+   #region "Implementation" ---------------------------------------------------
    void initializeControls () {
-      this.Files = this.FindControl<ListBox> ("Files");
+      this.initElementNameField ();
       ViewModels.Context.MainWindow.Initialize (Avalonia.Threading.Dispatcher.UIThread, this.Files);
+      if(this.FChassisHost != null) 
+         this.FChassisHost.Content = new FChassisMainWindowHost ();
 
-      this.LogTextBlock = this.FindControl<TextBlock> ("LogTextBlock");
       Logger.SetControl (this.LogTextBlock);
-
-      this.FChassisHost = this.FindControl<ContentControl> ("FChassisHost");
-      this.FChassisHost.Content = new FChassisMainWindowHost ();
 
       // [TODO:Alag] remove if Test not required
       if (true) {
@@ -43,13 +42,22 @@ public partial class ModelViewer : FChassis.UI.Panels.Child {
                Logger.Instance.Add (Logger.LogType.Error, $"Test Error{i}");
       }
    }
+   #endregion
 
+   #region "Events" -----------------------------------------------------------
    private void CloseBtn_Click (object? sender, Avalonia.Interactivity.RoutedEventArgs e) {
       Child.mainWindow?.Switch2MainPanel (); }
+   #endregion
 
-   #region "Control Variable" -------------------------------------------------
-   ContentControl FChassisHost;
-   TextBlock LogTextBlock;
-   ListBox Files;
-   #endregion "Control Variable"
+   #region "Element NameField" ------------------------------------------------
+   void initElementNameField () {
+      this.Files = this.FindControl<ListBox> ("Files");
+      this.LogTextBlock = this.FindControl<TextBlock> ("LogTextBlock");
+      this.FChassisHost = this.FindControl<ContentControl> ("FChassisHost");
+   }
+
+   ContentControl? FChassisHost = null!;
+   TextBlock? LogTextBlock = null!;
+   ListBox? Files = null!;
+   #endregion "Element NameField"
 }

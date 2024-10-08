@@ -7,13 +7,14 @@ public partial class Child : UserControl {
       InitializeComponent ();
    }
 
-   public void switchPanel(Child panel = null) {
+   public void switchPanel(Child panel = null!) {
       if (panel == null || panel == this.currentPanel)
          return;
 
       this.currentPanel = panel;
-      mainWindow.Content = panel;
+      if(Child.mainWindow != null) 
+         Child.mainWindow.Content = panel;
    }
 
-  Child currentPanel = null;
+  Child currentPanel = null!;
 }

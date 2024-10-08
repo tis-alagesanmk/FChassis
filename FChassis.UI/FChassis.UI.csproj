@@ -21,103 +21,13 @@
 	  
   </PropertyGroup>
   <ItemGroup>
-    <AvaloniaXaml Remove="SettingPanel\**" />
-    <Compile Remove="SettingPanel\**" />
-    <EmbeddedResource Remove="SettingPanel\**" />
-    <None Remove="SettingPanel\**" />
-    <Page Remove="SettingPanel\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Panels\MainPanel.axaml~RFfb7aa49.TMP" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.3" />
     <PackageReference Include="Avalonia.Desktop" Version="11.1.3" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.3" />
     <PackageReference Include="Avalonia.Themes.Simple" Version="11.1.3" />
-    <PackageReference Include="Avalonia.Win32.Interoperability" Version="11.1.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FChassis\FChassis.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ModelViewer\ModelViewer.axaml.cs">
-      <DependentUpon>ModelViewer.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Panels\Child.axaml.cs">
-      <DependentUpon>Child.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\LaserSettings\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\DCAPage\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\CuttingSettings.axaml.cs">
-      <DependentUpon>CuttingSettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\LargeSettings.axaml.cs">
-      <DependentUpon>LargeSettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\MediumSettings.axaml.cs">
-      <DependentUpon>MediumSettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\PreholeSettings.axaml.cs">
-      <DependentUpon>PreholeSettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\SpecialSettings.axaml.cs">
-      <DependentUpon>SpecialSettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\Cutting\SmallSettings.axaml.cs">
-      <DependentUpon>SmallSettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\Piercing\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\LaserCutting\PiercingSettings.axaml.cs">
-      <DependentUpon>PiercingSettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Laser\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\MachineSettings\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Machine\AxisParams\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Machine\General\HMISettings.axaml.cs">
-      <DependentUpon>HMISettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Machine\General\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Machine\PLCOptions\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Machine\ProcessingDefaults\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Machine\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Machine\TechParams\TabPanel.axaml.cs">
-      <DependentUpon>TabPanel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\WorkOffsets\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

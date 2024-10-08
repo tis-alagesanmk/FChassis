@@ -20,15 +20,16 @@ public partial class MainPanel : Child {
          "Laser DataBases"    => this.laserSettingPanel,
          "Work Offsets"       => this.workOffsetSettingPanel,
          "Machine Settings"   => this.machineSettingPanel,
+                            _ => null!
       };
 
       this.switchPanel (panel);
    }
 
    private void Button_Click (object? sender, Avalonia.Interactivity.RoutedEventArgs e) {
-      Button button = sender as Button;
-      var name = button?.Content ?? null;
-      this.switchPanel (name as string);
+      Button button = sender as Button ?? null!;
+      var name = button?.Content;
+      this.switchPanel (name as string ?? "");
    }
 
    #region "Field" 

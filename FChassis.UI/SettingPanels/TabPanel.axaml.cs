@@ -24,8 +24,9 @@ public partial class TabPanel : Panel {
 
       int t = 0;
       foreach (var panel in panels) {
-         TabItem tabItem = tabControl.Items[t++] as TabItem;
-         tabItem.Content = panel;
+         TabItem? tabItem = tabControl.Items[t++] as TabItem;
+         if(tabItem != null) 
+            tabItem.Content = panel;
       }
    }
 
@@ -43,11 +44,13 @@ public partial class TabPanel : Panel {
    virtual protected void TabItemSelected (TabItem? tabItem, string? tabName) { }
 
    protected void TabControl_SelectionChanged (object? sender, SelectionChangedEventArgs e) {
-      TabItem tabItem = (sender as TabControl).SelectedItem as TabItem;
-      this.TabItemSelected (tabItem, tabItem.Header as string);
+      TabControl? tabControl = sender as TabControl;
+      TabItem? tabItem = tabControl?.SelectedItem as TabItem;
+      if(tabItem != null) 
+         this.TabItemSelected (tabItem, tabItem.Header as string);
    }
 
    #region "Fields"
-   protected Panel[] panels = null;
+   protected Panel[] panels = null!;
    #endregion 
 }
