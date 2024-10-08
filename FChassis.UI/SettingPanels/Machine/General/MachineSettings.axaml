@@ -9,5 +9,316 @@
 		xmlns:base="FChassis.UI.Settings"
 		Background="White"
 		>
-	Machine Settings
+	<ScrollViewer>
+		<Grid>
+		<Grid.Resources>
+			<ControlTheme x:Key="lblHeader" TargetType="{x:Type Label}">
+				<Setter Property="HorizontalAlignment" Value="Right"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+			</ControlTheme>
+			<ControlTheme x:Key="lblHeaderBlue" TargetType="{x:Type Label}">
+				<Setter Property="Foreground" Value="blue"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+			</ControlTheme>
+			<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
+				<Setter Property="Foreground" Value="White"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="5,0,0,0"/>
+			</ControlTheme>
+		</Grid.Resources>
+		<Grid.Styles>
+			<Style Selector="TextBox">
+				<Setter Property="Foreground" Value="Black"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="5"/>
+				<Setter Property="Width" Value="150"/>
+				<Setter Property="Height" Value="27"/>
+				<Setter Property="Padding" Value="2,2,0,0"/>
+				<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+			</Style>
+			<Style Selector="StackPanel">
+				<Setter Property="Orientation" Value="Horizontal"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="0,0,0,5"/>
+			</Style>
+		</Grid.Styles>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="25*"/>
+			<RowDefinition Height="50*"/>
+			<RowDefinition Height="25*"/>
+		</Grid.RowDefinitions>
+		<!-- General -->
+		<Grid Grid.Row="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="10*"/>
+				<RowDefinition Height="90*"/>
+			</Grid.RowDefinitions>
+			<Border Grid.Row="0" Background="Blue" Height="35">
+				<TextBlock Text="General"
+						   Theme="{StaticResource textblockHeader}"/>
+			</Border>
+
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="50*"/>
+					<ColumnDefinition Width="50*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+				</Grid.RowDefinitions>
+
+				<Label Content="Match Id"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="0"/>
+				<TextBox x:Name="txtMatchId"
+						  
+						  Grid.Column="1" Grid.Row="0" />
+
+				<Label Content="Axis emulation"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="1"/>
+				<TextBox x:Name="txtAxisemulation"
+						
+						 Grid.Column="1" Grid.Row="1" />
+
+				<Label Content="Cfg custom tech"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="2"/>
+				<TextBox x:Name="txtCfgcustomtech"
+						
+						 Grid.Column="1" Grid.Row="2" />
+
+				<Label Content="Pesets"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="3"/>
+				<TextBox x:Name="txtMaximumstoragekeepfiles"
+						 Grid.Column="1" Grid.Row="3" />
+
+				<Label Content="Can open bit rate"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="4"/>
+				<StackPanel  Grid.Column="1" Grid.Row="4">
+					<TextBox x:Name="txtCanopenbitrate"/>
+					<Label Content="kbps"
+							   Margin="2,0,0,0"
+							   Theme="{StaticResource lblHeaderBlue}"/>
+				</StackPanel>
+				
+
+				<Label Content="Netdisk server IP address"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="5"/>
+				<TextBox x:Name="txtNetdiskserverip"
+						 Grid.Column="1" Grid.Row="5" />
+
+				<Label Content="Software limit code"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="6"/>
+				<TextBox x:Name="txtSoftwarelimitcode"
+						 Grid.Column="1" Grid.Row="6" />
+
+				<Label Content="Override limit"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="7"/>
+				<TextBox x:Name="txtOverridelimit"
+						 Grid.Column="1" Grid.Row="7" />
+
+			</Grid>
+
+			<Grid>
+
+			</Grid>
+		</Grid>
+		<!-- Controller  -->
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="10*"/>
+				<RowDefinition Height="90*"/>
+			</Grid.RowDefinitions>
+
+			<Border Grid.Row="0"
+					Height="30"
+					Background="Blue">
+				<TextBlock Text="Controller"
+						   Theme="{StaticResource textblockHeader}"/>
+			</Border>
+
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="50*"/>
+					<ColumnDefinition Width="50*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+				</Grid.RowDefinitions>
+
+				<Label Content="Interpolation cycle time"
+						Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="0"/>
+				<StackPanel Grid.Column="1" Grid.Row="0">
+					<TextBox x:Name="txtInterpolationcyclelimit"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="ms"/>
+				</StackPanel>
+				
+				<Label Content="Interpolation divider"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="1"/>
+				<TextBox x:Name="txtInterpolationdivider"
+						 Grid.Column="1" Grid.Row="1" />
+
+				<Label Content="Handwheel filetr time"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="2"/>
+				<StackPanel Grid.Column="1" Grid.Row="2">
+					<TextBox x:Name="txtHandwheelfiltertime"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="ms"/>
+				</StackPanel>
+
+
+				<Label Content="Velocity"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="3"/>
+				<StackPanel  Grid.Column="1" Grid.Row="3">
+					<TextBox x:Name="txtVelocity"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="m/min"/>
+				</StackPanel>
+
+				<Label Content="Acceleration"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="4"/>
+				<StackPanel Grid.Column="1" Grid.Row="4">
+					<TextBox x:Name="txtAcceleration"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="m/sec²"/>
+				</StackPanel>
+
+				<Label Content="Deceleration"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="5"/>
+				<StackPanel Grid.Column="1" Grid.Row="5">
+					<TextBox x:Name="txtDeceleration"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="m/sec²"/>
+				</StackPanel>
+
+
+				<Label Content="Ramp time"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="6"/>
+				<StackPanel Grid.Column="1" Grid.Row="6">
+					<TextBox x:Name="txtRamptime"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="ms"/>
+				</StackPanel>
+				
+				<Label Content="Position tolerance MM"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="7"/>
+				<StackPanel Grid.Column="1" Grid.Row="7">
+					<TextBox x:Name="txtPositiontolerancemm"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="mm"/>
+				</StackPanel>
+
+
+				<Label Content="Position tolerance Degree"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="8"/>
+				<StackPanel Grid.Column="1" Grid.Row="8">
+					<TextBox x:Name="txtPositiontolerancedegree"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="o"/>
+				</StackPanel>
+				
+
+				<Label Content="Quick stop time"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="9"/>
+				<StackPanel Grid.Column="1" Grid.Row="9">
+					<TextBox x:Name="txtQuickstoptime"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="ms"/>
+				</StackPanel>
+				
+				<Label Content="Creep speed velocity"
+					   Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="10"/>
+				<StackPanel Grid.Column="1" Grid.Row="10">
+					<TextBox x:Name="txtCreepspeedvelocity"/>
+					<Label Theme="{StaticResource lblHeaderBlue}"
+						   Content="m/min"/>
+				</StackPanel>
+				
+			</Grid>
+		</Grid>
+
+		<!-- Memory reservation  -->
+		<Grid Grid.Row="2">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="10*"/>
+				<RowDefinition Height="90*"/>
+			</Grid.RowDefinitions>
+
+			<Border Grid.Row="0"
+					Height="30"
+					Background="Blue">
+				<TextBlock Text="Memory reservation"
+						   Theme="{StaticResource textblockHeader}"/>
+			</Border>
+
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="50*"/>
+					<ColumnDefinition Width="50*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					<RowDefinition Height="25"/>
+					</Grid.RowDefinitions>
+				<Label Content="Block count"
+						Theme="{StaticResource lblHeader}"
+					   Grid.Column="0" Grid.Row="0"/>
+				<TextBox x:Name="txtBlockcount"
+						 Grid.Column="1" Grid.Row="0" />
+
+				<Label Content="Reverse Block count"
+							Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="1"/>
+				<TextBox x:Name="txtReverseblockcount"
+						 Grid.Column="1" Grid.Row="1" />
+
+				<Label Content="Parameter aray size"
+							Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="2"/>
+				<TextBox x:Name="txtParameterarraysize"
+						 Grid.Column="1" Grid.Row="2" />
+			</Grid>
+						
+	    </Grid>
+	</Grid>
+    </ScrollViewer>
 </base:Panel>
