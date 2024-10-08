@@ -4,17 +4,28 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		x:Class="FChassis.UI.ModelViewer"
+		x:CompileBindings="True"
+		
 		xmlns:base="FChassis.UI.Panels"
-			 
-		xmlns:vmc="using:FChassis.ViewModels"
-		d:DataContext="{x:Static vmc:Context.MainWindow}"
+		x:Class="FChassis.UI.ModelViewer"
 		
 		xmlns:vmd="using:FChassis.ViewModels"
-		x:DataType="vmd:MainWindow" x:CompileBindings="True"
+		x:DataType="vmd:MainWindow"
 		>
-	<DockPanel>
-		<Menu DockPanel.Dock="Top">
+	<Design.DataContext>
+		<vmd:MainWindow/>
+	</Design.DataContext>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="100"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Menu Grid.ColumnSpan="2">
 			<MenuItem Header="File">
 				<MenuItem Header="Open" Command="{Binding FileOpenCommand}"/>
 				<MenuItem Header="Import"/>
@@ -26,43 +37,51 @@
 				<MenuItem Header="Sanity Check"/>
 			</MenuItem>
 		</Menu>
-		<DockPanel DockPanel.Dock="Left" >
-			<StackPanel DockPanel.Dock="Bottom">
-				<Button Content="Align" Margin="4,4,4,0"
-						Command="{Binding AlignCommand}" CommandParameter="{x:True}"/>
-				<Button Content="Cut Holes"  Margin="4,4,4,0"
-						Command="{Binding AddHolesCommand}" CommandParameter="{x:True}"/>
-				<Button Content="Text Marking"  Margin="4,4,4,0"
-						Command="{Binding TextMarkingCommand}" CommandParameter="{x:True}"/>
-				<Button Content="Cut Notches"  Margin="4,4,4,0"
-						Command="{Binding CutNotchesCommand}" CommandParameter="{x:True}"/>
-				<Button Content="Sequence"  Margin="4,4,4,0"
-						Command="{Binding SortingCommand}" CommandParameter="{x:True}"/>
-				<Button Content="Generate G Code" Margin="4,4,4,0"
-						Command="{Binding GenerateGCodeCommand}" CommandParameter="{x:True}"/>
-				<Button Content="Simulate" Margin="4,4,4,0"
-						d:Command="{Binding SimulateCommand}" CommandParameter="{x:True}"/>
-				<Button Content="PauseSimulation" Margin="4,4,4,0"
-						d:Command="{Binding PauseSimulationCommand}" CommandParameter="{x:True}"/>
-				<Button Content="StopSimulation" Margin="4"
-						d:Command="{Binding StopSimulationCommand}" CommandParameter="{x:True}"/>
-			</StackPanel>
+		<Grid Grid.RowSpan="3" Grid.Row="1"> 
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+			</Grid.RowDefinitions>
 			<ListBox x:Name="Files" MinWidth="150"
 					 d:Items="{Binding FileItems}"
 					 SelectedItem="{Binding SelectedFileItem}"/>
-
-		</DockPanel>
+			<StackPanel Grid.Row="1">
+				<Button Content="Align" Margin="4,4,4,0"
+						Command="{Binding AlignCommand}"/>
+				<Button Content="Cut Holes"  Margin="4,4,4,0"
+						Command="{Binding AddHolesCommand}"/>
+				<Button Content="Text Marking"  Margin="4,4,4,0"
+						Command="{Binding TextMarkingCommand}"/>
+				<Button Content="Cut Notches"  Margin="4,4,4,0"
+						Command="{Binding CutNotchesCommand}"/>
+				<Button Content="Sequence"  Margin="4,4,4,0"
+						Command="{Binding SortingCommand}"/>
+				<Button Content="Generate G Code" Margin="4,4,4,0"
+						Command="{Binding GenerateGCodeCommand}"/>
+				<Button Content="Simulate" Margin="4,4,4,0"
+						Command="{Binding SimulateCommand}"/>
+				<Button Content="PauseSimulation" Margin="4,4,4,0"
+						d:Command="{Binding PauseSimulationCommand}"/>
+				<Button Content="StopSimulation" Margin="4"
+						d:Command="{Binding StopSimulationCommand}"/>
+				<Button Content="Close" Margin="4"
+						Background="Black" Foreground="White"
+						Click="CloseBtn_Click"/>
+			</StackPanel>
+		</Grid>
+		<ContentControl x:Name="FChassisHost"
+						Grid.Row="1" Grid.Column="1"
+						Background="LightGray"
+						HorizontalAlignment="Stretch"
+						HorizontalContentAlignment="Stretch"/>
 		<ScrollViewer x:Name="LogTextBlocks"
+					  Grid.Row="2" Grid.Column="1"
 					  DockPanel.Dock="Bottom" Height="100"
 					  HorizontalScrollBarVisibility="Disabled"
 					  VerticalScrollBarVisibility="Auto">
-			<TextBlock	Name="LogTextBlock"
-						HorizontalAlignment="Stretch"
-						VerticalAlignment="Stretch">
-			</TextBlock >
+			<TextBlock x:Name="LogTextBlock"
+					   HorizontalAlignment="Stretch"
+					   VerticalAlignment="Stretch"/>
 		</ScrollViewer>
-		<ContentControl x:Name="FChassisHost"
-						HorizontalAlignment="Stretch"
-						HorizontalContentAlignment="Stretch"/>
-	</DockPanel>
+	</Grid>
 </base:Child>

@@ -21,16 +21,6 @@
 	  
   </PropertyGroup>
   <ItemGroup>
-    <AvaloniaXaml Remove="SettingPanel\**" />
-    <Compile Remove="SettingPanel\**" />
-    <EmbeddedResource Remove="SettingPanel\**" />
-    <None Remove="SettingPanel\**" />
-    <Page Remove="SettingPanel\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Panels\MainPanel.axaml~RFfb7aa49.TMP" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.3" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.1.3" />
     <PackageReference Include="Avalonia.Desktop" Version="11.1.3" />
@@ -41,34 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FChassis\FChassis.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ModelViewer\ModelViewer.axaml.cs">
-      <DependentUpon>ModelViewer.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Panels\Child.axaml.cs">
-      <DependentUpon>Child.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\LaserSettings\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\MachineSettings\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Machine\General\HMISettings.axaml.cs">
-      <DependentUpon>HMISettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="SettingPanels\WorkOffsets\Panel.axaml.cs">
-      <DependentUpon>Panel.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

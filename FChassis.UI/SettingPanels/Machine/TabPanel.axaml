@@ -5,32 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="FChassis.UI.Settings.Machine.Panel"
+        x:Class="FChassis.UI.Settings.Machine.TabPanel"
 		xmlns:base="FChassis.UI.Settings"
 		>
 	<TabControl Margin="5"
 		x:Name="TabCtrl"
 		TabStripPlacement="Bottom" 
 		SelectionChanged="TabControl_SelectionChanged">
-		<TabItem Header="General">
-			<TextBlock Margin="5">This is tab 'General' content</TextBlock>
-		</TabItem>
-		<TabItem Header="Axis Paramaraters">
-			<TextBlock Margin="5">This is tab 'Axis Paramaraters' content</TextBlock>
-		</TabItem>
-		<TabItem Header="Tech Paramaraters">
-			<TextBlock Margin="5">This is tab 'Tech Paramaraters' content</TextBlock>
-		</TabItem>
-		<TabItem Header="PLC Options">
-			<TextBlock Margin="5">This is tab 'PLC Options' content</TextBlock>
-		</TabItem>
-		<TabItem Header="Processing Defaults">
-			<TextBlock Margin="5">This is tab 'Ramp Processing Defaults</TextBlock>
-		</TabItem>
-		<TabItem Header="Close">
-			<TextBlock Margin="5" >
-				Close
-			</TextBlock>
-		</TabItem>
+		<TabItem Header="General"/>
+		<TabItem Header="Axis Paramaraters"/>
+		<TabItem Header="Tech Paramaraters"/>
+		<TabItem Header="PLC Options"/>
+		<TabItem Header="Processing Defaults"/>
+		<TabItem Header="Close" Background="Black" Foreground="White"/>
 	</TabControl>
 </base:TabPanel>

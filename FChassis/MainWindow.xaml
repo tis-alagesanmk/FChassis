@@ -65,4 +65,5 @@
         <Border Name="Area" DockPanel.Dock="Left" 
                 Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"  />
     </DockPanel>
+
 </UserControl>

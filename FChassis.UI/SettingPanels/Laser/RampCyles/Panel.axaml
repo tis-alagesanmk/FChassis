@@ -1,0 +1,27 @@
+<base:Panel
+	    xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+		d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="FChassis.UI.Settings.Laser.RampCycles.Panel"
+		xmlns:base="FChassis.UI.Settings"
+		>
+	<Grid x:Name="Grid">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Panel Background="AliceBlue"
+			   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+		<Panel Background="AntiqueWhite"
+			   Grid.Row="1" Grid.Column="0"/>
+		<Panel Background="Aquamarine"
+			   Grid.Row="1" Grid.Column="1"/>
+	</Grid>
+</base:Panel>
