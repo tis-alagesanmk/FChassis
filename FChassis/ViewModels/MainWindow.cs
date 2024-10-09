@@ -25,8 +25,7 @@ public partial class MainWindow : ObservableObject {
    }}
    string _selectedFileItem = "";
 
-   [ObservableProperty]
-   Processor.ESimulationStatus _simulationStatus = ESimulationStatus.NotRunning;
+   Processor.ESimulationStatus simulationStatus = ESimulationStatus.NotRunning;
 
    public Processor Process {
       get => _process;
@@ -34,7 +33,7 @@ public partial class MainWindow : ObservableObject {
          if (_process != value) {
             if (_process != null) {
                SetProperty (ref _process, value);
-               OnPropertyChanged (nameof (SimulationStatus));
+               OnPropertyChanged (nameof (simulationStatus));
             }
          }
    }}
@@ -69,7 +68,7 @@ public partial class MainWindow : ObservableObject {
 
       _process = new Processor ();
       _process.TriggerRedraw += TriggerRedraw;
-      _process.SetSimulationStatus += status => SimulationStatus = status;
+      _process.SetSimulationStatus += (status) => simulationStatus = status;
    }
    #endregion "Method"
 
@@ -290,12 +289,9 @@ public partial class MainWindow : ObservableObject {
 
       mOverlay?.Redraw ();
    }
+
    void OnSimulationFinished ()
          => Process.SimulationStatus = Processor.ESimulationStatus.NotRunning;
-   /*private void OnProcessPropertyChanged (object sender, PropertyChangedEventArgs e) {
-      if (e.PropertyName == nameof (Processor.SimulationStatus))
-         OnPropertyChanged (nameof (SimulationStatus));
-   }*/
    #endregion "EventHandler"
    #endregion "Implementation"
 
