@@ -36,4 +36,10 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="SettingPanels\Machine\TechParams\XParams.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SettingPanels\Machine\AxisParams\AxisSettingsPanel.axaml.cs">
+      <DependentUpon>AxisSettingsPanel.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

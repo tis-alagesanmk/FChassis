@@ -38,9 +38,7 @@
 				<Setter Property="Padding" Value="2,2,0,0"/>
 				<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
 			</Style>
-			<Style Selector="DataGrid">
-				
-			</Style>
+			
 		</ScrollViewer.Styles>
 		<Border>
 			<Grid RowDefinitions="75* 25*">
@@ -51,6 +49,35 @@
 								   Theme="{StaticResource textblockHeader}"/>
 					</Border>
 
+					<DataGrid Grid.Row="1">
+						<DataGrid.Columns>
+							<DataGridTemplateColumn Header="Section Number">
+								<DataTemplate>
+									<TextBlock/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Header="X ON">
+								<DataTemplate>
+									<TextBlock/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Header="X OFF">
+								<DataTemplate>
+									<TextBlock/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Header="Y ON">
+								<DataTemplate>
+									<TextBlock/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Header="Y OFF">
+								<DataTemplate>
+									<TextBlock/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
 					
 				</Grid>
 			</Grid>
