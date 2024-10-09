@@ -22,8 +22,9 @@
 				<Setter Property="VerticalAlignment" Value="Center"/>
 			</ControlTheme>
 			<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
-				<Setter Property="Background" Value="Blue"/>
+				<Setter Property="Background" Value="#3D87B4"/>
 				<Setter Property="Height" Value="35"/>
+				<Setter Property="Margin" Value="0,3,0,3"/>
 			</ControlTheme>
 		</ScrollViewer.Resources>
 		<ScrollViewer.Styles>

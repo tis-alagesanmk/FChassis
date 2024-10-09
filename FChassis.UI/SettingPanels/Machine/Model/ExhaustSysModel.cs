@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FChassis.UI.SettingPanels.Machine.TechParams.Model {
+namespace FChassis.UI.SettingPanels.Machine.Model {
    public class ExhaustSysModel : ViewModelBase {
       public string SectionNumber { get; set; }
       public string XOn { get; set; }

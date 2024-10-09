@@ -32,6 +32,11 @@
 					<Setter Property="Width" Value="150"/>
 					<Setter Property="Height" Value="27"/>
 				</ControlTheme>
+				<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
+					<Setter Property="Background" Value="#3D87B4"/>
+					<Setter Property="Height" Value="35"/>
+					<Setter Property="Margin" Value="0,3,0,3"/>
+				</ControlTheme>
 			</Grid.Resources>
 			<Grid.Styles>
 				<Style Selector="TextBox">
@@ -58,7 +63,7 @@
 				<Style Selector="StackPanel">
 					<Setter Property="Orientation" Value="Horizontal"/>
 					<Setter Property="VerticalAlignment" Value="Center"/>
-					<Setter Property="Margin" Value="0,0,0,5"/>
+					<Setter Property="Margin" Value="0,5,5,5"/>
 				</Style>
 			</Grid.Styles>
 
@@ -80,20 +85,20 @@
 					<RowDefinition Height="90*"/>
 				</Grid.RowDefinitions>
 
-				<Border Grid.Row="0" Background="Blue" Height="35">
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 					<TextBlock Text="Configuration parameters"
 							   Theme="{StaticResource textblockHeader}"/>
 				</Border>
 
 				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="50*"/>
-						<ColumnDefinition Width="50*"/>
+						<ColumnDefinition Width="40*"/>
+						<ColumnDefinition Width="60*"/>
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="25"/>
 						<RowDefinition Height="25"/>
-						<RowDefinition Height="25"/>
+						<RowDefinition Height="28"/>
 						<RowDefinition Height="25"/>
 						<RowDefinition Height="25"/>
 						<RowDefinition Height="25"/>
@@ -113,13 +118,13 @@
 						   Theme="{StaticResource lblHeader}"
 						   Grid.Column="0" Grid.Row="2"/>
 					<ComboBox x:Name="cmbAxisconnection"
-								 Grid.Column="1" Grid.Row="2" />
+								 Grid.Column="1" Grid.Row="2"  />
 
 					<Label Content="Axis address"
 						   Theme="{StaticResource lblHeader}"
 						   Grid.Column="0" Grid.Row="3"/>
 				    <TextBox x:Name="txtAxisaddress"
-							  Grid.Column="1" Grid.Row="3"/>
+							  Grid.Column="1" Grid.Row="3" />
 					
 					<Label Content="Sync connection"
 						   Theme="{StaticResource lblHeader}"
@@ -146,15 +151,14 @@
 					<RowDefinition Height="90*"/>
 				</Grid.RowDefinitions>
 
-
-				<Border Grid.Row="0" Background="Blue" Height="35">
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 					<TextBlock Text="Resolution"
 							   Theme="{StaticResource textblockHeader}"/>
 				</Border>
 				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="50*"/>
-						<ColumnDefinition Width="50*"/>
+						<ColumnDefinition Width="40*"/>
+						<ColumnDefinition Width="60*"/>
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="25"/>
@@ -184,14 +188,14 @@
 						<RowDefinition Height="10*"/>
 						<RowDefinition Height="90*"/>
 					</Grid.RowDefinitions>
-				<Border Grid.Row="0" Background="Blue" Height="35">
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 						<TextBlock Text="Monitoring"
 								   Theme="{StaticResource textblockHeader}"/>
 					</Border>
 				<Grid Grid.Row="1">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50*"/>
-							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="25"/>
@@ -247,14 +251,14 @@
 						<RowDefinition Height="10*"/>
 						<RowDefinition Height="90*"/>
 					</Grid.RowDefinitions>
-					<Border Grid.Row="0" Background="Blue" Height="35">
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 						<TextBlock Text="Referencing"
 								   Theme="{StaticResource textblockHeader}"/>
 					</Border>
 					<Grid Grid.Row="1">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50*"/>
-							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="25"/>
@@ -331,14 +335,14 @@
 						<RowDefinition Height="10*"/>
 						<RowDefinition Height="90*"/>
 					</Grid.RowDefinitions>
-				<Border Grid.Row="0" Background="Blue" Height="35">
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 						<TextBlock Text="Speed &amp; Acceleration"
 								   Theme="{StaticResource textblockHeader}"/>
 					</Border>
 				<Grid Grid.Row="1">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50*"/>
-							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="25"/>
@@ -401,14 +405,14 @@
 						<RowDefinition Height="10*"/>
 						<RowDefinition Height="90*"/>
 					</Grid.RowDefinitions>
-					<Border Grid.Row="0" Background="Blue" Height="35">
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 						<TextBlock Text="Corrections"
 								   Theme="{StaticResource textblockHeader}"/>
 					</Border>
 					<Grid Grid.Row="1">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50*"/>
-							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="25"/>
@@ -431,14 +435,14 @@
 						<RowDefinition Height="10*"/>
 						<RowDefinition Height="90*"/>
 					</Grid.RowDefinitions>
-					<Border Grid.Row="0" Background="Blue" Height="35">
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 						<TextBlock Text="Synchronous"
 								   Theme="{StaticResource textblockHeader}"/>
 					</Border>
 					<Grid Grid.Row="1">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50*"/>
-							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="25"/>
@@ -471,14 +475,14 @@
 						<RowDefinition Height="10*"/>
 						<RowDefinition Height="90*"/>
 					</Grid.RowDefinitions>
-				<Border Grid.Row="0" Background="Blue" Height="35">
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 						<TextBlock Text="Handwheel"
 								   Theme="{StaticResource textblockHeader}"/>
 					</Border>
 				<Grid Grid.Row="1">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50*"/>
-							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="25"/>

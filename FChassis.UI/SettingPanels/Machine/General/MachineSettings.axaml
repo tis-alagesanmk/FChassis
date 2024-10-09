@@ -27,6 +27,11 @@
 				<Setter Property="VerticalAlignment" Value="Center"/>
 				<Setter Property="Margin" Value="5,0,0,0"/>
 			</ControlTheme>
+			<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
+				<Setter Property="Background" Value="#3D87B4"/>
+				<Setter Property="Height" Value="35"/>
+				<Setter Property="Margin" Value="0,3,0,3"/>
+			</ControlTheme>
 		</Grid.Resources>
 		<Grid.Styles>
 			<Style Selector="TextBox">
@@ -42,7 +47,7 @@
 			<Style Selector="StackPanel">
 				<Setter Property="Orientation" Value="Horizontal"/>
 				<Setter Property="VerticalAlignment" Value="Center"/>
-				<Setter Property="Margin" Value="0,0,0,5"/>
+				<Setter Property="Margin" Value="0,5,5,5"/>
 			</Style>
 		</Grid.Styles>
 		<Grid.RowDefinitions>
@@ -56,7 +61,7 @@
 				<RowDefinition Height="10*"/>
 				<RowDefinition Height="90*"/>
 			</Grid.RowDefinitions>
-			<Border Grid.Row="0" Background="Blue" Height="35">
+			<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
 				<TextBlock Text="General"
 						   Theme="{StaticResource textblockHeader}"/>
 			</Border>
@@ -147,8 +152,7 @@
 			</Grid.RowDefinitions>
 
 			<Border Grid.Row="0"
-					Height="30"
-					Background="Blue">
+					Theme="{StaticResource borderHeader}">
 				<TextBlock Text="Controller"
 						   Theme="{StaticResource textblockHeader}"/>
 			</Border>
@@ -274,7 +278,6 @@
 				
 			</Grid>
 		</Grid>
-
 		<!-- Memory reservation  -->
 		<Grid Grid.Row="2">
 			<Grid.RowDefinitions>
@@ -283,8 +286,7 @@
 			</Grid.RowDefinitions>
 
 			<Border Grid.Row="0"
-					Height="30"
-					Background="Blue">
+					Theme="{StaticResource borderHeader}">
 				<TextBlock Text="Memory reservation"
 						   Theme="{StaticResource textblockHeader}"/>
 			</Border>

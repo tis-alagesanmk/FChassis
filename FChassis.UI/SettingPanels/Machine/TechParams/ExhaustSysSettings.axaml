@@ -8,7 +8,7 @@
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Machine.TechParams.ExhaustSysSettings"
 		xmlns:base="FChassis.UI.Settings"
-		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.TechParams.ViewModel"
+		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
 		x:DataType="vm:ExhaustSystemViewModel"
 		Background="White"
 		>
@@ -33,8 +33,9 @@
 				<Setter Property="FontWeight" Value="Bold"/>
 			</ControlTheme>
 			<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
-				<Setter Property="Background" Value="Blue"/>
+				<Setter Property="Background" Value="#3D87B4"/>
 				<Setter Property="Height" Value="35"/>
+				<Setter Property="Margin" Value="0,3,0,3"/>
 			</ControlTheme>
 		</ScrollViewer.Resources>
 		<ScrollViewer.Styles>
@@ -106,14 +107,14 @@
 				<Grid Grid.Row="1"
 					  RowDefinitions="10* 90*">
 					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
-						<TextBlock Text="Sections"
+						<TextBlock Text="Splitters"
 								   Theme="{StaticResource textblockHeader}"/>
 					</Border>
 					<DataGrid Grid.Row="1"
 							  ItemsSource="{Binding Splitters}"
 							 x:Name="dgSplitters" >
 						<DataGrid.Columns>
-							<DataGridTemplateColumn Width="150"  Header="Section Number">
+							<DataGridTemplateColumn Width="150"  Header="Splitter Number">
 								<DataTemplate>
 									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
 											   Text="{Binding SectionNumber}" />
