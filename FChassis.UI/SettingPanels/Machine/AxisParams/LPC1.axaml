@@ -1,0 +1,81 @@
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FChassis.UI.Settings.Machine.AxisParams.LPC1"
+			 xmlns:base="FChassis.UI.Settings">
+
+	<UserControl.Styles>
+		<!--TextBlock Styles-->
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="5 0 0 0"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+
+		<!--Check Box Styles-->
+		<Style Selector="CheckBox">
+			<Setter Property="Margin" Value="10 0"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+
+		<!--Combo Box Styles-->
+		<Style Selector="ComboBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<!--TextBox Styles-->
+		<Style Selector="TextBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<!--Label Styles-->
+		<Style Selector="Label">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Label.info">
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+		</Style>
+		<Style Selector="Label.blue">
+			<Setter Property="Foreground" Value="Blue"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+	</UserControl.Styles>
+
+	<ScrollViewer>
+		<Grid ColumnDefinitions="*,Auto,*" RowDefinitions="35,35,35,35,35,35,35">
+			<!--Configuration parameters Header-->
+			<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+				<TextBlock Text="Configuration parameters"/>
+			</Border>
+
+			<CheckBox Grid.Row="1" Grid.Column="2" Content="Advanced"/>
+
+			<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Axis Type"/>
+			<ComboBox Grid.Row="2" Grid.Column="1"/>
+
+			<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Axis Connection"/>
+			<ComboBox Grid.Row="3" Grid.Column="1"/>
+
+			<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Axis address"/>
+			<TextBox Grid.Row="4" Grid.Column="1"/>
+
+			<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Max Laser Power"/>
+			<TextBox Grid.Row="5" Grid.Column="1"/>
+			<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="Watts"/>
+
+			<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Average Power"/>
+			<TextBox Grid.Row="6" Grid.Column="1"/>
+			<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="Watts"/>
+		</Grid>
+	</ScrollViewer>
+</base:Panel>

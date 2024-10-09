@@ -13,7 +13,7 @@ public partial class Panel : FChassis.UI.Settings.TabPanel {
 
    override protected void TabItemSelected (TabItem? tabItem, string? tabName) {
       if (tabName == "Close") {
-         Child.mainWindow?.Switch2MainPanel ();
+         //Child.mainWindow?.Switch2MainPanel ();
       }
    }
 

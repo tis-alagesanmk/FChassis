@@ -1,0 +1,480 @@
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FChassis.UI.Settings.Machine.PLCOptions.ControlParameters"
+			 xmlns:base="FChassis.UI.Settings">
+	<UserControl.Styles>
+		<!--TextBlock Styles-->
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="5 0 0 0"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+
+		<!--Check Box Styles-->
+		<Style Selector="CheckBox.advance">
+			<Setter Property="Margin" Value="10 0"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="CheckBox">
+			<Setter Property="Margin" Value="5 0"/>
+		</Style>
+
+		<!--Combo Box Styles-->
+		<Style Selector="ComboBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+		<Style Selector="ComboBox.long">
+			<Setter Property="Width" Value="150"/>
+		</Style>
+
+		<!--TextBox Styles-->
+		<Style Selector="TextBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<!--Label Styles-->
+		<Style Selector="Label">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Label.info">
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+		</Style>
+		<Style Selector="Label.blue">
+			<Setter Property="Foreground" Value="Blue"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+	</UserControl.Styles>
+
+	<ScrollViewer>
+		<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+			<!--Maximum override adjust level-->
+			<Grid Grid.Row="0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Maximum override adjust level"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Maximum override adjust value"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="%"/>
+			</Grid>
+
+			<!--Height control 2 steps only for piercing-->
+			<Grid Grid.Row="1" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Height control 2 steps only for piercing"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="HC minimum height for 2 steps"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="mm"/>
+			</Grid>
+
+			<!--Auto lubrication cycle-->
+			<Grid Grid.Row="2" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Auto lubrication cycle"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Number of lubrication values"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="X-axis lubrication feedrate"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mm/min"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Y-axis lubrication feedrate"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="mm/min"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Lubrication On delay"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="s"/>			
+			</Grid>
+
+			<!--Adjust gas pressure online-->
+			<Grid Grid.Row="3" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Adjust gas pressure online"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Maximum gas pressure adjust"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="bar"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Gas pressure adjust steps"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+			</Grid>
+
+			<!--Height sensor calibration program-->
+			<Grid Grid.Row="4" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Height sensor calibration program"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Offset distance from negative limit for slow speed"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Tip touch offset value"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mm"/>
+			</Grid>
+
+			<!--Edge detection program-->
+			<Grid Grid.Row="5" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Edge detection program"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Slat start point along X-axis"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Slat start point along Y-axis"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Slats equal distance along X-axis"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Slats Peak to Peak distance along Y-axis"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Edge correction offset along X-axis"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Edge correction offset along Y-axis"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Speed to detect the edge"/>
+				<TextBox Grid.Row="7" Grid.Column="1"/>
+				<Label Grid.Row="7" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<CheckBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Content="Start height sensor calibration before edge detect" HorizontalAlignment="Left"/>
+
+				<CheckBox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Content="Acknowledge the sheet origin point" HorizontalAlignment="Left"/>
+			</Grid>
+
+			<!--Sheet stopper specification-->
+			<Grid Grid.Row="6" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Sheet stopper specification"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Number of stoppers along X-axis"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Number of stoppers along Y-axis"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Stopper length along X-axis"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Stopper width along Y-axis"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Distance of first stopper from origin along X-axis"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Distance between first and second stopper along X-axis"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Distance between second and third stopper along X-axis"/>
+				<TextBox Grid.Row="7" Grid.Column="1"/>
+				<Label Grid.Row="7" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="8" Grid.Column="0" Classes="info" Content="Distance of first stopper from origin along Y-axis"/>
+				<TextBox Grid.Row="8" Grid.Column="1"/>
+				<Label Grid.Row="8" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="9" Grid.Column="0" Classes="info" Content="Distance between first and second stopper along Y-axis"/>
+				<TextBox Grid.Row="9" Grid.Column="1"/>
+				<Label Grid.Row="9" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="10" Grid.Column="0" Classes="info" Content="Distance between second and third stopper along Y-axis"/>
+				<TextBox Grid.Row="10" Grid.Column="1"/>
+				<Label Grid.Row="10" Grid.Column="2" Classes="blue" Content="mm"/>
+			</Grid>
+
+			<!--Suction anti blow valves configuration-->
+			<Grid Grid.Row="7" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Suction anti blow valves configuration"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Number of anti blow valves"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Anti blow valve ON time"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Anti blow valve wait time"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<CheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="Filter sensor" HorizontalAlignment="Left"/>
+			</Grid>
+
+			<!--Gas pressure adjust levels for analogue control-->
+			<Grid Grid.Row="8" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Gas pressure adjust levels for analogue control"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="HP gas regulator command correction"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="HP gas regulator feedback correction"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="%"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="LP gas regulator command correction"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="%"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="LP gas regulator feedback correction"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="%"/>
+			</Grid>
+
+			<!--Pallet changer - up and down motion hydraulic control-->
+			<Grid Grid.Row="9" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Pallet changer - up and down motion hydraulic control"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Up solenoid off delay time"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="s"/>
+				
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Down solenoid off delay time"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Hydraulic motor off delay time"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Hydraulic motor ON - max time out"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Fwd/Rev fast move time out"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Fwd/Rev slow move time out"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Fwd/Rev button function type"/>
+				<ComboBox Grid.Row="7" Grid.Column="1"/>
+			</Grid>
+
+			<!--Nozzle cleaning & height sensor calibration offsets-->
+			<Grid Grid.Row="10" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Nozzle cleaning &amp; height sensor calibration offsets"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Nozzle clean X-offset"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Nozzle clean Y-offset"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Nozzle clean Z-offset"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="HS calibration X-offset"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="HS calibration Y-offset"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="mm"/>
+			</Grid>
+
+			<!--Cutting head warning levels-->
+			<Grid Grid.Row="11" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Cutting head warning levels"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Sensor insert temperature"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="°C"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Plasma value percentage"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="%"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Protective window temperature"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="°C"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Collimating lens temperature"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="°C"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Focal lens temperature"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="°C"/>
+				
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Cutting head temperature"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="°C"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Diffusion light level"/>
+				<TextBox Grid.Row="7" Grid.Column="1"/>
+			</Grid>
+
+			<!--Nozzle changer configuration-->
+			<Grid Grid.Row="12" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Nozzle changer configuration"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Set torque value for opening"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="%"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Set torque value for closing"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="%"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Opening delay time"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Closing delay time"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Unwinding nozzle position"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="°"/>
+			</Grid>
+
+			<!--Laser pulsing gate(LPG) delay time-->
+			<Grid Grid.Row="13" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Laser pulsing gate(LPG) delay time"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="LPG On delay"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="ms"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="LPG Off delay"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="ms"/>
+			</Grid>
+
+			<!--Sealing gas pressure monitor-->
+			<Grid Grid.Row="14" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Sealing gas pressure monitor"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Minimum warning level"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="mbar"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Maximum warning level"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mbar"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Minimum error level"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="mbar"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Maximum error level"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="mbar"/>
+			</Grid>
+
+			<!--Protective glass monitor-->
+			<Grid Grid.Row="15" Margin="0 10 0 0"
+				  ColumnDefinitions="*,130,*"
+				  RowDefinitions="35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Protective glass monitor"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Offline broken factor"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Offline broken factor"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Warning limit"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="%"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Error limit"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="%"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Delay time to report warning"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="s"/>
+			</Grid>
+		</Grid>
+	</ScrollViewer>
+
+</base:Panel>
