@@ -1,0 +1,230 @@
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FChassis.UI.Settings.Machine.TechParams.LaserTechnology"
+             xmlns:base="FChassis.UI.Settings">
+	<UserControl.Styles>
+		<!--TextBlock Styles-->
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="5 0 0 0"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+
+		<!--TextBox Styles-->
+		<Style Selector="TextBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<!--Label Styles-->
+		<Style Selector="Label">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Label.info">
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+		</Style>
+		<Style Selector="Label.blue">
+			<Setter Property="Foreground" Value="Blue"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+	</UserControl.Styles>
+
+	<ScrollViewer>
+		<Grid RowDefinitions="Auto,Auto,Auto,Auto">			
+			<!--Custom parameters 1-->
+			<Grid Grid.Row="0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Custom parameters 1"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="X-axis park position"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Y-axis park position"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Test Run Feedrate"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="mm/min"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Frog Jump adjust distance"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Frog Jump adjust time"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="ms"/>
+
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Contour End Control Time OFF"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="ms"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Contour End Parameter Time OFF"/>
+				<TextBox Grid.Row="7" Grid.Column="1"/>
+				<Label Grid.Row="7" Grid.Column="2" Classes="blue" Content="ms"/>
+
+				<Label Grid.Row="8" Grid.Column="0" Classes="info" Content="Delay before start of cut"/>
+				<TextBox Grid.Row="8" Grid.Column="1"/>
+				<Label Grid.Row="8" Grid.Column="2" Classes="blue" Content="ms"/>
+
+				<Label Grid.Row="9" Grid.Column="0" Classes="info" Content="Delay after end of cut"/>
+				<TextBox Grid.Row="9" Grid.Column="1"/>
+				<Label Grid.Row="9" Grid.Column="2" Classes="blue" Content="ms"/>
+
+				<Label Grid.Row="10" Grid.Column="0" Classes="info" Content="Laser HV ON Delay"/>
+				<TextBox Grid.Row="10" Grid.Column="1"/>
+				<Label Grid.Row="10" Grid.Column="2" Classes="blue" Content="s"/>
+			</Grid>
+
+			<!--Custom parameters 2-->
+			<Grid Grid.Row="1" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Custom parameters 2"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="High Pressure Valve"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="bar"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Low Pressure Value"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="bar"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Gas Pressure difference to generate error"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="%"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="High Pressure to clean kerf"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="bar"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Focus Ref Voltage"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="V"/>
+
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Focus Offset Voltage"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="V"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Contour Length/No. of Pierce for Nozzle Cleaning"/>
+				<TextBox Grid.Row="7" Grid.Column="1"/>
+				<Label Grid.Row="7" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="8" Grid.Column="0" Classes="info" Content="Height Control Sensor Gain"/>
+				<TextBox Grid.Row="8" Grid.Column="1"/>
+
+				<Label Grid.Row="9" Grid.Column="0" Classes="info" Content="Height Control Retract Speed"/>
+				<TextBox Grid.Row="9" Grid.Column="1"/>
+				<Label Grid.Row="9" Grid.Column="2" Classes="blue" Content="mm/min"/>
+
+				<Label Grid.Row="10" Grid.Column="0" Classes="info" Content="Collision delay time"/>
+				<TextBox Grid.Row="10" Grid.Column="1"/>
+				<Label Grid.Row="10" Grid.Column="2" Classes="blue" Content="ms"/>
+			</Grid>
+
+			<!--Custom parameters 3-->
+			<Grid Grid.Row="2" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Custom parameters 3"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Gas Idle purge pressure"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="bar"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Z-axis Negative Limit - Shuttle Table"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Exhaust Lag Time to Stop"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Min distance between 2 gantries"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Tandem maximum Machine Stroke"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Gas Idle Purge time"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Gas Purge pressure before start of program"/>
+				<TextBox Grid.Row="7" Grid.Column="1"/>
+				<Label Grid.Row="7" Grid.Column="2" Classes="blue" Content="bar"/>
+
+				<Label Grid.Row="8" Grid.Column="0" Classes="info" Content="Gas Purge time before start of program"/>
+				<TextBox Grid.Row="8" Grid.Column="1"/>
+				<Label Grid.Row="8" Grid.Column="2" Classes="blue" Content="s"/>
+
+				<Label Grid.Row="9" Grid.Column="0" Classes="info" Content="Z-axis park position"/>
+				<TextBox Grid.Row="9" Grid.Column="1"/>
+				<Label Grid.Row="9" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="10" Grid.Column="0" Classes="info" Content="X-axis Limit value for Nozzle Cleaning"/>
+				<TextBox Grid.Row="10" Grid.Column="1"/>
+				<Label Grid.Row="10" Grid.Column="2" Classes="blue" Content="mm"/>
+			</Grid>
+
+			<!--Custom parameters 4-->
+			<Grid Grid.Row="3" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Background="Blue" Height="35">
+					<TextBlock Text="Custom parameters 4"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Piercing Sensor Delay Time"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="ms"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Param 2"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Param 3"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Param 4"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Param 5"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Param 6"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Param 7"/>
+				<TextBox Grid.Row="7" Grid.Column="1"/>
+
+				<Label Grid.Row="8" Grid.Column="0" Classes="info" Content="Param 8"/>
+				<TextBox Grid.Row="8" Grid.Column="1"/>
+
+				<Label Grid.Row="9" Grid.Column="0" Classes="info" Content="Param 9"/>
+				<TextBox Grid.Row="9" Grid.Column="1"/>
+
+				<Label Grid.Row="10" Grid.Column="0" Classes="info" Content="Param 10"/>
+				<TextBox Grid.Row="10" Grid.Column="1"/>
+			</Grid>
+
+		</Grid>
+	</ScrollViewer>
+</base:Panel>
