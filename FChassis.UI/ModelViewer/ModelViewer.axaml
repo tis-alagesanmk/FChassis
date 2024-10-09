@@ -9,22 +9,16 @@
 		xmlns:base="FChassis.UI.Panels"
 		x:Class="FChassis.UI.ModelViewer"
 		
+		xmlns:vmc="using:FChassis.ViewModels"
+		d:DataContext="{x:Static vmc:Context.MainWindow}"		
+		
 		xmlns:vmd="using:FChassis.ViewModels"
 		x:DataType="vmd:MainWindow"
 		>
 	<Design.DataContext>
 		<vmd:MainWindow/>
 	</Design.DataContext>
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="200"></ColumnDefinition>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-			<RowDefinition Height="100"></RowDefinition>
-		</Grid.RowDefinitions>
+	<Grid ColumnDefinitions="200,*" RowDefinitions="auto,*,100">
 		<Menu Grid.ColumnSpan="2">
 			<MenuItem Header="File">
 				<MenuItem Header="Open" Command="{Binding FileOpenCommand}"/>
@@ -37,11 +31,8 @@
 				<MenuItem Header="Sanity Check"/>
 			</MenuItem>
 		</Menu>
-		<Grid Grid.RowSpan="3" Grid.Row="1"> 
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="auto"></RowDefinition>
-			</Grid.RowDefinitions>
+		<Grid RowDefinitions ="*,auto" 
+			  Grid.RowSpan="3" Grid.Row="1"> 
 			<ListBox x:Name="Files" MinWidth="150"
 					 d:Items="{Binding FileItems}"
 					 SelectedItem="{Binding SelectedFileItem}"/>

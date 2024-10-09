@@ -7,7 +7,6 @@
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Machine.General.MachineSettings"
 		xmlns:base="FChassis.UI.Settings"
-		Background="White"
 		>
 	<ScrollViewer>
 		<Grid>
@@ -87,7 +86,7 @@
 					   Grid.Column="0" Grid.Row="0"/>
 				<TextBox x:Name="txtMatchId"
 						  
-						  Grid.Column="1" Grid.Row="0" />
+						  Grid.Column="1" Grid.Row="0"/>
 
 				<Label Content="Axis emulation"
 					   Theme="{StaticResource lblHeader}"
