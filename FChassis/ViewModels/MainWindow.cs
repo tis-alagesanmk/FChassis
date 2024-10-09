@@ -8,56 +8,42 @@ using Flux.API;
 using FChassis.Processes;
 using FChassis.Core;
 
+using CommunityToolkit.Mvvm.ComponentModel;
+
 using static FChassis.Processes.Processor;
+using CommunityToolkit.Mvvm.Input;
 
 namespace FChassis.ViewModels;
-public class MainWindow : MainWindowBase {
+public partial class MainWindow : ObservableObject {
    #region "Property" ---------------------------------------------------------
+   
    public string SelectedFileItem {
-      get => selectedFileItem;
+      get => _selectedFileItem;
       set {
-         selectedFileItem = value;
-         this.loadPart (selectedFileItem);
-         this.OnPropertyChanged (selectedFileItem);
-      }
-   }
-   string selectedFileItem = "";
+         SetProperty (ref _selectedFileItem, value);
+         this.loadPart (_selectedFileItem);
+   }}
+   string _selectedFileItem = "";
 
-   public Processor.ESimulationStatus SimulationStatus {
-      get => mSimulationStatus;
-      set {
-         if (mSimulationStatus != value) {
-            mSimulationStatus = value;
-            OnPropertyChanged (nameof (SimulationStatus));
-         }
-      }
-   }
-   Processor.ESimulationStatus mSimulationStatus = ESimulationStatus.NotRunning;
+   Processor.ESimulationStatus simulationStatus = ESimulationStatus.NotRunning;
 
    public Processor Process {
-      get => mProcess;
+      get => _process;
       set {
-         if (mProcess != value) {
-            if (mProcess != null) {
-               mProcess.PropertyChanged -= OnProcessPropertyChanged;
-               mProcess = value;
-
-               if (mProcess != null)
-                  mProcess.PropertyChanged += OnProcessPropertyChanged;
-
-               OnPropertyChanged (nameof (Process));
-               OnPropertyChanged (nameof (SimulationStatus));
+         if (_process != value) {
+            if (_process != null) {
+               SetProperty (ref _process, value);
+               OnPropertyChanged (nameof (simulationStatus));
             }
          }
-      }
-   }
-   Processor mProcess;
+   }}
+   Processor _process;
 
    public Workpiece Work {
       get => mWork;
       set {
          mWork = value;
-         mProcess.Workpiece = mWork;
+         _process.Workpiece = mWork;
          OnPropertyChanged (nameof (Work));
       }
    }
@@ -76,22 +62,19 @@ public class MainWindow : MainWindowBase {
       Library.Init ("W:/FChassis/Data", "C:/FluxSDK/Bin", this);
 
       AppUI.ThreadDispatcher = dispatcher;
-      mProcess = new Processor ();
-      mProcess.TriggerRedraw += TriggerRedraw;
-      mProcess.SetSimulationStatus += status => SimulationStatus = status;
-
       Sys.SelectionChanged += OnSelectionChanged;
 
       files.ItemsSource = Directory.GetFiles (mSrcDir, "*.fx").Select (Path.GetFileName);
 
-      mProcess = new Processor ();
-      mProcess.TriggerRedraw += TriggerRedraw;
-      mProcess.SetSimulationStatus += status => SimulationStatus = status;
+      _process = new Processor ();
+      _process.TriggerRedraw += TriggerRedraw;
+      _process.SetSimulationStatus += (status) => simulationStatus = status;
    }
    #endregion "Method"
 
    #region "Command" --------------------------------------------------
-   override protected void FileOpen() {
+   [RelayCommand]
+   protected void FileOpen() {
       OpenFileDialog openFileDialog = new () {
          Filter = "FX Files (*.fx)|*.fx|IGS Files (*.igs;*.iges)|*.igs;*.iges|All files (*.*)|*.*",
          InitialDirectory = @"W:\FChassis\Sample"
@@ -104,7 +87,8 @@ public class MainWindow : MainWindowBase {
       }
    }
 
-   override protected void ImportFile () {
+   [RelayCommand]
+   protected void ImportFile () {
       OpenFileDialog openFileDialog = new () {
          Filter = "GCode Files (*.din)|*.din|All files (*.*)|*.*",
          InitialDirectory = @"W:\FChassis\Sample"
@@ -115,12 +99,13 @@ public class MainWindow : MainWindowBase {
          if (!string.IsNullOrEmpty (openFileDialog.FileName)) {
             var extension = Path.GetExtension (openFileDialog.FileName).ToLower ();
             if (extension == ".din")
-               mProcess.LoadGCode (openFileDialog.FileName);
+               _process.LoadGCode (openFileDialog.FileName);
          }
       }
    }
 
-   override protected void FileSave () {
+   [RelayCommand]
+   protected void FileSave () {
       SaveFileDialog saveFileDialog = new () {
          Filter = "FX files (*.fx)|*.fx|All files (*.*)|*.*",
          DefaultExt = "fx",
@@ -141,49 +126,55 @@ public class MainWindow : MainWindowBase {
       => new SettingsDlg ().ShowDialog ();
 
    void SanityCheck () {
-      mProcess.ResetGCodeGenForTesting ();
-      FChassis.SanityCheck.Run (mProcess);
+      _process.ResetGCodeGenForTesting ();
+      FChassis.SanityCheck.Run (_process);
    }
 
-   override protected void Align ()  {
+   [RelayCommand]
+   protected void Align ()  {
       if (!handleNoWorkpiece ()) {
          Work.Align ();
          mScene.Bound3 = Work.Model.Bound;
       }
    }
 
-   override protected void AddHoles () {
+   [RelayCommand]
+   protected void AddHoles () {
       if (!handleNoWorkpiece ()) {
          Work.DoAddHoles ();
          mOverlay.Redraw ();
       }
    }
 
-   override protected void TextMarking () {
+   [RelayCommand]
+   protected void TextMarking () {
       if (!handleNoWorkpiece ()) {
          Work.DoTextMarking ();
          mOverlay.Redraw ();
       }
    }
 
-   override protected void CutNotches () {
+   [RelayCommand]
+   protected void CutNotches () {
       if (!handleNoWorkpiece ()) {
          Work.DoCutNotchesAndCutouts ();
          mOverlay.Redraw ();
       }
    }
 
-   override protected void Sorting () {
+   [RelayCommand]
+   protected void Sorting () {
       if (!handleNoWorkpiece ()) {
          Work.DoSorting ();
          mOverlay.Redraw ();
       }
    }
 
-   override protected void GenerateGCode () {
+   [RelayCommand]
+   protected void GenerateGCode () {
       if (!handleNoWorkpiece ()) {
 #if DEBUG
-         mProcess.ComputeGCode ();
+         _process.ComputeGCode ();
 #else
          try {
             mProcess.ComputeGCode ();
@@ -196,19 +187,22 @@ public class MainWindow : MainWindowBase {
       }
    }
 
-   override protected void Simulate () {
+   [RelayCommand]
+   protected void Simulate () {
       if (!handleNoWorkpiece ()) {
          Process.SimulationFinished += OnSimulationFinished;
          Task.Run (Process.Run);
       }
    }
 
-   override protected void PauseSimulation () {
+   [RelayCommand]
+   protected void PauseSimulation () {
       if (!handleNoWorkpiece ())
          Process.Pause ();
    }
 
-   override protected void StopSimulation () {
+   [RelayCommand]
+   protected void StopSimulation () {
       if (!handleNoWorkpiece ())
          Process.Stop ();
    }
@@ -237,13 +231,13 @@ public class MainWindow : MainWindowBase {
       Work = new Workpiece (mPart.Model, mPart);
 
       // Clear the zombies if any
-      mProcess?.ClearZombies ();
+      _process?.ClearZombies ();
    }
 
    void drawOverlay () {
       drawTooling ();
-      mProcess.DrawGCode ();
-      mProcess.DrawToolInstance ();
+      _process.DrawGCode ();
+      _process.DrawToolInstance ();
    }
 
    void drawTooling () {
@@ -295,12 +289,9 @@ public class MainWindow : MainWindowBase {
 
       mOverlay?.Redraw ();
    }
+
    void OnSimulationFinished ()
          => Process.SimulationStatus = Processor.ESimulationStatus.NotRunning;
-   private void OnProcessPropertyChanged (object sender, PropertyChangedEventArgs e) {
-      if (e.PropertyName == nameof (Processor.SimulationStatus))
-         OnPropertyChanged (nameof (SimulationStatus));
-   }
    #endregion "EventHandler"
    #endregion "Implementation"
 
