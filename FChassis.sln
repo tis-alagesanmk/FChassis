@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FChassis.UI", "FChassis.UI\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia", "Avalonia", "{E93025EC-C266-4E53-BA0E-1BE97B5E2231}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaApplication1", "AvaloniaApplication1\AvaloniaApplication1.csproj", "{1752A61B-55EA-4489-A126-97B4CF2A709E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1752A61B-55EA-4489-A126-97B4CF2A709E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1752A61B-55EA-4489-A126-97B4CF2A709E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1752A61B-55EA-4489-A126-97B4CF2A709E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1752A61B-55EA-4489-A126-97B4CF2A709E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D} = {E93025EC-C266-4E53-BA0E-1BE97B5E2231}
+		{1752A61B-55EA-4489-A126-97B4CF2A709E} = {E93025EC-C266-4E53-BA0E-1BE97B5E2231}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D1F4E69-AD6C-4223-B2EE-D7A4D7A79327}
