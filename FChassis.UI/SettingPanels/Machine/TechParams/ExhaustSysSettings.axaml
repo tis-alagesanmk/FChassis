@@ -4,10 +4,146 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
+		x:CompileBindings="True"
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Machine.TechParams.ExhaustSysSettings"
 		xmlns:base="FChassis.UI.Settings"
+		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
+		x:DataType="vm:ExhaustSystemViewModel"
 		Background="White"
 		>
-	Exhaust System Settings
+	<Design.DataContext>
+		<vm:ExhaustSystemViewModel/>
+	</Design.DataContext>
+	<ScrollViewer>
+		<ScrollViewer.Resources>
+			<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
+				<Setter Property="Foreground" Value="White"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="5,0,0,0"/>
+			</ControlTheme>
+			<ControlTheme x:Key="lblHeader" TargetType="{x:Type Label}">
+				<Setter Property="HorizontalAlignment" Value="Center"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+			</ControlTheme>
+			<ControlTheme x:Key="lblHeaderBold" TargetType="{x:Type Label}">
+				<Setter Property="HorizontalAlignment" Value="Center"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="FontWeight" Value="Bold"/>
+			</ControlTheme>
+			<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
+				<Setter Property="Background" Value="#3D87B4"/>
+				<Setter Property="Height" Value="35"/>
+				<Setter Property="Margin" Value="0,3,0,3"/>
+			</ControlTheme>
+		</ScrollViewer.Resources>
+		<ScrollViewer.Styles>
+			<Style Selector="TextBox">
+				<Setter Property="Foreground" Value="Black"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="5"/>
+				<Setter Property="Width" Value="150"/>
+				<Setter Property="Height" Value="27"/>
+				<Setter Property="Padding" Value="2,2,0,0"/>
+				<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+			</Style>
+			<Style Selector="DataGrid">
+				<Setter Property="GridLinesVisibility" Value="All"/>
+				<Setter Property="BorderThickness" Value="1"/>
+				<Setter Property="BorderBrush" Value="Gray"/>
+				<Setter Property="Width" Value="650"/>
+				<Setter Property="Margin" Value="5"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+			</Style>
+
+		</ScrollViewer.Styles>
+		<Border>
+			<Grid RowDefinitions="75* 25*">
+				<!-- Sections -->
+					<Grid Grid.Row="0"
+					  RowDefinitions="10* 90*">
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Sections"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+
+					<DataGrid Grid.Row="1"
+							  ItemsSource="{Binding Sections}"
+							 x:Name="dgSections" >
+						<DataGrid.Columns>
+							<DataGridTemplateColumn Width="150"  Header="Section Number">
+								<DataTemplate>
+									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+											   Text="{Binding SectionNumber}" />
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Width="125" Header="X ON">
+								<DataTemplate>
+									<TextBox Width="100" />
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Width="125" Header="X OFF">
+								<DataTemplate>
+									<TextBox Width="100"/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Width="125" Header="Y ON">
+								<DataTemplate>
+									<TextBox Width="100"/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Width="125" Header="Y OFF">
+								<DataTemplate>
+									<TextBox Width="100"/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+
+				</Grid>
+				<!-- Splitters -->
+				<Grid Grid.Row="1"
+					  RowDefinitions="10* 90*">
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Splitters"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+					<DataGrid Grid.Row="1"
+							  ItemsSource="{Binding Splitters}"
+							 x:Name="dgSplitters" >
+						<DataGrid.Columns>
+							<DataGridTemplateColumn Width="150"  Header="Splitter Number">
+								<DataTemplate>
+									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+											   Text="{Binding SectionNumber}" />
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Width="125" Header="X ON">
+								<DataTemplate>
+									<TextBox Width="100" />
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Width="125" Header="X OFF">
+								<DataTemplate>
+									<TextBox Width="100"/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Width="125" Header="Y ON">
+								<DataTemplate>
+									<TextBox Width="100"/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+							<DataGridTemplateColumn Width="125" Header="Y OFF">
+								<DataTemplate>
+									<TextBox Width="100"/>
+								</DataTemplate>
+							</DataGridTemplateColumn>
+						</DataGrid.Columns>
+					</DataGrid>
+				</Grid>
+			</Grid>
+		</Border>
+	</ScrollViewer>
 </base:Panel>

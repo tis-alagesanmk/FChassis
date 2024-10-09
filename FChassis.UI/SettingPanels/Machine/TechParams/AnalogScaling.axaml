@@ -1,14 +1,10 @@
-<base:Panel
-	    xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-		d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="FChassis.UI.Settings.Machine.TechParams.AnalogScalingSettings"
-		xmlns:base="FChassis.UI.Settings"
-		Background="White"
-		>
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FChassis.UI.Settings.Machine.TechParams.AnalogScaling"
+			 xmlns:base="FChassis.UI.Settings">
 	<ScrollViewer>
 		<ScrollViewer.Resources>
 			<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
@@ -27,7 +23,7 @@
 				<Setter Property="Margin" Value="0,3,0,3"/>
 			</ControlTheme>
 		</ScrollViewer.Resources>
-		<ScrollViewer.Styles>
+		<ScrollViewer.Styles>		
 			<Style Selector="TextBox">
 				<Setter Property="Foreground" Value="Black"/>
 				<Setter Property="HorizontalAlignment" Value="Left"/>
@@ -46,11 +42,11 @@
 							   Theme="{StaticResource textblockHeader}"/>
 				</Border>
 				<Grid Grid.Row="1"
-					  ColumnDefinitions="10* 40* *"
+					  ColumnDefinitions="30* 40* "
 					  RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
 
 					<Label Grid.Row="0" Grid.Column="0" Content="Channel 0" Theme="{StaticResource lblHeader}"/>
-					<TextBox x:Name="txtChannel0" Grid.Row="0" Grid.Column="1"/>
+                    <TextBox x:Name="txtChannel0" Grid.Row="0" Grid.Column="1"/>
 
 					<Label Grid.Row="1" Grid.Column="0" Content="Channel 1" Theme="{StaticResource lblHeader}"/>
 					<TextBox x:Name="txtChannel1" Grid.Row="1" Grid.Column="1"/>
@@ -85,7 +81,7 @@
 					<Label Grid.Row="11" Grid.Column="0" Content="Channel 11" Theme="{StaticResource lblHeader}"/>
 					<TextBox x:Name="txtChannel11" Grid.Row="11" Grid.Column="1"/>
 
-
+				
 					<Label Grid.Row="12" Grid.Column="0" Content="Channel 12" Theme="{StaticResource lblHeader}"/>
 					<TextBox x:Name="txtChannel12" Grid.Row="12" Grid.Column="1"/>
 
@@ -140,7 +136,7 @@
 
 					<Label Grid.Row="28" Grid.Column="0" Content="Channel 15" Theme="{StaticResource lblHeader}"/>
 					<TextBox x:Name="txtChannel28" Grid.Row="28" Grid.Column="1"/>
-
+					
 				</Grid>
 			</Grid>
 		</Border>

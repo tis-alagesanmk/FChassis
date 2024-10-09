@@ -22,7 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.1.3" />
     <PackageReference Include="Avalonia.Desktop" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Remote.Protocol" Version="11.1.3" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.3" />
     <PackageReference Include="Avalonia.Themes.Simple" Version="11.1.3" />
   </ItemGroup>
@@ -33,5 +35,11 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="SettingPanels\Machine\TechParams\XParams.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="SettingPanels\Machine\AxisParams\AxisSettingsPanel.axaml.cs">
+      <DependentUpon>AxisSettingsPanel.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
