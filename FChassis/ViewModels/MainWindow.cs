@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.IO;
-using System.ComponentModel;
 using Microsoft.Win32;
 using Avalonia.Threading;
 
