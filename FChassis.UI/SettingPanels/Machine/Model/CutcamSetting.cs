@@ -1,16 +1,9 @@
-﻿using FChassis.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace FChassis.UI.SettingPanels.Machine.Model {
-   public class CutcamSetting :ViewModelBase
-   {
-      public string Action { get; set; }
-      public string Contourflags { get; set; }
-      public string Disabled { get; set; }
-      public string Size { get; set; }
-   }
+namespace FChassis.UI.SettingPanels.Machine.Model; 
+public class CutcamSetting : ObservableObject {
+   public string Action { get; set; }
+   public string Contourflags { get; set; }
+   public string Disabled { get; set; }
+   public string Size { get; set; }
 }
