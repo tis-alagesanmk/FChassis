@@ -469,7 +469,7 @@
 				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Offline broken factor"/>
 				<TextBox Grid.Row="1" Grid.Column="1"/>
 
-				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Offline broken factor"/>
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Online broken factor"/>
 				<TextBox Grid.Row="2" Grid.Column="1"/>
 
 				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Warning limit"/>
