@@ -9,6 +9,9 @@ public partial class TabPanel : Settings.TabPanel {
          new ImportSettings(),
          new CutCamSettings(),
          new ProfileCamSettings(),
+         new SequenceSettings(),
+         new WorkSupportSettings(),
+         new SkeletonCutsSettings(),
       ]);
    }
 }

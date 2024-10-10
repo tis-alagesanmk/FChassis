@@ -4,6 +4,129 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:base="FChassis.UI.Settings"
+			 Background="White"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.ProfileCamSettings">
-  Welcome to Avalonia!
+	<ScrollViewer>
+		<ScrollViewer.Resources>
+			<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
+				<Setter Property="Foreground" Value="White"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="5,0,0,0"/>
+			</ControlTheme>
+			<ControlTheme x:Key="lblHeader" TargetType="{x:Type Label}">
+				<Setter Property="HorizontalAlignment" Value="Right"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+			</ControlTheme>
+			<ControlTheme x:Key="lblHeaderBold" TargetType="{x:Type Label}">
+				<Setter Property="HorizontalAlignment" Value="Center"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="FontWeight" Value="Bold"/>
+			</ControlTheme>
+			<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
+				<Setter Property="Background" Value="#3D87B4"/>
+				<Setter Property="Height" Value="35"/>
+				<Setter Property="Margin" Value="0,3,0,3"/>
+			</ControlTheme>
+		</ScrollViewer.Resources>
+		<ScrollViewer.Styles>
+			<Style Selector="TextBox">
+				<Setter Property="Foreground" Value="Black"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+				<Setter Property="Margin" Value="5"/>
+				<Setter Property="Width" Value="150"/>
+				<Setter Property="Height" Value="27"/>
+				<Setter Property="Padding" Value="2,2,0,0"/>
+				<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+			</Style>
+			<Style Selector="ComboBox">
+				<Setter Property="Width" Value="150"/>
+				<Setter Property="Height" Value="27"/>
+				<Setter Property="Margin" Value="5"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+			</Style>
+			<Style Selector="CheckBox">
+				<Setter Property="Height" Value="27"/>
+				<Setter Property="Margin" Value="0,10,20,0"/>
+				<Setter Property="HorizontalAlignment" Value="Left"/>
+				<Setter Property="VerticalAlignment" Value="Center"/>
+			</Style>
+		</ScrollViewer.Styles>
+		<Border>
+			<Grid RowDefinitions="1* 6* 1* 2* 90*">
+				<!--Top Adavanced check box -->
+				<Grid Grid.Row="0"
+					  RowDefinitions="10* 90*">
+					 <CheckBox Content="Advanced" HorizontalAlignment="Right"/>
+				</Grid>
+				<!--Cutting -->
+				<Grid Grid.Row="1"
+					  RowDefinitions="10* 90*">
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Cutting"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+					<Grid Grid.Row="1"
+						  ColumnDefinitions="40* 60*"
+						  RowDefinitions="* * *">
+
+						<Label Content="Choose cutting condition by"
+						   Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="0"/>
+						<ComboBox x:Name="cmbChoosecuttingcondition"
+								  Grid.Column="1" Grid.Row="0" />
+
+						<Label Content="Process for open polylines"
+						   Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="1"/>
+						<ComboBox x:Name="cmbProcessforopenplylines"
+								  Grid.Column="1" Grid.Row="1" />
+
+						<Label Content="Stitch cutting threshold distance (0=disable)"
+						   Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="2"/>
+						<TextBox x:Name="txtStitchcuttingthresholddistance"
+							 Grid.Column="1" Grid.Row="2" />
+
+					</Grid>
+				</Grid>
+				<!-- Pierce settings -->
+				<Grid Grid.Row="2"
+					  RowDefinitions="10* 90*">
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Pierce settings"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+					<Grid Grid.Row="1" ColumnDefinitions="40* 60*">
+						<CheckBox Grid.Column="1" IsChecked="true" Content="Allow approach that is more than distance to opposite side"/>
+					</Grid>
+					
+				</Grid>
+				<!-- Scrap cutting -->
+				<Grid Grid.Row="3"
+					  RowDefinitions="10* 90*">
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Scrap cutting"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+					<Grid Grid.Row="1" ColumnDefinitions="40* 60*" RowDefinitions="* *">
+						<Label Grid.Column="0" Grid.Row="0" 
+							   Content="Scrap grid width" 
+							   Theme="{StaticResource lblHeader}"/>
+						<TextBox x:Name="txtScrapgridwidth"
+							 Grid.Column="1" Grid.Row="0" />
+
+						<Label Grid.Column="0" Grid.Row="1"
+							   Content="Approach length for separating cuts"
+							   Theme="{StaticResource lblHeader}"/>
+						<TextBox x:Name="txtApproachlengthforseparatingcuts"
+							 Grid.Column="1" Grid.Row="1" />
+						
+						
+					</Grid>
+				</Grid>
+			</Grid>
+		</Border>
+	</ScrollViewer>
 </base:Panel>

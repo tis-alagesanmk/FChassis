@@ -69,18 +69,7 @@
 							   Theme="{StaticResource textblockHeader}"/>
 				</Border>
 
-				<Grid Grid.Row="1" ColumnDefinitions="40* 60*">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="28"/>
-						<RowDefinition Height="25"/>
-						<RowDefinition Height="25"/>
-						<RowDefinition Height="25"/>
-						<RowDefinition Height="25"/>
-						<RowDefinition Height="25"/>
-						<RowDefinition Height="25"/>
-						<RowDefinition Height="28"/>
-						<RowDefinition Height="30"/>
-					</Grid.RowDefinitions>
+				<Grid Grid.Row="1" ColumnDefinitions="40* 60*" RowDefinitions="28 25 25 25 25 25 25 28 30">
 					
 					<Label Content="Orientation"
 						   Theme="{StaticResource lblHeader}"
@@ -154,11 +143,7 @@
 				
 			</Grid>
 			<!-- Screen Size -->
-			<Grid Grid.Row="1">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="10*"/>
-					<RowDefinition Height="90*"/>
-				</Grid.RowDefinitions>
+			<Grid Grid.Row="1" RowDefinitions="10* 90*">
 				
 				<Border Grid.Row="0"
 						Theme="{StaticResource borderHeader}">

@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:base="FChassis.UI.Settings"
+			 Background="White"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.CutCamSettings">
-	<ScrollViewer Background="White">
+	<ScrollViewer>
 		<ScrollViewer.Resources>
 			<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
 				<Setter Property="Foreground" Value="White"/>
