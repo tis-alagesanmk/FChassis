@@ -15,6 +15,7 @@ public partial class MainWindow : UserControl, INotifyPropertyChanged {
    // Delegates
    public delegate void ProcessDrawDelegate ();
    Part mPart = null;
+
    public MainWindow () {
       InitializeComponent ();
       this.DataContext = this;

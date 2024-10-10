@@ -1,0 +1,506 @@
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:base="FChassis.UI.Settings"
+             x:Class="FChassis.UI.Settings.Machine.AxisParams.AxisSettingsPanel">
+	<ScrollViewer>
+		<Border>
+			<Grid>
+			<Grid.Resources>
+				<ControlTheme x:Key="lblHeader" TargetType="{x:Type Label}">
+					<Setter Property="HorizontalAlignment" Value="Right"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+				</ControlTheme>
+				<ControlTheme x:Key="lblHeaderBlue" TargetType="{x:Type Label}">
+					<Setter Property="Foreground" Value="blue"/>
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+				</ControlTheme>
+				<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
+					<Setter Property="Foreground" Value="White"/>
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+					<Setter Property="Margin" Value="5,0,0,0"/>
+				</ControlTheme>
+				<ControlTheme x:Key="textboxEntry" TargetType="{x:Type TextBox}">
+					<Setter Property="Foreground" Value="Black"/>
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="Width" Value="150"/>
+					<Setter Property="Height" Value="27"/>
+				</ControlTheme>
+				<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
+					<Setter Property="Background" Value="#3D87B4"/>
+					<Setter Property="Height" Value="35"/>
+					<Setter Property="Margin" Value="0,3,0,3"/>
+				</ControlTheme>
+			</Grid.Resources>
+			<Grid.Styles>
+				<Style Selector="TextBox">
+					<Setter Property="Foreground" Value="Black"/>
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="Width" Value="150"/>
+					<Setter Property="Height" Value="27"/>
+					<Setter Property="Padding" Value="2,2,0,0"/>
+					<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+				</Style>
+				<Style Selector="CheckBox">
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="Height" Value="25"/>
+				</Style>
+				<Style Selector="ComboBox">
+					<Setter Property="HorizontalAlignment" Value="Left"/>
+					<Setter Property="Margin" Value="5"/>
+					<Setter Property="Height" Value="27"/>
+					<Setter Property="Width" Value="150"/>
+				</Style>
+				<Style Selector="StackPanel">
+					<Setter Property="Orientation" Value="Horizontal"/>
+					<Setter Property="VerticalAlignment" Value="Center"/>
+					<Setter Property="Margin" Value="0,5,5,5"/>
+				</Style>
+			</Grid.Styles>
+
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+
+			<!-- Configuration parameters -->
+			<Grid Grid.Row="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="10*"/>
+					<RowDefinition Height="90*"/>
+				</Grid.RowDefinitions>
+
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+					<TextBlock Text="Configuration parameters"
+							   Theme="{StaticResource textblockHeader}"/>
+				</Border>
+
+				<Grid Grid.Row="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="40*"/>
+						<ColumnDefinition Width="60*"/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="28"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+					</Grid.RowDefinitions>
+
+					<CheckBox x:Name="chkCaptionsicons"
+							  Grid.Column="1" Grid.Row="0"
+							  Content="Advanced"/>
+
+					<Label Content="Axis type"
+						   Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="1"/>
+					<ComboBox x:Name="cmbAxistype"
+							 Grid.Column="1" Grid.Row="1" />
+
+					<Label Content="Axis connection"
+						   Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="2"/>
+					<ComboBox x:Name="cmbAxisconnection"
+								 Grid.Column="1" Grid.Row="2"  />
+
+					<Label Content="Axis address"
+						   Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="3"/>
+				    <TextBox x:Name="txtAxisaddress"
+							  Grid.Column="1" Grid.Row="3" />
+					
+					<Label Content="Sync connection"
+						   Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="4"/>
+					<TextBox x:Name="txtSyncconnection"
+							  Grid.Column="1" Grid.Row="4"/>
+
+					<Label Content="Interpolation filter time"
+						   Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="6"/>
+					<StackPanel Grid.Column="1" Grid.Row="6">
+						<TextBox x:Name="txtInterpolationfiltertime"/>
+						<Label Theme="{StaticResource lblHeaderBlue}"
+							   Content="s"/>
+					</StackPanel>
+
+				</Grid>
+
+			</Grid>
+		    <!--  Resolution -->
+			<Grid Grid.Row="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="10*"/>
+					<RowDefinition Height="90*"/>
+				</Grid.RowDefinitions>
+
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+					<TextBlock Text="Resolution"
+							   Theme="{StaticResource textblockHeader}"/>
+				</Border>
+				<Grid Grid.Row="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="40*"/>
+						<ColumnDefinition Width="60*"/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25"/>
+						<RowDefinition Height="25"/>
+					</Grid.RowDefinitions>
+
+					<Label Content="Increaments per distance"
+						    Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="0"/>
+					<TextBox x:Name="txtIncreamentperdistance"
+							 Grid.Column="1" Grid.Row="0" />
+
+					<Label Content="Distance"
+						    Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="1"/>
+					<StackPanel Grid.Column="1" Grid.Row="1" >
+						<TextBox x:Name="txtDistance"/>
+						<Label Theme="{StaticResource lblHeaderBlue}"
+							   Content="m"/>
+					</StackPanel>
+					
+				</Grid>
+			</Grid>
+			<!--  Monitoring -->
+			<Grid Grid.Row="2">
+				<Grid.RowDefinitions>
+						<RowDefinition Height="10*"/>
+						<RowDefinition Height="90*"/>
+					</Grid.RowDefinitions>
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Monitoring"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+				<Grid Grid.Row="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+						</Grid.RowDefinitions>
+
+					<CheckBox Grid.Row="0" Grid.Column="1" Content="Software limit active"/>
+
+					<Label Content="Software limit negative"
+						    Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="1"/>
+					<StackPanel Grid.Column="1" Grid.Row="1">
+						<TextBox x:Name="txtSoftwarelimitnegative"/>
+						<Label Theme="{StaticResource lblHeaderBlue}"
+							   Content="mm"/>
+					</StackPanel>
+					
+					<Label Content="Software limit positive"
+						    Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="2"/>
+					<StackPanel Grid.Column="1" Grid.Row="2">
+						<TextBox x:Name="txtWidth"/>
+						<Label Theme="{StaticResource lblHeaderBlue}"
+							   Content="mm"/>
+					</StackPanel>
+
+					<Label Content="Exact stop lag window"
+						    Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="3"/>
+					<StackPanel Grid.Column="1" Grid.Row="3">
+						<TextBox x:Name="txtExactstoplagwindow"/>
+						<Label Theme="{StaticResource lblHeaderBlue}"
+							   Content="mm"/>
+					</StackPanel>
+
+					<Label Content="Exact stop time window"
+						    Theme="{StaticResource lblHeader}"
+						   Grid.Column="0" Grid.Row="4"/>
+					<StackPanel Grid.Column="1" Grid.Row="4">
+						<TextBox x:Name="txtExactstoptimewindow"/>
+						<Label Theme="{StaticResource lblHeaderBlue}"
+							   Content="s"/>
+					</StackPanel>
+
+				</Grid>
+			</Grid>
+		    <!--  Referencing -->
+			<Grid Grid.Row="3">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="10*"/>
+						<RowDefinition Height="90*"/>
+					</Grid.RowDefinitions>
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Referencing"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+					<Grid Grid.Row="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+						</Grid.RowDefinitions>
+
+						<Label Content="Homing velocity2"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="0"/>
+						<StackPanel Grid.Column="1" Grid.Row="0">
+							<TextBox x:Name="txtHomingvelocity2"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="m/min"/>
+						</StackPanel>
+
+						<Label Content="Homing acceleration2"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="1"/>
+						<StackPanel Grid.Column="1" Grid.Row="1">
+							<TextBox x:Name="txtHomingacceleration2"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="m/sec²"/>
+						</StackPanel>
+
+						<Label Content="Homing mode"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="2"/>
+						<TextBox x:Name="txtHomingmode"
+								 Grid.Column="1" Grid.Row="2"/>
+						
+						<Label Content="Homing velocity1"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="3"/>
+						<StackPanel Grid.Column="1" Grid.Row="3">
+							<TextBox x:Name="txtHomingvelocity1"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="m/min"/>
+						</StackPanel>
+
+						<Label Content="Homing acceleration1"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="4"/>
+						<StackPanel Grid.Column="1" Grid.Row="4">
+							<TextBox x:Name="txtAcceleration1"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="m/sec²"/>
+						</StackPanel>
+
+						<Label Content="Homing offset"
+							   Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="5"/>
+						<StackPanel Grid.Column="1" Grid.Row="5">
+							<TextBox x:Name="txtHomingoffset"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="mm"/>
+						</StackPanel>
+
+						<Label Content="Homing direction and sequence"
+							   Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="6"/>
+						<TextBox x:Name="txtHomingdirectionandsequence"
+								 Grid.Column="1" Grid.Row="6"/>
+						
+					</Grid>
+				</Grid>
+			<!--  Speed & Acceleration -->
+			<Grid Grid.Row="4">
+				<Grid.RowDefinitions>
+						<RowDefinition Height="10*"/>
+						<RowDefinition Height="90*"/>
+					</Grid.RowDefinitions>
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Speed &amp; Acceleration"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+				<Grid Grid.Row="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+						</Grid.RowDefinitions>
+
+						<Label Content="Model velocity"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="0"/>
+						<StackPanel Grid.Column="1" Grid.Row="0">
+							<TextBox x:Name="txtModelvelocity"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="m/min"/>
+						</StackPanel>
+
+						<Label Content="Velocity"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="1"/>
+						<StackPanel Grid.Column="1" Grid.Row="1">
+							<TextBox x:Name="txtVelocity"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="m/mm"/>
+						</StackPanel>
+
+						<Label Content="Acceleration"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="2"/>
+						<StackPanel Grid.Column="1" Grid.Row="2">
+							<TextBox x:Name="txtAcceleration"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="m/sec²"/>
+						</StackPanel>
+
+						<Label Content="Deceleration"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="3"/>
+						<StackPanel Grid.Column="1" Grid.Row="3">
+							<TextBox x:Name="txtDeceleration"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="m/sec²"/>
+						</StackPanel>
+
+						<Label Content="Ramp time"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="4"/>
+						<StackPanel Grid.Column="1" Grid.Row="4">
+							<TextBox x:Name="txtRamptime"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="ms"/>
+						</StackPanel>
+
+					</Grid>
+			</Grid>
+			<!--  Corrections -->
+			<Grid Grid.Row="5">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="10*"/>
+						<RowDefinition Height="90*"/>
+					</Grid.RowDefinitions>
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Corrections"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+					<Grid Grid.Row="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="25"/>
+						</Grid.RowDefinitions>
+
+						<Label Content="Blacklash compensation"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="0"/>
+						<StackPanel Grid.Column="1" Grid.Row="0">
+							<TextBox x:Name="txtBlacklashcompensation"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="mm"/>
+						</StackPanel>
+				
+					</Grid>
+				</Grid>
+			<!--  Synchronous -->
+			<Grid Grid.Row="6">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="10*"/>
+						<RowDefinition Height="90*"/>
+					</Grid.RowDefinitions>
+					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Synchronous"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+					<Grid Grid.Row="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+						</Grid.RowDefinitions>
+
+						<Label Content="Synchronous offset"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="0"/>
+						<StackPanel Grid.Column="1" Grid.Row="0">
+							<TextBox x:Name="txtSynchronousoffset"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="mm"/>
+						</StackPanel>
+
+						<Label Content="Synchronous position deviation"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="1"/>
+						<StackPanel Grid.Column="1" Grid.Row="1">
+							<TextBox x:Name="txtSynchronouspositiondeviation"/>
+							<Label Theme="{StaticResource lblHeaderBlue}"
+								   Content="mm"/>
+						</StackPanel>
+
+					</Grid>
+				</Grid>
+			<!--  Handwheel -->
+			<Grid Grid.Row="7">
+				<Grid.RowDefinitions>
+						<RowDefinition Height="10*"/>
+						<RowDefinition Height="90*"/>
+					</Grid.RowDefinitions>
+				<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
+						<TextBlock Text="Handwheel"
+								   Theme="{StaticResource textblockHeader}"/>
+					</Border>
+				<Grid Grid.Row="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="40*"/>
+							<ColumnDefinition Width="60*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="25"/>
+							<RowDefinition Height="25"/>
+						</Grid.RowDefinitions>
+
+						<Label Content="Handwheel assignment"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="0"/>
+						<TextBox x:Name="txtHandwheelassignment" Grid.Column="1" Grid.Row="0"/>
+						
+						<Label Content="Handwheel factor"
+								Theme="{StaticResource lblHeader}"
+							   Grid.Column="0" Grid.Row="1"/>
+						<TextBox x:Name="txtHandwheelfactor" Grid.Column="1" Grid.Row="1"/>
+					</Grid>
+			</Grid>
+		</Grid>
+		</Border>
+    </ScrollViewer>
+</base:Panel>
