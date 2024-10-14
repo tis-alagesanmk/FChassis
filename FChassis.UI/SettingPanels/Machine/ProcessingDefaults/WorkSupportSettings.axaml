@@ -1,0 +1,43 @@
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 Background="White"
+			 xmlns:base="FChassis.UI.Settings"
+             x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.WorkSupportSettings">
+	<ScrollViewer>
+	
+		<Border>
+			<Grid RowDefinitions="10* 90*">
+				<!-- Work support configuration -->
+				<Grid Grid.Row="0"
+				  RowDefinitions="10* 90*">
+					<Border Grid.Row="0" Classes="header">
+						<TextBlock Text="Work support configuration"/>
+					</Border>
+					<Grid Grid.Row="1" ColumnDefinitions="40* 60*" RowDefinitions="* * *">
+						<Label Content="Distance between slats"
+							   Classes="info"
+							   Grid.Column="0" Grid.Row="0"/>
+						<TextBox x:Name="txtDistancebetweenslats"
+								Grid.Column="1" Grid.Row="0" />
+
+						<Label Content="Offset of first slat from sheet edge"
+							   Classes="info"
+							   Grid.Column="0" Grid.Row="1"/>
+						<TextBox x:Name="txtOffsetoffirstslat"
+								Grid.Column="1" Grid.Row="1" />
+
+						<Label Content="Distance between support pins in a slat"
+							   Classes="info"
+							   Grid.Column="0" Grid.Row="2"/>
+						<TextBox x:Name="txtDistancebetweensupportpins"
+								Grid.Column="1" Grid.Row="2" />
+
+					</Grid>
+				</Grid>
+			</Grid>
+		</Border>
+	</ScrollViewer>
+</base:Panel>

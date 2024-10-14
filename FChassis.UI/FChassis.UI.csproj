@@ -51,4 +51,8 @@
       <DependentUpon>AxisSettingsPanel.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="SettingPanels\Machine\ProcessingDefaults\SequenceSettings.axaml" />
+  </ItemGroup>
 </Project>
