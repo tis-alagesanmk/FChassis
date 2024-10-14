@@ -23,8 +23,7 @@
 					<RowDefinition Height="90*"/>
 				</Grid.RowDefinitions>
 				<Border Grid.Row="0" Classes="header">
-					<TextBlock Text="General"
-							   Theme="{StaticResource textblockHeader}"/>
+					<TextBlock Text="General"/>
 				</Border>
 
 				<Grid Grid.Row="1" ColumnDefinitions="40* 60*" RowDefinitions="28 25 25 25 25 25 25 28 30">
@@ -105,7 +104,7 @@
 				<Border Grid.Row="0"
 						Classes="header">
 					<TextBlock Text="Screen Size"
-							   Theme="{StaticResource textblockHeader}"/>
+							   Classes="title"/>
 			    </Border>
           
 				<Grid Grid.Row="1" ColumnDefinitions="40* 60*">

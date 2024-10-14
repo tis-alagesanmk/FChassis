@@ -24,7 +24,6 @@
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="0"/>
 				<TextBox x:Name="txtMatchId"
-						  
 						  Grid.Column="1" Grid.Row="0"/>
 
 				<Label Content="Axis emulation"
@@ -50,11 +49,13 @@
 				<Label Content="Can open bit rate"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="4"/>
-				<StackPanel  Grid.Column="1" Grid.Row="4" 
+				<StackPanel  Grid.Column="1" Grid.Row="4"
+							 Margin="0,5,0,5"
 							 Orientation="Horizontal">
-					<TextBox />
+					<TextBox Grid.Column="1" Grid.Row="4"/>
 					<Label Content="kbps"
-							  Classes="blue"/>
+						   FontSize="12"
+						   Classes="blue"/>
 				</StackPanel>
 				
 
@@ -84,11 +85,8 @@
 		</Grid>
 		<!-- Controller  -->
 		<Grid Grid.Row="1" RowDefinitions="10* 90*">
-			
-			<Border Grid.Row="0"
-					Classes="header">
-				<TextBlock Text="Controller"
-						   Theme="{StaticResource textblockHeader}"/>
+			<Border Grid.Row="0" Classes="header">
+				<TextBlock Text="Controller"/>
 			</Border>
 
 			<Grid Grid.Row="1" 
@@ -98,9 +96,11 @@
 				<Label Content="Interpolation cycle time"
 						Classes="info"
 					   Grid.Column="0" Grid.Row="0"/>
-				<StackPanel Grid.Column="1" Grid.Row="0">
+				<StackPanel Grid.Column="1" Grid.Row="0"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtInterpolationcyclelimit"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="ms"/>
 				</StackPanel>
 				
@@ -113,9 +113,11 @@
 				<Label Content="Handwheel filetr time"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="2"/>
-				<StackPanel Grid.Column="1" Grid.Row="2">
+				<StackPanel Grid.Column="1" Grid.Row="2"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtHandwheelfiltertime"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="ms"/>
 				</StackPanel>
 
@@ -123,27 +125,33 @@
 				<Label Content="Velocity"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="3"/>
-				<StackPanel  Grid.Column="1" Grid.Row="3">
+				<StackPanel  Grid.Column="1" Grid.Row="3"
+							 Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtVelocity"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="m/min"/>
 				</StackPanel>
 
 				<Label Content="Acceleration"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="4"/>
-				<StackPanel Grid.Column="1" Grid.Row="4">
+				<StackPanel Grid.Column="1" Grid.Row="4"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtAcceleration"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="m/sec²"/>
 				</StackPanel>
 
 				<Label Content="Deceleration"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="5"/>
-				<StackPanel Grid.Column="1" Grid.Row="5">
+				<StackPanel Grid.Column="1" Grid.Row="5"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtDeceleration"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="m/sec²"/>
 				</StackPanel>
 
@@ -151,18 +159,22 @@
 				<Label Content="Ramp time"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="6"/>
-				<StackPanel Grid.Column="1" Grid.Row="6">
+				<StackPanel Grid.Column="1" Grid.Row="6"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtRamptime"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="ms"/>
 				</StackPanel>
 				
 				<Label Content="Position tolerance MM"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="7"/>
-				<StackPanel Grid.Column="1" Grid.Row="7">
+				<StackPanel Grid.Column="1" Grid.Row="7"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtPositiontolerancemm"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="mm"/>
 				</StackPanel>
 
@@ -170,9 +182,11 @@
 				<Label Content="Position tolerance Degree"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="8"/>
-				<StackPanel Grid.Column="1" Grid.Row="8">
+				<StackPanel Grid.Column="1" Grid.Row="8"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtPositiontolerancedegree"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="o"/>
 				</StackPanel>
 				
@@ -180,18 +194,22 @@
 				<Label Content="Quick stop time"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="9"/>
-				<StackPanel Grid.Column="1" Grid.Row="9">
+				<StackPanel Grid.Column="1" Grid.Row="9"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtQuickstoptime"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="ms"/>
 				</StackPanel>
 				
 				<Label Content="Creep speed velocity"
 					   Classes="info"
 					   Grid.Column="0" Grid.Row="10"/>
-				<StackPanel Grid.Column="1" Grid.Row="10">
+				<StackPanel Grid.Column="1" Grid.Row="10"
+							Margin="0,5,0,5"
+							Orientation="Horizontal">
 					<TextBox x:Name="txtCreepspeedvelocity"/>
-					<Label Theme="{StaticResource lblHeaderBlue}"
+					<Label Classes="blue"
 						   Content="m/min"/>
 				</StackPanel>
 				
@@ -200,10 +218,8 @@
 		<!-- Memory reservation  -->
 		<Grid Grid.Row="2" RowDefinitions="10* 90*">
 		
-			<Border Grid.Row="0"
-					Classes="header">
-				<TextBlock Text="Memory reservation"
-						   Theme="{StaticResource textblockHeader}"/>
+			<Border Grid.Row="0" Classes="header">
+				<TextBlock Text="Memory reservation"/>
 			</Border>
 
 			<Grid Grid.Row="1" 

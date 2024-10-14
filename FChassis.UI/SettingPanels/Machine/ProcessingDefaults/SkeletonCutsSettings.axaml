@@ -7,59 +7,14 @@
 			 xmlns:base="FChassis.UI.Settings"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.SkeletonCutsSettings">
 	<ScrollViewer>
-		<ScrollViewer.Resources>
-			<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
-				<Setter Property="Foreground" Value="White"/>
-				<Setter Property="HorizontalAlignment" Value="Left"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-				<Setter Property="Margin" Value="5,0,0,0"/>
-			</ControlTheme>
-			<ControlTheme x:Key="lblHeader" TargetType="{x:Type Label}">
-				<Setter Property="HorizontalAlignment" Value="Right"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-			</ControlTheme>
-			<ControlTheme x:Key="lblHeaderBold" TargetType="{x:Type Label}">
-				<Setter Property="HorizontalAlignment" Value="Center"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-				<Setter Property="FontWeight" Value="Bold"/>
-			</ControlTheme>
-			<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
-				<Setter Property="Background" Value="#3D87B4"/>
-				<Setter Property="Height" Value="35"/>
-				<Setter Property="Margin" Value="0,3,0,3"/>
-			</ControlTheme>
-		</ScrollViewer.Resources>
-		<ScrollViewer.Styles>
-			<Style Selector="TextBox">
-				<Setter Property="Foreground" Value="Black"/>
-				<Setter Property="HorizontalAlignment" Value="Left"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-				<Setter Property="Margin" Value="5"/>
-				<Setter Property="Width" Value="150"/>
-				<Setter Property="Height" Value="27"/>
-				<Setter Property="Padding" Value="2,2,0,0"/>
-				<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-			</Style>
-			<Style Selector="ComboBox">
-				<Setter Property="Width" Value="150"/>
-				<Setter Property="Height" Value="27"/>
-				<Setter Property="Margin" Value="5"/>
-				<Setter Property="HorizontalAlignment" Value="Left"/>
-			</Style>
-			<Style Selector="CheckBox">
-				<Setter Property="Height" Value="27"/>
-				<Setter Property="Margin" Value="5"/>
-				<Setter Property="HorizontalAlignment" Value="Left"/>
-			</Style>
-		</ScrollViewer.Styles>
+		
 		<Border>
 			<Grid RowDefinitions="50* 40* 10*">
 				<!-- Sheet cutting rules -->
 				<Grid Grid.Row="0"
 				  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
-						<TextBlock Text="Laser Sequence"
-								   Theme="{StaticResource textblockHeader}"/>
+					<Border Grid.Row="0" Classes="header">
+						<TextBlock Text="Laser Sequence" />
 					</Border>
 					<Grid Grid.Row="1" ColumnDefinitions="40* 60*" RowDefinitions="* * * * * * *">
 						<Grid Grid.Row="0" Grid.Column="1">
@@ -67,14 +22,14 @@
 						</Grid>
 						
 						<Label Content="X spacing between vertical sheet cuts"
-						   Theme="{StaticResource lblHeader}"
-						   Grid.Column="0" Grid.Row="1"/>
+							   Classes="info"
+							   Grid.Column="0" Grid.Row="1"/>
 						<TextBox x:Name="txtXspacing"
 							 Grid.Column="1" Grid.Row="1" />
 
 						<Label Content="Y spacing between horizontal sheet cuts"
-						   Theme="{StaticResource lblHeader}"
-						   Grid.Column="0" Grid.Row="2"/>
+							   Classes="info"
+							   Grid.Column="0" Grid.Row="2"/>
 						<TextBox x:Name="txtYspacing"
 							 Grid.Column="1" Grid.Row="2" />
 
@@ -83,13 +38,13 @@
 						</Grid>
 
 						<Label Content="Minimum remainder sheet width"
-						   Theme="{StaticResource lblHeader}"
-						   Grid.Column="0" Grid.Row="4"/>
+							   Classes="info"
+							   Grid.Column="0" Grid.Row="4"/>
 						<TextBox x:Name="txtMinimumremaindersheetwidth"
 							 Grid.Column="1" Grid.Row="4" />
 
 						<Label Content="Final cut X offset"
-								Theme="{StaticResource lblHeader}"
+								Classes="info"
 								Grid.Column="0" Grid.Row="5"/>
 						<TextBox x:Name="txtFinalcutxoffset"
 								Grid.Column="1" Grid.Row="5" />
@@ -105,42 +60,41 @@
 				<!-- Sheet cut parameters -->
 				<Grid Grid.Row="1"
 					  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
-						<TextBlock Text="Sheet cut parameters"
-								   Theme="{StaticResource textblockHeader}"/>
+					<Border Grid.Row="0" Classes="header">
+						<TextBlock Text="Sheet cut parameters" />
 					</Border>
 
 					<Grid Grid.Row="1" ColumnDefinitions="40* 60*" RowDefinitions="* * * * * * * * * *">
 
 						<Label Content="Micro joint gap at sheet edge"
-							   Theme="{StaticResource lblHeader}"
+							   Classes="info"
 							   Grid.Column="0" Grid.Row="0"/>
 						<TextBox x:Name="txtMicrojointgapsheetedge"
 							 Grid.Column="1" Grid.Row="0" />
 
 						<Label Content="Micro joint gap at part edge"
-							   Theme="{StaticResource lblHeader}"
+							   Classes="info"
 							   Grid.Column="0" Grid.Row="1"/>
 						<TextBox x:Name="txtMicrojointgappartedge"
 								Grid.Column="1" Grid.Row="1" />
 
 						<Label Content="Pierce distance from part edge"
-							   Theme="{StaticResource lblHeader}"
+							   Classes="info"
 						       Grid.Column="0" Grid.Row="2"/>
 						<TextBox x:Name="txtPiercedistancefrompartedge"
 							 Grid.Column="1" Grid.Row="2" />
 
 						<Label Content="Measuring distance from sheet edge"
-					           Theme="{StaticResource lblHeader}"
+					           Classes="info"
 					           Grid.Column="0" Grid.Row="3"/>
 						<TextBox x:Name="txtMeasuringsheetfromsheetedge"
 							 Grid.Column="1" Grid.Row="3" />
 
 						<Label Content="Overtravel after sheet edge"
-					           Theme="{StaticResource lblHeader}"
+					           Classes="info"
 					           Grid.Column="0" Grid.Row="4"/>
 						<TextBox x:Name="txtOvertravelsheetedge"
-							 Grid.Column="1" Grid.Row="4" />
+							     Grid.Column="1" Grid.Row="4" />
 					</Grid>
 				</Grid>
 			</Grid>
