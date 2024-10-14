@@ -11,108 +11,67 @@
 		>
 	<ScrollViewer>
 		<Grid RowDefinitions="25* 50* 25*">
-		<Grid.Resources>
-			<ControlTheme x:Key="lblHeader" TargetType="{x:Type Label}">
-				<Setter Property="HorizontalAlignment" Value="Right"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-			</ControlTheme>
-			<ControlTheme x:Key="lblHeaderBlue" TargetType="{x:Type Label}">
-				<Setter Property="Foreground" Value="blue"/>
-				<Setter Property="HorizontalAlignment" Value="Left"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-			</ControlTheme>
-			<ControlTheme x:Key="textblockHeader" TargetType="{x:Type TextBlock}">
-				<Setter Property="Foreground" Value="White"/>
-				<Setter Property="HorizontalAlignment" Value="Left"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-				<Setter Property="Margin" Value="5,0,0,0"/>
-			</ControlTheme>
-			<ControlTheme x:Key="borderHeader" TargetType="{x:Type Border}">
-				<Setter Property="Background" Value="#3D87B4"/>
-				<Setter Property="Height" Value="35"/>
-				<Setter Property="Margin" Value="0,3,0,3"/>
-			</ControlTheme>
-		</Grid.Resources>
-		<Grid.Styles>
-			<Style Selector="TextBox">
-				<Setter Property="Foreground" Value="Black"/>
-				<Setter Property="HorizontalAlignment" Value="Left"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-				<Setter Property="Margin" Value="5"/>
-				<Setter Property="Width" Value="150"/>
-				<Setter Property="Height" Value="27"/>
-				<Setter Property="Padding" Value="2,2,0,0"/>
-				<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-			</Style>
-			<Style Selector="StackPanel">
-				<Setter Property="Orientation" Value="Horizontal"/>
-				<Setter Property="VerticalAlignment" Value="Center"/>
-				<Setter Property="Margin" Value="0,5,5,5"/>
-			</Style>
-		</Grid.Styles>
-		
 		<!-- General -->
 		<Grid Grid.Row="0" RowDefinitions="10* 90*">
-			<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
-				<TextBlock Text="General"
-						   Theme="{StaticResource textblockHeader}"/>
+			<Border Grid.Row="0" Classes="header">
+				<TextBlock Text="General"/>
 			</Border>
 
 			<Grid Grid.Row="1" 
 				  ColumnDefinitions="40* 60*"
 				  RowDefinitions="25 25 25 25 25 25 25 25">
 				<Label Content="Match Id"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="0"/>
 				<TextBox x:Name="txtMatchId"
 						  
 						  Grid.Column="1" Grid.Row="0"/>
 
 				<Label Content="Axis emulation"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="1"/>
 				<TextBox x:Name="txtAxisemulation"
 						
 						 Grid.Column="1" Grid.Row="1" />
 
 				<Label Content="Cfg custom tech"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="2"/>
 				<TextBox x:Name="txtCfgcustomtech"
 						
 						 Grid.Column="1" Grid.Row="2" />
 
 				<Label Content="Pesets"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="3"/>
 				<TextBox x:Name="txtMaximumstoragekeepfiles"
 						 Grid.Column="1" Grid.Row="3" />
 
 				<Label Content="Can open bit rate"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="4"/>
-				<StackPanel  Grid.Column="1" Grid.Row="4">
-					<TextBox x:Name="txtCanopenbitrate"/>
+				<StackPanel  Grid.Column="1" Grid.Row="4" 
+							 Orientation="Horizontal">
+					<TextBox />
 					<Label Content="kbps"
-							   Margin="2,0,0,0"
-							   Theme="{StaticResource lblHeaderBlue}"/>
+							  Classes="blue"/>
 				</StackPanel>
 				
 
 				<Label Content="Netdisk server IP address"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="5"/>
 				<TextBox x:Name="txtNetdiskserverip"
 						 Grid.Column="1" Grid.Row="5" />
 
 				<Label Content="Software limit code"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="6"/>
 				<TextBox x:Name="txtSoftwarelimitcode"
 						 Grid.Column="1" Grid.Row="6" />
 
 				<Label Content="Override limit"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="7"/>
 				<TextBox x:Name="txtOverridelimit"
 						 Grid.Column="1" Grid.Row="7" />
@@ -127,7 +86,7 @@
 		<Grid Grid.Row="1" RowDefinitions="10* 90*">
 			
 			<Border Grid.Row="0"
-					Theme="{StaticResource borderHeader}">
+					Classes="header">
 				<TextBlock Text="Controller"
 						   Theme="{StaticResource textblockHeader}"/>
 			</Border>
@@ -137,7 +96,7 @@
 				  RowDefinitions="25 25 25 25 25 25 25 25 25 25 25">
 		
 				<Label Content="Interpolation cycle time"
-						Theme="{StaticResource lblHeader}"
+						Classes="info"
 					   Grid.Column="0" Grid.Row="0"/>
 				<StackPanel Grid.Column="1" Grid.Row="0">
 					<TextBox x:Name="txtInterpolationcyclelimit"/>
@@ -146,13 +105,13 @@
 				</StackPanel>
 				
 				<Label Content="Interpolation divider"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="1"/>
 				<TextBox x:Name="txtInterpolationdivider"
 						 Grid.Column="1" Grid.Row="1" />
 
 				<Label Content="Handwheel filetr time"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="2"/>
 				<StackPanel Grid.Column="1" Grid.Row="2">
 					<TextBox x:Name="txtHandwheelfiltertime"/>
@@ -162,7 +121,7 @@
 
 
 				<Label Content="Velocity"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="3"/>
 				<StackPanel  Grid.Column="1" Grid.Row="3">
 					<TextBox x:Name="txtVelocity"/>
@@ -171,7 +130,7 @@
 				</StackPanel>
 
 				<Label Content="Acceleration"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="4"/>
 				<StackPanel Grid.Column="1" Grid.Row="4">
 					<TextBox x:Name="txtAcceleration"/>
@@ -180,7 +139,7 @@
 				</StackPanel>
 
 				<Label Content="Deceleration"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="5"/>
 				<StackPanel Grid.Column="1" Grid.Row="5">
 					<TextBox x:Name="txtDeceleration"/>
@@ -190,7 +149,7 @@
 
 
 				<Label Content="Ramp time"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="6"/>
 				<StackPanel Grid.Column="1" Grid.Row="6">
 					<TextBox x:Name="txtRamptime"/>
@@ -199,7 +158,7 @@
 				</StackPanel>
 				
 				<Label Content="Position tolerance MM"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="7"/>
 				<StackPanel Grid.Column="1" Grid.Row="7">
 					<TextBox x:Name="txtPositiontolerancemm"/>
@@ -209,7 +168,7 @@
 
 
 				<Label Content="Position tolerance Degree"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="8"/>
 				<StackPanel Grid.Column="1" Grid.Row="8">
 					<TextBox x:Name="txtPositiontolerancedegree"/>
@@ -219,7 +178,7 @@
 				
 
 				<Label Content="Quick stop time"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="9"/>
 				<StackPanel Grid.Column="1" Grid.Row="9">
 					<TextBox x:Name="txtQuickstoptime"/>
@@ -228,7 +187,7 @@
 				</StackPanel>
 				
 				<Label Content="Creep speed velocity"
-					   Theme="{StaticResource lblHeader}"
+					   Classes="info"
 					   Grid.Column="0" Grid.Row="10"/>
 				<StackPanel Grid.Column="1" Grid.Row="10">
 					<TextBox x:Name="txtCreepspeedvelocity"/>
@@ -242,7 +201,7 @@
 		<Grid Grid.Row="2" RowDefinitions="10* 90*">
 		
 			<Border Grid.Row="0"
-					Theme="{StaticResource borderHeader}">
+					Classes="header">
 				<TextBlock Text="Memory reservation"
 						   Theme="{StaticResource textblockHeader}"/>
 			</Border>
@@ -252,19 +211,19 @@
 				  RowDefinitions="25 25 25">
 			
 				<Label Content="Block count"
-						Theme="{StaticResource lblHeader}"
+						Classes="info"
 					   Grid.Column="0" Grid.Row="0"/>
 				<TextBox x:Name="txtBlockcount"
 						 Grid.Column="1" Grid.Row="0" />
 
 				<Label Content="Reverse Block count"
-							Theme="{StaticResource lblHeader}"
+							Classes="info"
 						   Grid.Column="0" Grid.Row="1"/>
 				<TextBox x:Name="txtReverseblockcount"
 						 Grid.Column="1" Grid.Row="1" />
 
 				<Label Content="Parameter aray size"
-							Theme="{StaticResource lblHeader}"
+							Classes="info"
 						   Grid.Column="0" Grid.Row="2"/>
 				<TextBox x:Name="txtParameterarraysize"
 						 Grid.Column="1" Grid.Row="2" />
