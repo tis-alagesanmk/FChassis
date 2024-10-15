@@ -6,6 +6,7 @@
 			 x:Class="FChassis.UI.Settings.Machine.PLCOptions.FunctionParameters"
 			 xmlns:base="FChassis.UI.Settings">
 	<UserControl.Styles>
+	
 		<!--TextBlock Styles-->
 		<Style Selector="TextBlock">
 			<Setter Property="Margin" Value="5 0 0 0"/>

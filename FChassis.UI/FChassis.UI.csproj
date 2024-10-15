@@ -47,6 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\ComboboxLabel.axaml.cs">
+      <DependentUpon>ComboboxLabel.axaml</DependentUpon>
+    </Compile>
     <Compile Update="SettingPanels\Machine\AxisParams\AxisSettingsPanel.axaml.cs">
       <DependentUpon>AxisSettingsPanel.axaml</DependentUpon>
     </Compile>
