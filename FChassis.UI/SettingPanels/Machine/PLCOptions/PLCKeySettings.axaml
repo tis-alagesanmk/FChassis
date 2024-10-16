@@ -7,12 +7,22 @@
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Machine.PLCOptions.PLCKeySettings"
 		xmlns:base="FChassis.UI.Settings"
-		Background="White"
-		>
-
+		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
+		xmlns:model="using:FChassis.UI.SettingPanels.Machine.Model"
+		x:DataType="vm:PLCKeyViewModel"
+		Background="White">
+	<UserControl.DataContext>
+		<vm:PLCKeyViewModel/>
+	</UserControl.DataContext>
 	<UserControl.Styles>
+		<!--Border Styles-->
+		<Style Selector="Border.title">
+			<Setter Property="Height" Value="35"/>
+			<Setter Property="Background" Value="#3D87B4"/>
+		</Style>
+
 		<!--TextBlock Styles-->
-		<Style Selector="TextBlock">
+		<Style Selector="TextBlock.head">
 			<Setter Property="Margin" Value="5 0 0 0"/>
 			<Setter Property="Foreground" Value="White"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
@@ -20,11 +30,11 @@
 		</Style>
 
 		<!--Check Box Styles-->
-		<Style Selector="CheckBox">
+		<Style Selector="CheckBox.advance">
 			<Setter Property="Margin" Value="10 0"/>
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
 		</Style>
-		<Style Selector="CheckBox.basic">
+		<Style Selector="CheckBox">
 			<Setter Property="Margin" Value="5 0"/>
 		</Style>
 
@@ -35,14 +45,8 @@
 			<Setter Property="Height" Value="25"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 		</Style>
-
-		<!--TextBox Styles-->
-		<Style Selector="TextBox">
-			<Setter Property="Margin" Value="5"/>
-			<Setter Property="Padding" Value="1"/>
-			<Setter Property="Width" Value="120"/>
-			<Setter Property="Height" Value="25"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Style Selector="ComboBox.long">
+			<Setter Property="Width" Value="150"/>
 		</Style>
 
 		<!--Label Styles-->
@@ -57,16 +61,342 @@
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
 		</Style>
+		<Style Selector="DataGrid">
+			<Setter Property="AutoGenerateColumns" Value="False"/>
+			<Setter Property="GridLinesVisibility" Value="All"/>
+			<!--<Setter Property="HorizontalAlignment" Value="Left"/>-->
+			<!--<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="BorderBrush" Value="Black"/>-->
+			
+		</Style>
+		
 	</UserControl.Styles>
 
 	<ScrollViewer>
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
+		<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+			<!--PLCKey1-->
+			<Grid Grid.Row="1" RowDefinitions="35,Auto">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey1" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey1}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey2-->
+			<Grid Grid.Row="2" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey2" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey2}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey3-->
+			<Grid Grid.Row="3" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey3" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey3}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey4-->
+			<Grid Grid.Row="4" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey4" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey4}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey5-->
+			<Grid Grid.Row="5" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey5" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey5}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey6-->
+			<Grid Grid.Row="6" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey6" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey6}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey7-->
+			<Grid Grid.Row="7" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey7" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey7}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey8-->
+			<Grid Grid.Row="8" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey8" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey8}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey9-->
+			<Grid Grid.Row="9" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey9" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey9}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey10-->
+			<Grid Grid.Row="10" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey10" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey10}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey11-->
+			<Grid Grid.Row="11" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey11" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey11}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<!--PLCKey12-->
+			<Grid Grid.Row="12" RowDefinitions="35,Auto" Margin="0 15 0 0">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="PLCKey12" Classes="head"/>
+				</Border>
+
+				<DataGrid Grid.Row="1" ItemsSource="{Binding PLCKey12}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Name">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Type">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Type}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Function">
+							<DataTemplate>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Function}" />
+							</DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
 		</Grid>
 	</ScrollViewer>
 </base:Panel>

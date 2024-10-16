@@ -430,5 +430,4 @@
 			<Label Grid.Row="90" Grid.Column="3" Classes="blue" Content="%"/>
 		</Grid>
 	</ScrollViewer>
-
 </base:Panel>

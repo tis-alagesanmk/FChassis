@@ -7,7 +7,241 @@
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Machine.AxisParams.Pallet1Settings"
 		xmlns:base="FChassis.UI.Settings"
-		Background="White"
-		>
-	Pallet1 Settings
+		Background="White">
+	
+	<UserControl.Styles>
+		<!--Border Styles-->
+		<Style Selector="Border.title">
+			<Setter Property="Height" Value="35"/>
+			<Setter Property="Background" Value="#3D87B4"/>
+		</Style>
+
+		<!--TextBlock Styles-->
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="5 0 0 0"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+
+		<!--Check Box Styles-->
+		<Style Selector="CheckBox">
+			<Setter Property="Margin" Value="10 0"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="CheckBox.basic">
+			<Setter Property="Margin" Value="5 0"/>
+		</Style>
+
+		<!--Combo Box Styles-->
+		<Style Selector="ComboBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<!--TextBox Styles-->
+		<Style Selector="TextBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<!--Label Styles-->
+		<Style Selector="Label">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Label.info">
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+		</Style>
+		<Style Selector="Label.blue">
+			<Setter Property="Foreground" Value="Blue"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+	</UserControl.Styles>
+
+	<ScrollViewer>
+		<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+			<!--Configuration parameters-->
+			<Grid Grid.Row="0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="Configuration parameters"/>
+				</Border>
+
+				<CheckBox Grid.Row="1" Grid.Column="2" Content="Advanced"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Axis Type"/>
+				<ComboBox Grid.Row="2" Grid.Column="1"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Axis Connection"/>
+				<ComboBox Grid.Row="3" Grid.Column="1"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Axis address"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Interpolation filter time"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="s"/>
+			</Grid>
+
+			<!--Resolution-->
+			<Grid Grid.Row="1" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="Resolution"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Increments per distance"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Average Power"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="Watts"/>
+			</Grid>
+
+			<!--Monitoring-->
+			<Grid Grid.Row="2" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="Monitoring"/>
+				</Border>
+
+				<CheckBox Grid.Row="1" Grid.Column="1" Classes="basic" Content="Software limit active"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Software limit negative"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Software limit positive"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Exact stop lag window"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Exact stop time window"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="s"/>
+			</Grid>
+
+			<!--Referencing-->
+			<Grid Grid.Row="3" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="Referencing"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Homing velocity2"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="m/min"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Homing acceleration2"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="m/sec²"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Homing mode"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Homing velocity1"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="m/min"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Homing acceleration1"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="m/sec²"/>
+
+				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Homing offset"/>
+				<TextBox Grid.Row="6" Grid.Column="1"/>
+				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Homing direction and sequence"/>
+				<TextBox Grid.Row="7" Grid.Column="1"/>
+			</Grid>
+
+			<!--Speed & Acceleration-->
+			<Grid Grid.Row="4" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35,35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="Speed &amp; Acceleration"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Modal velocity"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="m/min"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Velocity"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="m/min"/>
+
+				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Acceleration"/>
+				<TextBox Grid.Row="3" Grid.Column="1"/>
+				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="m/sec²"/>
+
+				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Deceleration"/>
+				<Label Grid.Row="4" Grid.Column="2" Classes="blue" Content="m/sec²"/>
+				<TextBox Grid.Row="4" Grid.Column="1"/>
+
+				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Ramp Time"/>
+				<TextBox Grid.Row="5" Grid.Column="1"/>
+				<Label Grid.Row="5" Grid.Column="2" Classes="blue" Content="ms"/>
+			</Grid>
+
+			<!--Corrections-->
+			<Grid Grid.Row="5" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="Corrections"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Backlash compensation"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="mm"/>
+			</Grid>
+
+			<!--Synchronous-->
+			<Grid Grid.Row="6" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="Synchronous"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Synchronous offset"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="mm"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Synchronous position deviation"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="mm"/>
+			</Grid>
+
+			<!--Handwheel-->
+			<Grid Grid.Row="7" Margin="0 10 0 0"
+				  ColumnDefinitions="*,Auto,*"
+				  RowDefinitions="35,35,35">
+				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
+					<TextBlock Text="Handwheel"/>
+				</Border>
+
+				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Handwheel assignment"/>
+				<TextBox Grid.Row="1" Grid.Column="1"/>
+
+				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Handwheel factor"/>
+				<TextBox Grid.Row="2" Grid.Column="1"/>
+			</Grid>
+
+		</Grid>
+	</ScrollViewer>
 </base:Panel>

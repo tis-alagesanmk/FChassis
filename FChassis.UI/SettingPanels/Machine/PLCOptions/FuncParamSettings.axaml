@@ -9,7 +9,6 @@
 		xmlns:base="FChassis.UI.Settings"
 		Background="White"
 		>
-
 	<ScrollViewer>
 		<Border>
 			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
