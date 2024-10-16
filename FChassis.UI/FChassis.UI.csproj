@@ -47,9 +47,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\ComboboxLabel.axaml.cs">
-      <DependentUpon>ComboboxLabel.axaml</DependentUpon>
-    </Compile>
     <Compile Update="Controls\TextboxLabel.axaml.cs">
       <DependentUpon>TextboxLabel.axaml</DependentUpon>
     </Compile>

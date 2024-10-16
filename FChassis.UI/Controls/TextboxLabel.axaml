@@ -23,8 +23,8 @@
     <Setter Property="Template">
       <ControlTemplate>
 		  <Grid ColumnDefinitions="* * * * *">
-			  <Label Grid.Column="0" Grid.ColumnSpan="2" Content="{TemplateBinding LabelContenth}" HorizontalAlignment="Right"/>
-			  <TextBox Grid.Column="2"  Text="{TemplateBinding LabelContenth1}"/>
+			  <Label Grid.Column="0" Grid.ColumnSpan="2" Content="{TemplateBinding Content}" HorizontalAlignment="Right"/>
+			  <TextBox Grid.Column="2"  Text="{TemplateBinding Text}"/>
 		  </Grid>
 		
       </ControlTemplate>

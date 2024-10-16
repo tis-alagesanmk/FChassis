@@ -8,25 +8,19 @@ namespace FChassis.UI.Controls;
 
 public class TextboxLabel : TemplatedControl
 {
-   //public static readonly DirectProperty<TemplatedControl1, string> LabelContentProperty = AvaloniaProperty.RegisterDirect<TemplatedControl1, string> (nameof (LabelContent), o => o.LabelContent.ToString (), (o, v) => o.LabelContent = v);
-   //private string _labelcontent = "Default Value";
-   //public string LabelContent {
-   //   get => _labelcontent;
-   //   set => SetAndRaise (LabelContentProperty,ref _labelcontent, value);
-   //}
 
-   public static readonly DirectProperty<TextboxLabel, string> LabelContenthProperty = AvaloniaProperty.RegisterDirect<TextboxLabel, string> (nameof (LabelContenth), o => o.LabelContenth.ToString (), (o, v) => o.LabelContenth = v);
-   private string _labelcontenth = "Default Value";
-   public string LabelContenth {
+   public static readonly DirectProperty<TextboxLabel, string> ContentProperty = AvaloniaProperty.RegisterDirect<TextboxLabel, string> (nameof (Content), o => o.Content.ToString (), (o, v) => o.Content = v);
+   private string _labelcontenth = string.Empty;
+   public string Content {
       get => _labelcontenth;
-      set => SetAndRaise (LabelContenthProperty, ref _labelcontenth, value);
+      set => SetAndRaise (ContentProperty, ref _labelcontenth, value);
    }
 
-   public static readonly DirectProperty<TextboxLabel, string> LabelContenth1Property = AvaloniaProperty.RegisterDirect<TextboxLabel, string> (nameof (LabelContenth1), o => o.LabelContenth1.ToString (), (o, v) => o.LabelContenth1 = v);
-   private string _labelcontenth1 = "Default Value";
-   public string LabelContenth1 {
-      get => _labelcontenth1;
-      set => SetAndRaise (LabelContenth1Property, ref _labelcontenth1, value);
+   public static readonly DirectProperty<TextboxLabel, string> TextProperty = AvaloniaProperty.RegisterDirect<TextboxLabel, string> (nameof (Text), o => o.Text.ToString (), (o, v) => o.Text = v);
+   private string _text = string.Empty;
+   public string Text {
+      get => _text;
+      set => SetAndRaise (TextProperty, ref _text, value);
    }
 
 }

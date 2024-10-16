@@ -7,12 +7,13 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="/Controls/TextboxLabel.axaml"/>
+			    <ResourceInclude Source="/Controls/ComboboxLabel.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
     <Application.Styles>
-		<FluentTheme />
+		<SimpleTheme />
 		<StyleInclude Source="/Themes/Styles.axaml"/>
-		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Simple.xaml"/>
     </Application.Styles>
 </Application>
