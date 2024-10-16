@@ -1,0 +1,69 @@
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800"
+			 Background="White"
+			 xmlns:base="FChassis.UI.Settings"
+             x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.SkeletonCutsSettings">
+	<ScrollViewer>
+		
+		<Border>
+			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
+				  RowDefinitions="32 32 32 32 32 32 32 32 32 32 32 32 32 32">
+
+				<Border Classes="header"
+						Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+					<TextBlock Text="Sheet cutting rules"/></Border>
+				<CheckBox Content="Create sheet cut"
+						  Grid.Row="1" Grid.Column="2"/>
+
+				<Label Content="X spacing between vertical sheet cuts"
+					   Classes="info" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="2" Grid.Column="2"/>
+
+				<Label Content="Y spacing between horizontal sheet cuts"
+					   Classes="info" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="3" Grid.Column="2"/>
+
+				<CheckBox Content="Create remainder sheet"
+						  Grid.Row="4" Grid.Column="2"/>
+
+				<Label Content="Minimum remainder sheet width"
+					   Classes="info" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="5" Grid.Column="2"/>
+
+				<Label Content="Final cut X offset"
+					   Classes="info" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="6" Grid.Column="2"/>
+
+				<CheckBox Content="Process sheet cut after all part"
+						  Grid.Row="7" Grid.Column="2"/>
+
+				<Border Classes="header"
+						Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5">
+					<TextBlock Text="Sheet cut parameters"/></Border>
+				<Label Content="Micro joint gap at sheet edge"
+					   Classes="info" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="9" Grid.Column="2"/>
+
+				<Label Content="Micro joint gap at part edge"
+					   Classes="info" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="10" Grid.Column="2"/>
+
+
+				<Label Content="Pierce distance from part edge"
+					   Classes="info" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="11" Grid.Column="2"/>
+
+				<Label Content="Measuring distance from sheet edge"
+					   Classes="info" Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="12" Grid.Column="2"/>
+
+				<Label Content="Overtravel after sheet edge"
+					   Classes="info" Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="13" Grid.Column="2"/>
+			</Grid>
+		</Border>
+	</ScrollViewer>
+</base:Panel>

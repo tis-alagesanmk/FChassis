@@ -1,0 +1,52 @@
+<base:Panel xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800"
+			 xmlns:base="FChassis.UI.Settings"
+			 Background="White"
+             x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.ProfileCamSettings">
+	<ScrollViewer>
+		
+		<Border>
+			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
+				  RowDefinitions="32 32 32 32 32 32 32 32 32 32">
+				<CheckBox Content="Advanced" 
+						  Classes="header" Grid.Column="4"
+						  HorizontalAlignment="Right"/>
+
+				<Border Classes="header" 
+						Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
+					<TextBlock Text="Cutting"/></Border>
+				<Label Content="Choose cutting condition by"
+					   Classes="info" Grid.Row="2" Grid.Column="1"/>
+				<ComboBox Grid.Row="2" Grid.Column="2"/>
+
+				<Label Content="Process for open polylines"
+					   Classes="info" Grid.Row="3" Grid.Column="1"/>
+				<ComboBox Grid.Row="3" Grid.Column="2"/>
+
+				<Label Content="Stitch cutting threshold distance (0=disable)"
+					   Classes="info" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="4" Grid.Column="2"/>
+
+				<Border Classes="header"
+						Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5">
+					<TextBlock Text="Pierce settings"/></Border>
+				<CheckBox Content="Allow approach that is more than 0.5 distance to opposite dide"
+						  Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<Border Classes="header"
+						Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5">
+					<TextBlock Text="Scrap cutting"/></Border>
+				<Label Content="Scrap grid width"
+					   Classes="info" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="8" Grid.Column="2"/>
+				
+				<Label Content="Approach length for separating cuts"
+					   Classes="info" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="9" Grid.Column="2"/>
+			</Grid>
+		</Border>
+	</ScrollViewer>
+</base:Panel>

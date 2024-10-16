@@ -61,7 +61,6 @@
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
 		</Style>
-
 		<Style Selector="DataGrid">
 			<Setter Property="AutoGenerateColumns" Value="False"/>
 			<Setter Property="GridLinesVisibility" Value="All"/>

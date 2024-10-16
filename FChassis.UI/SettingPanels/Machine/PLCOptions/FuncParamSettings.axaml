@@ -4,294 +4,221 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-		d:DesignWidth="800" d:DesignHeight="450"
+		d:DesignWidth="800" 
         x:Class="FChassis.UI.Settings.Machine.PLCOptions.FuncParamSettings"
 		xmlns:base="FChassis.UI.Settings"
 		Background="White"
 		>
-	<UserControl.Styles>
-		<!--Border Styles-->
-		<Style Selector="Border.title">
-			<Setter Property="Height" Value="35"/>
-			<Setter Property="Background" Value="#3D87B4"/>
-		</Style>		
-		
-		<!--TextBlock Styles-->
-		<Style Selector="TextBlock">
-			<Setter Property="Margin" Value="5 0 0 0"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
-
-		<!--Check Box Styles-->
-		<Style Selector="CheckBox.advance">
-			<Setter Property="Margin" Value="10 0"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-		</Style>
-		<Style Selector="CheckBox">
-			<Setter Property="Margin" Value="5 0"/>
-		</Style>
-
-		<!--Combo Box Styles-->
-		<Style Selector="ComboBox">
-			<Setter Property="Margin" Value="5"/>
-			<Setter Property="Width" Value="120"/>
-			<Setter Property="Height" Value="25"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-		</Style>
-		<Style Selector="ComboBox.long">
-			<Setter Property="Width" Value="150"/>
-		</Style>
-
-		<!--TextBox Styles-->
-		<Style Selector="TextBox">
-			<Setter Property="Margin" Value="5"/>
-			<Setter Property="Padding" Value="1"/>
-			<Setter Property="Width" Value="120"/>
-			<Setter Property="Height" Value="25"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-		</Style>
-
-		<!--Label Styles-->
-		<Style Selector="Label">
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
-		<Style Selector="Label.info">
-			<Setter Property="HorizontalAlignment" Value="Right"/>
-		</Style>
-		<Style Selector="Label.blue">
-			<Setter Property="Foreground" Value="Blue"/>
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-		</Style>
-	</UserControl.Styles>
-
 	<ScrollViewer>
-		<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-			<!--PLC Custom Parameters-->
-			<Grid Grid.Row="0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="PLC Custom Parameters"/>
-				</Border>
-
+		<Border>
+			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
+				  RowDefinitions="32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32">
+				<Border Classes="header" Grid.ColumnSpan="5">
+					<TextBlock Text="PLC Custom Parameters"/></Border>
 				<CheckBox Grid.Row="1" Grid.Column="2" Classes="advance" Content="Advanced"/>
+
+				
+				<Border Classes="header" Grid.Row="2" Grid.ColumnSpan="5">
+					<TextBlock Text="Jog Parameters"/></Border>
+				<Label Content="Acc/Dec"
+					   Classes="info" Grid.Row="3" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="3" Grid.Column="2"/>
+				<Label Grid.Row="3" Grid.Column="3" Classes="blue" Content="m/sec²"/>
+
+				<Label Content="Ramp Time"
+					   Classes="info" Grid.Row="4" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="4" Grid.Column="2"/>
+				<Label Grid.Row="4" Grid.Column="3" Classes="blue" Content="ms"/>
+
+
+				<Border Classes="header" Grid.Row="5" Grid.ColumnSpan="5">
+					<TextBlock Text="Miscellaneous"/></Border>
+				<Label Content="Oil Lubrication Cycle Time"
+					   Classes="info" Grid.Row="6" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="6" Grid.Column="2"/>
+				<Label Grid.Row="6" Grid.Column="3" Classes="blue" Content="h"/>
+
+				<Label Content="Grease Lubrication Cycle Time"
+					   Classes="info" Grid.Row="7" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="7" Grid.Column="2"/>
+				<Label Grid.Row="7" Grid.Column="3" Classes="blue" Content="h"/>
+
+				<Label Content="Chip Conveyor Time"
+					   Classes="info" Grid.Row="8" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="8" Grid.Column="2"/>
+				<Label Grid.Row="8" Grid.Column="3" Classes="blue" Content="min"/>
+
+				<Label Content="Laser cut head type"
+					   Classes="info" Grid.Row="9" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="9" Grid.Column="2"/>
+
+				<Label Content="Laser type"
+					   Classes="info" Grid.Row="10" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="10" Grid.Column="2"/>
+
+				<Label Content="Delay for stop-pause"
+					   Classes="info" Grid.Row="11" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="11" Grid.Column="2"/>
+				<Label Grid.Row="11" Grid.Column="3" Classes="blue" Content="ms"/>
+
+				<Label Content="Delay for stop-abort"
+					   Classes="info" Grid.Row="12" Grid.ColumnSpan="2"/>
+				<TextBox Grid.Row="12" Grid.Column="2"/>
+				<Label Grid.Row="12" Grid.Column="3" Classes="blue" Content="ms"/>
+
+				<Label Content="Machine origin"
+					   Classes="info" Grid.Row="13" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="13" Grid.Column="2"/>
+
+				<Label Content="Jog keys"
+					   Classes="info" Grid.Row="14" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="14" Grid.Column="2"/>
+
+				<Label Content="Override keys"
+					   Classes="info" Grid.Row="15" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="15" Grid.Column="2"/>
+
+
+				<Border Classes="header" Grid.Row="16" Grid.ColumnSpan="5">
+					<TextBlock Text="Tandem Operation Options"/></Border>
+				<CheckBox  Content="Active Tandem operation"
+						   Classes="advance" Grid.Row="17" Grid.Column="2" Grid.ColumnSpan="3"/>
+				<CheckBox  Content="Deactivate Red Zone Stop"
+						   Classes="advance" Grid.Row="18" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<Border Classes="header" Grid.Row="19" Grid.ColumnSpan="5">
+					<TextBlock Text="Nozzle Cleaning Options"/></Border>
+				<CheckBox  Content="Nozzle cleaning active"
+						   Classes="advance" Grid.Row="20" Grid.Column="2" Grid.ColumnSpan="3"/>
+				
+				<CheckBox  Content="HC Calibration after Nozzle clean"
+						   Classes="advance" Grid.Row="21" Grid.Column="2" Grid.ColumnSpan="3"/>
+				
+				<CheckBox  Content="X-axis Limit Change"
+						   Classes="advance" Grid.Row="22" Grid.Column="2" Grid.ColumnSpan="3"/>
+				
+				<Label Content="Brush"
+					   Classes="info" Grid.Row="23" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="23" Grid.Column="2"/>
+
+
+				<Border Classes="header" Grid.Row="24" Grid.ColumnSpan="5">
+					<TextBlock Text="Auto Nozzle Clean Option"/></Border>
+				<Label Content="Based on"
+					   Classes="info" Grid.Row="25" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="25" Grid.Column="2"/>
+				
+				<Label Content="State of program"
+					   Classes="info" Grid.Row="26" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="26" Grid.Column="2"/>
+
+
+				<Border Classes="header" Grid.Row="27" Grid.ColumnSpan="5">
+					<TextBlock Text="Pallet Changer Configuration"/></Border>
+				<Label Content="Pallet"
+					   Classes="info" Grid.Row="28" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="28" Grid.Column="2"/>
+				
+				<CheckBox  Content="Pallet Lock"
+						   Classes="advance" Grid.Row="29" Grid.Column="2" Grid.ColumnSpan="3"/>
+				
+				<Label Content="Shuttle"
+					   Classes="info" Grid.Row="30" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="30" Grid.Column="2"/>
+				
+				<Label Content="Up/Down motion"
+					   Classes="info" Grid.Row="31" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="31" Grid.Column="2"/>
+
+				<CheckBox  Content="Pallet Door"
+						   Classes="advance" Grid.Row="32" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Light Barrier"
+						   Classes="advance" Grid.Row="33" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+
+				<Border Classes="header" Grid.Row="34" Grid.ColumnSpan="5">
+					<TextBlock Text="Laser Technology Miscellaneous Control"/></Border>
+				<CheckBox  Content="Auto Focus active"
+						   Classes="advance" Grid.Row="35" Grid.Column="2" Grid.ColumnSpan="3"/>
+				<CheckBox  Content="HC CAlibration On Ext. Plate"
+						   Classes="advance" Grid.Row="36" Grid.Column="2" Grid.ColumnSpan="3"/>
+				<CheckBox  Content="High Peak Power"
+						   Classes="advance" Grid.Row="37" Grid.Column="2" Grid.ColumnSpan="3"/>
+				<CheckBox  Content="HC in 2 steps for position > 9mm &amp; measure range = 20mm"
+						   Classes="advance" Grid.Row="38" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<Label Content="High Pressure Valve"
+					   Classes="info" Grid.Row="39" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="39" Grid.Column="2"/>
+
+				<Label Content="Low Pressure Valve"
+					   Classes="info" Grid.Row="40" Grid.ColumnSpan="2"/>
+				<ComboBox Grid.Row="40" Grid.Column="2"/>
+
+				<CheckBox  Content="Adaptive optics"
+						   Classes="advance" Grid.Row="41" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+
+				<Border Classes="header" Grid.Row="42" Grid.ColumnSpan="5">
+					<TextBlock Text="Machine Miscellaneous Control"/></Border>
+				<CheckBox  Content="External Start Stop"
+						   Classes="advance" Grid.Row="43" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Mode selection via external keys"
+						   Classes="advance" Grid.Row="44" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Z-axis Dynamic Enable bit"
+						   Classes="advance" Grid.Row="45" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Activate Exhaust system"
+						   Classes="advance" Grid.Row="46" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Activate Sheet Edge function"
+						   Classes="advance" Grid.Row="47" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Auto lubrication activate"
+						   Classes="advance" Grid.Row="48" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Auto Chip conveyor activate"
+						   Classes="advance" Grid.Row="49" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Auto Exhaust activate"
+						   Classes="advance" Grid.Row="50" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Enable park position at program end"
+						   Classes="advance" Grid.Row="51" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Activate auto nozzle changer"
+						   Classes="advance" Grid.Row="52" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+
+				<Border Classes="header" Grid.Row="53" Grid.ColumnSpan="5">
+					<TextBlock Text="Emulate Hardware"/></Border>
+				<CheckBox  Content="EStop"
+						   Classes="advance" Grid.Row="54" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Field Bus module device"
+						   Classes="advance" Grid.Row="55" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Axis device"
+						   Classes="advance" Grid.Row="56" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Exhaust device"
+						   Classes="advance" Grid.Row="57" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Height Control"
+						   Classes="advance" Grid.Row="58" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Laser device"
+						   Classes="advance" Grid.Row="59" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="No collision input"
+						   Classes="advance" Grid.Row="60" Grid.Column="2" Grid.ColumnSpan="3"/>
+
+				<CheckBox  Content="Beam mode index"
+						   Classes="advance" Grid.Row="61" Grid.Column="2" Grid.ColumnSpan="3"/>
 			</Grid>
-
-			<!--Jog Parameters-->
-			<Grid Grid.Row="1" Margin="0 10 0 0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Jog Parameters"/>
-				</Border>
-
-				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Acc/Dec"/>
-				<TextBox Grid.Row="1" Grid.Column="1"/>
-				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="m/sec²"/>
-
-				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Ramp Time"/>
-				<TextBox Grid.Row="2" Grid.Column="1"/>
-				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="ms"/>
-			</Grid>
-
-			<!--Miscellaneous-->
-			<Grid Grid.Row="2" Margin="0 10 0 0"
-				  ColumnDefinitions="*,Auto,*"
-				  RowDefinitions="35,35,35,35,35,35,35,35,35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Miscellaneous"/>
-				</Border>
-
-				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Oil Lubrication Cycle Time"/>
-				<TextBox Grid.Row="1" Grid.Column="1"/>
-				<Label Grid.Row="1" Grid.Column="2" Classes="blue" Content="h"/>
-
-				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="Grease Lubrication Cycle Time"/>
-				<TextBox Grid.Row="2" Grid.Column="1"/>
-				<Label Grid.Row="2" Grid.Column="2" Classes="blue" Content="h"/>
-
-				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Chip Conveyor Time"/>
-				<TextBox Grid.Row="3" Grid.Column="1"/>
-				<Label Grid.Row="3" Grid.Column="2" Classes="blue" Content="min"/>
-
-				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Laser cut head type"/>
-				<ComboBox Grid.Row="4" Grid.Column="1"/>
-
-				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Laser type"/>
-				<ComboBox Grid.Row="5" Grid.Column="1"/>
-
-				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Delay for stop-pause"/>
-				<TextBox Grid.Row="6" Grid.Column="1"/>
-				<Label Grid.Row="6" Grid.Column="2" Classes="blue" Content="ms"/>
-
-				<Label Grid.Row="7" Grid.Column="0" Classes="info" Content="Delay for stop-abort"/>
-				<TextBox Grid.Row="7" Grid.Column="1"/>
-				<Label Grid.Row="7" Grid.Column="2" Classes="blue" Content="ms"/>
-
-				<Label Grid.Row="8" Grid.Column="0" Classes="info" Content="Machine origin"/>
-				<ComboBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Classes="long"/>
-
-				<Label Grid.Row="9" Grid.Column="0" Classes="info" Content="Jog keys"/>
-				<ComboBox Grid.Row="9" Grid.Column="1"/>
-
-				<Label Grid.Row="10" Grid.Column="0" Classes="info" Content="Override keys"/>
-				<ComboBox Grid.Row="10" Grid.Column="1"/>
-			</Grid>
-
-			<!--Tandem Operation Options-->
-			<Grid Grid.Row="3" Margin="0 10 0 0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Tandem Operation Options"/>
-				</Border>
-
-				<CheckBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Active Tandem operation" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Deactivate Red Zone Stop" HorizontalAlignment="Left"/>
-			</Grid>
-
-			<!--Nozzle Cleaning Options-->
-			<Grid Grid.Row="4" Margin="0 10 0 0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35,35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Nozzle Cleaning Options"/>
-				</Border>
-
-				<CheckBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Nozzle cleaning active" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="HC Calibration after Nozzle clean" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Content="X-axis Limit Change" HorizontalAlignment="Left"/>
-
-				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Brush"/>
-				<ComboBox Grid.Row="4" Grid.Column="1"/>
-			</Grid>
-
-			<!--Auto Nozzle Clean Options-->
-			<Grid Grid.Row="5" Margin="0 10 0 0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Auto Nozzle Clean Options"/>
-				</Border>
-
-				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Based on"/>
-				<ComboBox Grid.Row="1" Grid.Column="1"/>
-
-				<Label Grid.Row="2" Grid.Column="0" Classes="info" Content="State of program"/>
-				<ComboBox Grid.Row="2" Grid.Column="1"/>
-			</Grid>
-
-			<!--Pallet Changer Configuration-->
-			<Grid Grid.Row="6" Margin="0 10 0 0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35,35,35,35,35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Pallet Changer Configuration"/>
-				</Border>
-
-				<Label Grid.Row="1" Grid.Column="0" Classes="info" Content="Pallet"/>
-				<ComboBox Grid.Row="1" Grid.Column="1"/>
-
-				<CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Pallet Lock" HorizontalAlignment="Left"/>
-
-				<Label Grid.Row="3" Grid.Column="0" Classes="info" Content="Shuttle"/>
-				<ComboBox Grid.Row="3" Grid.Column="1"/>
-
-				<Label Grid.Row="4" Grid.Column="0" Classes="info" Content="Up/Down motion"/>
-				<ComboBox Grid.Row="4" Grid.Column="1"/>
-
-				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="Forward/Reverse motion"/>
-				<ComboBox Grid.Row="5" Grid.Column="1"/>
-
-				<CheckBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Content="Pallet Door" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Light Barrier" HorizontalAlignment="Left"/>
-			</Grid>
-
-			<!--Laser Technology Miscellaneous Control-->
-			<Grid Grid.Row="7" Margin="0 10 0 0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35,35,35,35,35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Laser Technology Miscellaneous Control"/>
-				</Border>
-
-				<CheckBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Auto Focus active" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="HC CAlibration On Ext. Plate" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Content="High Peak Power" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="HC in 2 steps for position > 9mm &amp; measure range = 20mm" HorizontalAlignment="Left"/>
-
-				<Label Grid.Row="5" Grid.Column="0" Classes="info" Content="High Pressure Valve"/>
-				<ComboBox Grid.Row="5" Grid.Column="1"/>
-
-				<Label Grid.Row="6" Grid.Column="0" Classes="info" Content="Low Pressure Valve"/>
-				<ComboBox Grid.Row="6" Grid.Column="1"/>
-
-				<CheckBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Adaptive optics" HorizontalAlignment="Left"/>
-			</Grid>
-
-			<!--Machine Miscellaneous Control-->
-			<Grid Grid.Row="8" Margin="0 10 0 0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35,35,35,35,35,35,35,35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Machine Miscellaneous Control"/>
-				</Border>
-
-				<CheckBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="External Start Stop" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Mode selection via external keys" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Content="Z-axis Dynamic Enable bit" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="Activate Exhaust system" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Content="Activate Sheet Edge function" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Content="Auto lubrication activate" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Auto Chip conveyor activate" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Content="Auto Exhaust activate" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Content="Enable park position at program end" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Content="Activate auto nozzle changer" HorizontalAlignment="Left"/>
-			</Grid>
-
-			<!--Emulate Hardware-->
-			<Grid Grid.Row="9" Margin="0 10 0 0"
-				  ColumnDefinitions="*,130,*"
-				  RowDefinitions="35,35,35,35,35,35,35,35,35">
-				<Border Grid.Row="0" Grid.ColumnSpan="3" Classes="title">
-					<TextBlock Text="Emulate Hardware"/>
-				</Border>
-
-				<CheckBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="EStop" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="Field Bus module device" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Content="Axis device" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Content="Exhaust device" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Content="Height Control" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Content="Laser device" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="No collision input" HorizontalAlignment="Left"/>
-
-				<CheckBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Content="Beam mode index" HorizontalAlignment="Left"/>
-			</Grid>
-		</Grid>
+		</Border>
 	</ScrollViewer>
 </base:Panel>
