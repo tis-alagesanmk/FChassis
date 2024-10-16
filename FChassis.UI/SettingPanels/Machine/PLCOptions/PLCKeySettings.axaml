@@ -9,5 +9,64 @@
 		xmlns:base="FChassis.UI.Settings"
 		Background="White"
 		>
-	PLC Keys Settings
+
+	<UserControl.Styles>
+		<!--TextBlock Styles-->
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="5 0 0 0"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+
+		<!--Check Box Styles-->
+		<Style Selector="CheckBox">
+			<Setter Property="Margin" Value="10 0"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="CheckBox.basic">
+			<Setter Property="Margin" Value="5 0"/>
+		</Style>
+
+		<!--Combo Box Styles-->
+		<Style Selector="ComboBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<!--TextBox Styles-->
+		<Style Selector="TextBox">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Padding" Value="1"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="25"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+
+		<!--Label Styles-->
+		<Style Selector="Label">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Label.info">
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+		</Style>
+		<Style Selector="Label.blue">
+			<Setter Property="Foreground" Value="Blue"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+	</UserControl.Styles>
+
+	<ScrollViewer>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+		</Grid>
+	</ScrollViewer>
 </base:Panel>
