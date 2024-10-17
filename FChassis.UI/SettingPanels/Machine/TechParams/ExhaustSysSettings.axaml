@@ -19,11 +19,10 @@
 		<Border>
 			<Grid RowDefinitions="75* 25*">
 				<!-- Sections -->
-					<Grid Grid.Row="0"
+				<Grid Grid.Row="0"
 					  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
-						<TextBlock Text="Sections"
-								   Classes="title"/>
+					<Border Grid.Row="0" Classes="header">
+						<TextBlock Text="Sections"/>
 					</Border>
 
 					<DataGrid Grid.Row="1"
@@ -63,9 +62,8 @@
 				<!-- Splitters -->
 				<Grid Grid.Row="1"
 					  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Theme="{StaticResource borderHeader}">
-						<TextBlock Text="Splitters"
-								   Classes="title"/>
+					<Border Grid.Row="0" Classes="header">
+						<TextBlock Text="Splitters"/>
 					</Border>
 					<DataGrid Grid.Row="1"
 							  ItemsSource="{Binding Splitters}"
