@@ -190,7 +190,7 @@
 			<Label Grid.Row="39" Grid.Column="3" Classes="blue" Content="s"/>
 
 			<CheckBox Content="Filter sensor" HorizontalAlignment="Left"
-						  Grid.Row="40" Grid.Column="2" Grid.ColumnSpan="2"/>
+					  Grid.Row="40" Grid.Column="2" Grid.ColumnSpan="2"/>
 
 
 			<Border Classes="header" Grid.Row="41" Grid.ColumnSpan="5">
