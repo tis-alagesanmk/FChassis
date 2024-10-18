@@ -55,4 +55,8 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="SettingPanels\Machine\ProcessingDefaults\SequenceSettings.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
 </Project>

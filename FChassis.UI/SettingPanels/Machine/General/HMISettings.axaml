@@ -6,17 +6,25 @@
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Machine.General.HMISettings"
+		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
 		xmlns:base="FChassis.UI.Settings"
-		Background="White"
-		>
+		x:DataType="vm:HMISettingsViewModel"
+		Background="White">
+	<UserControl.DataContext>
+		<vm:HMISettingsViewModel/>
+	</UserControl.DataContext>
 	
 	<ScrollViewer>
+		<Grid ColumnDefinitions="20* 20* 20* 20* 20*">
+		</Grid>
+	</ScrollViewer>
+	<!--<ScrollViewer>
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="60*"/>
 				<RowDefinition Height="40*"/>
 			</Grid.RowDefinitions>
-			<!-- General -->
+			--><!-- General --><!--
 			<Grid Grid.Row="0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="10*"/>
@@ -98,7 +106,7 @@
 				</Grid>
 				
 			</Grid>
-			<!-- Screen Size -->
+			--><!-- Screen Size --><!--
 			<Grid Grid.Row="1" RowDefinitions="10* 90*">
 				
 				<Border Grid.Row="0"
@@ -127,5 +135,5 @@
 				</Grid>
 			</Grid>
 		</Grid>
-	</ScrollViewer>
+	</ScrollViewer>-->
 </base:Panel>
