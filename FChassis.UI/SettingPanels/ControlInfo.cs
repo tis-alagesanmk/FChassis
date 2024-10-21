@@ -21,8 +21,8 @@ internal class ControlInfo {
    internal Type type = Type.None;
    internal string label = null!;
    internal object binding = null!;
+   internal object itemsBinding = null!;
    internal string unit = null!;
-   internal object[] items = null!;
 }
 
 public partial class Panel : FChassis.UI.Panels.Child {
@@ -62,15 +62,21 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
             case ControlInfo.Type.Button:
                control = button = new Button ();
+               button.Content = ci.label;
                Bind (button, Button.CommandProperty, ci.binding);
 
                grid.Children.Add (control);
                setGridRowColumn (control, row, 2);
                break;
-
+            case ControlInfo.Type.Check:
+               control = checkBox = new CheckBox () { Content = ci.label, IsEnabled = true };
+               Bind (checkBox, CheckBox.CommandProperty, ci.binding);
+               
+               grid.Children.Add (control);
+               setGridRowColumn (control, row, 2);
+               break;
             case ControlInfo.Type.Text:
             case ControlInfo.Type.Combo:
-            case ControlInfo.Type.Check:
                label = new Label ();
                label.Content = ci.label;
                setGridRowColumn (label, row, 0);
@@ -84,11 +90,8 @@ public partial class Panel : FChassis.UI.Panels.Child {
                } else if (ci.type == ControlInfo.Type.Combo) {
                   control = comboBox = new ComboBox ();
                   Bind (comboBox, ComboBox.SelectedItemProperty, ci.binding);
-               } else if (ci.type == ControlInfo.Type.Check) {
-                  control = checkBox = new CheckBox ();
-                  Bind (checkBox, CheckBox.ContentProperty, ci.binding);
-               }
-
+                  Bind (comboBox, ComboBox.ItemsSourceProperty, ci.itemsBinding);
+               } 
                grid.Children.Add (control);
                setGridRowColumn (control, row, 2);
 
@@ -117,19 +120,6 @@ public partial class Panel : FChassis.UI.Panels.Child {
          binding = new Binding ((string)property);
          target.Bind (targetProperty, binding);
       }
-
-      //void BindCommand (AvaloniaObject target, RoutedEvent<KeyEventArgs> targetEvent, object? command = null) {
-      //   if(command == null)
-      //      return;
-      //   targetEvent.AddClassHandler
-
-      //   binding = new Binding ((string)command);
-        
-      //   public IDisposable Bind (
-      //      AvaloniaProperty property,
-      //      IObservable<object?> source,
-      //      BindingPriority priority = BindingPriority.LocalValue) => property.RouteBind (this, source, priority);
-      //}
    }
 
    
