@@ -33,7 +33,7 @@ public partial class ExhaustSysSettings : Panel {
          binding = binding,
          columns = new[] 
          {
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Section  Number",path ="SectionNumber", items = vm.Sections },
+            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Section  Number",path ="SectionNumber"},
             new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "X ON",path="XOn"},
             new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "X OFF",path="XOff" },
             new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Y ON" ,path="YOn"},

@@ -51,7 +51,6 @@ internal class DGridControlInfo : ControlInfo {
       internal Type type = Type.None;
       internal string header = null!;
       internal string path = null!;
-      internal ObservableCollection<ExhaustSysModel> items = null!;
    }
 }
 
