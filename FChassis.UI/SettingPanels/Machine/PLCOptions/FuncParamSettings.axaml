@@ -7,23 +7,31 @@
 		d:DesignWidth="800" 
         x:Class="FChassis.UI.Settings.Machine.PLCOptions.FuncParamSettings"
 		xmlns:base="FChassis.UI.Settings"
+		xmlns:control="using:FChassis.UI.Controls"
 		Background="White"
 		>
 	<ScrollViewer>
 		<Border>
-			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
+			<Grid Grid.IsSharedSizeScope="True" ColumnDefinitions="20* 20* 20* 20* 20*"
 				  RowDefinitions="32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32">
+				<!--<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="20*" SharedSizeGroup="TemplateGroup1"/>
+					<ColumnDefinition Width="20*" SharedSizeGroup="TemplateGroup2"/>
+					<ColumnDefinition Width="20*" SharedSizeGroup="TemplateGroup3"/>
+					<ColumnDefinition Width="20*" SharedSizeGroup="TemplateGroup4"/>
+					<ColumnDefinition Width="20*" SharedSizeGroup="TemplateGroup5"/>
+				</Grid.ColumnDefinitions>-->
 				<Border Classes="header" Grid.ColumnSpan="5">
 					<TextBlock Text="PLC Custom Parameters"/></Border>
 				<CheckBox Grid.Row="1" Grid.Column="2" Classes="advance" Content="Advanced"/>
 
-				
 				<Border Classes="header" Grid.Row="2" Grid.ColumnSpan="5">
 					<TextBlock Text="Jog Parameters"/></Border>
-				<Label Content="Acc/Dec"
-					   Classes="info" Grid.Row="3" Grid.ColumnSpan="2"/>
-				<TextBox Grid.Row="3" Grid.Column="2"/>
-				<Label Grid.Row="3" Grid.Column="3" Classes="blue" Content="m/sec²"/>
+				<!--<Label Content="Acc/Dec"
+					   Classes="info" Grid.Row="3" Grid.ColumnSpan="2"/>-->
+				<control:TextboxLabel Content="Acc/Dec"  Grid.Row="3" Grid.ColumnSpan="5"/>
+				<!--<TextBox Grid.Row="3" Grid.Column="2"/>
+				<Label Grid.Row="3" Grid.Column="3" Classes="blue" Content="m/sec²"/>-->
 
 				<Label Content="Ramp Time"
 					   Classes="info" Grid.Row="4" Grid.ColumnSpan="2"/>
