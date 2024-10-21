@@ -13,7 +13,7 @@
 	
 	<ScrollViewer>
 		<Grid ColumnDefinitions="* *">
-			<Grid Grid.Column="0" ColumnDefinitions="20* 20* 20* 20* 20*"/>
+			<Grid Grid.Column="0" ColumnDefinitions="20* 20* 20* 20* 20* 2"/>
 			<Grid Grid.Column="1" ColumnDefinitions="20* 20* 20* 20* 20*"/>
 		</Grid>
 	</ScrollViewer>

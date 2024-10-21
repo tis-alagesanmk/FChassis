@@ -2,7 +2,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
-using FChassis.UI.Controls;
 
 namespace FChassis.UI.Settings;
 internal class ControlInfo {
@@ -12,6 +11,7 @@ internal class ControlInfo {
       Text_,
       Combo,
       Check,
+      DGrid,
    };
    
    internal Type type = Type.None;
@@ -19,6 +19,38 @@ internal class ControlInfo {
    internal object binding = null!;
    internal string unit = null!;
    internal object[] items = null!;
+}
+
+internal class GroupControlInfo : ControlInfo {
+   internal GroupControlInfo () {
+      this.type = Type.Group; }
+}
+
+internal class _TextControlInfo : ControlInfo {
+   internal _TextControlInfo () {
+      this.type = Type.Text_; }
+}
+
+internal class ComboControlInfo : ControlInfo {
+   internal ComboControlInfo () {
+      this.type = Type.Combo; }
+}
+
+internal class CheckControlInfo : ControlInfo {
+   internal CheckControlInfo () {
+      this.type = Type.Check; }
+}
+
+internal class DGridControlInfo : ControlInfo {
+   internal DGridControlInfo () {
+      this.type = Type.DGrid; }
+
+   internal ColInfo[] columns = null!;
+
+   internal class ColInfo {
+      internal Type type = Type.None;
+      internal string header = null!;
+   }
 }
 
 public partial class Panel : FChassis.UI.Panels.Child {
@@ -37,6 +69,7 @@ public partial class Panel : FChassis.UI.Panels.Child {
          TextBox textBox = null!;
          ComboBox comboBox = null!;
          CheckBox checkBox = null!;
+         DataGrid dGrid = null!;
          TemplatedControl control = null!;
 
          switch (ci.type) {
@@ -83,6 +116,13 @@ public partial class Panel : FChassis.UI.Panels.Child {
                   grid.Children.Add (label);
                }
                break;
+
+            case ControlInfo.Type.DGrid:
+               DGridControlInfo dgi = (DGridControlInfo)ci;
+               dGrid = createDGridColumns(dgi.columns);
+               setGridRowColumn (dGrid, row, 0, 4);
+               grid.Children.Add (dGrid);
+               break;
          }
          row++;
       }
@@ -100,6 +140,31 @@ public partial class Panel : FChassis.UI.Panels.Child {
          binding = new Binding ();
          binding.Initiate (target, ComboBox.SelectedItemProperty, property);
          target.Bind (targetProperty, binding);
+      }
+
+      DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis) {
+         DataGrid dGrid = new DataGrid ();
+         DataGridColumn column = null!;
+         foreach (var dgci in dgcis) {
+            switch(dgci.type) {
+               case ControlInfo.Type.Text_:
+                  column = new DataGridTextColumn ();
+                  break;
+
+               case ControlInfo.Type.Check:
+                  column = new DataGridCheckBoxColumn ();
+                  break;
+            }
+
+            if (column == null)
+               continue;
+
+            column.Header = dgci.header;
+            dGrid.Columns.Add (column);
+            column = null!;
+         }
+
+         return dGrid;
       }
    }
 }
