@@ -11,6 +11,7 @@ internal class ControlInfo {
       Text,
       Combo,
       Check,
+      DGrid,
    };
 
    internal Type type = Type.None;
@@ -20,10 +21,47 @@ internal class ControlInfo {
    internal object[] items = null!;
 }
 
+internal class GroupControlInfo : ControlInfo {
+   internal GroupControlInfo () {
+      this.type = Type.Group;
+   }
+}
+
+internal class _TextControlInfo : ControlInfo {
+   internal _TextControlInfo () {
+      this.type = Type.Text;
+   }
+}
+
+internal class ComboControlInfo : ControlInfo {
+   internal ComboControlInfo () {
+      this.type = Type.Combo;
+   }
+}
+
+internal class CheckControlInfo : ControlInfo {
+   internal CheckControlInfo () {
+      this.type = Type.Check;
+   }
+}
+
+internal class DGridControlInfo : ControlInfo {
+   internal DGridControlInfo () {
+      this.type = Type.DGrid;
+   }
+
+   internal ColInfo[] columns = null!;
+
+   internal class ColInfo {
+      internal Type type = Type.None;
+      internal string header = null!;
+   }
+}
+
 public partial class Panel : FChassis.UI.Panels.Child {
    internal void AddParameterControls (Grid grid, ControlInfo[] controlInfos) {
 
-      int row = 0;
+      int row = grid.RowDefinitions.Count;
       Binding binding = null!;
       foreach (var ci in controlInfos) {
          grid.RowDefinitions.Add (new RowDefinition {
@@ -36,21 +74,19 @@ public partial class Panel : FChassis.UI.Panels.Child {
          TextBox textBox = null!;
          ComboBox comboBox = null!;
          CheckBox checkBox = null!;
+         DataGrid dGrid = null!;
          TemplatedControl control = null!;
 
          switch (ci.type) {
             case ControlInfo.Type.Group:
                border = new Border ();
-               border.SetCurrentValue (Grid.RowProperty, row);
-               border.SetCurrentValue (Grid.ColumnProperty, 0);
-               border.SetCurrentValue (Grid.ColumnSpanProperty, 5);
+               setGridRowColumn (border, row, 0, 5);
                border.Classes.Add ("header");
                grid.Children.Add (border);
 
                textBlock = new TextBlock ();
                textBlock.Text = ci.label;
                textBlock.Classes.Add ("title");
-               textBlock.SetCurrentValue (Grid.ColumnProperty, 0);
                border.Child = textBlock;
                break;
 
@@ -59,8 +95,7 @@ public partial class Panel : FChassis.UI.Panels.Child {
             case ControlInfo.Type.Check:
                label = new Label ();
                label.Content = ci.label;
-               setGridRowColumn (label, row, 0);
-               label.SetCurrentValue (Grid.ColumnSpanProperty, 2);
+               setGridRowColumn (label, row, 0, 2);
                label.Classes.Add ("info");
                grid.Children.Add (label);
 
@@ -86,14 +121,21 @@ public partial class Panel : FChassis.UI.Panels.Child {
                   grid.Children.Add (label);
                }
                break;
-         }
 
+            case ControlInfo.Type.DGrid:
+               DGridControlInfo dgi = (DGridControlInfo)ci;
+               dGrid = createDGridColumns (dgi.columns);
+               setGridRowColumn (dGrid, row, 0, 4);
+               grid.Children.Add (dGrid);
+               break;
+         }
          row++;
       }
 
-      void setGridRowColumn (TemplatedControl control, int row, int col) {
+      void setGridRowColumn (Control control, int row, int col, int colSpan = 1) {
          control.SetCurrentValue (Grid.RowProperty, row);
          control.SetCurrentValue (Grid.ColumnProperty, col);
+         control.SetCurrentValue (Grid.ColumnSpanProperty, colSpan);
       }
 
       void bind (AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
@@ -103,6 +145,31 @@ public partial class Panel : FChassis.UI.Panels.Child {
          binding = new Binding ();
          binding.Initiate (target, ComboBox.SelectedItemProperty, property);
          target.Bind (targetProperty, binding);
+      }
+
+      DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis) {
+         DataGrid dGrid = new DataGrid ();
+         DataGridColumn column = null!;
+         foreach (var dgci in dgcis) {
+            switch (dgci.type) {
+               case ControlInfo.Type.Text:
+                  column = new DataGridTextColumn ();
+                  break;
+
+               case ControlInfo.Type.Check:
+                  column = new DataGridCheckBoxColumn ();
+                  break;
+            }
+
+            if (column == null)
+               continue;
+
+            column.Header = dgci.header;
+            dGrid.Columns.Add (column);
+            column = null!;
+         }
+
+         return dGrid;
       }
    }
 }

@@ -11,10 +11,10 @@
   -->
   
   <Design.PreviewWith>
-    <StackPanel Width="400" Spacing="10">      
-        <StackPanel Background="{DynamicResource SystemRegionBrush}">
-			<controls:TextboxLabel />
-        </StackPanel>
+    <StackPanel Width="400" Height="700" Spacing="10">      
+        <Grid RowDefinitions="* * * *" ColumnDefinitions="* * * *">
+			<controls:TextboxLabel Row1="2" Column="0"/>
+        </Grid>
     </StackPanel>
   </Design.PreviewWith>
  
@@ -22,11 +22,10 @@
 	  <Setter Property="Foreground" Value="Red"/>
     <Setter Property="Template">
       <ControlTemplate>
-		  <Grid ColumnDefinitions="* * * * *">
-			  <Label Grid.Column="0" Grid.ColumnSpan="2" Content="{TemplateBinding Content}" HorizontalAlignment="Right"/>
-			  <TextBox Grid.Column="2"  Text="{TemplateBinding Text}"/>
-		  </Grid>
-		
+		  <StackPanel Orientation="Horizontal">
+			  <Label   Content="{TemplateBinding Content}" HorizontalAlignment="Right"/>
+			  <TextBox  Text="{TemplateBinding Text}"/>
+		  </StackPanel>
       </ControlTemplate>
     </Setter>
   </ControlTheme>

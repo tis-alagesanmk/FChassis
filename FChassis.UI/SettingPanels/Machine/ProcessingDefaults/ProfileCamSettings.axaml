@@ -7,78 +7,8 @@
 			 Background="White"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.ProfileCamSettings">
 	<ScrollViewer>
-		
-		<Border>
-			<Grid RowDefinitions="1* 6* 1* 2* 90*">
-				<!--Top Adavanced check box -->
-				<Grid Grid.Row="0"
-					  RowDefinitions="10* 90*">
-					 <CheckBox Content="Advanced" Classes="header"  HorizontalAlignment="Right"/>
-				</Grid>
-				<!--Cutting -->
-				<Grid Grid.Row="1"
-					  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Classes="header">
-						<TextBlock Text="Cutting" />
-					</Border>
-					<Grid Grid.Row="1"
-						  ColumnDefinitions="40* 60*"
-						  RowDefinitions="* * *">
-
-						<Label Content="Choose cutting condition by"
-							   Classes="info"
-						       Grid.Column="0" Grid.Row="0"/>
-						<ComboBox x:Name="cmbChoosecuttingcondition"
-								  Grid.Column="1" Grid.Row="0" />
-
-						<Label Content="Process for open polylines"
-						   Classes="info"
-						   Grid.Column="0" Grid.Row="1"/>
-						<ComboBox x:Name="cmbProcessforopenplylines"
-								  Grid.Column="1" Grid.Row="1" />
-
-						<Label Content="Stitch cutting threshold distance (0=disable)"
-						   Classes="info"
-						   Grid.Column="0" Grid.Row="2"/>
-						<TextBox x:Name="txtStitchcuttingthresholddistance"
-							 Grid.Column="1" Grid.Row="2" />
-
-					</Grid>
-				</Grid>
-				<!-- Pierce settings -->
-				<Grid Grid.Row="2"
-					  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Classes="header">
-						<TextBlock Text="Pierce settings" />
-					</Border>
-					<Grid Grid.Row="1" ColumnDefinitions="40* 60*">
-						<CheckBox Grid.Column="1" IsChecked="true" Content="Allow approach that is more than distance to opposite side"/>
-					</Grid>
-					
-				</Grid>
-				<!-- Scrap cutting -->
-				<Grid Grid.Row="3"
-					  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Classes="header">
-						<TextBlock Text="Scrap cutting"/>
-					</Border>
-					<Grid Grid.Row="1" ColumnDefinitions="40* 60*" RowDefinitions="* *">
-						<Label Grid.Column="0" Grid.Row="0" 
-							   Content="Scrap grid width" 
-							   Classes="info"/>
-						<TextBox x:Name="txtScrapgridwidth"
-							 Grid.Column="1" Grid.Row="0" />
-
-						<Label Grid.Column="0" Grid.Row="1"
-							   Content="Approach length for separating cuts"
-							   Classes="info"/>
-						<TextBox x:Name="txtApproachlengthforseparatingcuts"
-							 Grid.Column="1" Grid.Row="1" />
-						
-						
-					</Grid>
-				</Grid>
-			</Grid>
-		</Border>
+		<Grid ColumnDefinitions="* * * * *">
+			
+		</Grid>
 	</ScrollViewer>
 </base:Panel>
