@@ -2,9 +2,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
-using FChassis.UI.SettingPanels.Machine.Model;
-using FChassis.UI.SettingPanels.Model;
-using System.Collections.ObjectModel;
 
 namespace FChassis.UI.Settings;
 internal class ControlInfo {
@@ -26,32 +23,27 @@ internal class ControlInfo {
 
 internal class GroupControlInfo : ControlInfo {
    internal GroupControlInfo () {
-      this.type = Type.Group;
-   }
+      this.type = Type.Group; }
 }
 
 internal class _TextControlInfo : ControlInfo {
    internal _TextControlInfo () {
-      this.type = Type.Text_;
-   }
+      this.type = Type.Text_; }
 }
 
 internal class ComboControlInfo : ControlInfo {
    internal ComboControlInfo () {
-      this.type = Type.Combo;
-   }
+      this.type = Type.Combo; }
 }
 
 internal class CheckControlInfo : ControlInfo {
    internal CheckControlInfo () {
-      this.type = Type.Check;
-   }
+      this.type = Type.Check; }
 }
 
 internal class DGridControlInfo : ControlInfo {
    internal DGridControlInfo () {
-      this.type = Type.DGrid;
-   }
+      this.type = Type.DGrid; }
 
    internal ColInfo[] columns = null!;
 
@@ -64,7 +56,7 @@ internal class DGridControlInfo : ControlInfo {
 }
 
 public partial class Panel : FChassis.UI.Panels.Child {
-   internal void AddParameterControls (Grid grid, ControlInfo[] controlInfos) {
+   internal void AddParameterControls(Grid grid, ControlInfo[] controlInfos) {
 
       int row = grid.RowDefinitions.Count;
       Binding binding = null!;
@@ -129,7 +121,7 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
             case ControlInfo.Type.DGrid:
                DGridControlInfo dgi = (DGridControlInfo)ci;
-               dGrid = createDGridColumns (dgi.columns);
+               dGrid = createDGridColumns(dgi.columns);
                setGridRowColumn (dGrid, row, 0, 4);
                grid.Children.Add (dGrid);
                break;
@@ -137,13 +129,13 @@ public partial class Panel : FChassis.UI.Panels.Child {
          row++;
       }
 
-      void setGridRowColumn (Control control, int row, int col, int colSpan = 1) {
+      void setGridRowColumn(Control control, int row, int col, int colSpan = 1) {
          control.SetCurrentValue (Grid.RowProperty, row);
          control.SetCurrentValue (Grid.ColumnProperty, col);
          control.SetCurrentValue (Grid.ColumnSpanProperty, colSpan);
       }
 
-      void bind (AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
+      void bind(AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
          if (property == null)
             return;
 
@@ -154,15 +146,15 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
       DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis) {
          DataGrid dGrid = new DataGrid ();
-         DataGridColumn column = null!; 
+         DataGridColumn column = null!;
          foreach (var dgci in dgcis) {
-            switch (dgci.type) {
+            switch(dgci.type) {
                case ControlInfo.Type.Text_:
-                  column = new DataGridTextColumn () { Binding = new Binding(dgci.path) };
+                  column = new DataGridTextColumn ();
                   break;
 
                case ControlInfo.Type.Check:
-                  column = new DataGridCheckBoxColumn () { Binding = new Binding (dgci.path) };
+                  column = new DataGridCheckBoxColumn ();
                   break;
             }
 
@@ -171,9 +163,9 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
             column.Header = dgci.header;
             dGrid.Columns.Add (column);
-            //column = null!;
+            column = null!;
          }
-         dGrid.ItemsSource = dgcis[0].items;
+
          return dGrid;
       }
    }

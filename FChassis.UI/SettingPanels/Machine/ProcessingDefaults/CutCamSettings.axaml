@@ -8,61 +8,37 @@
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.CutCamSettings">
 	<ScrollViewer>
 		<Border>
-			<Grid RowDefinitions="2* 35* 58*">
-				<!-- Top-->
-				<Grid Grid.Row="0" ColumnDefinitions="40* 60*" RowDefinitions="*">
-						<CheckBox Grid.Column="1" Grid.Row="0" 
-								  Classes="header"
-								  Content="Advanced"/>
-					</Grid>
-				<!-- Finishing Rules-->
-				<Grid Grid.Row="1"
-						RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Classes="header">
-						<TextBlock Text="Finishing rules"/>
-					</Border>
+			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
+				RowDefinitions="32 32 200 32 32">
+				<CheckBox Content="Advanced"
+						  Classes="header" Grid.Column="4"/>
+				<Border Classes="header"
+						Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
+					<TextBlock Text="Finishing rules"/></Border>
+				<DataGrid Grid.Row="2"
+						  Grid.Column="0">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Action" Width="100"><DataTemplate>
+							<ComboBox/></DataTemplate></DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Contour flags" Width="150"><DataTemplate>
+							<ComboBox/></DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Disabled" Width="100"><DataTemplate>
+							<CheckBox/></DataTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTemplateColumn Header="Size" Width="100"><DataTemplate>
+							<TextBlock/></DataTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
 
-					<DataGrid Grid.Row="1">
-						<DataGrid.Columns>
-							<DataGridTemplateColumn Header="Action" Width="100">
-								<DataTemplate>
-									<ComboBox/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Header="Contour flags" Width="150">
-								<DataTemplate>
-									<ComboBox/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Header="Disabled" Width="100">
-								<DataTemplate>
-									<CheckBox/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Header="Size" Width="100">
-								<DataTemplate>
-									<TextBlock/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-						</DataGrid.Columns>
-					</DataGrid>
-				</Grid>
 				<!-- Microjoint settings-->
-				<Grid Grid.Row="2"
-					  RowDefinitions="10* 90*">
-						<Border Grid.Row="0" Classes="header">
-							<TextBlock Text="Microjoint length"/>
-						</Border>
-
-						<Grid Grid.Row="1" ColumnDefinitions="40* 60*" RowDefinitions="50">
-							<Label Content="Microjoint length"
-								   Classes="info"
-								   Grid.Column="0" Grid.Row="1"/>
-							<TextBox x:Name="txtMaximundayskeepupfiles"
-								 Grid.Column="1" Grid.Row="1" />
-						</Grid>
-					</Grid>
-			
+				<Border Classes="header"
+						Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5">
+					<TextBlock Text="Microjoint length"/></Border>
+				<Label Content="Microjoint length"
+					   Classes="info" Grid.Row="4" Grid.Column="1"/>
+				<TextBox Grid.Row="5" Grid.Column="2" />
 			</Grid>
 		</Border>
 	</ScrollViewer>

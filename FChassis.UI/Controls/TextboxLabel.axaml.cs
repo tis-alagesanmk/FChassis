@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Markup.Xaml;
 using FChassis.UI.Controls;
 using System.Reflection.Emit;
+using Avalonia.Controls.Primitives;
 
 namespace FChassis.UI.Controls;
 
