@@ -2,13 +2,16 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
+using FChassis.UI.SettingPanels.Machine.Model;
+using FChassis.UI.SettingPanels.Model;
+using System.Collections.ObjectModel;
 
 namespace FChassis.UI.Settings;
 internal class ControlInfo {
    internal enum Type {
       None,
       Group,
-      Text,
+      Text_,
       Combo,
       Check,
       DGrid,
@@ -29,7 +32,7 @@ internal class GroupControlInfo : ControlInfo {
 
 internal class _TextControlInfo : ControlInfo {
    internal _TextControlInfo () {
-      this.type = Type.Text;
+      this.type = Type.Text_;
    }
 }
 
@@ -55,6 +58,8 @@ internal class DGridControlInfo : ControlInfo {
    internal class ColInfo {
       internal Type type = Type.None;
       internal string header = null!;
+      internal string path = null!;
+      internal ObservableCollection<ExhaustSysModel> items = null!;
    }
 }
 
@@ -90,7 +95,7 @@ public partial class Panel : FChassis.UI.Panels.Child {
                border.Child = textBlock;
                break;
 
-            case ControlInfo.Type.Text:
+            case ControlInfo.Type.Text_:
             case ControlInfo.Type.Combo:
             case ControlInfo.Type.Check:
                label = new Label ();
@@ -99,7 +104,7 @@ public partial class Panel : FChassis.UI.Panels.Child {
                label.Classes.Add ("info");
                grid.Children.Add (label);
 
-               if (ci.type == ControlInfo.Type.Text) {
+               if (ci.type == ControlInfo.Type.Text_) {
                   control = textBox = new TextBox ();
                   bind (textBox, TextBox.TextProperty, ci.binding);
                } else if (ci.type == ControlInfo.Type.Combo) {
@@ -149,15 +154,15 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
       DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis) {
          DataGrid dGrid = new DataGrid ();
-         DataGridColumn column = null!;
+         DataGridColumn column = null!; 
          foreach (var dgci in dgcis) {
             switch (dgci.type) {
-               case ControlInfo.Type.Text:
-                  column = new DataGridTextColumn ();
+               case ControlInfo.Type.Text_:
+                  column = new DataGridTextColumn () { Binding = new Binding(dgci.path) };
                   break;
 
                case ControlInfo.Type.Check:
-                  column = new DataGridCheckBoxColumn ();
+                  column = new DataGridCheckBoxColumn () { Binding = new Binding (dgci.path) };
                   break;
             }
 
@@ -166,9 +171,9 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
             column.Header = dgci.header;
             dGrid.Columns.Add (column);
-            column = null!;
+            //column = null!;
          }
-
+         dGrid.ItemsSource = dgcis[0].items;
          return dGrid;
       }
    }

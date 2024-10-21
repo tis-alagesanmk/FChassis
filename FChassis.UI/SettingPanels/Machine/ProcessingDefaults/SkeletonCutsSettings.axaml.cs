@@ -14,19 +14,19 @@ public partial class SkeletonCutsSettings : Panel{
       {
          new ControlInfo{type=ControlInfo.Type.Group, label="Sheet cutting rules"},
          new ControlInfo{type=ControlInfo.Type.Check, label="Create sheet cut"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="X spacing between vertical sheet cuts"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Y spacing between horizontal sheet cuts"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="X spacing between vertical sheet cuts"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Y spacing between horizontal sheet cuts"},
          new ControlInfo{type=ControlInfo.Type.Check, label="Create remainder sheet"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Minimum remainder sheet width"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Final cut X offset"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Minimum remainder sheet width"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Final cut X offset"},
          new ControlInfo{type=ControlInfo.Type.Check, label="Process sheet cut after all part"},
 
          new ControlInfo{type=ControlInfo.Type.Group, label="Sheet cut parameters"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Micro joint gap at sheet edge"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Micro joint gap at part edge"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Pierce distance from part edge"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Measuring distance from sheet edge"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Overtravel after sheet edge"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Micro joint gap at sheet edge"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Micro joint gap at part edge"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Pierce distance from part edge"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Measuring distance from sheet edge"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Overtravel after sheet edge"},
 
       };
 

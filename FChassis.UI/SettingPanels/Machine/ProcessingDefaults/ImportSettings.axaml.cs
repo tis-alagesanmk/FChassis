@@ -16,8 +16,8 @@ public partial class ImportSettings : Panel {
       {
          new ControlInfo{type=ControlInfo.Type.Group, label="Import settings"},
          new ControlInfo{type=ControlInfo.Type.Combo, label="Units for DFX files"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Stitch together lines/arcs closer than this"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Maximun thickness for sheet-metal part"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Stitch together lines/arcs closer than this"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Maximun thickness for sheet-metal part"},
          new ControlInfo{type=ControlInfo.Type.Check, label="Ignore layer in DXF/DWG files"},
          new ControlInfo{type=ControlInfo.Type.Check, label="Explode blocks in 2D drawing"},
          new ControlInfo{type=ControlInfo.Type.Check, label="Convert white entities to black"},
@@ -30,9 +30,9 @@ public partial class ImportSettings : Panel {
          new ControlInfo{type=ControlInfo.Type.Combo, label="Covert splines on import"},
 
          new ControlInfo{type=ControlInfo.Type.Group, label="Layer mapping"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Auxilary Layers Names"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Mark Layers Names"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Mark Layers Names"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Auxilary Layers Names"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Mark Layers Names"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Mark Layers Names"},
       };
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;

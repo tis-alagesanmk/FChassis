@@ -15,7 +15,7 @@ public partial class AnalogScalingSettings : Panel {
       for(int i=0; i<=28; i++) 
       {
          ctrlInfos[i] = i == 0 ? new ControlInfo { type = ControlInfo.Type.Group, label = "Chennals"}: 
-                        new ControlInfo { type = ControlInfo.Type.Text, label = "Chennal" +" "+ i};
+                        new ControlInfo { type = ControlInfo.Type.Text_, label = "Chennal" +" "+ i};
       }
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;

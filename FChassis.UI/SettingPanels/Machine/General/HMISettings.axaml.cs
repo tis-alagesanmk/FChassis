@@ -18,17 +18,17 @@ public partial class HMISettings : Panel {
       {
          new ControlInfo{type=ControlInfo.Type.Group, label="General"},
          new ControlInfo{type=ControlInfo.Type.Combo, label="Orientation"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Step size to increment" },
-         new ControlInfo{type=ControlInfo.Type.Text, label="Maximum days keep back up files"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Minimum storage to keep back up files", unit="GB"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Step size to increment" },
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Maximum days keep back up files"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Minimum storage to keep back up files", unit="GB"},
          new ControlInfo{type=ControlInfo.Type.Combo, label="PLC messages to display"},
          new ControlInfo{type=ControlInfo.Type.Check, label="Caption for command-bar icons"},
          new ControlInfo{type=ControlInfo.Type.Check, label="Mini player"},
          new ControlInfo{type=ControlInfo.Type.Combo, label="Language"},
          new ControlInfo{type=ControlInfo.Type.Combo, label="Theme"},
          new ControlInfo{type=ControlInfo.Type.Group, label="Screen size"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Width"},
-         new ControlInfo{type=ControlInfo.Type.Text, label="Height"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Width"},
+         new ControlInfo{type=ControlInfo.Type.Text_, label="Height"},
       };
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
