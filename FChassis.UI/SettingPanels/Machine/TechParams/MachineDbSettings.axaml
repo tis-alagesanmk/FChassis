@@ -9,5 +9,8 @@
 		xmlns:base="FChassis.UI.Settings"
 		Background="White"
 		>
-	Machine Database Settings
+	<ScrollViewer>
+		<Grid ColumnDefinitions="20* 20* 20* 20* 20*">
+		</Grid>
+	</ScrollViewer>
 </base:Panel>
