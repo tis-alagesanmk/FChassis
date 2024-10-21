@@ -17,7 +17,7 @@
 						<TextBlock Text="Channels"/>
 					</Border>
 					<Grid Grid.Row="1"
-						  ColumnDefinitions="30* 40* "
+						  ColumnDefinitions="20* 40* 40*"
 						  RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
 
 						<Label Grid.Row="0" Grid.Column="0" Content="Channel 0" Classes="info"/>
