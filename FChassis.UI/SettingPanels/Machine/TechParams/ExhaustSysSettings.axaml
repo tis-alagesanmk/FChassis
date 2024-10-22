@@ -13,7 +13,7 @@
 		Background="White"
 		>
 	<Design.DataContext>
-		<vm:ExhaustSystemViewModel/>
+		<vm:ExhaustSystemViewModel/> 
 	</Design.DataContext>
 	<ScrollViewer>
 		<Grid ColumnDefinitions="*">

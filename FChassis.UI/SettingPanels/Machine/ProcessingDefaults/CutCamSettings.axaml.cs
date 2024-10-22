@@ -1,22 +1,30 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
+using FChassis.UI.SettingPanels.Machine.Model;
+
+
 namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 public partial class CutCamSettings : Panel {
    public CutCamSettings () {
-      AvaloniaXamlLoader.Load (this);
-      
+      AvaloniaXamlLoader.Load (this); 
+      this.AddControls ();
+   }
+
+   private void AddControls () {
+      ControlInfo[] ctrlInfos = new ControlInfo[]
+      {
+         new CheckControlInfo{label="Advanced"},
+         this.createFinishingRuleDGrid(),
+         new GroupControlInfo{ label="Microjoint settings"},
+         new _TextControlInfo{label="Microjoint length"}
+      };
+
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
-      if (grid != null) {
-         ControlInfo[] controlInfos = new ControlInfo[4];
-         controlInfos[0] = new GroupControlInfo {label = "Finishing rules"};
-         controlInfos[1] = createFinishingRuleDGrid ();
-         controlInfos[2] = new GroupControlInfo {label = "Microjoint Settings" };
-         controlInfos[3] = new _TextControlInfo {label = "Microjoint length" };
+      if (grid != null)
+         this.AddParameterControls (grid, ctrlInfos);
 
-         this.AddParameterControls (grid, controlInfos);
-      }
-
+   }
       #region Local Function
       DGridControlInfo createFinishingRuleDGrid () {
          DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
@@ -31,5 +39,4 @@ public partial class CutCamSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion Local Function
-   }
 }
