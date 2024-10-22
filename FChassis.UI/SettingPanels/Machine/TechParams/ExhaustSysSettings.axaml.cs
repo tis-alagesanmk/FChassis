@@ -1,6 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using FChassis.UI.SettingPanels.Machine.Model;
 using FChassis.UI.SettingPanels.Machine.ViewModel;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace FChassis.UI.Settings.Machine.TechParams;
 public partial class ExhaustSysSettings : Panel {
