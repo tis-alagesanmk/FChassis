@@ -13,16 +13,7 @@ public partial class ExhaustSysSettings : Panel {
       AvaloniaXamlLoader.Load (this);
       vm = new ExhaustSystemViewModel ();
       this.DataContext = vm;
-
       this.AddControls ();
-
-      //Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
-      //grid.RowDefinitions.Add (new RowDefinition { Height = new (32) });
-      //var dGris = this.GetDataGrid (vm.Sections);
-      //dGris.SetCurrentValue (Grid.RowProperty, 0);
-      //// dGris.SetCurrentValue (Grid.ColumnProperty, 0);
-      //// dGris.SetCurrentValue (Grid.ColumnSpanProperty, 4);
-      //grid.Children.Add (dGris);
    }
 
    private void AddControls () {
@@ -63,7 +54,7 @@ public partial class ExhaustSysSettings : Panel {
          Collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
          columns = new[]
          {
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Section  Number",path ="SectionNumber"},
+            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Splitter  Number",path ="SectionNumber"},
             new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "X ON",path="XOn"},
             new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "X OFF",path="XOff" },
             new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Y ON" ,path="YOn"},

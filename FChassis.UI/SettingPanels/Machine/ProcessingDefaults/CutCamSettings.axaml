@@ -7,39 +7,8 @@
 			 Background="White"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.CutCamSettings">
 	<ScrollViewer>
-		<Border>
-			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
-				RowDefinitions="32 32 200 32 32">
-				<CheckBox Content="Advanced"
-						  Classes="header" Grid.Column="4"/>
-				<Border Classes="header"
-						Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
-					<TextBlock Text="Finishing rules"/></Border>
-				<DataGrid Grid.Row="2"
-						  Grid.Column="0">
-					<DataGrid.Columns>
-						<DataGridTemplateColumn Header="Action" Width="100"><DataTemplate>
-							<ComboBox/></DataTemplate></DataGridTemplateColumn>
-						<DataGridTemplateColumn Header="Contour flags" Width="150"><DataTemplate>
-							<ComboBox/></DataTemplate>
-						</DataGridTemplateColumn>
-						<DataGridTemplateColumn Header="Disabled" Width="100"><DataTemplate>
-							<CheckBox/></DataTemplate>
-						</DataGridTemplateColumn>
-						<DataGridTemplateColumn Header="Size" Width="100"><DataTemplate>
-							<TextBlock/></DataTemplate>
-						</DataGridTemplateColumn>
-					</DataGrid.Columns>
-				</DataGrid>
-
-				<!-- Microjoint settings-->
-				<Border Classes="header"
-						Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5">
-					<TextBlock Text="Microjoint length"/></Border>
-				<Label Content="Microjoint length"
-					   Classes="info" Grid.Row="4" Grid.Column="1"/>
-				<TextBox Grid.Row="5" Grid.Column="2" />
-			</Grid>
-		</Border>
+		<Grid ColumnDefinitions="* * * * *">
+			
+		</Grid>
 	</ScrollViewer>
 </base:Panel>
