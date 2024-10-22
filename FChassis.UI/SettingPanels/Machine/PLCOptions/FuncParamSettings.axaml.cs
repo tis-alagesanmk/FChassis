@@ -8,9 +8,9 @@ public partial class FuncParamSettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new[] {
+         this.AddParameterControls (grid, new ControlInfo[] {
             new GroupControlInfo{label="PLC Custom Parameters"},
-            new CheckControlInfo{type=ControlInfo.Type.Check, label="Advanced"} as ControlInfo,
+            new CheckControlInfo{label="Advanced"},
 
             new GroupControlInfo{label="Jog Parameters"},
             new _TextControlInfo{label="Acc/Dec", unit="m/sec²"},

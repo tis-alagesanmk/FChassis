@@ -1,3 +1,2 @@
 namespace FChassis.UI.Settings.Machine.AxisParams;
-public partial class YSettings : Panel {
-}
+public partial class ZSettings : Panel {}

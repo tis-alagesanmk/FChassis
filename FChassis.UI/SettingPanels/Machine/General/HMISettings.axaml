@@ -9,10 +9,7 @@
 		xmlns:base="FChassis.UI.Settings"
 		xmlns:controls="using:FChassis.UI.Controls"
 		Background="White">
-	
 	<ScrollViewer>
-		<Grid ColumnDefinitions="* * * * *">			
-
-		</Grid>
+		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
 	</ScrollViewer>
 </base:Panel>
