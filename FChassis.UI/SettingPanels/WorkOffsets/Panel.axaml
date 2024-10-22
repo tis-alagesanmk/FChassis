@@ -8,26 +8,20 @@
         x:Class="FChassis.UI.Settings.WorkOffsets.Panel"
 	    xmlns:base="FChassis.UI.Settings"
         >
-	<Grid x:Name="Grid">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"></ColumnDefinition>
-			<ColumnDefinition Width="100"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"></RowDefinition>
-			<RowDefinition Height="40"></RowDefinition>
-		</Grid.RowDefinitions>
-		<Panel Background="AliceBlue" Grid.RowSpan="2"/>
-		<TextBlock DockPanel.Dock="Bottom"
-				   Grid.Column="1"				   
+	<Grid RowDefinitions="32 * 40" ColumnDefinitions="* 100"
+		  Background="AliceBlue">
+		<TextBlock Grid.Row="0" HorizontalAlignment="Stretch"
+					Margin="5,0,0,0" Text="Work Offsets"/>
+		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
+			  Grid.Row="1" Grid.RowSpan="2"
+			  Background="White">			
+		</Grid>
+		<TextBlock Grid.Row="1" Grid.Column="1"				   
 				   HorizontalAlignment="Center"
 				   Height="32">Import Position</TextBlock>
-		<Button DockPanel.Dock="Bottom" 
-					Grid.Row="1"
-					Grid.Column="1"
-					Margin="5"
-					Height="32"
-					Background="Black" Foreground="White"
-					Click="CloseBtn_Click">Close</Button>
-		</Grid>
+		<Button Grid.Row="2" Grid.Column="1"
+				Margin="5" Height="32"
+				Background="Black" Foreground="White"
+				Click="CloseBtn_Click">Close</Button>
+	</Grid>
 </base:Panel>
