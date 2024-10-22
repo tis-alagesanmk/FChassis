@@ -59,12 +59,12 @@ internal class DGridControlInfo : ControlInfo {
 public partial class Panel : FChassis.UI.Panels.Child {
    internal void AddParameterControls(Grid grid, ControlInfo[] controlInfos) {
 
+      int i = 0;
       int row = grid.RowDefinitions.Count;
       Binding binding = null!;
       foreach (var ci in controlInfos) {
-         grid.RowDefinitions.Add (new RowDefinition {
-            Height = new (32)
-         });
+         grid.RowDefinitions.Add (new RowDefinition {Height = new (32)});
+         i++;
 
          Border border = null!;
          Label label = null!;
@@ -141,7 +141,8 @@ public partial class Panel : FChassis.UI.Panels.Child {
         
       }
 
-      void bind(AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
+      #region Local function
+      void bind (AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
          if (property == null)
             return;
 
@@ -175,5 +176,6 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
          return dGrid;
       }
+      #endregion Local function
    }
 }

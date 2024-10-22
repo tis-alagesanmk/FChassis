@@ -1,10 +1,11 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+
 using FChassis.UI.SettingPanels.Machine.Model;
 
-namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 
-public partial class CutCamSettings : Panel{ 
+namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
+public partial class CutCamSettings : Panel {
    public CutCamSettings () {
       AvaloniaXamlLoader.Load (this); 
       this.AddControls ();
@@ -14,7 +15,7 @@ public partial class CutCamSettings : Panel{
       ControlInfo[] ctrlInfos = new ControlInfo[]
       {
          new CheckControlInfo{label="Advanced"},
-         this.CreateFinishRulesDataGrid(""),
+         this.createFinishingRuleDGrid(),
          new GroupControlInfo{ label="Microjoint settings"},
          new _TextControlInfo{label="Microjoint length"}
       };
@@ -24,19 +25,18 @@ public partial class CutCamSettings : Panel{
          this.AddParameterControls (grid, ctrlInfos);
 
    }
+      #region Local Function
+      DGridControlInfo createFinishingRuleDGrid () {
+         DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
+            binding = "Finishing Rules",
+            columns = new[] {
+               new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Wire Auto"},
+               new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Contour Flags" },
+               new DGridControlInfo.ColInfo {type = ControlInfo.Type.Check, header = "Disabled"},
+               new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Size" },
+         }};
 
-   DGridControlInfo CreateFinishRulesDataGrid (object binding) {
-      DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
-         binding = binding,
-         columns = new[]
-         {
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Action  Number",path ="Action"},
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Contour flags",path="Contourflags"},
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Disabled",path="Disabled" },
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Size" ,path="Size"},
-         }
-      };
-
-      return dGridCrtlInfo;
-   }
+         return dGridCrtlInfo;
+      }
+      #endregion Local Function
 }
