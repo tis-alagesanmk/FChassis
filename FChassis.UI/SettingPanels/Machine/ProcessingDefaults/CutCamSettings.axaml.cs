@@ -6,7 +6,7 @@ namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 
 public partial class CutCamSettings : Panel{
    public CutCamSettings () {
-      AvaloniaXamlLoader.Load (this);
+      AvaloniaXamlLoader.Load (this); 
       this.AddControls ();
    }
 
