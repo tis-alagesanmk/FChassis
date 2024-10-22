@@ -1,4 +1,9 @@
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Markup.Xaml;
+using FChassis.UI.Controls;
+using System.Reflection.Emit;
 using Avalonia.Controls.Primitives;
 
 namespace FChassis.UI.Controls;
@@ -20,4 +25,21 @@ public class TextboxLabel : TemplatedControl
       set => SetAndRaise (TextProperty, ref _text, value);
    }
 
+   public static readonly StyledProperty<int> RowProperty = AvaloniaProperty.Register<TextboxLabel, int> (nameof (RowPro), 0);
+   public int RowPro {
+      get => GetValue (RowProperty);
+      set => SetValue (RowProperty, value);
+   }
+
+   public static readonly StyledProperty<int>ColumnProperty = AvaloniaProperty.Register<TextboxLabel, int> (nameof (ColumnPro), 0);
+   public int ColumnPro {
+      get => GetValue (ColumnProperty);
+      set => SetValue (ColumnProperty, value);
+   }
+   protected override void OnPropertyChanged (AvaloniaPropertyChangedEventArgs change) 
+   {
+     Grid.SetRow(this,RowPro);
+     Grid.SetColumn (this, ColumnPro);
+      Grid.SetColumnSpan (this, 2);
+   }
 }

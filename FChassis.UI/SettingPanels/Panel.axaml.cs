@@ -13,7 +13,7 @@ internal class ControlInfo {
       Check,
       DGrid,
    };
-   
+
    internal Type type = Type.None;
    internal string label = null!;
    internal object binding = null!;
@@ -50,6 +50,7 @@ internal class DGridControlInfo : ControlInfo {
    internal class ColInfo {
       internal Type type = Type.None;
       internal string header = null!;
+      internal string path = null!;
    }
 }
 

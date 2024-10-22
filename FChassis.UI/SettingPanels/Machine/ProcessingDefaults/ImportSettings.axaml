@@ -2,60 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" 
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:base="FChassis.UI.Settings"
 			 Background="White"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.ImportSettings">
 	<ScrollViewer>
-		<Border>
-			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
-				  RowDefinitions="32 32 32 32 32 32 32 32 32 32 32 32 32 32 32">
-
-				<Border Classes="header" Grid.Column="0" Grid.ColumnSpan="5">
-					<TextBlock Text="Import settings"/></Border>
-				<Label Content="Units for DFX files"
-					   Classes="info" Grid.Row="1" Grid.Column="1"/>
-				<ComboBox Grid.Row="1" Grid.Column="2"/>
-
-				<Label Content="Stitch together lines/arcs closer than this"
-					   Classes="info" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
-				<TextBox Grid.Row="2" Grid.Column="2"/>
-
-				<Label Content="Maximun thickness for sheet-metal part"
-					   Classes="info" Grid.Row="3" Grid.Column="1"/>
-				<TextBox Grid.Row="3" Grid.Column="2"/>
-
-				<CheckBox Content="Ignore layer in DXF/DWG files"
-						  Grid.Row="4" Grid.Column="2"/>
-				<CheckBox Content="Explode blocks in 2D drawing"
-						  Grid.Row="5" Grid.Column="2"/>
-				<CheckBox Content="Convert white entities to black"
-						  Grid.Row="6" Grid.Column="2"/>
-				<CheckBox Content="Darken colors during DXF import"
-						  Grid.Row="7" Grid.Column="2"/>
-
-				<Border Classes="header" Grid.Row="8" Grid.ColumnSpan="5">
-					<TextBlock Text="DXF Settings"/></Border>
-				
-				<CheckBox Content="Darken colors during DXF import"
-						  Grid.Row="9" Grid.Column="2"/>
-
-				<Border Classes="header" Grid.Row="10" Grid.ColumnSpan="5">
-					<TextBlock Text="Spline Coversion"/></Border>
-				<Label Content="Covert splines on import"
-					   Classes="info" Grid.Row="11" Grid.Column="1"/>
-				<ComboBox Grid.Row="11" Grid.Column="2"  />
-
-				<Border Classes="header" Grid.Row="12" Grid.ColumnSpan="5">
-					<TextBlock Text="Layer mapping"/></Border>
-				<Label Content="Auxilary Layers Names"
-					   Classes="info" Grid.Row="13" Grid.Column="1"/>
-				<TextBox Grid.Row="13" Grid.Column="2"/>
-
-				<Label Content="Mark Layers Names"
-					   Classes="info" Grid.Row="14" Grid.Column="1"/>
-				<TextBox Grid.Row="14" Grid.Column="2"/>
-			</Grid>
-		</Border>
+		<Grid ColumnDefinitions="* * * * *">
+			
+		</Grid>
 	</ScrollViewer>
 </base:Panel>

@@ -8,13 +8,11 @@
         x:Class="FChassis.UI.Settings.Machine.General.HMISettings"
 		xmlns:base="FChassis.UI.Settings"
 		xmlns:controls="using:FChassis.UI.Controls"
-		Background="White"
-		>
+		Background="White">
 	
 	<ScrollViewer>
-		<Grid ColumnDefinitions="* *">
-			<Grid Grid.Column="0" ColumnDefinitions="20* 20* 20* 20* 20* 2"/>
-			<Grid Grid.Column="1" ColumnDefinitions="20* 20* 20* 20* 20*"/>
+		<Grid ColumnDefinitions="* * * * *">			
+
 		</Grid>
 	</ScrollViewer>
 </base:Panel>

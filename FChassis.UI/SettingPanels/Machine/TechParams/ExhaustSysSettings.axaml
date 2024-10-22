@@ -15,90 +15,9 @@
 	<Design.DataContext>
 		<vm:ExhaustSystemViewModel/>
 	</Design.DataContext>
-	<ScrollViewer>	
-		<Border>
-			<Grid RowDefinitions="75* 25*">
-				<!-- Sections -->
-				<Grid Grid.Row="0"
-					  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Classes="header">
-						<TextBlock Text="Sections"/>
-					</Border>
-
-					<DataGrid Grid.Row="1"
-							  ItemsSource="{Binding Sections}"
-							 x:Name="dgSections" >
-						<DataGrid.Columns>
-							<DataGridTemplateColumn Width="150"  Header="Section Number">
-								<DataTemplate>
-									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
-											   Text="{Binding SectionNumber}" />
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Width="125" Header="X ON">
-								<DataTemplate>
-									<TextBox Width="100" />
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Width="125" Header="X OFF">
-								<DataTemplate>
-									<TextBox Width="100"/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Width="125" Header="Y ON">
-								<DataTemplate>
-									<TextBox Width="100"/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Width="125" Header="Y OFF">
-								<DataTemplate>
-									<TextBox Width="100"/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-						</DataGrid.Columns>
-					</DataGrid>
-
-				</Grid>
-				<!-- Splitters -->
-				<Grid Grid.Row="1"
-					  RowDefinitions="10* 90*">
-					<Border Grid.Row="0" Classes="header">
-						<TextBlock Text="Splitters"/>
-					</Border>
-					<DataGrid Grid.Row="1"
-							  ItemsSource="{Binding Splitters}"
-							 x:Name="dgSplitters" >
-						<DataGrid.Columns>
-							<DataGridTemplateColumn Width="150"  Header="Splitter Number">
-								<DataTemplate>
-									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
-											   Text="{Binding SectionNumber}" />
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Width="125" Header="X ON">
-								<DataTemplate>
-									<TextBox Width="100" />
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Width="125" Header="X OFF">
-								<DataTemplate>
-									<TextBox Width="100"/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Width="125" Header="Y ON">
-								<DataTemplate>
-									<TextBox Width="100"/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-							<DataGridTemplateColumn Width="125" Header="Y OFF">
-								<DataTemplate>
-									<TextBox Width="100"/>
-								</DataTemplate>
-							</DataGridTemplateColumn>
-						</DataGrid.Columns>
-					</DataGrid>
-				</Grid>
-			</Grid>
-		</Border>
+	<ScrollViewer>
+		<Grid>
+			
+		</Grid>
 	</ScrollViewer>
 </base:Panel>

@@ -2,29 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 Background="White"
 			 xmlns:base="FChassis.UI.Settings"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.WorkSupportSettings">
 	<ScrollViewer>
-	
-		<Border>
-			<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
-				  RowDefinitions="32 32 32 32">
-				<Border Classes="header" Grid.Column="0" Grid.ColumnSpan="5">
-					<TextBlock Text="Work Support Configuration"/></Border>
-				<Label Content="Distance between slats"
-					   Classes="info" Grid.Row="1" Grid.Column="1"/>
-				<TextBox Grid.Row="1" Grid.Column="2"/>
-
-				<Label Content="Offset of first slat from sheet edge"
-					   Classes="info" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
-				<TextBox Grid.Row="2" Grid.Column="2"/>
-
-				<Label Content="Distance between support pins in a slat"
-					   Classes="info" Grid.Row="3" Grid.Column="1"/>
-				<TextBox Grid.Row="3" Grid.Column="2"/>
-			</Grid>
-		</Border>
-	</ScrollViewer>
+		<Grid ColumnDefinitions="* * * * *">
+			
+		</Grid>
+    </ScrollViewer>
 </base:Panel>
