@@ -134,7 +134,8 @@ public partial class Panel : FChassis.UI.Panels.Child {
          control.SetCurrentValue (Grid.ColumnSpanProperty, colSpan);
       }
 
-      void bind(AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
+      #region Local function
+      void bind (AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
          if (property == null)
             return;
 
@@ -167,5 +168,6 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
          return dGrid;
       }
+      #endregion Local function
    }
 }

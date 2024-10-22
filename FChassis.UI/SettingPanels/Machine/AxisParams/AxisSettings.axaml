@@ -7,8 +7,6 @@
 			 xmlns:base="FChassis.UI.Settings"
              x:Class="FChassis.UI.Settings.Machine.AxisParams.AxisSettingsPanel">
 	<ScrollViewer>
-		<Grid ColumnDefinitions="* * * * *">
-			
-		</Grid>
+		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
     </ScrollViewer>
 </base:Panel>

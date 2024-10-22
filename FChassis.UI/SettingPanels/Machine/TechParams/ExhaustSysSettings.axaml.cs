@@ -4,43 +4,35 @@ using FChassis.UI.SettingPanels.Machine.ViewModel;
 
 namespace FChassis.UI.Settings.Machine.TechParams;
 public partial class ExhaustSysSettings : Panel {
-   ExhaustSystemViewModel vm = null;
+   ExhaustSystemViewModel vm = null!;
    public ExhaustSysSettings () {
       AvaloniaXamlLoader.Load (this);
       vm = new ExhaustSystemViewModel ();
       this.DataContext = vm;
 
-      this.AddControls ();
-   }
-
-   private void AddControls () {
-      ControlInfo[] ctrlInfos = new ControlInfo[]
-      {
-         new ControlInfo{type = ControlInfo.Type.Group, label = "Sections" },
-         createPLCKey("")
+      ControlInfo[] ctrlInfos = new ControlInfo[] {
+         new GroupControlInfo{label = "Sections"},
+         createSectionDGrid() 
       };
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid, ctrlInfos);
 
-   }
+      #region Local function
+      DGridControlInfo createSectionDGrid () {
+         DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
+            binding = "Sections",
+            columns = new[] {
+               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "Section  Number",path ="SectionNumber"},
+               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "X ON",path="XOn"},
+               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "X OFF",path="XOff"},
+               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "Y ON" ,path="YOn"},
+               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "Y OFF" ,path="YOff"},
+         }};
 
-   DGridControlInfo createPLCKey (object binding) 
-   {
-      DGridControlInfo dGridCrtlInfo = new DGridControlInfo 
-      {
-         binding = binding,
-         columns = new[] 
-         {
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Section  Number",path ="SectionNumber"},
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "X ON",path="XOn"},
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "X OFF",path="XOff" },
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Y ON" ,path="YOn"},
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Y OFF" ,path="YOff"},
-         }
-      };
-
-      return dGridCrtlInfo;
+         return dGridCrtlInfo;
+      }
+      #endregion Local function
    }
 }

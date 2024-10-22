@@ -14,7 +14,7 @@ public partial class PLCKeySettings : Panel {
          for (int i = 0; i < count; i++) {
             groupName = $"PLCKey {i + 1}";
             controlInfos[i * 2] = new GroupControlInfo { label = groupName };
-            controlInfos[i * 2 + 1] = createPLCKey (groupName) as ControlInfo;
+            controlInfos[i * 2 + 1] = createPLCKey (groupName);
          }
 
          this.AddParameterControls (grid, controlInfos);
