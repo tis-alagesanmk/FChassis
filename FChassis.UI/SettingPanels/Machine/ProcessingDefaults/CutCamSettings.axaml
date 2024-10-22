@@ -7,7 +7,7 @@
 			 Background="White"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.CutCamSettings">
 	<ScrollViewer>
-		<Grid ColumnDefinitions="* * * * *">
+		<Grid ColumnDefinitions="* * * * *"> 
 			
 		</Grid>
 	</ScrollViewer>

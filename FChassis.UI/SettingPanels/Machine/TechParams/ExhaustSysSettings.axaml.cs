@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace FChassis.UI.Settings.Machine.TechParams;
+namespace FChassis.UI.Settings.Machine.TechParams; 
 public partial class ExhaustSysSettings : Panel {
    ExhaustSystemViewModel vm = null;
    public ExhaustSysSettings () {
