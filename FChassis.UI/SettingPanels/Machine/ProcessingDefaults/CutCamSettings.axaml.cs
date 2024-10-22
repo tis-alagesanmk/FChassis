@@ -8,14 +8,10 @@ namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 public partial class CutCamSettings : Panel {
    public CutCamSettings () {
       AvaloniaXamlLoader.Load (this); 
-      this.AddControls ();
-   }
 
-   private void AddControls () {
-      ControlInfo[] ctrlInfos = new ControlInfo[]
-      {
+      ControlInfo[] ctrlInfos = new ControlInfo[] {
          new CheckControlInfo{label="Advanced"},
-         this.createFinishingRuleDGrid(),
+         createFinishingRuleDGrid(),
          new GroupControlInfo{ label="Microjoint settings"},
          new _TextControlInfo{label="Microjoint length"}
       };
@@ -24,7 +20,6 @@ public partial class CutCamSettings : Panel {
       if (grid != null)
          this.AddParameterControls (grid, ctrlInfos);
 
-   }
       #region Local Function
       DGridControlInfo createFinishingRuleDGrid () {
          DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
@@ -39,4 +34,5 @@ public partial class CutCamSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion Local Function
+   }
 }

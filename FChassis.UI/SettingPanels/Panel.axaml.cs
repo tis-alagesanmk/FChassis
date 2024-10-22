@@ -20,6 +20,8 @@ internal class ControlInfo {
    internal object binding = null!;
    internal string unit = null!;
    internal object[] items = null!;
+
+   internal Control control = null!;
 }
 
 internal class GroupControlInfo : ControlInfo {
@@ -43,10 +45,10 @@ internal class CheckControlInfo : ControlInfo {
 }
 
 internal class DGridControlInfo : ControlInfo {
-   internal IEnumerable Collections { get; set; }
    internal DGridControlInfo () {
       this.type = Type.DGrid; }
 
+   internal IEnumerable collections { get; set; } = null!;
    internal ColInfo[] columns = null!;
 
    internal class ColInfo {
@@ -108,6 +110,7 @@ public partial class Panel : FChassis.UI.Panels.Child {
                   bind (checkBox, CheckBox.ContentProperty, ci.binding);
                }
 
+               ci.control = control;
                grid.Children.Add (control);
                setGridRowColumn (control, row, 2);
 
@@ -122,10 +125,11 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
             case ControlInfo.Type.DGrid:
                DGridControlInfo dgi = (DGridControlInfo)ci;
-               dGrid = createDGridColumns(dgi.columns,dgi.Collections);
+               dGrid = createDGridColumns(dgi.columns,dgi.collections);
                grid.RowDefinitions[row].Height = new GridLength (1,GridUnitType.Star);
                setGridRowColumnDataGrid (dGrid, row);
                grid.Children.Add (dGrid);
+               ci.control = dGrid;
                break;
          }
          row++;
