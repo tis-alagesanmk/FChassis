@@ -21,7 +21,7 @@ public partial class ExhaustSysSettings : Panel {
       {       
          new GroupControlInfo{label = "Sections"},
          CreateSectionDGrid(),
-         new GroupControlInfo{label = "Sections"},
+         new GroupControlInfo{label = "Splitters"},
          CreateSplittersdDGrid()
       };
 
@@ -33,7 +33,7 @@ public partial class ExhaustSysSettings : Panel {
       DGridControlInfo CreateSectionDGrid () {
          DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
             binding = "Sections",
-            Collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
+            Collections = vm.Sections.Cast<ExhaustSysModel> ().ToArray (),
             columns = new[] {
                new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "Section  Number",path ="SectionNumber"},
                new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "X ON",path="XOn"},
