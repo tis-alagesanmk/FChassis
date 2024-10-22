@@ -16,7 +16,7 @@
 		<vm:ExhaustSystemViewModel/>
 	</Design.DataContext>
 	<ScrollViewer>
-		<Grid>
+		<Grid ColumnDefinitions="*">
 			
 		</Grid>
 	</ScrollViewer>
