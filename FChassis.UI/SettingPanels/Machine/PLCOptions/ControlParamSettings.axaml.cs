@@ -8,7 +8,7 @@ public partial class ControlParamSettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="Maximum override adjust level"},
             new _TextControlInfo{label="Maximum override adjust value", unit="%"},
 
@@ -114,6 +114,6 @@ public partial class ControlParamSettings : Panel {
             new _TextControlInfo{label="Warning limit", unit="%"},
             new _TextControlInfo{label="Error limit", unit="%"},
             new _TextControlInfo{label="Delay time to report warning", unit="s"},
-      });
+      ]);
    }
 }

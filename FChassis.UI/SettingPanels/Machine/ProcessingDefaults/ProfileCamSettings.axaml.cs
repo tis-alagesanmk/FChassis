@@ -9,7 +9,7 @@ public partial class ProfileCamSettings : Panel{
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new CheckControlInfo{label="Advanced"},
 
             new GroupControlInfo{label="Cutting"},
@@ -23,6 +23,6 @@ public partial class ProfileCamSettings : Panel{
             new GroupControlInfo{label="Scrap cutting"},
             new _TextControlInfo{label="Scrap grid width"},
             new _TextControlInfo{label="Approach length for separating cuts"},
-      });
+      ]);
    }
 }

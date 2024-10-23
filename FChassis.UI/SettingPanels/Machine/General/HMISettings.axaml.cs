@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using FChassis.UI.Settings;
 
 namespace FChassis.UI.Settings.Machine.General;
 public partial class HMISettings : Panel {
@@ -9,22 +10,20 @@ public partial class HMISettings : Panel {
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid, [
-            new GroupControlInfo{label="General"},
-            new ComboControlInfo{label="Orientation"},
-            new _TextControlInfo{label="Step size to increment" },
-            new _TextControlInfo{label="Maximum days keep back up files"},
-            new _TextControlInfo{label="Minimum storage to keep back up files", unit="GB", 
-                                 bindInfos=[ControlInfo.Text.Binding("TextMember")] },
-            new ComboControlInfo{label="PLC messages to display"},
-            new CheckControlInfo{label="Caption for command-bar icons",
-                                 bindInfo=ControlInfo.Check.Binding("TextMember") },
-            new CheckControlInfo{label="Mini player"},
-            new ComboControlInfo{label="Language"},
-            new ComboControlInfo{label="Theme"},
+            new GroupControlInfo ("General"),
+            new ComboControlInfo ("Orientation"),
+            new _TextControlInfo ("Step size to increment"),
+            new _TextControlInfo ("Maximum days keep back up files"),
+            new _TextControlInfo ("Minimum storage to keep back up files", "BindName", "GB"),                                  
+            new ComboControlInfo ("PLC messages to display"),
+            new CheckControlInfo ("Caption for command-bar icons","BindName"),
+            new CheckControlInfo ("Mini player"),
+            new ComboControlInfo ("Language"),
+            new ComboControlInfo ("Theme"),
 
-            new GroupControlInfo{label="Screen size"},
-            new _TextControlInfo{label="Width"},
-            new _TextControlInfo{label="Height"},
+            new GroupControlInfo ("Screen size"),
+            new _TextControlInfo ("Width"),
+            new _TextControlInfo ("Height"),
       ]);
    }
 }

@@ -8,7 +8,7 @@ public partial class AxisSettingsPanel : Panel{
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="Configuration parameters"},
             new CheckControlInfo{label="Axis type"},
             new ComboControlInfo{label="Axis connection"},
@@ -52,6 +52,6 @@ public partial class AxisSettingsPanel : Panel{
             new GroupControlInfo{label="Synchronous"},
             new _TextControlInfo{label="Handwheel assignment"},
             new _TextControlInfo{label="Handwheel factor"},
-      });
+      ]);
    }
 }
