@@ -15,14 +15,9 @@ namespace FChassis.UI.SettingPanels.Machine.ViewModel;
 public partial class HMISettingsViewModel: ObservableObject {
    private ObservableCollection<string> comboBoxItems;
    private bool isCheckBoxChecked;
-   private string property1Text;
-   public string Property1Text {
-      get => property1Text;
-      set {
-         property1Text = value;
-         OnPropertyChanged (nameof (Property1Text));
-      }
-   }
+
+   [ObservableProperty]
+   public string property1Text;
 
    public bool IsCheckBoxChecked {
       get => isCheckBoxChecked;
