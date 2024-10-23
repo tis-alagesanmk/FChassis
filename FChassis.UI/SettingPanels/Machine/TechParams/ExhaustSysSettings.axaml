@@ -13,11 +13,9 @@
 		Background="White"
 		>
 	<Design.DataContext>
-		<vm:ExhaustSystemViewModel/>
+		<vm:ExhaustSystemViewModel/> 
 	</Design.DataContext>
 	<ScrollViewer>
-		<Grid>
-			
-		</Grid>
+		<Grid ColumnDefinitions="*"/>
 	</ScrollViewer>
 </base:Panel>
