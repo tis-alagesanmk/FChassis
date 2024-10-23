@@ -8,5 +8,9 @@
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.Piercing.PeckSettings"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	Peck Settings
+	<ScrollViewer>
+		<Grid>
+			
+		</Grid>
+	</ScrollViewer>
 </base:Panel>

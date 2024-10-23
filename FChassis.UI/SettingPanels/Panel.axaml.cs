@@ -123,8 +123,8 @@ public partial class Panel : FChassis.UI.Panels.Child {
             case ControlInfo.Type.DGrid:
                DGridControlInfo dgi = (DGridControlInfo)ci;
                dGrid = createDGridColumns(dgi.columns,dgi.Collections);
-               grid.RowDefinitions[row].Height = new GridLength (1,GridUnitType.Star);
-               setGridRowColumnDataGrid (dGrid, row);
+               grid.RowDefinitions[row].Height = new GridLength (1,GridUnitType.Auto);
+               setGridRowColumnDGrid (dGrid, row);
                grid.Children.Add (dGrid);
                break;
          }
@@ -136,13 +136,13 @@ public partial class Panel : FChassis.UI.Panels.Child {
          control.SetCurrentValue (Grid.ColumnProperty, col);
          control.SetCurrentValue (Grid.ColumnSpanProperty, colSpan);
       }
-      void setGridRowColumnDataGrid (Control control, int row) {
+      void setGridRowColumnDGrid (Control control, int row) {
          control.SetCurrentValue (Grid.RowProperty, row);
         
       }
 
       #region Local function
-      void bind (AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
+      void bind (AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null, object[] items = null) {
          if (property == null)
             return;
 

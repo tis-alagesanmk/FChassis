@@ -10,7 +10,7 @@ public partial class HMISettings : Panel {
       if (grid != null)
          this.AddParameterControls (grid, new ControlInfo[] {
             new GroupControlInfo{label="General"},
-            new ComboControlInfo{label="Orientation"},
+            new ComboControlInfo{label="Orientation",items =["Test1", "Test2"] },
             new _TextControlInfo{label="Step size to increment" },
             new _TextControlInfo{label="Maximum days keep back up files"},
             new _TextControlInfo{label="Minimum storage to keep back up files", unit="GB"},
