@@ -3,6 +3,8 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using System.Collections;
+using System.Data;
+using static FChassis.UI.Settings.ControlInfo;
 
 namespace FChassis.UI.Settings;
 internal class ControlInfo {
@@ -17,32 +19,60 @@ internal class ControlInfo {
 
    internal Type type = Type.None;
    internal string label = null!;
-   internal object binding = null!;
    internal string unit = null!;
    internal object[] items = null!;
 
    internal Control control = null!;
+   internal object binding = null!;
+
+   internal BindInfo bindInfo = null!;
+   internal BindInfo[] bindInfos = null!;
+
+   #region Inner Class
+   internal class BindInfo {
+      internal AvaloniaProperty property = null!;
+      internal Binding binding = null!;
+   }
+
+   internal static class Text {
+      internal static BindInfo Binding (string name) {
+         return new BindInfo {
+            property = TextBox.TextProperty,
+            binding = new Binding (name), }; 
+   }}
+
+   internal static class Combo {
+      internal static BindInfo Binding (string name) {
+         return new BindInfo {
+            property = ComboBox.SelectedItemProperty,
+            binding = new Binding (name), }; 
+   }}   
+
+   internal static class Check {
+      internal static BindInfo Binding (string name) {
+         return new BindInfo {
+            property = CheckBox.IsCheckedProperty,
+            binding = new Binding (name), }; 
+   }}   
+   #endregion Inner Class
 }
 
+#region Specialized ControlInfo classes
 internal class GroupControlInfo : ControlInfo {
    internal GroupControlInfo () {
-      this.type = Type.Group; }
-}
+      this.type = Type.Group;  }}
 
 internal class _TextControlInfo : ControlInfo {
    internal _TextControlInfo () {
-      this.type = Type.Text_; }
-}
+      this.type = Type.Text_; }}
 
 internal class ComboControlInfo : ControlInfo {
    internal ComboControlInfo () {
-      this.type = Type.Combo; }
-}
+      this.type = Type.Combo; }}
 
 internal class CheckControlInfo : ControlInfo {
    internal CheckControlInfo () {
-      this.type = Type.Check; }
-}
+      this.type = Type.Check; }}
 
 internal class DGridControlInfo : ControlInfo {
    internal DGridControlInfo () {
@@ -57,16 +87,15 @@ internal class DGridControlInfo : ControlInfo {
       internal string path = null!;
    }
 }
+#endregion Specialized ControlInfo classes
 
 public partial class Panel : FChassis.UI.Panels.Child {
    internal void AddParameterControls(Grid grid, ControlInfo[] controlInfos) {
 
-      int i = 0;
       int row = grid.RowDefinitions.Count;
-      Binding binding = null!;
+      //Binding binding = null!;
       foreach (var ci in controlInfos) {
          grid.RowDefinitions.Add (new RowDefinition {Height = new (32)});
-         i++;
 
          Border border = null!;
          Label label = null!;
@@ -101,14 +130,19 @@ public partial class Panel : FChassis.UI.Panels.Child {
 
                if (ci.type == ControlInfo.Type.Text_) {
                   control = textBox = new TextBox ();
-                  bind (textBox, TextBox.TextProperty, ci.binding);
+                  //bind (textBox, TextBox.TextProperty, ci.binding);
                } else if (ci.type == ControlInfo.Type.Combo) {
                   control = comboBox = new ComboBox ();
-                  bind (comboBox, ComboBox.SelectedItemProperty, ci.binding);
+                  //bind (comboBox, ComboBox.SelectedItemProperty, ci.binding);
                } else if (ci.type == ControlInfo.Type.Check) {
                   control = checkBox = new CheckBox ();
-                  bind (checkBox, CheckBox.ContentProperty, ci.binding);
+                  //bind (checkBox, CheckBox.ContentProperty, ci.binding);
                }
+
+               if (ci.bindInfos != null)
+                  bind1 (control, ci.bindInfos);
+               else if (ci.bindInfo != null)
+                  bind1 (control, [ci.bindInfo]);
 
                ci.control = control;
                grid.Children.Add (control);
@@ -146,14 +180,19 @@ public partial class Panel : FChassis.UI.Panels.Child {
       }
 
       #region Local function
-      void bind (AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
-         if (property == null)
-            return;
-
-         binding = new Binding ();
-         binding.Initiate (target, ComboBox.SelectedItemProperty, property);
-         target.Bind (targetProperty, binding);
+      void bind1 (Control control, BindInfo[] bindInfos) {
+         foreach (BindInfo bi in bindInfos) 
+            control.Bind (bi.property, bi.binding); 
       }
+
+      //void bind (AvaloniaObject target, AvaloniaProperty targetProperty, object? property = null) {
+      //   if (property == null)
+      //      return;
+
+      //   binding = new Binding ();
+      //   binding.Initiate (target, ComboBox.SelectedItemProperty, property);
+      //   target.Bind (targetProperty, binding);
+      //}
 
       DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis,IEnumerable collections) {
          DataGrid dGrid = new DataGrid ();

@@ -8,14 +8,16 @@ public partial class HMISettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="General"},
             new ComboControlInfo{label="Orientation"},
             new _TextControlInfo{label="Step size to increment" },
             new _TextControlInfo{label="Maximum days keep back up files"},
-            new _TextControlInfo{label="Minimum storage to keep back up files", unit="GB"},
+            new _TextControlInfo{label="Minimum storage to keep back up files", unit="GB", 
+                                 bindInfos=[ControlInfo.Text.Binding("TextMember")] },
             new ComboControlInfo{label="PLC messages to display"},
-            new CheckControlInfo{label="Caption for command-bar icons"},
+            new CheckControlInfo{label="Caption for command-bar icons",
+                                 bindInfo=ControlInfo.Check.Binding("TextMember") },
             new CheckControlInfo{label="Mini player"},
             new ComboControlInfo{label="Language"},
             new ComboControlInfo{label="Theme"},
@@ -23,6 +25,6 @@ public partial class HMISettings : Panel {
             new GroupControlInfo{label="Screen size"},
             new _TextControlInfo{label="Width"},
             new _TextControlInfo{label="Height"},
-      });
+      ]);
    }
 }
