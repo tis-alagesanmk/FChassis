@@ -8,7 +8,7 @@ public partial class LaserTechSettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="Custom parameters 1"},
             new _TextControlInfo{label="X-axis park position", unit="mm"},
             new _TextControlInfo{label="Y-axis park position", unit="mm"},
@@ -56,6 +56,6 @@ public partial class LaserTechSettings : Panel {
             new _TextControlInfo{label="Param 8"},
             new _TextControlInfo{label="Param 9"},
             new _TextControlInfo{label="Param 10"},
-      });
+      ]);
    }
 }

@@ -8,7 +8,7 @@ public partial class Pallet1Settings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="Configuration parameters"},
             new CheckControlInfo{label="Advanced"},
             new ComboControlInfo{label="Axis Type"},
@@ -53,6 +53,6 @@ public partial class Pallet1Settings : Panel {
             new GroupControlInfo{label="Handwheel"},
             new _TextControlInfo{label="Handwheel assignment"},
             new _TextControlInfo{label="Handwheel factor"},
-      });
+      ]);
    }
 }
