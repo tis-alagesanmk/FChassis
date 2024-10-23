@@ -2,8 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FChassis.UI.SettingPanels.Machine.Model;
 using FChassis.UI.SettingPanels.Machine.ViewModel;
-using System.Collections;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace FChassis.UI.Settings.Machine.TechParams; 
@@ -20,44 +18,58 @@ public partial class ExhaustSysSettings : Panel {
       ControlInfo[] ctrlInfos = new ControlInfo[]
       {       
          new GroupControlInfo{label = "Sections"},
-         CreateSectionDGrid(),
+         createSectionDGrid(),
+
          new GroupControlInfo{label = "Splitters"},
-         CreateSplittersdDGrid()
+         createSplittersdDGrid()
       };
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid, ctrlInfos);
 
+      // Alag: [Testing]
+      if (ctrlInfos[3].control != null) {
+         DataGrid dataGrid = ctrlInfos[3].control as DataGrid;
+         dataGrid.ItemsSource = new object[] {
+            new string[] {"Section1", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
+            new string[] {"Section2", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
+            new string[] {"Section3", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
+            new string[] {"Section4", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
+         };
+      }
+
       #region Local function
-      DGridControlInfo CreateSectionDGrid () {
+      DGridControlInfo createSectionDGrid () {
          DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
             binding = "Sections",
-            Collections = vm.Sections.Cast<ExhaustSysModel> ().ToArray (),
-            columns = new[] {
-               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "Section  Number",path ="SectionNumber"},
-               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "X ON",path="XOn"},
-               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "X OFF",path="XOff"},
-               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "Y ON" ,path="YOn"},
-               new DGridControlInfo.ColInfo{type = ControlInfo.Type.Text_, header = "Y OFF" ,path="YOff"},
-         }};
-
+            collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
+            columns = [
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="Section Number",  
+                                                                                          path="SectionNumber"},
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="X ON",   path="XOn"},
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="X OFF",  path="XOff"},
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="Y ON" ,  path="YOn"},
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="Y OFF",  path="YOff"},
+         ]};
 
          return dGridCrtlInfo;
       }
-   DGridControlInfo CreateSplittersdDGrid () {
-      DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
-         binding = "Splitters",
-         Collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
-         columns = new[]
-         {
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Splitter  Number",path ="SectionNumber"},
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "X ON",path="XOn"},
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "X OFF",path="XOff" },
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Y ON" ,path="YOn"},
-            new DGridControlInfo.ColInfo { type = ControlInfo.Type.Text_, header = "Y OFF" ,path="YOff"},
-         }
-      };
+
+    
+      DGridControlInfo createSplittersdDGrid () {
+         DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
+            binding = "Splitters",
+            collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
+            columns = [
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="Splitter Number", 
+                                                                                          path ="SectionNumber"},
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="X ON",   path="XOn"},
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="X OFF",  path="XOff" },
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="Y ON",   path="YOn"},
+               new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="Y OFF",  path="YOff"},
+         ]};
+
          return dGridCrtlInfo;
       }
       #endregion Local function

@@ -8,26 +8,21 @@ namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 public partial class CutCamSettings : Panel {
    public CutCamSettings () {
       AvaloniaXamlLoader.Load (this); 
-      this.AddControls ();
-   }
 
-   private void AddControls () {
-      ControlInfo[] ctrlInfos = new ControlInfo[]
-      {
+      ControlInfo[] ctrlInfos = [
          new CheckControlInfo{label="Advanced"},
-         this.createFinishingRuleDGrid(),
+         createFinishingRuleDGrid(),
          new GroupControlInfo{ label="Microjoint settings"},
          new _TextControlInfo{label="Microjoint length"}
-      };
+      ];
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid, ctrlInfos);
 
-   }
       #region Local Function
       DGridControlInfo createFinishingRuleDGrid () {
-         DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
+         DGridControlInfo dGridCrtlInfo = new () {
             binding = "Finishing Rules",
             columns = new[] {
                new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Wire Auto"},
@@ -39,4 +34,5 @@ public partial class CutCamSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion Local Function
+   }
 }

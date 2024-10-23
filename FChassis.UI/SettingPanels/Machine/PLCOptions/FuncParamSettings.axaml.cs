@@ -8,7 +8,7 @@ public partial class FuncParamSettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="PLC Custom Parameters"},
             new CheckControlInfo{label="Advanced"},
 
@@ -80,6 +80,6 @@ public partial class FuncParamSettings : Panel {
             new CheckControlInfo{label="Laser device"},
             new CheckControlInfo{label="No collision input"},
             new CheckControlInfo{label="Beam mode index"},
-         });
+      ]);
    }
 }

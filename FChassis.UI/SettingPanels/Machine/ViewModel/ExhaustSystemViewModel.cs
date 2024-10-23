@@ -20,18 +20,15 @@ namespace FChassis.UI.SettingPanels.Machine.ViewModel {
       }
 
       private void GetExhausSystem () {
-
          for (int i = 1; i <= 36; i++)
             Sections.Add (new ExhaustSysModel {
                SectionNumber = Section + " " + i,
-            }
-            );
+            });
 
          for (int i = 1; i <= 6; i++)
             Splitters.Add (new ExhaustSysModel {
                SectionNumber = Splitter + " " + i,
-            }
-            );
+            });
       }
    }
 }
