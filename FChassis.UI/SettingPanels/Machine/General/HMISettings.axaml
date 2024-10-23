@@ -6,9 +6,14 @@
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Machine.General.HMISettings"
+		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
 		xmlns:base="FChassis.UI.Settings"
+		x:DataType="vm:HMISettingsViewModel"
 		xmlns:controls="using:FChassis.UI.Controls"
 		Background="White">
+	<UserControl.DataContext>
+		<vm:HMISettingsViewModel/>
+	</UserControl.DataContext>
 	<ScrollViewer>
 		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
 	</ScrollViewer>
