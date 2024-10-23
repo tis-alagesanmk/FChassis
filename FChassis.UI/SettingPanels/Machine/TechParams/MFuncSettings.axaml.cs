@@ -6,7 +6,7 @@ public partial class MFuncSettings : Panel {
    public MFuncSettings () {
       AvaloniaXamlLoader.Load (this);
 
-      ControlInfo[] ctrlInfos = new ControlInfo[] { };
+      ControlInfo[] ctrlInfos = new ControlInfo[33];
       ctrlInfos[0] = new GroupControlInfo {label = "Sub program table"};
       for (int i = 1; i < 33; i++)
          ctrlInfos[i] = new _TextControlInfo {label = $"M number {i - 1}"};
