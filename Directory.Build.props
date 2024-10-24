@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="IBM437"?>
-<Project DefaultTargets="Build">
+<Project>
   <PropertyGroup>
-    <BaseIntermediateOutputPath>$(SolutionDir)\output\obj\$(MSBuildProjectName)\$(Configuration)</BaseIntermediateOutputPath>
+    <Nullable>enable</Nullable>
+    <AvaloniaVersion>11.1.0</AvaloniaVersion>
   </PropertyGroup>
- </Project>
+</Project>

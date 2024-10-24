@@ -50,6 +50,10 @@ public partial class Panel : Panels.Child {
 
                break;
 
+            case ControlInfo.Type.Btn:
+               ci.control = new Button () { Content = ci.label};
+               setGridRowColumn (ci.control, row, 2);
+               break;
             case ControlInfo.Type.Text_:
 
             case ControlInfo.Type.Combo:
@@ -227,6 +231,8 @@ internal class ControlInfo {
 
       Check,
 
+      Btn,
+
       DGrid,
 
    };
@@ -308,6 +314,19 @@ internal class ControlInfo {
 
    }
 
+   internal static class Btn {
+
+      internal static BindInfo Binding (string name) {
+
+         return new BindInfo {
+
+            property = Button.CommandProperty,
+
+            binding = new Binding (name), };
+
+      }
+   }
+
    #endregion Inner Class
 
 }
@@ -349,6 +368,16 @@ internal class CheckControlInfo : ControlInfo {
    internal CheckControlInfo () {
 
       this.type = Type.Check;
+
+   }
+
+}
+
+internal class ButtonControlInfo : ControlInfo {
+
+   internal ButtonControlInfo () {
+
+      this.type = Type.Btn;
 
    }
 

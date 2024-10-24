@@ -14,18 +14,11 @@ using System.Windows.Navigation;
 namespace FChassis.UI.SettingPanels.Machine.ViewModel;
 public partial class HMISettingsViewModel: ObservableObject {
    private ObservableCollection<string> comboBoxItems;
+   [ObservableProperty]
    private bool isCheckBoxChecked;
 
    [ObservableProperty]
    public string property1Text;
-
-   public bool IsCheckBoxChecked {
-      get => isCheckBoxChecked;
-      set {
-         isCheckBoxChecked = value;
-         OnPropertyChanged (nameof (IsCheckBoxChecked));
-      }
-   }
 
    public ObservableCollection<string> ComboBoxItems {
       get => comboBoxItems;

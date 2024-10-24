@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FChassis.Data\FChassis.Data.csproj" />
     <ProjectReference Include="..\FChassis\FChassis.csproj" />
   </ItemGroup>
 

@@ -10,14 +10,15 @@ public partial class MachineSettings : Panel {
       if (grid != null)
          this.AddParameterControls (grid, new ControlInfo[] {
             new GroupControlInfo{label="General"},
-            new ComboControlInfo{label="Match Id"},
-            new _TextControlInfo{label="Axis emulation" },
-            new _TextControlInfo{label="Cfg custom tech"},
+            new _TextControlInfo{label="Machine Id", bindInfo=ControlInfo.Text.Binding("MachineId") },
+            new _TextControlInfo{label="Axis emulation" ,bindInfo=ControlInfo.Text.Binding("AxisEmulation") },
+            new _TextControlInfo{label="Cfg custom tech", bindInfo=ControlInfo.Text.Binding("CfgCustomTech") },
             new _TextControlInfo{label="Pesets"},
             new ComboControlInfo{label="Can open bit rate", unit="kbps"},
             new CheckControlInfo{label="Netdisk server IP address"},
             new CheckControlInfo{label="Software limit code"},
-            new ComboControlInfo{label="Override limit"},
+            new _TextControlInfo{label="Override limit", bindInfo= ControlInfo.Text.Binding("OverrideLimit")},
+            new ButtonControlInfo{label="Limit Incrementer", bindInfo= ControlInfo.Btn.Binding("IncrementLimitCommand")},
 
             new GroupControlInfo{label="Controller"},
             new _TextControlInfo{label="Interpolation cycle time",unit="ms"},
