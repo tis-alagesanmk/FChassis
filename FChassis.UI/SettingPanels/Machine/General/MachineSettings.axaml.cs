@@ -16,7 +16,7 @@ public partial class MachineSettings : Panel {
             new _TextControlInfo{label="Pesets"},
             new ComboControlInfo{label="Can open bit rate", unit="kbps"},
             new CheckControlInfo{label="Netdisk server IP address"},
-            new CheckControlInfo{label="Software limit code"},
+            new ComboControlInfo{label="Software limit code", bindInfos=[ControlInfo.Combo.Binding("Code"),ControlInfo.Combo.BindingItems("Codes")]},
             new _TextControlInfo{label="Override limit", bindInfo= ControlInfo.Text.Binding("OverrideLimit")},
             new ButtonControlInfo{label="Limit Incrementer", bindInfo= ControlInfo.Btn.Binding("IncrementLimitCommand")},
 

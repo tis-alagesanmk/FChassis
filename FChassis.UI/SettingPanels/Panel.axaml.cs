@@ -289,6 +289,16 @@ internal class ControlInfo {
 
       }
 
+      internal static BindInfo BindingItems (string name) {
+
+         return new BindInfo {
+
+            property = ComboBox.ItemsSourceProperty,
+
+            binding = new Binding (name), };
+
+      }
+
    }
 
    internal static class Check {

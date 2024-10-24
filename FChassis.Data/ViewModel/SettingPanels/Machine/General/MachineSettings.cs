@@ -17,11 +17,19 @@ public partial class MachineSettings:ObservableObject {
    [ObservableProperty]
    private int overrideLimit;
 
+   [ObservableProperty]
+   private string code;
+
+   [ObservableProperty]
+   private List<string> codes;
+
    public MachineSettings () {
       MachineId = "130166";
       AxisEmulation = "1";
       CfgCustomTech= "ECUT";
       OverrideLimit = 1;
+      codes = new List<string> { "12", "13", "14", "15", "16" };
+      code = "13";
    }
 
 
