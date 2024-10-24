@@ -11,14 +11,14 @@ public partial class MachineSettings : Panel {
       if (grid != null)
          this.AddParameterControls (grid, [
             new GroupControlInfo ("General"),
-            new ComboControlInfo ("Match Id"),
+            new _TextControlInfo ("Match Id"),
             new _TextControlInfo ("Axis emulation"),
             new _TextControlInfo ("Cfg custom tech"),
             new _TextControlInfo ("Pesets"),
-            new ComboControlInfo ("Can open bit rate") {unit="kbps"},
-            new CheckControlInfo ("Netdisk server IP address"),
-            new CheckControlInfo ("Software limit code"),
-            new ComboControlInfo ("Override limit"),
+            new _TextControlInfo ("Can open bit rate") {unit="kbps"},
+            new _TextControlInfo ("Netdisk server IP address"),
+            new _TextControlInfo ("Software limit code"),
+            new _TextControlInfo ("Override limit"),
 
             new GroupControlInfo ("Controller"),
             new _TextControlInfo ("Interpolation cycle time", "BindName", "ms"),

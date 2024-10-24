@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FChassis.UI", "FChassis.UI\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia", "Avalonia", "{E93025EC-C266-4E53-BA0E-1BE97B5E2231}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FChassis.Data", "FChassis.Data\FChassis.Data.csproj", "{B2A321D2-7FB1-4CE5-8C12-0D2EC42F8F99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66A567EE-F6B3-4743-92CE-2E0962D8DC7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A321D2-7FB1-4CE5-8C12-0D2EC42F8F99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A321D2-7FB1-4CE5-8C12-0D2EC42F8F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A321D2-7FB1-4CE5-8C12-0D2EC42F8F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A321D2-7FB1-4CE5-8C12-0D2EC42F8F99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

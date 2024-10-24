@@ -172,6 +172,11 @@ internal class ControlInfo {
             property = ComboBox.SelectedItemProperty,
             binding = new Binding (name), };
       }
+      internal static BindInfo BindingItems (object[] items) {
+         return new BindInfo {
+            property = ComboBox.ItemsSourceProperty,
+            binding = new Binding () { Source = items }, };
+      }
    }
 
    internal static class Check {
@@ -202,11 +207,12 @@ internal class _TextControlInfo : ControlInfo {
 }
 
 internal class ComboControlInfo : ControlInfo {
-   internal ComboControlInfo (string label = null!, string bindName = null!)
+   internal ComboControlInfo (string label = null!, string bindName = null!, object[] items = null!)
       : base (Type.Combo, label) {
       if (bindName != null)
          this.bindInfos = [Combo.Binding (bindName)];
    }
+
 }
 
 internal class CheckControlInfo : ControlInfo {
