@@ -64,7 +64,7 @@ public partial class Panel : Panels.Child {
                DGridControlInfo dgi = (DGridControlInfo)ci;
                ci.control = dGrid = createDGridColumns(dgi.columns,dgi.collections);
                grid.RowDefinitions[row].Height = new GridLength (1,GridUnitType.Star);
-               setGridRowColumnDataGrid (dGrid, row);
+               dGrid.SetCurrentValue (Grid.RowProperty, row);
                break;
          }
 
@@ -85,9 +85,6 @@ public partial class Panel : Panels.Child {
          control.SetCurrentValue (Grid.ColumnSpanProperty, colSpan);
       }
 
-      void setGridRowColumnDataGrid (Control control, int row)
-         => control.SetCurrentValue (Grid.RowProperty, row);              
-
       #region Local function
       void bind (Control control, ControlInfo.BindInfo[] bindInfos) {
          foreach (ControlInfo.BindInfo bi in bindInfos) 
@@ -104,13 +101,14 @@ public partial class Panel : Panels.Child {
                   column = new DataGridTextColumn ();
                   ((DataGridTextColumn)column).Binding = new Binding (dgci.path);
                   break;
+
                case ControlInfo.Type.Check:
                   column = new DataGridCheckBoxColumn ();
                   break;
-            }
 
-            if (column == null)
-               continue;
+               default:
+                  continue;
+            }
 
             column.Header = dgci.header;
             dGrid.Columns.Add (column);
@@ -124,11 +122,17 @@ public partial class Panel : Panels.Child {
 }
 
 #region Run Time ControlInfo 
-internal class ControlInfo {
-   internal ControlInfo (Type _type = Type.None, string _label = null!, string _unit = null!) {
-      this.label = _label.Trim ();
-      this.unit = _unit.Trim (); }
+internal class ControlInfo (string label = null!, string unit = null!) {
+   internal ControlInfo (Type type = Type.None, string label = null!, string unit = null!)
+      : this (label, unit) => this.type = type;
 
+   internal ControlInfo (Type type, string label, string bindName, string unit = null!)
+      : this(type, label, unit) {
+      if (bindName != null)
+         this.bindInfos = [Text.Binding (bindName)];
+   }
+
+   // -------------------------------------------------------------------------
    internal enum Type {
       None,
       Group,
@@ -139,8 +143,8 @@ internal class ControlInfo {
    };
 
    internal Type type = Type.None;
-   internal string label = null!;
-   internal string unit = null!;
+   internal string label = label;
+   internal string unit = unit;
    internal object[] items = null!;
 
    internal Control control = null!;
@@ -189,25 +193,22 @@ internal class _TextControlInfo : ControlInfo {
    internal _TextControlInfo (string label = null!, string unitName = null!) 
       : base(Type.Text_, label, unitName) {}
 
-   internal _TextControlInfo (string label, string bindName, string unitName = null!) 
-      : base (Type.Text_, label, unitName) {
-      if (bindName != null)
-         this.bindInfos = [Text.Binding (bindName)];
-   }
+   internal _TextControlInfo (string label, string bindName, string unitName = null!)
+      : base (Type.Text_, label, bindName, unitName) {}
 }
 
 internal class ComboControlInfo : ControlInfo {
-   internal ComboControlInfo (string label = null!, string bindName = null!) 
-      : base (Type.Combo, label) {
-      if (bindName != null)
-         this.bindInfos = [Combo.Binding (bindName)];
-}}
+   internal ComboControlInfo (string label = null!, string bindName = null!)
+      : base (Type.Combo, label) {}
+
+   internal ComboControlInfo (string label, string bindName, string unitName = null!)
+      : base (Type.Combo, label, bindName, unitName) {}
+}
 
 internal class CheckControlInfo : ControlInfo {
-   internal CheckControlInfo (string label = null!, string bindName = null!) 
-      : base (Type.Check, label) {
-      this.bindInfos = [Check.Binding (bindName)];
-}}
+   internal CheckControlInfo (string label = null!, string bindName = null!)
+      : base (Type.Check, label, bindName) {}
+}
 
 internal class DGridControlInfo : ControlInfo {
    internal DGridControlInfo (string label = null!) 
