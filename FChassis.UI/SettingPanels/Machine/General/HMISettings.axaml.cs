@@ -20,15 +20,15 @@ public partial class HMISettings : Panel {
 
          this.AddParameterControls (grid, [
             new GroupControlInfo ("General"),
-            new ComboControlInfo { label ="Orientation",bindInfos = [ControlInfo.Combo.Binding ("Portrait"), ControlInfo.Combo.BindingItems(vm.Orientation.Cast<string>().ToArray())] },
+            new ComboControlInfo { label ="Orientation",bindInfos = [ControlInfo.Combo.Binding (nameof(vm.Selectedorientation)), ControlInfo.Combo.BindingItems(vm.Orientation.ToArray())] },
             new _TextControlInfo ("Step size to increment",nameof(vm.StepSizetoIncrement),""),
             new _TextControlInfo ("Maximum days keep back up files",nameof(vm.MaximumDaysKeepBackupFiles),""),
             new _TextControlInfo ("Minimum storage to keep back up files", nameof(vm.MinimumStoragetoKeepBackupFiles), "GB"),                                  
-            new ComboControlInfo ("PLC messages to display",nameof(vm.PLCMessagesToDisplay)),
+            new ComboControlInfo {label = "PLC messages to display",bindInfos =[ControlInfo.Combo.Binding(nameof (vm.Selecteplcmessage)), ControlInfo.Combo.BindingItems (vm.PLCMessagesToDisplay.ToArray())] },
             new CheckControlInfo ("Caption for command-bar icons",nameof(vm.CaptionForcommandBarIcons)),
             new CheckControlInfo ("Mini player",nameof(vm.CaptionForcommandBarIcons)),
-            new ComboControlInfo {label= "Language",bindInfos = [ControlInfo.Combo.Binding ("EN"), ControlInfo.Combo.BindingItems(vm.Language.Cast<string>().ToArray())] },
-            new ComboControlInfo {label= "Theme",bindInfos = [ControlInfo.Combo.Binding ("Grey"), ControlInfo.Combo.BindingItems(vm.Theme.Cast<string>().ToArray())] },
+            new ComboControlInfo {label= "Language",bindInfos = [ControlInfo.Combo.Binding (nameof (vm.Selectedlanguage)), ControlInfo.Combo.BindingItems(vm.Language.ToArray())] },
+            new ComboControlInfo {label= "Theme",bindInfos = [ControlInfo.Combo.Binding (nameof (vm.Selectedtheme)), ControlInfo.Combo.BindingItems(vm.Theme.ToArray())] },
 
             new GroupControlInfo ("Screen size"),
             new _TextControlInfo ("Width",nameof(vm.Width),""),

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FChassis.Data.Model.SettingPanels.Machine.General {
-   public class HMI : ObservableObject {
+   public partial class HMI : ObservableObject {
 
       #region --- HMI Fields ---
       private IEnumerable<string>? orientation;
@@ -71,6 +71,17 @@ namespace FChassis.Data.Model.SettingPanels.Machine.General {
          set => SetProperty (ref height, value);
       }
 
+      #endregion
+
+      #region --- Selected Item ---
+      [ObservableProperty]
+      private string? selectedorientation = "Portrait";
+      [ObservableProperty]
+      private string? selecteplcmessage = "Only error";
+      [ObservableProperty]
+      private string? selectedlanguage = "EN";
+      [ObservableProperty]
+      private string? selectedtheme = "Grey";
       #endregion
    }
 }
