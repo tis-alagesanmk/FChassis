@@ -1,8 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FChassis.UI.Panels;
-using FChassis.Data.LocalDB;
-using System.Linq;
 
 namespace FChassis.UI.Settings;
 public partial class TabPanel : Panel {
@@ -41,7 +39,7 @@ public partial class TabPanel : Panel {
 
          Child.mainWindow?.Switch2MainPanel ();
 
-         //var hmisettings = tabControl.Items.OfType<TabItem> ().SingleOrDefault (n => n.Name == "");
+         
       }
    }
 
