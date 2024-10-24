@@ -38,7 +38,7 @@ public partial class ControlParamSettings : Panel {
             new _TextControlInfo{label="Edge correction offset along Y-axis", unit="mm"},
             new _TextControlInfo{label="Speed to detect the edge", unit="mm/min"},
             new CheckControlInfo{label="Start height sensor calibration before edge detect"},
-            new ControlInfo{type=ControlInfo.Type.Check, label="Acknowledge the sheet origin point"},
+            new CheckControlInfo{label="Acknowledge the sheet origin point"},
 
             new GroupControlInfo{label="Sheet stopper specification"},
             new _TextControlInfo{label="Number of stoppers along X-axis"},

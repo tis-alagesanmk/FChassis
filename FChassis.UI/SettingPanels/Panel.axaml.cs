@@ -37,16 +37,18 @@ public partial class Panel : Panels.Child {
                   col = 3; colSpan = 1;
                } // Back Label for Check, otherwise Front Label
 
-               label = new Label ();
-               label.Content = ci.label;
-               setGridRowColumn (label, row, col, colSpan);
-               label.Classes.Add ("info");
-               grid.Children.Add (label);
+               if (ci.type != ControlInfo.Type.Check) {
+                  label = new Label ();
+                  label.Content = ci.label;
+                  setGridRowColumn (label, row, col, colSpan);
+                  label.Classes.Add ("info");
+                  grid.Children.Add (label);
+               }
 
                ci.control = ci.type switch {
                   ControlInfo.Type.Text_ => new TextBox (),
                   ControlInfo.Type.Combo => new ComboBox (),
-                  ControlInfo.Type.Check => new CheckBox (),
+                  ControlInfo.Type.Check => new CheckBox () { Content = ci.label},
                   _ => null!
                };
 
@@ -127,8 +129,9 @@ public partial class Panel : Panels.Child {
 #region Run Time ControlInfo 
 internal class ControlInfo {
    internal ControlInfo (Type _type = Type.None, string _label = null!, string _unit = null!) {
-      this.label = _label.Trim ();
-      this.unit = _unit.Trim ();
+      this.type = _type;
+      this.label = _label;
+      this.unit = _unit;
    }
 
    internal enum Type {
