@@ -7,13 +7,13 @@
 		x:CompileBindings="True"
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Machine.General.HMISettings"
-		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
+		xmlns:vm="using:FChassis.Data.ViewModels.Setting.Machine.General"
 		xmlns:base="FChassis.UI.Settings"
-		x:DataType="vm:HMISettingsViewModel"
+		x:DataType="vm:HMIViewModel"
 		xmlns:controls="using:FChassis.UI.Controls"
 		Background="White">
 	<UserControl.DataContext>
-		<vm:HMISettingsViewModel/>
+		<vm:HMIViewModel/>
 	</UserControl.DataContext>
 	<ScrollViewer>
 		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>

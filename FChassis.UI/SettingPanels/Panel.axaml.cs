@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FChassis.UI.Settings;
@@ -78,7 +79,7 @@ public partial class Panel : Panels.Child {
          }
 
          if (ci.control != null) {
-            ControlInfo.BindInfo[] bis = ci.bindInfos!;
+            List<ControlInfo.BindInfo> bis = ci.bindInfos!;
             if (bis != null)
                bind (ci.control, bis!);
 
@@ -98,7 +99,7 @@ public partial class Panel : Panels.Child {
          => control.SetCurrentValue (Grid.RowProperty, row);
 
       #region Local function
-      void bind (Control control, ControlInfo.BindInfo[] bindInfos) {
+      void bind (Control control, List<ControlInfo.BindInfo> bindInfos) {
          foreach (ControlInfo.BindInfo bi in bindInfos) {
             if (bi == null) continue;
             control.Bind (bi.property, bi.binding); }
@@ -158,7 +159,7 @@ internal class ControlInfo (ControlInfo.Type type, string label, string unit = n
 
    internal Control control = null!;
    internal object binding = null!;
-   internal BindInfo[] bindInfos = null!;
+   internal List<BindInfo> bindInfos = null!;
 
    #region Inner Class --------------------------------------------------------
    internal class BindInfo(string name, AvaloniaProperty property) {
@@ -183,10 +184,10 @@ internal class _TextControlInfo : ControlInfo {
 internal class ComboControlInfo : ControlInfo {
    internal ComboControlInfo (string label, string bindName, string itemsName = null!, string unitName = null!)
       : base (Type.Combo, label, unitName) {
-      this.bindInfos = new BindInfo[2];
-      bindInfos[0] = Bind (bindName, ComboBox.SelectedItemProperty);
+      //this.bindInfos = new BindInfo[2];
+      bindInfos = [Bind (bindName, ComboBox.SelectedItemProperty)];
       if (itemsName != null)
-         this.bindInfos.Append (Bind (itemsName, ComboBox.ItemsSourceProperty));
+         this.bindInfos.Add (Bind (itemsName, ComboBox.ItemsSourceProperty));
    }
 }
 

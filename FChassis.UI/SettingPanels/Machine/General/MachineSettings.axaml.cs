@@ -17,7 +17,7 @@ public partial class MachineSettings : Panel {
             new _TextControlInfo ("Pesets", null!),
             new ComboControlInfo ("Can open bit rate", null!, "kbps"),
             new CheckControlInfo ("Netdisk server IP address", null!),
-            new ComboControlInfo ("Software limit code", "Code", "codes"),
+            new ComboControlInfo ("Software limit code", "Code", "Codes"),
             new _TextControlInfo ("Override limit", "OverrideLimit"),
             new ButtonControlInfo ("Limit Incrementer", "IncrementLimitCommand"),
 
