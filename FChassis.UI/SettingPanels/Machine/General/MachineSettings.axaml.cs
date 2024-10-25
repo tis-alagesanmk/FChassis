@@ -10,14 +10,14 @@ public partial class MachineSettings : Panel {
       if (grid != null)
          this.AddParameterControls (grid, new ControlInfo[] {
             new GroupControlInfo{label="General"},
-            new _TextControlInfo{label="Machine Id", bindInfo=ControlInfo.Text.Binding("MachineId") },
-            new _TextControlInfo{label="Axis emulation" ,bindInfo=ControlInfo.Text.Binding("AxisEmulation") },
-            new _TextControlInfo{label="Cfg custom tech", bindInfo=ControlInfo.Text.Binding("CfgCustomTech") },
+            new _TextControlInfo{label="Machine Id", bindInfo=ControlInfo.Text.Binding("Machine.MachineId") },
+            new _TextControlInfo{label="Axis emulation" ,bindInfo=ControlInfo.Text.Binding("Machine.AxisEmulation") },
+            new _TextControlInfo{label="Cfg custom tech", bindInfo=ControlInfo.Text.Binding("Machine.CfgCustomTech") },
             new _TextControlInfo{label="Pesets"},
             new ComboControlInfo{label="Can open bit rate", unit="kbps"},
             new CheckControlInfo{label="Netdisk server IP address"},
-            new ComboControlInfo{label="Software limit code", bindInfos=[ControlInfo.Combo.Binding("Code"),ControlInfo.Combo.BindingItems("Codes")]},
-            new _TextControlInfo{label="Override limit", bindInfo= ControlInfo.Text.Binding("OverrideLimit")},
+            new ComboControlInfo{label="Software limit code", bindInfos=[ControlInfo.Combo.Binding("Machine.Code"),ControlInfo.Combo.BindingItems("Machine.Codes")]},
+            new _TextControlInfo{label="Override limit", bindInfo= ControlInfo.Text.Binding("Machine.OverrideLimit")},
             new ButtonControlInfo{label="Limit Incrementer", bindInfo= ControlInfo.Btn.Binding("IncrementLimitCommand")},
 
             new GroupControlInfo{label="Controller"},
@@ -27,7 +27,7 @@ public partial class MachineSettings : Panel {
             new _TextControlInfo{label="Velocity",unit="m/min"},
             new _TextControlInfo{label="Acceleration",unit="m/sec²"},
             new _TextControlInfo{label="Deceleration",unit="m/sec²"},
-            new _TextControlInfo{label="Ramp time",unit="ms"},
+            new _TextControlInfo{label="Ramp time",unit="ms"}, 
             new _TextControlInfo{label="Position tolerance MM",unit="mm"},
             new _TextControlInfo{label="Position tolerance Degree",unit="°"},
             new _TextControlInfo{label="Quick stop time",unit="ms"},

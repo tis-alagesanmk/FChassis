@@ -8,7 +8,7 @@
         x:Class="FChassis.UI.Settings.Machine.General.MachineSettings"
 		xmlns:base="FChassis.UI.Settings"
 		
-		xmlns:vm="using:FChassis.Data.ViewModel.SettingPanels.Machine.General"
+		xmlns:vm="using:FChassis.Data.ViewModel.Settings.Machine.General"
 		x:DataType="vm:MachineSettings"
 		Background="White">
 	<UserControl.DataContext>

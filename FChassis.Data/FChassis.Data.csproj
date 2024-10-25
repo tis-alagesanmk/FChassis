@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ViewModel\SettingPanels\Machine\General\MachineSettings.cs~RFe312f97a.TMP" />
+    <None Remove="ViewModel\Settings\Machine\General\MachineSettings.cs~RFe312f97a.TMP" />
   </ItemGroup>
 
   <ItemGroup>
