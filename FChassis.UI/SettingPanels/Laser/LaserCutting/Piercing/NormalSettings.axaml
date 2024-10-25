@@ -8,5 +8,9 @@
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.Piercing.NormalSettings"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	Normal Settings
+	<ScrollViewer>
+	<Grid>
+
+	</Grid>
+	</ScrollViewer>
 </base:Panel>

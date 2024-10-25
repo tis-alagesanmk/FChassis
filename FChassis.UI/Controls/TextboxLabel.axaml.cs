@@ -1,16 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Markup.Xaml;
-using FChassis.UI.Controls;
-using System.Reflection.Emit;
-using Avalonia.Controls.Primitives;
 
 namespace FChassis.UI.Controls;
 
 public class TextboxLabel : TemplatedControl
 {
-
    public static readonly DirectProperty<TextboxLabel, string> ContentProperty = AvaloniaProperty.RegisterDirect<TextboxLabel, string> (nameof (Content), o => o.Content.ToString (), (o, v) => o.Content = v);
    private string _labelcontenth = string.Empty;
    public string Content {

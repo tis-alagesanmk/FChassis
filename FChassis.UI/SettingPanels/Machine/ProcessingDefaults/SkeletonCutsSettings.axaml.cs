@@ -7,7 +7,7 @@ public partial class SkeletonCutsSettings : Panel{
       AvaloniaXamlLoader.Load (this);
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="Sheet cutting rules"},
             new CheckControlInfo{label="Create sheet cut"},
             new _TextControlInfo{label="X spacing between vertical sheet cuts"},
@@ -23,6 +23,6 @@ public partial class SkeletonCutsSettings : Panel{
             new _TextControlInfo{label="Pierce distance from part edge"},
             new _TextControlInfo{label="Measuring distance from sheet edge"},
             new _TextControlInfo{label="Overtravel after sheet edge"},
-      });
+      ]);
    }
 }

@@ -13,13 +13,13 @@ public partial class Panel : Settings.Panel {
 
       #region Local function
       DGridControlInfo createDGrid () {
-         DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
+         DGridControlInfo dGridCrtlInfo = new () {
             binding = "bindingHere",
-            columns = new[] {
+            columns = [
                new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "X"},
                new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Y"},
                new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Z"},
-         }};
+         ]};
 
          return dGridCrtlInfo;
       }

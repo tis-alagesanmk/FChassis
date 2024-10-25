@@ -23,11 +23,11 @@ public partial class PLCKeySettings : Panel {
       DGridControlInfo createPLCKey(object binding) {
          DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
             binding = binding,
-            columns = new[] {
+            columns = [
                new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Name"},
                new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Type"},
                new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Function"},
-         }};
+         ]};
 
          return dGridCrtlInfo;
       }

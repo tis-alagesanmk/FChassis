@@ -1,18 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ViewModel\Settings\Machine\General\MachineSettings.cs~RFe312f97a.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.1.3" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-  </ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+  </ItemGroup>
 </Project>

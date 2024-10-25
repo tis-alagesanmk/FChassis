@@ -8,7 +8,7 @@ public partial class ControlParamSettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="Maximum override adjust level"},
             new _TextControlInfo{label="Maximum override adjust value", unit="%"},
 
@@ -38,7 +38,7 @@ public partial class ControlParamSettings : Panel {
             new _TextControlInfo{label="Edge correction offset along Y-axis", unit="mm"},
             new _TextControlInfo{label="Speed to detect the edge", unit="mm/min"},
             new CheckControlInfo{label="Start height sensor calibration before edge detect"},
-            new ControlInfo{type=ControlInfo.Type.Check, label="Acknowledge the sheet origin point"},
+            new CheckControlInfo{label="Acknowledge the sheet origin point"},
 
             new GroupControlInfo{label="Sheet stopper specification"},
             new _TextControlInfo{label="Number of stoppers along X-axis"},
@@ -114,6 +114,6 @@ public partial class ControlParamSettings : Panel {
             new _TextControlInfo{label="Warning limit", unit="%"},
             new _TextControlInfo{label="Error limit", unit="%"},
             new _TextControlInfo{label="Delay time to report warning", unit="s"},
-      });
+      ]);
    }
 }

@@ -9,12 +9,12 @@ public partial class CutCamSettings : Panel {
    public CutCamSettings () {
       AvaloniaXamlLoader.Load (this); 
 
-      ControlInfo[] ctrlInfos = new ControlInfo[] {
+      ControlInfo[] ctrlInfos = [
          new CheckControlInfo{label="Advanced"},
          createFinishingRuleDGrid(),
          new GroupControlInfo{ label="Microjoint settings"},
          new _TextControlInfo{label="Microjoint length"}
-      };
+      ];
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
@@ -22,7 +22,7 @@ public partial class CutCamSettings : Panel {
 
       #region Local Function
       DGridControlInfo createFinishingRuleDGrid () {
-         DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
+         DGridControlInfo dGridCrtlInfo = new () {
             binding = "Finishing Rules",
             columns = new[] {
                new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Wire Auto"},

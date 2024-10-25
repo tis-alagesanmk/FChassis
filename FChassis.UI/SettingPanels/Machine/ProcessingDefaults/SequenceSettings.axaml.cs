@@ -9,7 +9,7 @@ public partial class SequenceSettings : Panel{
       
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="Laser Sequence"},
             new ComboControlInfo{label="Laser processing sequence"},
             new ComboControlInfo{label="Laser Seq"},
@@ -29,6 +29,6 @@ public partial class SequenceSettings : Panel{
 
             new GroupControlInfo{label="Laser Heads"},
             new CheckControlInfo{label="Cute with single head"},
-      });
+      ]);
    }
 }

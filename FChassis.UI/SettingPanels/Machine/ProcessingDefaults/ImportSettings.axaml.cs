@@ -9,7 +9,7 @@ public partial class ImportSettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo{label="Import settings"},
             new ComboControlInfo{label="Units for DFX files"},
             new _TextControlInfo{label="Stitch together lines/arcs closer than this"},
@@ -29,6 +29,6 @@ public partial class ImportSettings : Panel {
             new _TextControlInfo{label="Auxilary Layers Names"},
             new _TextControlInfo{label="Mark Layers Names"},
             new _TextControlInfo{label="Mark Layers Names"},
-      });
+      ]);
    }
 }
