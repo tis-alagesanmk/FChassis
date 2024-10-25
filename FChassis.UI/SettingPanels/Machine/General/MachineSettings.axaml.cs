@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using FChassis.UI.Settings;
 
 namespace FChassis.UI.Settings.Machine.General;
 public partial class MachineSettings : Panel {
