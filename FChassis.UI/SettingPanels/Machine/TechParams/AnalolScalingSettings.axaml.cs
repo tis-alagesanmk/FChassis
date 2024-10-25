@@ -10,7 +10,7 @@ public partial class AnalogScalingSettings : Panel {
       ctrlInfos[0] = new GroupControlInfo {label = "Chennals"};
 
       for (int i = 1; i <= 28; i++) 
-         ctrlInfos[i] = new _TextControlInfo {label = $"Chennal {i}"};
+         ctrlInfos[i] = new _TextControlInfo ($"Chennal {i}", null!);
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)

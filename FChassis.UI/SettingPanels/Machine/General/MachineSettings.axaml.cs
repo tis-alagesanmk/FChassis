@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using FChassis.UI.Settings;
 
 namespace FChassis.UI.Settings.Machine.General;
 public partial class MachineSettings : Panel {
@@ -8,39 +9,35 @@ public partial class MachineSettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
-            new GroupControlInfo{label="General"},
-            new _TextControlInfo{label="Machine Id", bindInfos=[ControlInfo.Text.Binding("MachineId")] },
-            new _TextControlInfo{label="Axis emulation" ,bindInfos=[ControlInfo.Text.Binding("AxisEmulation")] },
-            new _TextControlInfo{label="Cfg custom tech", bindInfos=[ControlInfo.Text.Binding("CfgCustomTech")] },
-            new _TextControlInfo{label="Pesets"},
-            new ComboControlInfo{label="Can open bit rate", unit="kbps"},
-            new CheckControlInfo{label="Netdisk server IP address"},
-            new ComboControlInfo{label="Software limit code", 
-                                 bindInfos=[ControlInfo.Combo.Binding("Code"),
-                                            ControlInfo.Combo.BindingItems("Codes")]},
-            new _TextControlInfo{label="Override limit", 
-                                  bindInfos= [ControlInfo.Text.Binding("OverrideLimit")]},
-            new ButtonControlInfo{label="Limit Incrementer", 
-                                  bindInfos=[ControlInfo.Button.Binding("IncrementLimitCommand")]},
+         this.AddParameterControls (grid, [
+            new GroupControlInfo("General"),
+            new _TextControlInfo ("Machine Id", "MachineId"),
+            new _TextControlInfo ("Axis emulation", "AxisEmulation"),
+            new _TextControlInfo ("Cfg custom tech", "CfgCustomTech"),
+            new _TextControlInfo ("Pesets", null!),
+            new ComboControlInfo ("Can open bit rate", null!, "kbps"),
+            new CheckControlInfo ("Netdisk server IP address", null!),
+            new ComboControlInfo ("Software limit code", "Code", "codes"),
+            new _TextControlInfo ("Override limit", "OverrideLimit"),
+            new ButtonControlInfo ("Limit Incrementer", "IncrementLimitCommand"),
 
-            new GroupControlInfo{label="Controller"},
-            new _TextControlInfo{label="Interpolation cycle time",unit="ms"},
-            new _TextControlInfo{label="Interpolation divider"},
-            new _TextControlInfo{label="Handwheel filetr time",unit="ms"},
-            new _TextControlInfo{label="Velocity",unit="m/min"},
-            new _TextControlInfo{label="Acceleration",unit="m/sec²"},
-            new _TextControlInfo{label="Deceleration",unit="m/sec²"},
-            new _TextControlInfo{label="Ramp time",unit="ms"},
-            new _TextControlInfo{label="Position tolerance MM",unit="mm"},
-            new _TextControlInfo{label="Position tolerance Degree",unit="°"},
-            new _TextControlInfo{label="Quick stop time",unit="ms"},
-            new _TextControlInfo{label="Creep speed velocity",unit="m/min"},
+            new GroupControlInfo ("Controller"),
+            new _TextControlInfo ("Interpolation cycle time",null!, "ms"),
+            new _TextControlInfo ("Interpolation divider", null!),
+            new _TextControlInfo ("Handwheel filetr time", null!, "ms"),
+            new _TextControlInfo ("Velocity", null!, "m/min"),
+            new _TextControlInfo ("Acceleration", null!, "m/sec²"),
+            new _TextControlInfo ("Deceleration", null!, "m/sec²"),
+            new _TextControlInfo ("Ramp time", null!, "ms"),
+            new _TextControlInfo ("Position tolerance MM", null!, "mm"),
+            new _TextControlInfo ("Position tolerance Degree", null!, "°"),
+            new _TextControlInfo ("Quick stop time", null!, "ms"),
+            new _TextControlInfo ("Creep speed velocity", null!, "m/min"),
 
-            new GroupControlInfo{label="Memory reservation"},
-            new _TextControlInfo{label="Block count"},
-            new _TextControlInfo{label="Reverse Block count"},
-            new _TextControlInfo{label="Parameter aray size"},
-      });
+            new GroupControlInfo ("Memory reservation"),
+            new _TextControlInfo ("Block count", null!),
+            new _TextControlInfo ("Reverse Block count", null!),
+            new _TextControlInfo ("Parameter aray size", null!),
+         ]);
    }
 }

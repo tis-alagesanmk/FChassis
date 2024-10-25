@@ -9,13 +9,13 @@ public partial class LPC1Settings : Panel {
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid, [
-            new GroupControlInfo{label="Configuration parameters"},
-            new CheckControlInfo{label="Advanced"},
-            new ComboControlInfo{label="Axis Type"},
-            new ComboControlInfo{label="Axis Connection"},
-            new _TextControlInfo{label="Axis address"},
-            new _TextControlInfo{label="Max Laser Power", unit="watts"},
-            new _TextControlInfo{label="Average Power", unit="watts"}
+            new GroupControlInfo ("Configuration parameters"),
+            new CheckControlInfo ("Advanced", null!),
+            new ComboControlInfo ("Axis Type", null!),
+            new ComboControlInfo ("Axis Connection", null!),
+            new _TextControlInfo ("Axis address", null!),
+            new _TextControlInfo ("Max Laser Power", null!, "watts"),
+            new _TextControlInfo ("Average Power", null!, "watts"),
       ]);
    }
 }

@@ -8,21 +8,21 @@ public partial class SkeletonCutsSettings : Panel{
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid, [
-            new GroupControlInfo{label="Sheet cutting rules"},
-            new CheckControlInfo{label="Create sheet cut"},
-            new _TextControlInfo{label="X spacing between vertical sheet cuts"},
-            new _TextControlInfo{label="Y spacing between horizontal sheet cuts"},
-            new CheckControlInfo{label="Create remainder sheet"},
-            new _TextControlInfo{label="Minimum remainder sheet width"},
-            new _TextControlInfo{label="Final cut X offset"},
-            new CheckControlInfo{label="Process sheet cut after all part"},
+            new GroupControlInfo ("Sheet cutting rules"),
+            new CheckControlInfo ("Create sheet cut", null!),
+            new _TextControlInfo ("X spacing between vertical sheet cuts", null!),
+            new _TextControlInfo ("Y spacing between horizontal sheet cuts", null!),
+            new CheckControlInfo ("Create remainder sheet", null!),
+            new _TextControlInfo ("Minimum remainder sheet width", null!),
+            new _TextControlInfo ("Final cut X offset", null!),
+            new CheckControlInfo ("Process sheet cut after all part", null!),
 
-            new GroupControlInfo{label="Sheet cut parameters"},
-            new _TextControlInfo{label="Micro joint gap at sheet edge"},
-            new _TextControlInfo{label="Micro joint gap at part edge"},
-            new _TextControlInfo{label="Pierce distance from part edge"},
-            new _TextControlInfo{label="Measuring distance from sheet edge"},
-            new _TextControlInfo{label="Overtravel after sheet edge"},
+            new GroupControlInfo ("Sheet cut parameters"),
+            new _TextControlInfo ("Micro joint gap at sheet edge", null!),
+            new _TextControlInfo ("Micro joint gap at part edge", null!),
+            new _TextControlInfo ("Pierce distance from part edge", null!),
+            new _TextControlInfo ("Measuring distance from sheet edge", null!),
+            new _TextControlInfo ("Overtravel after sheet edge", null!),
       ]);
    }
 }

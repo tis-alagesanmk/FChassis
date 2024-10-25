@@ -10,7 +10,7 @@ public partial class MFuncSettings : Panel {
       ControlInfo[] ctrlInfos = new ControlInfo[count + 1];
       ctrlInfos[0] = new GroupControlInfo {label = "Sub program table"};
       for (int i = 1; i <= count; i++)
-         ctrlInfos[i] = new _TextControlInfo {label = $"M number {i - 1}"};
+         ctrlInfos[i] = new _TextControlInfo ($"M number {i - 1}", null!);
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
