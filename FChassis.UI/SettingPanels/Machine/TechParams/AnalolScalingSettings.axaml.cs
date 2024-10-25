@@ -7,7 +7,7 @@ public partial class AnalogScalingSettings : Panel {
       AvaloniaXamlLoader.Load (this);
 
       ControlInfo[] ctrlInfos = new ControlInfo[29];
-      ctrlInfos[0] = new GroupControlInfo {label = "Chennals"};
+      ctrlInfos[0] = new GroupControlInfo("Chennals");
 
       for (int i = 1; i <= 28; i++) 
          ctrlInfos[i] = new _TextControlInfo ($"Chennal {i}", null!);

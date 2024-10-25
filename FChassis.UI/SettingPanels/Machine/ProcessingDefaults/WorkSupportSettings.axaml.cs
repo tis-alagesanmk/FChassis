@@ -10,9 +10,9 @@ public partial class WorkSupportSettings : Panel{
       if (grid != null)
          this.AddParameterControls (grid, [
             new GroupControlInfo ("Work support configuration"),
-            new ComboControlInfo ("Distance between slats", null!),
-            new ComboControlInfo ("Offset of first slat from sheet edge", null!),
-            new ComboControlInfo ("Distance between support pins in a slat", null!),
+            new ComboControlInfo ("Distance between slats", null!, null!),
+            new ComboControlInfo ("Offset of first slat from sheet edge", null!, null!),
+            new ComboControlInfo ("Distance between support pins in a slat", null!, null!),
       ]);
    }
 }

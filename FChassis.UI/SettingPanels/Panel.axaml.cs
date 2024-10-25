@@ -170,7 +170,7 @@ internal class ControlInfo (ControlInfo.Type type, string label, string unit = n
 
 #region Specialized ControlInfo classes ---------------------------------------
 internal class GroupControlInfo : ControlInfo {
-   internal GroupControlInfo (string label = null!, string unit = null!)
+   internal GroupControlInfo (string label, string unit = null!)
       : base (Type.Group, label, unit) { }
 }
 
@@ -181,7 +181,7 @@ internal class _TextControlInfo : ControlInfo {
 }
 
 internal class ComboControlInfo : ControlInfo {
-   internal ComboControlInfo (string label, string bindName, string itemsName = null!, string unitName = null!)
+   internal ComboControlInfo (string label, string bindName, string itemsName, string unitName = null!)
       : base (Type.Combo, label, unitName) {
       this.bindInfos = new BindInfo[2];
       bindInfos[0] = Bind (bindName, ComboBox.SelectedItemProperty);

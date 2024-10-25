@@ -69,7 +69,7 @@ public partial class ControlParamSettings : Panel {
             new _TextControlInfo ("Hydraulic motor ON - max time out", null!, "s"),
             new _TextControlInfo ("Fwd/Rev fast move time out", null!, "s"),
             new _TextControlInfo ("Fwd/Rev slow move time out", null!, "s"),
-            new ComboControlInfo ("Fwd/Rev button function type", null!),
+            new ComboControlInfo ("Fwd/Rev button function type", null!, null!),
 
             new GroupControlInfo ("Nozzle cleaning &amp; height sensor calibration offsets"),
             new _TextControlInfo ("Nozzle clean X-offset", null!, "mm"),

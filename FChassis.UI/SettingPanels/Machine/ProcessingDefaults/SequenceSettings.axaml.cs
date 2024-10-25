@@ -12,8 +12,8 @@ public partial class SequenceSettings : Panel{
       if (grid != null)
          this.AddParameterControls (grid, [
             new GroupControlInfo("Laser Sequence", null!),
-            new ComboControlInfo ("Laser processing sequence", null!),
-            new ComboControlInfo ("Laser Seq", null!),
+            new ComboControlInfo ("Laser processing sequence", null!, null!),
+            new ComboControlInfo ("Laser Seq", null!, null!),
             new CheckControlInfo ("Do pre-piercing part-by-part", null!),
 
             new GroupControlInfo ("Route Traverse", null!),

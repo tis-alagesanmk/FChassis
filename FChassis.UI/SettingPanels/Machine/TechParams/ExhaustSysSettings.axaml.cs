@@ -15,10 +15,10 @@ public partial class ExhaustSysSettings : Panel {
    private void AddControls () {
       ControlInfo[] ctrlInfos = new ControlInfo[]
       {       
-         new GroupControlInfo{label = "Sections"},
+         new GroupControlInfo("Sections"),
          createSectionDGrid(),
 
-         new GroupControlInfo{label = "Splitters"},
+         new GroupControlInfo("Splitters"),
          createSplittersdDGrid()
       };
 

@@ -13,7 +13,7 @@ public partial class MachineDbSettings : Panel {
             new _TextControlInfo ("Paramater1", "Property1Text"),
 
             new GroupControlInfo ("Database type"),
-            new ComboControlInfo ("Database", null!),
+            new ComboControlInfo ("Database", null!, null!),
       ]);
    }
 }

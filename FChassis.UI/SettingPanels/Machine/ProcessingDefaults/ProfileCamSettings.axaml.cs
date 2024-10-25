@@ -13,8 +13,8 @@ public partial class ProfileCamSettings : Panel{
             new CheckControlInfo ("Advanced", null!),
 
             new GroupControlInfo ("Cutting"),
-            new ComboControlInfo ("Choose cutting condition by", null!),
-            new ComboControlInfo ("Process for open polylines", null!),
+            new ComboControlInfo ("Choose cutting condition by", null!, null!),
+            new ComboControlInfo ("Process for open polylines", null!, null!),
             new _TextControlInfo ("Stitch cutting threshold distance (0=disable)", null!),
 
             new GroupControlInfo ("Pierce settings", null!),
