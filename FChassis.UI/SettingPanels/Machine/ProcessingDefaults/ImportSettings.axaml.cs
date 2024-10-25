@@ -10,25 +10,25 @@ public partial class ImportSettings : Panel {
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid, [
-            new GroupControlInfo{label="Import settings"},
-            new ComboControlInfo{label="Units for DFX files"},
-            new _TextControlInfo{label="Stitch together lines/arcs closer than this"},
-            new _TextControlInfo{label="Maximun thickness for sheet-metal part"},
-            new CheckControlInfo{label="Ignore layer in DXF/DWG files"},
-            new CheckControlInfo{label="Explode blocks in 2D drawing"},
-            new CheckControlInfo{label="Convert white entities to black"},
-            new CheckControlInfo{label="Darken colors during DXF import"},
+            new GroupControlInfo ("Import settings"),
+            new ComboControlInfo ("Units for DFX files", null!),
+            new _TextControlInfo ("Stitch together lines/arcs closer than this", null!),
+            new _TextControlInfo ("Maximun thickness for sheet-metal part", null!),
+            new CheckControlInfo ("Ignore layer in DXF/DWG files", null!),
+            new CheckControlInfo ("Explode blocks in 2D drawing", null!),
+            new CheckControlInfo ("Convert white entities to black", null!),
+            new CheckControlInfo ("Darken colors during DXF import", null!),
 
-            new GroupControlInfo{label="DXF Settings"},
-            new CheckControlInfo{label="Angles in DXF are interior angles"},
+            new GroupControlInfo ("DXF Settings"),
+            new CheckControlInfo ("Angles in DXF are interior angles", null!),
 
-            new GroupControlInfo{label="Spline Coversion"},
-            new ComboControlInfo{label="Covert splines on import"},
+            new GroupControlInfo ("Spline Coversion"),
+            new ComboControlInfo ("Covert splines on import", null!),
 
-            new GroupControlInfo{label="Layer mapping"},
-            new _TextControlInfo{label="Auxilary Layers Names"},
-            new _TextControlInfo{label="Mark Layers Names"},
-            new _TextControlInfo{label="Mark Layers Names"},
+            new GroupControlInfo ("Layer mapping", null!),
+            new _TextControlInfo ("Auxilary Layers Names", null!),
+            new _TextControlInfo ("Mark Layers Names", null!),
+            new _TextControlInfo ("Mark Layers Names", null!),
       ]);
    }
 }

@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using System.Collections;
+using System.Linq;
 
 namespace FChassis.UI.Settings;
 public partial class Panel : Panels.Child {
@@ -98,11 +99,12 @@ public partial class Panel : Panels.Child {
 
       #region Local function
       void bind (Control control, ControlInfo.BindInfo[] bindInfos) {
-         foreach (ControlInfo.BindInfo bi in bindInfos)
-            control.Bind (bi.property, bi.binding);
-      }
+         foreach (ControlInfo.BindInfo bi in bindInfos) {
+            if (bi == null) continue;
+            control.Bind (bi.property, bi.binding); }
+         }
 
-      DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis, IEnumerable collections) {
+         DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis, IEnumerable collections) {
          DataGrid dGrid = new DataGrid ();
          dGrid.ItemsSource = collections;
          DataGridColumn column = null!;
@@ -132,23 +134,12 @@ public partial class Panel : Panels.Child {
 }
 
 #region Run Time ControlInfo 
-internal class ControlInfo (string label = null!, string unit = null!) {
-   internal ControlInfo (Type type = Type.None, string label = null!, string unit = null!)
-      : this (label, unit) => this.type = type;
-
-   internal ControlInfo (Type type, string label, string bindName, string unit = null!)
-      : this (type, label, unit) {
-      if (bindName != null)
-         this.bindInfos = [Text.Binding (bindName)];
-   }
-
-   static internal BindInfo Bind (string name, AvaloniaProperty property) {
-      return new BindInfo {
-         property = property,
-         binding = new Binding (name), };
-   }
+internal class ControlInfo (ControlInfo.Type type, string label, string unit = null!) {
+   static internal BindInfo Bind (string name, AvaloniaProperty property)
+      => new BindInfo (name, property);
 
    // -------------------------------------------------------------------------
+   #region Types enum
    internal enum Type {
       None,
       Group,
@@ -158,8 +149,9 @@ internal class ControlInfo (string label = null!, string unit = null!) {
       Button,
       DGrid,
    };
+   #endregion Types enum
 
-   internal Type type = Type.None;
+   internal Type type = type;
    internal string label = label;
    internal string unit = unit;
    internal object[] items = null!;
@@ -168,67 +160,46 @@ internal class ControlInfo (string label = null!, string unit = null!) {
    internal object binding = null!;
    internal BindInfo[] bindInfos = null!;
 
-   #region Inner Class
-   internal class BindInfo {
-      internal AvaloniaProperty property = null!;
-      internal Binding binding = null!;
-   }
-
-   internal static class Text {
-      internal static BindInfo Binding (string name)
-         => Bind (name, TextBox.TextProperty);
-   }
-
-   internal static class Combo {
-      internal static BindInfo Binding (string name)
-         => Bind (name, ComboBox.SelectedItemProperty);
-
-      internal static BindInfo BindingItems (string name)
-         => Bind (name, ComboBox.ItemsSourceProperty);
-   }
-
-   internal static class Check {
-      internal static BindInfo Binding (string name)
-         => Bind (name, CheckBox.IsCheckedProperty);
-   }
-
-   internal static class Button {
-      internal static BindInfo Binding (string name)
-          => Bind (name, Avalonia.Controls.Button.CommandProperty);
+   #region Inner Class --------------------------------------------------------
+   internal class BindInfo(string name, AvaloniaProperty property) {
+      internal AvaloniaProperty property = property;
+      internal Binding binding = new Binding (name);
    }
    #endregion Inner Class
 }
 
-#region Specialized ControlInfo classes
+#region Specialized ControlInfo classes ---------------------------------------
 internal class GroupControlInfo : ControlInfo {
-   internal GroupControlInfo (string label = null!, string _unit = null!)
-      : base (Type.Group, label, _unit) { }
+   internal GroupControlInfo (string label = null!, string unit = null!)
+      : base (Type.Group, label, unit) { }
 }
 
 internal class _TextControlInfo : ControlInfo {
-   internal _TextControlInfo (string label = null!, string unitName = null!)
-      : base (Type.Text_, label, unitName) { }
-
    internal _TextControlInfo (string label, string bindName, string unitName = null!)
-      : base (Type.Text_, label, bindName, unitName) { }
+      : base (Type.Text_, label, unitName) {
+      this.bindInfos = [Bind (bindName, TextBox.TextProperty)]; }
 }
 
 internal class ComboControlInfo : ControlInfo {
-   internal ComboControlInfo (string label = null!, string bindName = null!)
-      : base (Type.Combo, label) { }
-
-   internal ComboControlInfo (string label, string bindName, string unitName = null!)
-      : base (Type.Combo, label, bindName, unitName) { }
+   internal ComboControlInfo (string label, string bindName, string itemsName = null!, string unitName = null!)
+      : base (Type.Combo, label, unitName) {
+      this.bindInfos = new BindInfo[2];
+      bindInfos[0] = Bind (bindName, ComboBox.SelectedItemProperty);
+      if (itemsName != null)
+         this.bindInfos.Append (Bind (itemsName, ComboBox.ItemsSourceProperty));
+   }
 }
 
 internal class CheckControlInfo : ControlInfo {
-   internal CheckControlInfo (string label = null!, string bindName = null!)
-      : base (Type.Check, label, bindName) { }
+   internal CheckControlInfo (string label, string bindName)
+      : base (Type.Check, label) {
+         this.bindInfos = [Bind (bindName, CheckBox.IsCheckedProperty)]; }
 }
 
 internal class ButtonControlInfo : ControlInfo {
-   internal ButtonControlInfo (string label = null!, string bindName = null!)
-      : base (Type.Button, label, bindName) {}
+   internal ButtonControlInfo (string label, string bindName)
+      : base (Type.Button, label) {
+         this.bindInfos = [Bind (bindName, Avalonia.Controls.Button.CommandProperty)]; }
 }
 
 internal class DGridControlInfo : ControlInfo {

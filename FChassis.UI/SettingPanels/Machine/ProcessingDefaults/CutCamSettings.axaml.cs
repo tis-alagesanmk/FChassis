@@ -7,10 +7,10 @@ public partial class CutCamSettings : Panel {
       AvaloniaXamlLoader.Load (this); 
 
       ControlInfo[] ctrlInfos = [
-         new CheckControlInfo{label="Advanced"},
+         new CheckControlInfo ("Advanced", null!),
          createFinishingRuleDGrid(),
-         new GroupControlInfo{ label="Microjoint settings"},
-         new _TextControlInfo{label="Microjoint length"}
+         new GroupControlInfo ("Microjoint settings"),
+         new _TextControlInfo  ("Microjoint length", null!)
       ];
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;

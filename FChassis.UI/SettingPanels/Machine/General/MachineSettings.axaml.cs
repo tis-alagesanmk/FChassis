@@ -9,21 +9,21 @@ public partial class MachineSettings : Panel {
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
-         this.AddParameterControls (grid, new ControlInfo[] {
+         this.AddParameterControls (grid, [
             new GroupControlInfo("General"),
-            new _TextControlInfo ("Machine Id") {bindInfos=[ControlInfo.Text.Binding("MachineId")] },
-            new _TextControlInfo ("Axis emulation") {bindInfos=[ControlInfo.Text.Binding("AxisEmulation")] },
-            new _TextControlInfo ("Cfg custom tech") {bindInfos=[ControlInfo.Text.Binding("CfgCustomTech")] },
-            new _TextControlInfo ("Pesets"),
+            new _TextControlInfo ("Machine Id", "MachineId"),
+            new _TextControlInfo ("Axis emulation", "AxisEmulation"),
+            new _TextControlInfo ("Cfg custom tech", "CfgCustomTech"),
+            new _TextControlInfo ("Pesets", null!),
             new ComboControlInfo ("Can open bit rate", null!, "kbps"),
-            new CheckControlInfo ("Netdisk server IP address"),
-            new ComboControlInfo ("Software limit code") {bindInfos=[ControlInfo.Combo.Binding("Code"), ControlInfo.Combo.BindingItems("Codes")]},
-            new _TextControlInfo ("Override limit") {bindInfos= [ControlInfo.Text.Binding("OverrideLimit")]},
-            new ButtonControlInfo ("Limit Incrementer") {bindInfos=[ControlInfo.Button.Binding("IncrementLimitCommand")]},
+            new CheckControlInfo ("Netdisk server IP address", null!),
+            new ComboControlInfo ("Software limit code", "Code", "codes"),
+            new _TextControlInfo ("Override limit", "OverrideLimit"),
+            new ButtonControlInfo ("Limit Incrementer", "IncrementLimitCommand"),
 
             new GroupControlInfo ("Controller"),
             new _TextControlInfo ("Interpolation cycle time",null!, "ms"),
-            new _TextControlInfo ("Interpolation divider"),
+            new _TextControlInfo ("Interpolation divider", null!),
             new _TextControlInfo ("Handwheel filetr time", null!, "ms"),
             new _TextControlInfo ("Velocity", null!, "m/min"),
             new _TextControlInfo ("Acceleration", null!, "m/sec²"),
@@ -35,9 +35,9 @@ public partial class MachineSettings : Panel {
             new _TextControlInfo ("Creep speed velocity", null!, "m/min"),
 
             new GroupControlInfo ("Memory reservation"),
-            new _TextControlInfo ("Block count"),
-            new _TextControlInfo ("Reverse Block count"),
-            new _TextControlInfo ("Parameter aray size"),
-      });
+            new _TextControlInfo ("Block count", null!),
+            new _TextControlInfo ("Reverse Block count", null!),
+            new _TextControlInfo ("Parameter aray size", null!),
+         ]);
    }
 }

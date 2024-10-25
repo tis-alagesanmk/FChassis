@@ -8,6 +8,5 @@ namespace FChassis.Data.Model.Settings.Machine.General {
       [ObservableProperty] private string axisEmulation = "1";
       [ObservableProperty] private string cfgCustomTech = "ECUT";
       [ObservableProperty] private string code = "14";
-      [ObservableProperty] private List<string> codes = ["12", "13", "14", "15", "16"];
    }
 }
