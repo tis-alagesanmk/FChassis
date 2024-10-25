@@ -29,6 +29,11 @@ public partial class Panel : Panels.Child {
                border.Child = textBlock;
                break;
 
+            case ControlInfo.Type.Button:
+               ci.control = new Button () { Content = ci.label };
+               setGridRowColumn (ci.control, row, 2);
+               break;
+
             case ControlInfo.Type.Text_:
             case ControlInfo.Type.Combo:
             case ControlInfo.Type.Check:
@@ -127,25 +132,30 @@ public partial class Panel : Panels.Child {
 }
 
 #region Run Time ControlInfo 
-internal class ControlInfo {
-   internal ControlInfo (Type _type = Type.None, string _label = null!, string _unit = null!) {
-      this.type = _type;
-      this.label = _label;
-      this.unit = _unit;
+internal class ControlInfo (string label = null!, string unit = null!) {
+   internal ControlInfo (Type type = Type.None, string label = null!, string unit = null!)
+      : this (label, unit) => this.type = type;
+
+   internal ControlInfo (Type type, string label, string bindName, string unit = null!)
+      : this (type, label, unit) {
+      if (bindName != null)
+         this.bindInfos = [Text.Binding (bindName)];
    }
 
+   // -------------------------------------------------------------------------
    internal enum Type {
       None,
       Group,
       Text_,
       Combo,
       Check,
+      Button,
       DGrid,
    };
 
    internal Type type = Type.None;
-   internal string label = null!;
-   internal string unit = null!;
+   internal string label = label;
+   internal string unit = unit;
    internal object[] items = null!;
 
    internal Control control = null!;
@@ -172,10 +182,10 @@ internal class ControlInfo {
             property = ComboBox.SelectedItemProperty,
             binding = new Binding (name), };
       }
-      internal static BindInfo BindingItems (object[] items) {
+      internal static BindInfo BindingItems (string name) {
          return new BindInfo {
             property = ComboBox.ItemsSourceProperty,
-            binding = new Binding () { Source = items }, };
+            binding = new Binding (name)};
       }
    }
 
@@ -183,6 +193,14 @@ internal class ControlInfo {
       internal static BindInfo Binding (string name) {
          return new BindInfo {
             property = CheckBox.IsCheckedProperty,
+            binding = new Binding (name), };
+      }
+   }
+
+   internal static class Button {
+      internal static BindInfo Binding (string name) {
+         return new BindInfo {
+            property = Avalonia.Controls.Button.CommandProperty,
             binding = new Binding (name), };
       }
    }
@@ -200,26 +218,25 @@ internal class _TextControlInfo : ControlInfo {
       : base (Type.Text_, label, unitName) { }
 
    internal _TextControlInfo (string label, string bindName, string unitName = null!)
-      : base (Type.Text_, label, unitName) {
-      if (bindName != null)
-         this.bindInfos = [Text.Binding (bindName)];
-   }
+      : base (Type.Text_, label, bindName, unitName) { }
 }
 
 internal class ComboControlInfo : ControlInfo {
-   internal ComboControlInfo (string label = null!, string bindName = null!, object[] items = null!)
-      : base (Type.Combo, label) {
-      if (bindName != null)
-         this.bindInfos = [Combo.Binding (bindName)];
-   }
+   internal ComboControlInfo (string label = null!, string bindName = null!)
+      : base (Type.Combo, label) { }
 
+   internal ComboControlInfo (string label, string bindName, string unitName = null!)
+      : base (Type.Combo, label, bindName, unitName) { }
 }
 
 internal class CheckControlInfo : ControlInfo {
    internal CheckControlInfo (string label = null!, string bindName = null!)
-      : base (Type.Check, label) {
-      this.bindInfos = [Check.Binding (bindName)];
-   }
+      : base (Type.Check, label, bindName) { }
+}
+
+internal class ButtonControlInfo : ControlInfo {
+   internal ButtonControlInfo (string label = null!, string bindName = null!)
+      : base (Type.Button, label, bindName) {}
 }
 
 internal class DGridControlInfo : ControlInfo {
