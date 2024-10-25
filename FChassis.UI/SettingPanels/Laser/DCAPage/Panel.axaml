@@ -7,12 +7,8 @@
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Laser.DCAPage.Panel"
 		xmlns:base="FChassis.UI.Settings"
-		xmlns:vm="using:FChassis.UI.SettingPanels.Laser.ViewModel"
-		x:DataType="vm:DCAViewModel">
-	<UserControl.DataContext>
-		<vm:DCAViewModel/>
-	</UserControl.DataContext>
-	<DataGrid Grid.Row="1" ItemsSource="{Binding Parameters}">
+		>
+	<!--<DataGrid Grid.Row="1" ItemsSource="{Binding Parameters}">
 		<DataGrid.Columns>
 			<DataGridTemplateColumn Header="Name">
 				<DataTemplate>
@@ -45,5 +41,5 @@
 				</DataTemplate>
 			</DataGridTemplateColumn>
 		</DataGrid.Columns>
-	</DataGrid>
+	</DataGrid>-->
 </base:Panel>

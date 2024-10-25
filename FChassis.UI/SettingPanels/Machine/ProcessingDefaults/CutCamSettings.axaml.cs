@@ -1,9 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-using FChassis.UI.SettingPanels.Machine.Model;
-
-
 namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 public partial class CutCamSettings : Panel {
    public CutCamSettings () {

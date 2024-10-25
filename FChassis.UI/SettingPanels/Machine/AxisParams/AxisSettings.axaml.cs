@@ -10,9 +10,10 @@ public partial class AxisSettingsPanel : Panel{
       if (grid != null)
          this.AddParameterControls (grid, [
             new GroupControlInfo{label="Configuration parameters"},
-            new CheckControlInfo{label="Axis type"},
+            new CheckControlInfo("Advanced"),
+            new ComboControlInfo{label="Axis type"},
             new ComboControlInfo{label="Axis connection"},
-            new ComboControlInfo{label="Axis address"},
+            new _TextControlInfo{label="Axis address"},
             new _TextControlInfo{label="Sync connection"},
             new _TextControlInfo{label="Interpolation filter time",unit="s"},
 

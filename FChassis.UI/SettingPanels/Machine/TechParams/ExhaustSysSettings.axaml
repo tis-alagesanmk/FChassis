@@ -9,7 +9,6 @@
         x:Class="FChassis.UI.Settings.Machine.TechParams.ExhaustSysSettings"
 		xmlns:base="FChassis.UI.Settings"
 		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
-		x:DataType="vm:ExhaustSystemViewModel"
 		Background="White"
 		>
 	<Design.DataContext>

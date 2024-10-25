@@ -8,5 +8,9 @@
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.Piercing.DotPunchSettings"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	Dot Punch Settings
+	<ScrollViewer>
+		<Grid>
+
+		</Grid>
+	</ScrollViewer>
 </base:Panel>

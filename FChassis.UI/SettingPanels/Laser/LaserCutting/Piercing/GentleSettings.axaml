@@ -8,5 +8,9 @@
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.Piercing.GentleSettings"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	Gentle Settings
+	<ScrollViewer>
+		<Grid>
+
+		</Grid>
+	</ScrollViewer>
 </base:Panel>

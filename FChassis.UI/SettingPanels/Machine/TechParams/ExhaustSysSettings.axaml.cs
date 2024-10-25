@@ -1,16 +1,14 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using FChassis.UI.SettingPanels.Machine.Model;
-using FChassis.UI.SettingPanels.Machine.ViewModel;
 using System.Linq;
 
 namespace FChassis.UI.Settings.Machine.TechParams; 
 public partial class ExhaustSysSettings : Panel {
-   ExhaustSystemViewModel vm = null!;
+   //ExhaustSystemViewModel vm = null!;
    public ExhaustSysSettings () {
       AvaloniaXamlLoader.Load (this);
-      vm = new ExhaustSystemViewModel ();
-      this.DataContext = vm;
+    // vm = new ExhaustSystemViewModel ();
+      //this.DataContext = vm;
       this.AddControls ();
    }
 
@@ -28,22 +26,22 @@ public partial class ExhaustSysSettings : Panel {
       if (grid != null)
          this.AddParameterControls (grid, ctrlInfos);
 
-      // Alag: [Testing]
-      if (ctrlInfos[3].control != null) {
-         DataGrid dataGrid = ctrlInfos[3].control as DataGrid;
-         dataGrid.ItemsSource = new object[] {
-            new string[] {"Section1", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
-            new string[] {"Section2", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
-            new string[] {"Section3", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
-            new string[] {"Section4", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
-         };
-      }
+      //// Alag: [Testing]
+      //if (ctrlInfos[3].control != null) {
+      //   DataGrid dataGrid = ctrlInfos[3].control as DataGrid;
+      //   dataGrid.ItemsSource = new object[] {
+      //      new string[] {"Section1", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
+      //      new string[] {"Section2", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
+      //      new string[] {"Section3", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
+      //      new string[] {"Section4", "X ON-1", "X OFF-1", "Y ON-1", "Y OFF-1" },
+      //   };
+      //}
 
       #region Local function
       DGridControlInfo createSectionDGrid () {
          DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
             binding = "Sections",
-            collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
+            //collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
             columns = [
                new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="Section Number",  
                                                                                           path="SectionNumber"},
@@ -60,7 +58,7 @@ public partial class ExhaustSysSettings : Panel {
       DGridControlInfo createSplittersdDGrid () {
          DGridControlInfo dGridCrtlInfo = new DGridControlInfo {
             binding = "Splitters",
-            collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
+            //collections = vm.Splitters.Cast<ExhaustSysModel> ().ToArray (),
             columns = [
                new DGridControlInfo.ColInfo{type=ControlInfo.Type.Text_, header="Splitter Number", 
                                                                                           path ="SectionNumber"},
