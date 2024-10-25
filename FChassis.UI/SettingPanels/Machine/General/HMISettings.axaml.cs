@@ -1,5 +1,3 @@
-using FChassis.Data.ViewModels.Setting.Machine.General;
-
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
@@ -8,25 +6,24 @@ public partial class HMISettings : Panel {
    public HMISettings () {
       AvaloniaXamlLoader.Load (this);
 
-      this.DataContext = new HMIViewModel (); 
-
+      var vm = this.DataContext as Data.ViewModel.Settings.Machine.General.HMIViewModel;
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid!, [
             new GroupControlInfo ("General"),
-            new ComboControlInfo ("Orientation", "Orientation", "Orientations"),
-            new _TextControlInfo ("Step size to increment", "StepSizetoIncrement"),
-            new _TextControlInfo ("Maximum days keep back up files", "MaximumDaysKeepBackupFiles"),
-            new _TextControlInfo ("Minimum storage to keep back up files", "MinimumStoragetoKeepBackupFiles", "GB"),                                  
-            new ComboControlInfo ("PLC messages to display", "PlcMessagesToDisplay", "PlcMessages"),
-            new CheckControlInfo ("Caption for command-bar icons", "CaptionForcommandBarIcons"),
-            new CheckControlInfo ("Mini player", "MiniPlayer"),
-            new ComboControlInfo ("Language", "Language", "Languages"),
-            new ComboControlInfo ("Theme", "Theme", "Themes"),
+            new ComboControlInfo ("Orientation", nameof(vm.Orientation), nameof(vm.Orientations)),
+            new _TextControlInfo ("Step size to increment", nameof(vm.StepSizetoIncrement)),
+            new _TextControlInfo ("Maximum days keep back up files", nameof(vm.MaximumDaysKeepBackupFiles)),
+            new _TextControlInfo ("Minimum storage to keep back up files", nameof(vm.MinimumStoragetoKeepBackupFiles), "GB"),                                  
+            new ComboControlInfo ("PLC messages to display", nameof(vm.PlcMessagesToDisplay), nameof(vm.PlcMessages)),
+            new CheckControlInfo ("Caption for command-bar icons", nameof(vm.CaptionForcommandBarIcons)),
+            new CheckControlInfo ("Mini player", nameof(vm.MiniPlayer)),
+            new ComboControlInfo ("Language", nameof(vm.Language), nameof(vm.Languages)),
+            new ComboControlInfo ("Theme", nameof(vm.Theme), nameof(vm.Themes)),
 
             new GroupControlInfo ("Screen size"),
-            new _TextControlInfo ("Width", "Width"),
-            new _TextControlInfo ("Height", "Height"),
+            new _TextControlInfo ("Width", nameof(vm.Width)),
+            new _TextControlInfo ("Height", nameof(vm.Height)),
       ]);
    }
 }
