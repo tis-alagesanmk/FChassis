@@ -1,8 +1,8 @@
-using FChassis.Data.ViewModels.Setting.Machine.General;
 
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using System.Linq;
+using FChassis.Data.ViewModel.Settings.Machine.General;
 
 namespace FChassis.UI.Settings.Machine.General;
 public partial class HMISettings : Panel {
@@ -23,7 +23,7 @@ public partial class HMISettings : Panel {
             new _TextControlInfo ("Step size to increment", nameof(vm.StepSizetoIncrement),""),
             new _TextControlInfo ("Maximum days keep back up files", nameof(vm.MaximumDaysKeepBackupFiles),""),
             new _TextControlInfo ("Minimum storage to keep back up files", nameof(vm.MinimumStoragetoKeepBackupFiles), "GB"),                                  
-            new ComboControlInfo ("PLC messages to display", nameof(vm.PLCMessagesToDisplay)),
+            new ComboControlInfo ("PLC messages to display", nameof(vm.PlcMessagesToDisplay)),
             new CheckControlInfo ("Caption for command-bar icons",nameof(vm.CaptionForcommandBarIcons)),
             new CheckControlInfo ("Mini player", nameof(vm.CaptionForcommandBarIcons)),
             new ComboControlInfo {label= "Language",
