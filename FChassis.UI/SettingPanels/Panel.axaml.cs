@@ -12,7 +12,7 @@ using System.Windows.Media.Media3D;
 namespace FChassis.UI.Settings;
 #nullable disable
 public partial class Panel : Panels.Child {
-   internal void AddPropControls (Grid grid, Type type) {
+   internal void AddPropControls (Grid grid, Type type,Type colType = null) {
       int row = grid.RowDefinitions.Count;
 
       var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -76,7 +76,8 @@ public partial class Panel : Panels.Child {
                break;
 
             case Prop.Type.DGrid:
-               p.control = control = dGrid = createDGridColumns (p.columns, p.collections);
+               p.control = control = dGrid = createDGridColumns (colType);//createDGridColumns (p.columns, p.collections);
+               dGrid.Bind (DataGrid.ItemsSourceProperty, new Binding (p.itemsName));
                grid.RowDefinitions[row].Height = new GridLength (1, GridUnitType.Auto);
                setGridRowColumnDataGrid (dGrid, row);
                break;
@@ -133,15 +134,18 @@ public partial class Panel : Panels.Child {
          }
       }
 
-      DataGrid createDGridColumns (Prop.ColInfo[] dgcis, IEnumerable collections) {
+      DataGrid createDGridColumns (Type type) {
          DataGrid dGrid = new DataGrid ();
-         dGrid.ItemsSource = collections;
+         //dGrid.ItemsSource = collections;
          DataGridColumn column = null!;
-         foreach (var dgci in dgcis) {
-            switch (dgci.type) {
+         
+         var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+         foreach (var f in fields) {
+            Prop? p = f.GetCustomAttribute<Prop> ();
+            switch (p.type) {
                case Prop.Type.Text:
                   column = new DataGridTextColumn ();
-                  ((DataGridTextColumn)column).Binding = new Binding (dgci.bindName);
+                  ((DataGridTextColumn)column).Binding = new Binding (p.dGridPath);
                   break;
 
                case Prop.Type.Check:
@@ -152,11 +156,10 @@ public partial class Panel : Panels.Child {
             if (column == null)
                continue;
 
-            column.Header = dgci.header;
+            column.Header = p.label;
             dGrid.Columns.Add (column);
             column = null!;
          }
-
          return dGrid;
       }
       #endregion Local function
