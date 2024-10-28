@@ -24,6 +24,7 @@ public partial class Panel : Panels.Child {
          TextBlock textBlock = null!;
          if (p.groupName != null) {
             border = new Border ();
+            grid.RowDefinitions.Add (new RowDefinition { Height = new (32) });
             setGridRowColumn (border, row++, 0, 5);
             border.Classes.Add ("header");
             grid.Children.Add (border);
