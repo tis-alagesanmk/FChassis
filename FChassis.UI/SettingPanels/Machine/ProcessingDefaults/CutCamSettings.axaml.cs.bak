@@ -1,16 +1,19 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
+using FChassis.UI.SettingPanels.Machine.Model;
+
+
 namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 public partial class CutCamSettings : Panel {
    public CutCamSettings () {
       AvaloniaXamlLoader.Load (this); 
 
       ControlInfo[] ctrlInfos = [
-         new CheckControlInfo ("Advanced", null!),
+         new CheckControlInfo{label="Advanced"},
          createFinishingRuleDGrid(),
-         new GroupControlInfo ("Microjoint settings"),
-         new _TextControlInfo  ("Microjoint length", null!)
+         new GroupControlInfo{ label="Microjoint settings"},
+         new _TextControlInfo{label="Microjoint length"}
       ];
 
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;

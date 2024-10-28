@@ -38,6 +38,8 @@ public partial class TabPanel : Panel {
          tabControl.SelectedItem = firstTabItem;
 
          Child.mainWindow?.Switch2MainPanel ();
+
+         
       }
    }
 

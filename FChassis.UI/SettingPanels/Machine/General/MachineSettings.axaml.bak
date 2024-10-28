@@ -4,13 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-		d:DesignWidth="800" 
-        x:Class="FChassis.UI.Settings.Machine.PLCOptions.PLCKeySettings"
-		xmlns:base="FChassis.UI.Settings"
-		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
-		xmlns:model="using:FChassis.UI.SettingPanels.Machine.Model"
+		d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="FChassis.UI.Settings.Machine.General.MachineSettings"
+		xmlns:base="FChassis.UI.Settings"		
+		xmlns:vm="using:FChassis.Data.ViewModel.Settings.Machine.General"
+		x:DataType="vm:MachineViewModel"
 		Background="White">
+	<UserControl.DataContext>
+		<vm:MachineViewModel/>
+	</UserControl.DataContext>
 	<ScrollViewer>
 		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
-	</ScrollViewer>
+    </ScrollViewer>
 </base:Panel>

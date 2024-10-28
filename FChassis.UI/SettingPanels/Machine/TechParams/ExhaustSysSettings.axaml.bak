@@ -4,13 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-		d:DesignWidth="800" 
-        x:Class="FChassis.UI.Settings.Machine.PLCOptions.PLCKeySettings"
+		x:CompileBindings="True"
+		d:DesignWidth="800"
+        x:Class="FChassis.UI.Settings.Machine.TechParams.ExhaustSysSettings"
 		xmlns:base="FChassis.UI.Settings"
 		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
-		xmlns:model="using:FChassis.UI.SettingPanels.Machine.Model"
-		Background="White">
+		x:DataType="vm:ExhaustSystemViewModel"
+		Background="White"
+		>
+	<Design.DataContext>
+		<vm:ExhaustSystemViewModel/> 
+	</Design.DataContext>
 	<ScrollViewer>
-		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
+		<Grid ColumnDefinitions="*"/>
 	</ScrollViewer>
 </base:Panel>

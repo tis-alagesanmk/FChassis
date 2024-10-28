@@ -10,19 +10,19 @@ public partial class ProfileCamSettings : Panel{
       Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
       if (grid != null)
          this.AddParameterControls (grid, [
-            new CheckControlInfo{label="Advanced"},
+            new CheckControlInfo ("Advanced", null!),
 
-            new GroupControlInfo{label="Cutting"},
-            new ComboControlInfo{label="Choose cutting condition by"},
-            new ComboControlInfo{label="Process for open polylines"},
-            new _TextControlInfo{label="Stitch cutting threshold distance (0=disable)"},
+            new GroupControlInfo ("Cutting"),
+            new ComboControlInfo ("Choose cutting condition by", null!, null!),
+            new ComboControlInfo ("Process for open polylines", null!, null!),
+            new _TextControlInfo ("Stitch cutting threshold distance (0=disable)", null!),
 
-            new GroupControlInfo{label="Pierce settings"},
-            new CheckControlInfo{label="Allow approach that is more than 0.5 distance to opposite side"},
+            new GroupControlInfo ("Pierce settings", null!),
+            new CheckControlInfo ("Allow approach that is more than 0.5 distance to opposite side", null!),
 
-            new GroupControlInfo{label="Scrap cutting"},
-            new _TextControlInfo{label="Scrap grid width"},
-            new _TextControlInfo{label="Approach length for separating cuts"},
+            new GroupControlInfo ("Scrap cutting"),
+            new _TextControlInfo ("Scrap grid width", null!),
+            new _TextControlInfo ("Approach length for separating cuts", null!),
       ]);
    }
 }
