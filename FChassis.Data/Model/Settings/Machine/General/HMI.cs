@@ -1,27 +1,36 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis.Data.Model.Settings.Machine.General;
-[System.AttributeUsage (System.AttributeTargets.Field,
-                        AllowMultiple = true)  /* Multiuse attribute*/]
-public class Prop(string label, string unit = null!) : System.Attribute {
-   internal string? label = label;
-   public string? unit = unit;
-}
-
 public partial class HMI : ObservableObject {
-   [ObservableProperty, Prop("Machine Id", "s")] 
+   [ObservableProperty, Prop ("General", Prop.Type.Combo, "Orientation", null!, "orientations")]
    string? orientation = "Portrait";
+   [ObservableProperty, Prop (Prop.Type.Text, "Step size to increment")]
+   double? stepSizetoIncrement = 10;
 
+   [ObservableProperty, Prop (Prop.Type.Text, "Maximum days keep back up files")]
+   int? maximumDaysKeepBackupFiles = 10;
 
-   [ObservableProperty] double? stepSizetoIncrement = 10;
-   [ObservableProperty] int? maximumDaysKeepBackupFiles = 10;
-   [ObservableProperty] int? minimumStoragetoKeepBackupFiles = 10;
-   [ObservableProperty] string? plcMessagesToDisplay = "Only error";
-   [ObservableProperty] bool? captionForcommandBarIcons = true;
-   [ObservableProperty] bool? miniPlayer = true;
-   [ObservableProperty] string? language = "EN";
-   [ObservableProperty] string? theme = "Grey";
+   [ObservableProperty, Prop (Prop.Type.Text, "Minimum storage to keep back up files")]
+   int? minimumStoragetoKeepBackupFiles = 10;
 
-   [ObservableProperty] double? width = 10;
-   [ObservableProperty] double? height = 10;
+   [ObservableProperty, Prop (Prop.Type.Combo, "PLC messages to display", null!, "plcMessages")]
+   string? plcMessagesToDisplay = "Only error";
+
+   [ObservableProperty, Prop (Prop.Type.Check, "Caption for command-bar icons")]
+   bool? captionForcommandBarIcons = true;
+
+   [ObservableProperty, Prop (Prop.Type.Check, "Mini player")]
+   bool? miniPlayer = true;
+
+   [ObservableProperty, Prop (Prop.Type.Combo, "Language", null!, "languages")]
+   string? language = "EN";
+
+   [ObservableProperty, Prop (Prop.Type.Combo, "Theme", null!, "themes")]
+   string? theme = "Grey";
+
+   [ObservableProperty, Prop ("Screen size", Prop.Type.Text, "Width")]
+   double? width = 10;
+
+   [ObservableProperty, Prop (Prop.Type.Text, "Height")]
+   double? height = 10;
 }

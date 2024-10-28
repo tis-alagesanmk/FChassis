@@ -1,12 +1,166 @@
+using FChassis.Data.Model;
+
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 
 namespace FChassis.UI.Settings;
 public partial class Panel : Panels.Child {
+   internal void AddPropControls (Grid grid, Type type) {
+      int row = grid.RowDefinitions.Count;
+
+      var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+      foreach (FieldInfo f in fields) {
+         Prop p = f.GetCustomAttribute<Prop> ()!;
+         if (p == null) continue;
+
+         Border border = null!;
+         TextBlock textBlock = null!;
+         if (p.groupName != null) {
+            border = new Border ();
+            grid.RowDefinitions.Add (new RowDefinition { Height = new (32) });
+            setGridRowColumn (border, row++, 0, 5);
+            border.Classes.Add ("header");
+            grid.Children.Add (border);
+
+            textBlock = new TextBlock ();
+            textBlock.Text = p.groupName;
+            textBlock.Classes.Add ("title");
+            border.Child = textBlock;
+         }
+
+         grid.RowDefinitions.Add (new RowDefinition { Height = new (32) });
+
+         Label label = null!;
+         DataGrid dGrid = null!;
+         Control control = null!;
+         switch (p.type) {
+            case Prop.Type.Button:
+               p.control = control = new Button () { Content = p.label };
+               setGridRowColumn (control, row, 2);
+               break;
+
+            case Prop.Type.Text:
+            case Prop.Type.Combo:
+            case Prop.Type.Check:
+               if (p.type != Prop.Type.Check) {
+                  label = new Label ();
+                  label.Content = p.label;
+                  setGridRowColumn (label, row, 0, 2);
+                  label.Classes.Add ("info");
+                  grid.Children.Add (label);
+               }
+
+               p.control = control = p.type switch {
+                  Prop.Type.Text => new TextBox (),
+                  Prop.Type.Combo => new ComboBox (),
+                  Prop.Type.Check => new CheckBox () { Content = p.label },
+                  _ => null!
+               };
+
+               setGridRowColumn (control, row, 2);
+
+               if (p.unit != null) {
+                  label = new Label ();
+                  label.Content = p.unit;
+                  label.Classes.Add ("blue");
+                  setGridRowColumn (label, row, 3);
+                  grid.Children.Add (label);
+               }
+               break;
+
+            case Prop.Type.DGrid:
+               p.control = control = dGrid = createDGridColumns (p.columns, p.collections);
+               grid.RowDefinitions[row].Height = new GridLength (1, GridUnitType.Auto);
+               setGridRowColumnDataGrid (dGrid, row);
+               break;
+         }
+
+         if (control != null) {
+            List<Prop.BindInfo> bis = p.bindInfos!;
+            if (bis != null)
+               bind (control, bis!);
+
+            switch (p.type) {
+               case Prop.Type.Text:
+                  (control as TextBox)!.Bind (TextBox.TextProperty, new Binding (CapitalizeFirstLetter (f.Name)));
+                  break;
+
+               case Prop.Type.Check:
+                  (control as CheckBox)!.Bind (CheckBox.IsCheckedProperty, new Binding (CapitalizeFirstLetter (f.Name)));
+                  break;
+
+               case Prop.Type.Combo:
+                  (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
+                  (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.itemsName)));
+                  break;
+            }
+
+            grid.Children.Add (control);
+         }
+
+         row++;
+      }
+
+      void setGridRowColumn (Control control, int row, int col, int colSpan = 1) {
+         control.SetCurrentValue (Grid.RowProperty, row);
+         control.SetCurrentValue (Grid.ColumnProperty, col);
+         control.SetCurrentValue (Grid.ColumnSpanProperty, colSpan);
+      }
+
+      void setGridRowColumnDataGrid (Control control, int row)
+         => control.SetCurrentValue (Grid.RowProperty, row);
+      
+      string CapitalizeFirstLetter (string str) {
+         if (string.IsNullOrEmpty (str)) {
+            return str; // Return original string if it's null or empty
+         }
+
+         // Convert the first character to uppercase and concatenate with the rest of the string
+         return char.ToUpper (str[0]) + str.Substring (1);
+      }
+      #region Local function
+      void bind (Control control, List<Prop.BindInfo> bindInfos) {
+         foreach (Prop.BindInfo bi in bindInfos) {
+            if (bi == null) continue;
+            control.Bind ((AvaloniaProperty)bi.property, new Binding (bi.name));
+         }
+      }
+
+      DataGrid createDGridColumns (Prop.ColInfo[] dgcis, IEnumerable collections) {
+         DataGrid dGrid = new DataGrid ();
+         dGrid.ItemsSource = collections;
+         DataGridColumn column = null!;
+         foreach (var dgci in dgcis) {
+            switch (dgci.type) {
+               case Prop.Type.Text:
+                  column = new DataGridTextColumn ();
+                  ((DataGridTextColumn)column).Binding = new Binding (dgci.bindName);
+                  break;
+
+               case Prop.Type.Check:
+                  column = new DataGridCheckBoxColumn ();
+                  break;
+            }
+
+            if (column == null)
+               continue;
+
+            column.Header = dgci.header;
+            dGrid.Columns.Add (column);
+            column = null!;
+         }
+
+         return dGrid;
+      }
+      #endregion Local function
+   }
+
    internal void AddParameterControls (Grid grid, ControlInfo[] controlInfos) {
       int row = grid.RowDefinitions.Count;
       foreach (var ci in controlInfos) {
