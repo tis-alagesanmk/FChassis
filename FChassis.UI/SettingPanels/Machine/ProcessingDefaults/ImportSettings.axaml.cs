@@ -11,7 +11,7 @@ public partial class ImportSettings : Panel {
       if (grid != null)
          this.AddParameterControls (grid, [
             new GroupControlInfo ("Import settings"),
-            new ComboControlInfo ("Units for DFX files", null!),
+            new ComboControlInfo ("Units for DFX files", null!, null!),
             new _TextControlInfo ("Stitch together lines/arcs closer than this", null!),
             new _TextControlInfo ("Maximun thickness for sheet-metal part", null!),
             new CheckControlInfo ("Ignore layer in DXF/DWG files", null!),
@@ -23,7 +23,7 @@ public partial class ImportSettings : Panel {
             new CheckControlInfo ("Angles in DXF are interior angles", null!),
 
             new GroupControlInfo ("Spline Coversion"),
-            new ComboControlInfo ("Covert splines on import", null!),
+            new ComboControlInfo ("Covert splines on import", null!, null!),
 
             new GroupControlInfo ("Layer mapping", null!),
             new _TextControlInfo ("Auxilary Layers Names", null!),

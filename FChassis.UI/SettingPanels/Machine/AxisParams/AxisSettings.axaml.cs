@@ -11,8 +11,8 @@ public partial class AxisSettingsPanel : Panel{
          this.AddParameterControls (grid, [
             new GroupControlInfo ("Configuration parameters"),
             new CheckControlInfo ("Advanced", null!),
-            new ComboControlInfo ("Axis type", null!,null!),
-            new ComboControlInfo ("Axis connection", null!,null!),
+            new ComboControlInfo ("Axis type", null!, null!),
+            new ComboControlInfo ("Axis connection", null!, null!),
             new _TextControlInfo ("Axis address", null!),
             new _TextControlInfo ("Sync connection", null!),
             new _TextControlInfo ("Interpolation filter time", null!, "s"),

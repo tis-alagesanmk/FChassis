@@ -1,23 +1,22 @@
+using FChassis.Data.Model;
+
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
-using FChassis.Data.Model;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Windows.Media.Media3D;
 
 namespace FChassis.UI.Settings;
-#nullable disable
 public partial class Panel : Panels.Child {
-   internal void AddPropControls (Grid grid, Type type,Type colType = null) {
+   internal void AddPropControls (Grid grid, Type type, Type colType = null!) {
       int row = grid.RowDefinitions.Count;
 
       var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
       foreach (FieldInfo f in fields) {
-         Prop? p = f.GetCustomAttribute<Prop> ();
+         Prop p = f.GetCustomAttribute<Prop> ()!;
          if (p == null) continue;
 
          Border border = null!;
@@ -30,7 +29,7 @@ public partial class Panel : Panels.Child {
             grid.Children.Add (border);
 
             textBlock = new TextBlock ();
-            textBlock.Text = p.label;
+            textBlock.Text = p.groupName;
             textBlock.Classes.Add ("title");
             border.Child = textBlock;
          }
@@ -99,7 +98,10 @@ public partial class Panel : Panels.Child {
 
                case Prop.Type.Combo:
                   (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
-                  (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.itemsName)));
+                  if (p.items != null)
+                     (control as ComboBox)!.ItemsSource = p.items;
+                  else
+                     (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.itemsName)));
                   break;
             }
 
@@ -138,7 +140,7 @@ public partial class Panel : Panels.Child {
          DataGrid dGrid = new DataGrid ();
          //dGrid.ItemsSource = collections;
          DataGridColumn column = null!;
-         
+
          var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
          foreach (var f in fields) {
             Prop? p = f.GetCustomAttribute<Prop> ();
@@ -164,7 +166,6 @@ public partial class Panel : Panels.Child {
       }
       #endregion Local function
    }
-
 
    internal void AddParameterControls (Grid grid, ControlInfo[] controlInfos) {
       int row = grid.RowDefinitions.Count;
@@ -214,7 +215,7 @@ public partial class Panel : Panels.Child {
                ci.control = ci.type switch {
                   ControlInfo.Type.Text_ => new TextBox (),
                   ControlInfo.Type.Combo => new ComboBox (),
-                  ControlInfo.Type.Check => new CheckBox () { Content = ci.label },
+                  ControlInfo.Type.Check => new CheckBox () { Content = ci.label},
                   _ => null!
                };
 
@@ -261,11 +262,10 @@ public partial class Panel : Panels.Child {
       void bind (Control control, List<ControlInfo.BindInfo> bindInfos) {
          foreach (ControlInfo.BindInfo bi in bindInfos) {
             if (bi == null) continue;
-            control.Bind (bi.property, bi.binding);
+            control.Bind (bi.property, bi.binding); }
          }
-      }
 
-      DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis, IEnumerable collections) {
+         DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis, IEnumerable collections) {
          DataGrid dGrid = new DataGrid ();
          dGrid.ItemsSource = collections;
          DataGridColumn column = null!;
@@ -319,10 +319,10 @@ internal class ControlInfo (ControlInfo.Type type, string label, string unit = n
 
    internal Control control = null!;
    internal object binding = null!;
-   internal List<BindInfo> bindInfos = new ();
+   internal List<BindInfo> bindInfos = new();
 
    #region Inner Class --------------------------------------------------------
-   internal class BindInfo (string name, AvaloniaProperty property) {
+   internal class BindInfo(string name, AvaloniaProperty property) {
       internal AvaloniaProperty property = property;
       internal Binding binding = new Binding (name);
    }
@@ -338,14 +338,13 @@ internal class GroupControlInfo : ControlInfo {
 internal class _TextControlInfo : ControlInfo {
    internal _TextControlInfo (string label, string bindName, string unitName = null!)
       : base (Type.Text_, label, unitName) {
-      this.bindInfos = [Bind (bindName, TextBox.TextProperty)];
-   }
+      this.bindInfos = [Bind (bindName, TextBox.TextProperty)]; }
 }
 
 internal class ComboControlInfo : ControlInfo {
-   internal ComboControlInfo (string label, string bindName, string itemsName=null!, string unitName = null!)
+   internal ComboControlInfo (string label, string bindName, string itemsName, string unitName = null!)
       : base (Type.Combo, label, unitName) {
-      this.bindInfos.Add (Bind (bindName, ComboBox.SelectedItemProperty));
+      this.bindInfos.Add(Bind (bindName, ComboBox.SelectedItemProperty));
       if (itemsName != null)
          this.bindInfos.Add (Bind (itemsName, ComboBox.ItemsSourceProperty));
    }
@@ -354,15 +353,13 @@ internal class ComboControlInfo : ControlInfo {
 internal class CheckControlInfo : ControlInfo {
    internal CheckControlInfo (string label, string bindName)
       : base (Type.Check, label) {
-      this.bindInfos = [Bind (bindName, CheckBox.IsCheckedProperty)];
-   }
+         this.bindInfos = [Bind (bindName, CheckBox.IsCheckedProperty)]; }
 }
 
 internal class ButtonControlInfo : ControlInfo {
    internal ButtonControlInfo (string label, string bindName)
       : base (Type.Button, label) {
-      this.bindInfos = [Bind (bindName, Avalonia.Controls.Button.CommandProperty)];
-   }
+         this.bindInfos = [Bind (bindName, Avalonia.Controls.Button.CommandProperty)]; }
 }
 
 internal class DGridControlInfo : ControlInfo {
@@ -379,4 +376,4 @@ internal class DGridControlInfo : ControlInfo {
    }
 }
 #endregion Specialized ControlInfo classes
-#endregion Run Time ControlInfo 
+#endregion  Run Time ControlInfo 

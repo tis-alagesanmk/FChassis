@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace FChassis.Data.Model;
 [System.AttributeUsage (System.AttributeTargets.Field, AllowMultiple = true)]
-public class Prop (Prop.Type type, string label, string unit = null!, string itemsName = null!,string dGridPath = null!) : System.Attribute {
-   internal Prop (string _groupName, Prop.Type type, string label, string unit = null!, string itemsName = null!, string dGridPath = null!)
-      : this (type, label, unit, itemsName,dGridPath) {
+public class Prop (Prop.Type type, string label, string unit = null!, object[] items = null!, string itemsName = null!,string dGidPath = null!) : System.Attribute {
+   public Prop (string _groupName, Prop.Type type, string label, string unit = null!, object[] items = null!, string itemsName = null!, string dGidPath = null!)
+      : this (type, label, unit, items, itemsName, dGidPath) {
       groupName = _groupName;
    }
 
@@ -13,10 +13,11 @@ public class Prop (Prop.Type type, string label, string unit = null!, string ite
    public Type type = type;
    public string label = label;
    public string? unit = unit;
+   public string dGridPath = dGidPath;
+   public object[] items = items;
    public string itemsName = itemsName;
    public object control = null!;
    public List<BindInfo> bindInfos = new ();
-   public string? dGridPath = dGridPath!;
 
    public IEnumerable collections = null!;
    public ColInfo[] columns = null!;

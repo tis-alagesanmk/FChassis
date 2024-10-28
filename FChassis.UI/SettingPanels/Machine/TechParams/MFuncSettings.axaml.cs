@@ -8,7 +8,7 @@ public partial class MFuncSettings : Panel {
 
       const int count = 31;
       ControlInfo[] ctrlInfos = new ControlInfo[count + 1];
-      ctrlInfos[0] = new GroupControlInfo ("Sub program table");
+      ctrlInfos[0] = new GroupControlInfo("Sub program table");
       for (int i = 1; i <= count; i++)
          ctrlInfos[i] = new _TextControlInfo ($"M number {i - 1}", null!);
 

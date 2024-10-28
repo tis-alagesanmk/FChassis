@@ -11,8 +11,8 @@ public partial class Pallet1Settings : Panel {
          this.AddParameterControls (grid, [
             new GroupControlInfo ("Configuration parameters"),
             new CheckControlInfo ("Advanced", null!),
-            new ComboControlInfo ("Axis Type", null!),
-            new ComboControlInfo ("Axis Connection", null!),
+            new ComboControlInfo ("Axis Type", null!, null!),
+            new ComboControlInfo ("Axis Connection", null!, null!),
             new _TextControlInfo ("Axis address", null!),
             new _TextControlInfo ("Interpolation filter time", null!, "s"),
 
