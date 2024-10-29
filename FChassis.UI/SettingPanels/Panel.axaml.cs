@@ -75,7 +75,8 @@ public partial class Panel : Panels.Child {
                break;
 
             case Prop.Type.DGrid:
-               p.control = control = dGrid = createDGridColumns (p.columns, p.collections);
+               DBGridPropInfo dbgpi = f.GetCustomAttribute<DBGridPropInfo> ()!;
+               p.control = control = dGrid = createDGridColumns (dbgpi);
                grid.RowDefinitions[row].Height = new GridLength (1, GridUnitType.Auto);
                setGridRowColumnDataGrid (dGrid, row);
                break;
@@ -96,8 +97,14 @@ public partial class Panel : Panels.Child {
                   break;
 
                case Prop.Type.Combo:
-                  (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
-                  (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.itemsName)));
+                  PropInfo pi = f.GetCustomAttribute<PropInfo> ()!;
+                  if (pi != null) {
+                     (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
+                     if (pi.items != null)
+                        (control as ComboBox)!.ItemsSource = pi.items;
+                     else
+                        (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (pi.itemsName)));
+                  }
                   break;
             }
 
@@ -132,11 +139,11 @@ public partial class Panel : Panels.Child {
          }
       }
 
-      DataGrid createDGridColumns (Prop.ColInfo[] dgcis, IEnumerable collections) {
+      DataGrid createDGridColumns (DBGridPropInfo dbgpi)/*Prop.ColInfo[] dgcis, IEnumerable collections)*/ {
          DataGrid dGrid = new DataGrid ();
-         dGrid.ItemsSource = collections;
+         dGrid.ItemsSource = dbgpi.items;
          DataGridColumn column = null!;
-         foreach (var dgci in dgcis) {
+         foreach (var dgci in (DBGridPropColInfo[])dbgpi.colInfos) {
             switch (dgci.type) {
                case Prop.Type.Text:
                   column = new DataGridTextColumn ();
