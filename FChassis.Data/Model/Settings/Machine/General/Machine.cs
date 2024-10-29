@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace FChassis.Data.Model.Settings.Machine.General; 
 public partial class Machine : ObservableObject{
@@ -27,8 +28,7 @@ public partial class Machine : ObservableObject{
    int overrideLimit = 1;
 
    [ObservableProperty, Prop (Prop.Type.Button, "Limit Incrementer")]
-   int incrementLimitCommand;
-
+   int incrementLimit;
 
    [ObservableProperty, Prop ("Controller", Prop.Type.Text, "Interpolation cycle time", "ms")]
    string interpolationCycleTime = "1";

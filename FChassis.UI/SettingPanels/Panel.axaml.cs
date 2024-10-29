@@ -11,6 +11,26 @@ using System.Reflection;
 
 namespace FChassis.UI.Settings;
 public partial class Panel : Panels.Child {
+   internal void AddPropControls (Type type) {
+      Grid? grid = null!;
+      if (this.LogicalChildren.Count > 0 && this.LogicalChildren[0] != null)
+         grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
+      else {
+         // Create ScrollView and Grid if found
+         var scrollViewer = new ScrollViewer ();
+         this.Content = scrollViewer;
+
+         grid = new Grid ();
+         for (int i = 0; i < 5; i++)
+            grid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (20, GridUnitType.Star) });
+
+         scrollViewer.Content = grid;
+      }
+
+
+      this.AddPropControls(grid!, type);
+   }
+
    internal void AddPropControls (Grid grid, Type type) {
       int row = grid.RowDefinitions.Count;
 
@@ -24,7 +44,7 @@ public partial class Panel : Panels.Child {
          if (p.groupName != null) {
             border = new Border ();
             grid.RowDefinitions.Add (new RowDefinition { Height = new (32) });
-            setGridRowColumn (border, row++, 0, 5);
+            _setGridRowColumn (border, row++, 0, 5);
             border.Classes.Add ("header");
             grid.Children.Add (border);
 
@@ -34,7 +54,7 @@ public partial class Panel : Panels.Child {
             border.Child = textBlock;
          }
 
-         grid.RowDefinitions.Add (new RowDefinition { Height = new (32) });
+         grid.RowDefinitions.Add (new RowDefinition { Height = new GridLength (1, GridUnitType.Auto) });
 
          Label label = null!;
          DataGrid dGrid = null!;
@@ -42,7 +62,7 @@ public partial class Panel : Panels.Child {
          switch (p.type) {
             case Prop.Type.Button:
                p.control = control = new Button () { Content = p.label };
-               setGridRowColumn (control, row, 2);
+               _setGridRowColumn (control, row, 2);
                break;
 
             case Prop.Type.Text:
@@ -51,53 +71,50 @@ public partial class Panel : Panels.Child {
                if (p.type != Prop.Type.Check) {
                   label = new Label ();
                   label.Content = p.label;
-                  setGridRowColumn (label, row, 0, 2);
                   label.Classes.Add ("info");
+                  _setGridRowColumn (label, row, 0, 2);
                   grid.Children.Add (label);
                }
 
                p.control = control = p.type switch {
-                  Prop.Type.Text => new TextBox (),
+                  Prop.Type.Text  => new TextBox (),
                   Prop.Type.Combo => new ComboBox (),
                   Prop.Type.Check => new CheckBox () { Content = p.label },
-                  _ => null!
+                                _ => null!
                };
 
-               setGridRowColumn (control, row, 2);
+               _setGridRowColumn (control, row, 2);
 
                if (p.unit != null) {
                   label = new Label ();
                   label.Content = p.unit;
                   label.Classes.Add ("blue");
-                  setGridRowColumn (label, row, 3);
+                  _setGridRowColumn (label, row, 3);
                   grid.Children.Add (label);
                }
                break;
 
             case Prop.Type.DBGrid:
-               p.control = control = dGrid = createDGridColumns (p, f);
-               grid.RowDefinitions[row].Height = new GridLength (1, GridUnitType.Auto);
-               setGridRowColumnDataGrid (dGrid, row);
+               p.control = control = dGrid = _createDBGridColumns (p, f);
+               dGrid.SetCurrentValue (Grid.RowProperty, row);
                break;
          }
 
          if (control != null) {
-            bind (control, f);
-            switch (p.type) {
-               case Prop.Type.Text:
-                  (control as TextBox)!.Bind (TextBox.TextProperty, new Binding (CapitalizeFirstLetter (f.Name)));
-                  break;
+            _bindProp (control, f);
 
-               case Prop.Type.Check:
-                  (control as CheckBox)!.Bind (CheckBox.IsCheckedProperty, new Binding (CapitalizeFirstLetter (f.Name)));
-                  break;
+            (AvaloniaProperty property, Type type)? sp = p.type switch {
+               Prop.Type.Text   => (TextBox.TextProperty, typeof (DataGrid)),
+               Prop.Type.Check  => (CheckBox.IsCheckedProperty, typeof (TextBox)),
+               Prop.Type.Button => (Button.CommandProperty, typeof (Button)),
+               Prop.Type.Combo  => (ComboBox.SelectedItemProperty, typeof (ComboBox)),
+                              _ => null!
+            };
 
-               case Prop.Type.Combo:
-                  if (p != null) {
-                     (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
-                     bindItemSource (control, typeof (ComboBox), p, ComboBox.ItemsSourceProperty);
-                  }
-                  break;
+            if (sp != null) {
+               control.Bind (sp.Value.property, new Binding (_capitalizeFirstLetter (f.Name)));
+               if (p.type == Prop.Type.Combo)
+                  _bindItemSource (control, sp.Value.type, p, ComboBox.ItemsSourceProperty);
             }
 
             grid.Children.Add (control);
@@ -106,25 +123,17 @@ public partial class Panel : Panels.Child {
          row++;
       }
 
-      void setGridRowColumn (Control control, int row, int col, int colSpan = 1) {
+      #region Local function
+      void _setGridRowColumn (Control control, int row, int col, int colSpan = 1) {
          control.SetCurrentValue (Grid.RowProperty, row);
          control.SetCurrentValue (Grid.ColumnProperty, col);
          control.SetCurrentValue (Grid.ColumnSpanProperty, colSpan);
       }
 
-      void setGridRowColumnDataGrid (Control control, int row)
-         => control.SetCurrentValue (Grid.RowProperty, row);
-      
-      string CapitalizeFirstLetter (string str) {
-         if (string.IsNullOrEmpty (str)) {
-            return str; // Return original string if it's null or empty
-         }
+      string _capitalizeFirstLetter (string str)
+         => char.ToUpper (str[0]) + str.Substring (1);
 
-         // Convert the first character to uppercase and concatenate with the rest of the string
-         return char.ToUpper (str[0]) + str.Substring (1);
-      }
-      #region Local function
-      void bind (Control control, FieldInfo f) {
+      void _bindProp (Control control, FieldInfo f) {
          var pbis = f.GetCustomAttributes<PropBind> ()!;
          foreach (var bi in pbis) {
             if (bi == null) continue;
@@ -132,19 +141,19 @@ public partial class Panel : Panels.Child {
          }
       }
 
-      void bindItemSource (AvaloniaObject obj, Type objType, Prop p, AvaloniaProperty itemSourceProperty) {
+      void _bindItemSource (AvaloniaObject obj, Type objType, Prop p, AvaloniaProperty itemSourceProperty) {
          if (p.items != null) {
             Type type = obj.GetType ();
             PropertyInfo piInstance = objType.GetProperty ("ItemsSource")!;
             piInstance.SetValue (obj, p.items);
 
          } else if (p.bindName != null)
-            obj.Bind (itemSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
+            obj.Bind (itemSourceProperty, new Binding (_capitalizeFirstLetter (p.bindName)));
       }
 
-      DataGrid createDGridColumns (Prop p, FieldInfo f) {
+      DataGrid _createDBGridColumns (Prop p, FieldInfo f) {
          var dbGrid = new DataGrid ();
-         bindItemSource (dbGrid, typeof (DataGrid), p, DataGrid.ItemsSourceProperty);
+         _bindItemSource (dbGrid, typeof (DataGrid), p, DataGrid.ItemsSourceProperty);
 
          DataGridColumn column = null!;
          var dbgcis = f.GetCustomAttributes<DBGridColProp> ()!;
@@ -182,7 +191,6 @@ public partial class Panel : Panels.Child {
          Label label = null!;
          TextBlock textBlock = null!;
          DataGrid dGrid = null!;
-         int col, colSpan;
 
          switch (ci.type) {
             case ControlInfo.Type.Group:
@@ -205,15 +213,10 @@ public partial class Panel : Panels.Child {
             case ControlInfo.Type.Text_:
             case ControlInfo.Type.Combo:
             case ControlInfo.Type.Check:
-               col = 0; colSpan = 2;
-               if (ci.type == ControlInfo.Type.Check) {
-                  col = 3; colSpan = 1;
-               } // Back Label for Check, otherwise Front Label
-
                if (ci.type != ControlInfo.Type.Check) {
                   label = new Label ();
                   label.Content = ci.label;
-                  setGridRowColumn (label, row, col, colSpan);
+                  setGridRowColumn (label, row, 0, 2);
                   label.Classes.Add ("info");
                   grid.Children.Add (label);
                }
@@ -240,7 +243,7 @@ public partial class Panel : Panels.Child {
                DGridControlInfo dgi = (DGridControlInfo)ci;
                ci.control = dGrid = createDGridColumns (dgi.columns, dgi.collections);
                grid.RowDefinitions[row].Height = new GridLength (1, GridUnitType.Auto);
-               setGridRowColumnDataGrid (dGrid, row);
+               dGrid.SetCurrentValue (Grid.RowProperty, row);
                break;
          }
 
@@ -260,9 +263,6 @@ public partial class Panel : Panels.Child {
          control.SetCurrentValue (Grid.ColumnProperty, col);
          control.SetCurrentValue (Grid.ColumnSpanProperty, colSpan);
       }
-
-      void setGridRowColumnDataGrid (Control control, int row)
-         => control.SetCurrentValue (Grid.RowProperty, row);
 
       #region Local function
       void bind (Control control, List<ControlInfo.BindInfo> bindInfos) {
