@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace FChassis.Data.Model;
+﻿namespace FChassis.Data.Model;
 [System.AttributeUsage (System.AttributeTargets.Field, AllowMultiple = false)]
 public class Prop (Prop.Type type, string label, string unit = null!, string bindName = null!, object[] items = null!) 
              : System.Attribute {
@@ -39,7 +37,6 @@ public class PropBindInfo (string name, object property)
    public object property = property;
    public string name = name;
 }
-
 
 // -----------------------------------------------------------------
 [System.AttributeUsage (System.AttributeTargets.Field, AllowMultiple = true)]

@@ -97,7 +97,7 @@ public partial class Panel : Panels.Child {
                      (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
                      if (p.items != null)
                         (control as ComboBox)!.ItemsSource = p.items;
-                     else
+                     else if (p.bindName != null)
                         (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
                   }
                   break;
@@ -139,11 +139,11 @@ public partial class Panel : Panels.Child {
          var dGrid = new DataGrid ();
          if (p.items != null)
             dGrid.ItemsSource = p.items;
-         else
-            dGrid.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
+         else if(p.bindName != null) 
+            dGrid.Bind (DataGrid.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
          dGrid.ItemsSource = p.items;
-         DataGridColumn column = null!;
 
+         DataGridColumn column = null!;
          var dbgcis = f.GetCustomAttributes<DBGridColPropInfo> ()!;
          foreach (var dgci in dbgcis) {
             switch (dgci.type) {
