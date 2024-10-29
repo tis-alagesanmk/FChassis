@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace FChassis.Data.Model.Settings.Machine.General; 
-public partial class Machine : ObservableObject{
+namespace FChassis.Data.Model.Settings.Machine.General;
+public partial class Machine : ObservableObject {
    [ObservableProperty, Prop ("General", Prop.Type.Text, "Machine Id")]
    string machineId = "130166";
 
@@ -20,7 +20,7 @@ public partial class Machine : ObservableObject{
    [ObservableProperty, Prop (Prop.Type.Check, "Netdisk server IP address")]
    string netDiskServerIPAddr = "1000,1000";
 
-   [ObservableProperty, Prop (Prop.Type.Check, "Software limit code", null!, null!, "codes")]
+   [ObservableProperty, Prop (Prop.Type.Combo, "Software limit code", null!, null!, ["12", "13", "14", "15", "16"])]
    string code = "14";
 
    [ObservableProperty, Prop (Prop.Type.Text, "Override limit")]

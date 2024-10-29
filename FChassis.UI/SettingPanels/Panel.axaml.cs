@@ -11,12 +11,12 @@ using System.Reflection;
 
 namespace FChassis.UI.Settings;
 public partial class Panel : Panels.Child {
-   internal void AddPropControls (Grid grid, Type type, Type colType = null!) {
+   internal void AddPropControls (Grid grid, Type type) {
       int row = grid.RowDefinitions.Count;
 
       var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
       foreach (FieldInfo f in fields) {
-         Prop p = f.GetCustomAttribute<Prop> ()!;
+         var p = f.GetCustomAttribute<Prop> ()!;
          if (p == null) continue;
 
          Border border = null!;
@@ -74,19 +74,15 @@ public partial class Panel : Panels.Child {
                }
                break;
 
-            case Prop.Type.DGrid:
-               p.control = control = dGrid = createDGridColumns (colType);//createDGridColumns (p.columns, p.collections);
-               dGrid.Bind (DataGrid.ItemsSourceProperty, new Binding (p.itemsName));
+            case Prop.Type.DBGrid:
+               p.control = control = dGrid = createDGridColumns (p, f);
                grid.RowDefinitions[row].Height = new GridLength (1, GridUnitType.Auto);
                setGridRowColumnDataGrid (dGrid, row);
                break;
          }
 
          if (control != null) {
-            List<Prop.BindInfo> bis = p.bindInfos!;
-            if (bis != null)
-               bind (control, bis!);
-
+            bind (control, f);
             switch (p.type) {
                case Prop.Type.Text:
                   (control as TextBox)!.Bind (TextBox.TextProperty, new Binding (CapitalizeFirstLetter (f.Name)));
@@ -97,11 +93,13 @@ public partial class Panel : Panels.Child {
                   break;
 
                case Prop.Type.Combo:
-                  (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
-                  if (p.items != null)
-                     (control as ComboBox)!.ItemsSource = p.items;
-                  else
-                     (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.itemsName)));
+                  if (p != null) {
+                     (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
+                     if (p.items != null)
+                        (control as ComboBox)!.ItemsSource = p.items;
+                     else if (p.bindName != null)
+                        (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
+                  }
                   break;
             }
 
@@ -119,7 +117,7 @@ public partial class Panel : Panels.Child {
 
       void setGridRowColumnDataGrid (Control control, int row)
          => control.SetCurrentValue (Grid.RowProperty, row);
-      
+
       string CapitalizeFirstLetter (string str) {
          if (string.IsNullOrEmpty (str)) {
             return str; // Return original string if it's null or empty
@@ -129,25 +127,29 @@ public partial class Panel : Panels.Child {
          return char.ToUpper (str[0]) + str.Substring (1);
       }
       #region Local function
-      void bind (Control control, List<Prop.BindInfo> bindInfos) {
-         foreach (Prop.BindInfo bi in bindInfos) {
+      void bind (Control control, FieldInfo f) {
+         var pbis = f.GetCustomAttributes<PropBindInfo> ()!;
+         foreach (var bi in pbis) {
             if (bi == null) continue;
             control.Bind ((AvaloniaProperty)bi.property, new Binding (bi.name));
          }
       }
 
-      DataGrid createDGridColumns (Type type) {
-         DataGrid dGrid = new DataGrid ();
-         //dGrid.ItemsSource = collections;
-         DataGridColumn column = null!;
+      DataGrid createDGridColumns (Prop p, FieldInfo f) {
+         var dGrid = new DataGrid ();
+         if (p.items != null)
+            dGrid.ItemsSource = p.items;
+         else if (p.bindName != null)
+            dGrid.Bind (DataGrid.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
+         dGrid.ItemsSource = p.items;
 
-         var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-         foreach (var f in fields) {
-            Prop? p = f.GetCustomAttribute<Prop> ();
-            switch (p.type) {
+         DataGridColumn column = null!;
+         var dbgcis = f.GetCustomAttributes<DBGridColPropInfo> ()!;
+         foreach (var dgci in dbgcis) {
+            switch (dgci.type) {
                case Prop.Type.Text:
                   column = new DataGridTextColumn ();
-                  ((DataGridTextColumn)column).Binding = new Binding (p.dGridPath);
+                  ((DataGridTextColumn)column).Binding = new Binding (dgci.bindName);
                   break;
 
                case Prop.Type.Check:
@@ -158,10 +160,11 @@ public partial class Panel : Panels.Child {
             if (column == null)
                continue;
 
-            column.Header = p.label;
+            column.Header = dgci.header;
             dGrid.Columns.Add (column);
             column = null!;
          }
+
          return dGrid;
       }
       #endregion Local function
@@ -215,7 +218,7 @@ public partial class Panel : Panels.Child {
                ci.control = ci.type switch {
                   ControlInfo.Type.Text_ => new TextBox (),
                   ControlInfo.Type.Combo => new ComboBox (),
-                  ControlInfo.Type.Check => new CheckBox () { Content = ci.label},
+                  ControlInfo.Type.Check => new CheckBox () { Content = ci.label },
                   _ => null!
                };
 
@@ -262,10 +265,11 @@ public partial class Panel : Panels.Child {
       void bind (Control control, List<ControlInfo.BindInfo> bindInfos) {
          foreach (ControlInfo.BindInfo bi in bindInfos) {
             if (bi == null) continue;
-            control.Bind (bi.property, bi.binding); }
+            control.Bind (bi.property, bi.binding);
          }
+      }
 
-         DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis, IEnumerable collections) {
+      DataGrid createDGridColumns (DGridControlInfo.ColInfo[] dgcis, IEnumerable collections) {
          DataGrid dGrid = new DataGrid ();
          dGrid.ItemsSource = collections;
          DataGridColumn column = null!;
@@ -319,10 +323,10 @@ internal class ControlInfo (ControlInfo.Type type, string label, string unit = n
 
    internal Control control = null!;
    internal object binding = null!;
-   internal List<BindInfo> bindInfos = new();
+   internal List<BindInfo> bindInfos = new ();
 
    #region Inner Class --------------------------------------------------------
-   internal class BindInfo(string name, AvaloniaProperty property) {
+   internal class BindInfo (string name, AvaloniaProperty property) {
       internal AvaloniaProperty property = property;
       internal Binding binding = new Binding (name);
    }
@@ -338,13 +342,14 @@ internal class GroupControlInfo : ControlInfo {
 internal class _TextControlInfo : ControlInfo {
    internal _TextControlInfo (string label, string bindName, string unitName = null!)
       : base (Type.Text_, label, unitName) {
-      this.bindInfos = [Bind (bindName, TextBox.TextProperty)]; }
+      this.bindInfos = [Bind (bindName, TextBox.TextProperty)];
+   }
 }
 
 internal class ComboControlInfo : ControlInfo {
    internal ComboControlInfo (string label, string bindName, string itemsName, string unitName = null!)
       : base (Type.Combo, label, unitName) {
-      this.bindInfos.Add(Bind (bindName, ComboBox.SelectedItemProperty));
+      this.bindInfos.Add (Bind (bindName, ComboBox.SelectedItemProperty));
       if (itemsName != null)
          this.bindInfos.Add (Bind (itemsName, ComboBox.ItemsSourceProperty));
    }
@@ -353,13 +358,15 @@ internal class ComboControlInfo : ControlInfo {
 internal class CheckControlInfo : ControlInfo {
    internal CheckControlInfo (string label, string bindName)
       : base (Type.Check, label) {
-         this.bindInfos = [Bind (bindName, CheckBox.IsCheckedProperty)]; }
+      this.bindInfos = [Bind (bindName, CheckBox.IsCheckedProperty)];
+   }
 }
 
 internal class ButtonControlInfo : ControlInfo {
    internal ButtonControlInfo (string label, string bindName)
       : base (Type.Button, label) {
-         this.bindInfos = [Bind (bindName, Avalonia.Controls.Button.CommandProperty)]; }
+      this.bindInfos = [Bind (bindName, Avalonia.Controls.Button.CommandProperty)];
+   }
 }
 
 internal class DGridControlInfo : ControlInfo {

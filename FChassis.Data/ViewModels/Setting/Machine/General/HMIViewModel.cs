@@ -1,9 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis.Data.ViewModel.Settings.Machine.General;
 public partial class HMIViewModel : Model.Settings.Machine.General.HMI {
-   [ObservableProperty] string[] orientations = ["Portrait", "Landscape"];
-   [ObservableProperty] string[] plcMessages = ["Only error", "Warn & error", "info, warn & error"];
-   [ObservableProperty] string[] themes = ["Grey", "Blue"];
-   [ObservableProperty] string[] languages = ["EN", "FR"];
+   [ObservableProperty]
+   object[] gridItems = [
+      (Col1: "Col11", Col2: "Col12"),
+      (Col1: "Col21", Col2: "Col22"),
+      ];
 }
