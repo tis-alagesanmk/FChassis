@@ -95,10 +95,7 @@ public partial class Panel : Panels.Child {
                case Prop.Type.Combo:
                   if (p != null) {
                      (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
-                     if (p.items != null)
-                        (control as ComboBox)!.ItemsSource = p.items;
-                     else if (p.bindName != null)
-                        (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
+                     bindItemSource (control, typeof (ComboBox), p, ComboBox.ItemsSourceProperty);
                   }
                   break;
             }
@@ -128,23 +125,29 @@ public partial class Panel : Panels.Child {
       }
       #region Local function
       void bind (Control control, FieldInfo f) {
-         var pbis = f.GetCustomAttributes<PropBindInfo> ()!;
+         var pbis = f.GetCustomAttributes<PropBind> ()!;
          foreach (var bi in pbis) {
             if (bi == null) continue;
             control.Bind ((AvaloniaProperty)bi.property, new Binding (bi.name));
          }
       }
 
+      void bindItemSource (AvaloniaObject obj, Type objType, Prop p, AvaloniaProperty itemSourceProperty) {
+         if (p.items != null) {
+            Type type = obj.GetType ();
+            PropertyInfo piInstance = objType.GetProperty ("ItemsSource")!;
+            piInstance.SetValue (obj, p.items);
+
+         } else if (p.bindName != null)
+            obj.Bind (itemSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
+      }
+
       DataGrid createDGridColumns (Prop p, FieldInfo f) {
-         var dGrid = new DataGrid ();
-         if (p.items != null)
-            dGrid.ItemsSource = p.items;
-         else if(p.bindName != null) 
-            dGrid.Bind (DataGrid.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
-         dGrid.ItemsSource = p.items;
+         var dbGrid = new DataGrid ();
+         bindItemSource (dbGrid, typeof (DataGrid), p, DataGrid.ItemsSourceProperty);
 
          DataGridColumn column = null!;
-         var dbgcis = f.GetCustomAttributes<DBGridColPropInfo> ()!;
+         var dbgcis = f.GetCustomAttributes<DBGridColProp> ()!;
          foreach (var dgci in dbgcis) {
             switch (dgci.type) {
                case Prop.Type.Text:
@@ -161,11 +164,11 @@ public partial class Panel : Panels.Child {
                continue;
 
             column.Header = dgci.header;
-            dGrid.Columns.Add (column);
+            dbGrid.Columns.Add (column);
             column = null!;
          }
 
-         return dGrid;
+         return dbGrid;
       }
       #endregion Local function
    }
