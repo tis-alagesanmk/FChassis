@@ -1,5 +1,4 @@
 ﻿using FChassis.UI.SettingPanels.Laser.Model;
-using FChassis.UI.SettingPanels.Machine.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

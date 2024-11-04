@@ -16,7 +16,7 @@ public partial class Panel : Panels.Child {
 
       var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
       foreach (FieldInfo f in fields) {
-         Prop p = f.GetCustomAttribute<Prop> ()!;
+         var p = f.GetCustomAttribute<Prop> ()!;
          if (p == null) continue;
 
          Border border = null!;
@@ -74,21 +74,18 @@ public partial class Panel : Panels.Child {
                }
                break;
 
-            case Prop.Type.DGrid:
-               p.control = control = dGrid = createDGridColumns (p.columns, p.collections);
+            case Prop.Type.DBGrid:
+               p.control = control = dGrid = createDGridColumns (p, f);
                grid.RowDefinitions[row].Height = new GridLength (1, GridUnitType.Auto);
                setGridRowColumnDataGrid (dGrid, row);
                break;
          }
 
          if (control != null) {
-            List<Prop.BindInfo> bis = p.bindInfos!;
-            if (bis != null)
-               bind (control, bis!);
-
+            bind (control, f);
             switch (p.type) {
                case Prop.Type.Text:
-                  (control as TextBox)!.Bind (TextBox.TextProperty, new Binding (CapitalizeFirstLetter (f.Name)));
+                  (control as TextBox)!.Bind (TextBox.TextProperty, new Binding (CapitalizeFirstLetter (f.Name),BindingMode.TwoWay));
                   break;
 
                case Prop.Type.Check:
@@ -96,8 +93,13 @@ public partial class Panel : Panels.Child {
                   break;
 
                case Prop.Type.Combo:
-                  (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
-                  (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.itemsName)));
+                  if (p != null) {
+                     (control as ComboBox)!.Bind (ComboBox.SelectedItemProperty, new Binding (CapitalizeFirstLetter (f.Name)));
+                     if (p.items != null)
+                        (control as ComboBox)!.ItemsSource = p.items;
+                     else
+                        (control as ComboBox)!.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
+                  }
                   break;
             }
 
@@ -125,18 +127,25 @@ public partial class Panel : Panels.Child {
          return char.ToUpper (str[0]) + str.Substring (1);
       }
       #region Local function
-      void bind (Control control, List<Prop.BindInfo> bindInfos) {
-         foreach (Prop.BindInfo bi in bindInfos) {
+      void bind (Control control, FieldInfo f) {
+         var pbis = f.GetCustomAttributes<PropBindInfo> ()!;
+         foreach (var bi in pbis) {
             if (bi == null) continue;
             control.Bind ((AvaloniaProperty)bi.property, new Binding (bi.name));
          }
       }
 
-      DataGrid createDGridColumns (Prop.ColInfo[] dgcis, IEnumerable collections) {
-         DataGrid dGrid = new DataGrid ();
-         dGrid.ItemsSource = collections;
+      DataGrid createDGridColumns (Prop p, FieldInfo f) {
+         var dGrid = new DataGrid ();
+         if (p.items != null)
+            dGrid.ItemsSource = p.items;
+         else
+            dGrid.Bind (ComboBox.ItemsSourceProperty, new Binding (CapitalizeFirstLetter (p.bindName)));
+         dGrid.ItemsSource = p.items;
          DataGridColumn column = null!;
-         foreach (var dgci in dgcis) {
+
+         var dbgcis = f.GetCustomAttributes<DBGridColPropInfo> ()!;
+         foreach (var dgci in dbgcis) {
             switch (dgci.type) {
                case Prop.Type.Text:
                   column = new DataGridTextColumn ();
@@ -210,7 +219,7 @@ public partial class Panel : Panels.Child {
                   ControlInfo.Type.Text_ => new TextBox (),
                   ControlInfo.Type.Combo => new ComboBox (),
                   ControlInfo.Type.Check => new CheckBox () { Content = ci.label},
-                  _ => null!
+                                       _ => null!
                };
 
                setGridRowColumn (ci.control, row, 2);
