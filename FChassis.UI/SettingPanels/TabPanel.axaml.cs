@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using FChassis.Data.Interfaces;
 using FChassis.Data.Model;
 using FChassis.Data.ViewModel.Settings.Machine.General;
 using FChassis.UI.Panels;
