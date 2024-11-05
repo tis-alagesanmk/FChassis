@@ -8,12 +8,10 @@ namespace FChassis.UI.Settings.Machine.TechParams;
 public partial class ExhaustSysSettings : Panel {
    
    public ExhaustSysSettings () {
+
       AvaloniaXamlLoader.Load (this);
-      ExhaustSystemViewModel vm = new ExhaustSystemViewModel ();
-      this.DataContext = vm;
-      Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
-      if (grid != null)
-            this.AddPropControls (grid, typeof(ExhaustSystem));
+     
+      this.AddPropControls (typeof(ExhaustSystem));
    }
 
    //private void AddControls () {

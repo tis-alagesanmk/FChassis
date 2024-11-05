@@ -21,9 +21,9 @@ public partial class HMI : ObservableObject {
    [ObservableProperty, Prop (Prop.Type.Check, "Caption for command-bar icons")]
    bool? captionForcommandBarIcons = true;
 
-   [ObservableProperty, Prop (Prop.Type.DBGrid, "Mini player", null!, "BindName"), 
-                        DBGridColPropInfo (Prop.Type.Text, "ColumnName1", "BindName1"), 
-                        DBGridColPropInfo (Prop.Type.Text, "ColumnName2", "BindName2")]
+   [ObservableProperty, Prop (Prop.Type.DBGrid, "Mini player", null!, "gridItems"), 
+                        DBGridColProp (Prop.Type.Text, "ColumnName1", "Col1"),
+                        DBGridColProp (Prop.Type.Text, "ColumnName2", "Col2")]
    bool? miniPlayer = true;
 
    [ObservableProperty, Prop (Prop.Type.Combo, "Language", null!, null!, ["EN", "FR"])]
