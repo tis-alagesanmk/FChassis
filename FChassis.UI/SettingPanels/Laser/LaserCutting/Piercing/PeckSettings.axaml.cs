@@ -6,10 +6,7 @@ public partial class PeckSettings : Panel {
 
    public PeckSettings () {
       AvaloniaXamlLoader.Load (this);
-      this.AddControls ();
-   }
 
-   private void AddControls() {
       ControlInfo[] controlInfos = new ControlInfo[] {
          CreatePeckSettingDGrid1 (),
          CreatePeckSettingDGrid2 (),
@@ -46,6 +43,5 @@ public partial class PeckSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion
-
    }
 }

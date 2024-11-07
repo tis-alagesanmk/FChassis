@@ -7,10 +7,10 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
       bool? unitForDXFFiles = true;
 
 
-      [ObservableProperty, Prop ("Cutting", Prop.Type.Combo, "Choose cutting condition by", null, null, ["Max.segment length","Avg.segment length","Area",])]
+      [ObservableProperty, Prop ("Cutting", Prop.Type.Combo, "Choose cutting condition by", null!, null!, ["Max.segment length","Avg.segment length","Area",])]
       string? chooseCuttingConditionBy = "Avg.segment length";
 
-      [ObservableProperty, Prop (Prop.Type.Combo, "Process for open polylines", null, null, ["None", "Mark", "Cut","EopenPlineProcess.ByLayer"])]
+      [ObservableProperty, Prop (Prop.Type.Combo, "Process for open polylines", null!, null!, ["None", "Mark", "Cut","EopenPlineProcess.ByLayer"])]
       string? processForOpenPolylines = "EopenPlineProcess.ByLayer";
 
 
@@ -23,7 +23,5 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
 
       [ObservableProperty, Prop (Prop.Type.Text, "Approach length for separating cuts")]
       double? approachLengthForSeparatingCuts = 2.32;
-
-
    }
 }

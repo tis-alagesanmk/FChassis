@@ -5,9 +5,7 @@ namespace FChassis.UI.Settings.Laser.LaserCutting.Piercing;
 public partial class DotPunchSettings : Panel {
    public DotPunchSettings () {
       AvaloniaXamlLoader.Load (this);
-      this.AddControls ();
-   }
-   private void AddControls () {
+
       ControlInfo[] controlInfos = new ControlInfo[] {
        CreateDGridDotPunch(),
       };
@@ -29,6 +27,5 @@ public partial class DotPunchSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion
-
    }
 }

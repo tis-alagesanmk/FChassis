@@ -35,6 +35,7 @@ public partial class TabPanel : Panel {
       int t = 0;
       foreach (var panel in panels) {
          TabItem? tabItem = tabControl.Items[t++] as TabItem;
+         this.LoadJsonData (panel);
          if(tabItem != null) 
             tabItem.Content = panel;
       }
@@ -50,30 +51,39 @@ public partial class TabPanel : Panel {
          Child.mainWindow?.Switch2MainPanel ();
 
          DataContainer dataContainer = new DataContainer ();
-         LocalSettings settings = new LocalSettings (dataContainer);
+         LocalJson settings = new LocalJson (dataContainer);
 
          foreach (var tabitem in tabControl.Items) {
-            this.LoadJson (tabitem as TabItem, settings);
+            this.SaveAppData ((tabitem as TabItem)!, settings);
          }
       }
    }
 
-   protected void LoadJson(TabItem tabItem,LocalSettings settings) {
-      TabPanel tabPanel = ((TabPanel)(tabItem.Content as Panel));
-      if (tabPanel == null) return;
+   protected void SaveAppData(TabItem tabItem,LocalJson json) 
+   {
+      TabPanel? tabPanel = tabItem.Content as TabPanel;
+      if (tabPanel is null) return;
+
       Panel[] panels = tabPanel.panels;
-      foreach(var panel in panels) {
+      foreach(var panel in panels) 
+      {
          var context = panel.DataContext;
-         if (context != null && context is HMI) {
-            var model = (HMI)context;
-            settings.data.HMI = model;
-         } else if (context != null && context is FChassis.Data.Model.Settings.Machine.General.Machine) {
-            var model = (FChassis.Data.Model.Settings.Machine.General.Machine)context;
-            settings.data.Machine = model;
-         }     
+         if(context is null) continue;
+         json.GetData (context);
       }
 
-      settings.Save ();
+      json.Save ();
+   } 
+
+   protected void LoadJsonData(Panel panel) 
+   {
+      if(panel is null) return;
+       
+      DataContainer dataContainer = null!;
+      LocalJson json = new LocalJson (dataContainer);
+
+      json.Load ();
+      panel.DataContext = json.LoadData(panel.DataContext!);
    }
 
    virtual protected void TabItemSelected (TabItem? tabItem, string? tabName) { }

@@ -5,9 +5,7 @@ namespace FChassis.UI.Settings.Laser.LaserCutting.Piercing;
 public partial class NormalSettings : Panel {
    public NormalSettings () {
       AvaloniaXamlLoader.Load (this);
-      this.AddControls ();
-   }
-   private void AddControls () {
+
       ControlInfo[] controlInfos = new ControlInfo[] {
        CreateDGridNormal(),
       };
@@ -29,6 +27,5 @@ public partial class NormalSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion
-
    }
 }

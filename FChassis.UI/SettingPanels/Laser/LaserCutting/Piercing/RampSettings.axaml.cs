@@ -34,6 +34,5 @@ public partial class RampSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion
-
    }
 }

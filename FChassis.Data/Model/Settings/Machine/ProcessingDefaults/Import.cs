@@ -3,7 +3,7 @@
 namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class Import : ObservableObject {
 
-       [ObservableProperty,Prop ("Import settings", Prop.Type.Combo, "", null, null, ["mm","inch"])]
+       [ObservableProperty,Prop ("Import settings", Prop.Type.Combo, "", null!, null!, ["mm","inch"])]
        string? unitForDXFFiles = "mm";
 
        [ObservableProperty, Prop (Prop.Type.Text, "Stitch together lines/arcs closer than this")]
@@ -27,7 +27,7 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
       [ObservableProperty, Prop ("DXF Settings", Prop.Type.Check, "Angles in DXF are interior angles")]
       bool? anglesInDXFAreInteriorAngles = true;
 
-      [ObservableProperty, Prop ("Spline Coversion", Prop.Type.Combo, "Covert splines on import", null, null, ["Off","Lines","Arcs"])]
+      [ObservableProperty, Prop ("Spline Coversion", Prop.Type.Combo, "Covert splines on import", null!, null!, ["Off","Lines","Arcs"])]
       string? covertSplinesOnImport = "Lines";
 
       [ObservableProperty, Prop ("Layer mapping", Prop.Type.Text, "Auxilary Layers Names")]
@@ -35,6 +35,5 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
 
       [ObservableProperty, Prop (Prop.Type.Text, "Mark Layers Names")]
       string? markLayersNames = "_AUX,AUX,BENDLIMIT";
-
    }
 }

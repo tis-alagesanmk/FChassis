@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO; 
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FChassis.Data.JsonDB {
    public class LocalBase {
@@ -15,26 +10,16 @@ namespace FChassis.Data.JsonDB {
       }
       private string CreateFolderPath(string name) 
       {
-         string exePath = Assembly.GetExecutingAssembly ().Location;
-         string exeDirectory = Path.GetDirectoryName (exePath);
-         string newFolderPath = Path.Combine (exeDirectory, name);
-         try 
+         string? exePath = Assembly.GetExecutingAssembly ().Location;
+         string? exeDirectory = Path.GetDirectoryName (exePath);
+         string? folderPath = Path.Combine (exeDirectory, name);
+       
+         if (!Directory.Exists (folderPath)) 
          {
-            if (!Directory.Exists (newFolderPath)) 
-            {
-               Directory.CreateDirectory (newFolderPath);
-               Console.WriteLine ($"Folder created at: {newFolderPath}");
-            } 
-            else 
-            {
-               Console.WriteLine ($"Folder already exists at: {newFolderPath}");
-            }
+            Directory.CreateDirectory (folderPath);
          } 
-         catch (Exception ex) 
-         {
-            Console.WriteLine ($"Error creating folder: {ex.Message}");
-         }
-         return newFolderPath;
+       
+         return folderPath;
       }
    }
 }

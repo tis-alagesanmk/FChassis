@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis.Data.Model.Settings.Machine.General; 
-public partial class Machine : ObservableObject{
+public partial class Machine : ObservableObject {
    [ObservableProperty, Prop ("General", Prop.Type.Text, "Machine Id")]
    string machineId = "130166";
 
@@ -64,8 +64,6 @@ public partial class Machine : ObservableObject{
    [ObservableProperty, Prop (Prop.Type.Text, "Creep speed velocity", "m/min")]
    string creepSpeedVelocity = "1";
 
-
-
    [ObservableProperty, Prop ("Memory reservation", Prop.Type.Text, "Block count")]
    string blockCount = "1024";
 
@@ -74,5 +72,4 @@ public partial class Machine : ObservableObject{
 
    [ObservableProperty, Prop (Prop.Type.Text, "Parameter aray size")]
    string parameterArraySize = "10000";
-
 }

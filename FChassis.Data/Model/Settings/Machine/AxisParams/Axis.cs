@@ -6,10 +6,10 @@ namespace FChassis.Data.Model.Setting.Machine.AxisParams {
       [ObservableProperty, Prop ("Configuration parameters", Prop.Type.Check, "Advanced")]
       bool? advanced;
 
-      [ObservableProperty, Prop (Prop.Type.Combo, "Axis type", null, null, ["Linear Axis","Rotary Axis"])]
+      [ObservableProperty, Prop (Prop.Type.Combo, "Axis type", null!, null!, ["Linear Axis","Rotary Axis"])]
       string? axisType = "Linear Axis";
 
-      [ObservableProperty, Prop (Prop.Type.Combo,"Axis connection", null, null, ["Analog Axis","CAN Axis","Virtual Axis", "EtherCAT Axis"])]     
+      [ObservableProperty, Prop (Prop.Type.Combo,"Axis connection", null!, null!, ["Analog Axis","CAN Axis","Virtual Axis", "EtherCAT Axis"])]     
       string? axisConnection = "EtherCAT Axis";
 
       [ObservableProperty, Prop (Prop.Type.Text, "Axis address")]
@@ -98,6 +98,5 @@ namespace FChassis.Data.Model.Setting.Machine.AxisParams {
 
       [ObservableProperty, Prop ("Handwheel", Prop.Type.Text, "Handwheel factor")]
       double? handwheelFactor = 12.3;
-
    }
 }

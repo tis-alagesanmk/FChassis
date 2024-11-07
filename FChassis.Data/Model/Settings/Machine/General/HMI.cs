@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace FChassis.Data.Model.Settings.Machine.General;
 public partial class HMI : ObservableObject {
@@ -34,6 +33,7 @@ public partial class HMI : ObservableObject {
 
    [ObservableProperty, Prop ("Screen size", Prop.Type.Text, "Width")]
    double? width = 10;
+   
    partial void OnWidthChanged (double? oldValue, double? newValue) {
      this.Width = newValue;
    }

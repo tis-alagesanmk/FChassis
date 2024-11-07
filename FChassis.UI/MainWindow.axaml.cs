@@ -9,20 +9,11 @@ public partial class MainWindow : Window {
    public MainWindow () {
       InitializeComponent ();
 
-      this.LoadJSON ();
-
       FChassis.UI.Panels.Child.mainWindow = this;
       this.mainPanel.switchPanel ();
    }
 
    internal void Switch2MainPanel () {
       this.mainPanel.switchPanel ();
-   }
-   internal void LoadJSON() {
-
-      DataContainer dataContainer = null;
-      LocalSettings settings = new LocalSettings (dataContainer);
-
-      dataContainer = settings.Load ();
    }
 }
