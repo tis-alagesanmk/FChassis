@@ -3,12 +3,9 @@ using Avalonia.Controls;
 
 namespace FChassis.UI.Settings.Laser.LaserCutting.Piercing;
 public partial class SingleSettings : Panel {
-   public SingleSettings () 
-   {
+   public SingleSettings () {
       AvaloniaXamlLoader.Load (this);
-      this.AddControls ();
-   }
-   private void AddControls () {
+
       ControlInfo[] controlInfos = new ControlInfo[] {
        CreateDGridSingle(),
       };
@@ -30,6 +27,5 @@ public partial class SingleSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion
-
    }
 }

@@ -1,16 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using FChassis.Data.Model;
-using FChassis.Data.ViewModel.Settings.Machine.General;
 using FChassis.UI.Panels;
-using System.Collections.Generic;
-using System.Reflection;
-using System;
-using System.Linq;
-using FChassis.Data.ViewModels;
 using FChassis.Data.Model.Settings.Machine.General;
 using FChassis.Data.JsonDB;
-using System.Reflection.PortableExecutable;
 
 namespace FChassis.UI.Settings;
 public partial class TabPanel : Panel {

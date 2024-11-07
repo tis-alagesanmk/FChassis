@@ -98,6 +98,5 @@ namespace FChassis.Data.Model.Setting.Machine.AxisParams {
 
       [ObservableProperty, Prop ("Handwheel", Prop.Type.Text, "Handwheel factor")]
       double? handwheelFactor = 12.3;
-
    }
 }

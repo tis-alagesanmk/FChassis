@@ -5,6 +5,5 @@ using FChassis.Data.Model.Settings.Machine.TechParams;
 using System.Collections.ObjectModel;
 
 namespace FChassis.Data.ViewModels.Setting.Machine.TechParams {
-   public partial class ExhaustSystemViewModel  { 
-      }
+   public partial class ExhaustSystemViewModel {}
 }

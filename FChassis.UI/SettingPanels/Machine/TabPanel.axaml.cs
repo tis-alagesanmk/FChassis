@@ -6,11 +6,11 @@ public partial class TabPanel : Settings.TabPanel {
    public TabPanel () : base() {
       AvaloniaXamlLoader.Load (this);
       this.PopulateTabItemContent ([
-         new FChassis.UI.Settings.Machine.General.TabPanel(),
-         new FChassis.UI.Settings.Machine.AxisParams.TabPanel(),
-         new FChassis.UI.Settings.Machine.TechParams.TabPanel(),
-         new FChassis.UI.Settings.Machine.PLCOptions.TabPanel(),
-         new FChassis.UI.Settings.Machine.ProcessingDefaults.TabPanel(),
+         new General.TabPanel(),
+         new AxisParams.TabPanel(),
+         new TechParams.TabPanel(),
+         new PLCOptions.TabPanel(),
+         new ProcessingDefaults.TabPanel(),
       ]);
    }
 

@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace FChassis.Data.Model.Settings.Machine.General;
 public partial class HMI : ObservableObject {

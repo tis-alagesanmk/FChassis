@@ -2,7 +2,6 @@
 
 namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class Sequence : ObservableObject {
-
       [ObservableProperty, Prop ("Laser Sequence", Prop.Type.Combo, "Laser processing sequence", null!, null!, ["Standard", "MarkCut","PierceCut", "MarkPierceCut", "PierceMarkCut"])]
       string? laserProcessingSeq = "Standard";
 

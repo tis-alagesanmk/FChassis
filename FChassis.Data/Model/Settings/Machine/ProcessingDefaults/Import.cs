@@ -35,6 +35,5 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
 
       [ObservableProperty, Prop (Prop.Type.Text, "Mark Layers Names")]
       string? markLayersNames = "_AUX,AUX,BENDLIMIT";
-
    }
 }
