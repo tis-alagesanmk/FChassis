@@ -5,12 +5,8 @@ namespace FChassis.UI.Settings.Laser.LaserCutting.Piercing;
 public partial class MultipleSettings : Panel {
 
    public MultipleSettings () { 
-
       AvaloniaXamlLoader.Load (this);
-      this.AddControls ();  
-   }
 
-   private void AddControls () {
       ControlInfo[] controlInfos = new ControlInfo[] {
          CreateMultipleSettingDGrid1 (),
          CreateMultipleSettingDGrid2 (),
@@ -53,6 +49,5 @@ public partial class MultipleSettings : Panel {
          return dGridCrtlInfo;
       }
       #endregion
-
    }
 }

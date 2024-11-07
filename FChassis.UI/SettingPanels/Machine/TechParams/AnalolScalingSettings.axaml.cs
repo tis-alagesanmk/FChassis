@@ -1,19 +1,11 @@
 using Avalonia.Markup.Xaml;
-using Avalonia.Controls;
+using FChassis.Data.Model.Settings.Machine.TechParams;
 
 namespace FChassis.UI.Settings.Machine.TechParams;
 public partial class AnalogScalingSettings : Panel {
    public AnalogScalingSettings () {
       AvaloniaXamlLoader.Load (this);
 
-      ControlInfo[] ctrlInfos = new ControlInfo[29];
-      ctrlInfos[0] = new GroupControlInfo("Chennals");
-
-      for (int i = 1; i <= 28; i++) 
-         ctrlInfos[i] = new _TextControlInfo ($"Chennal {i}", null!);
-
-      Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
-      if (grid != null)
-         this.AddParameterControls (grid, ctrlInfos);
+      this.AddPropControls (typeof(AnalogScaling));
    }
 }

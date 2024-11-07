@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800"
 			 Background="White"
+			 xmlns:vm="using:FChassis.Data.ViewModels.Setting.Machine.ProcessingDefaults"
 			 xmlns:base="FChassis.UI.Settings"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.SkeletonCutsSettings">
-	<ScrollViewer>
-		<Grid  ColumnDefinitions="20* 20* 20* 20* 20*"/>
-	</ScrollViewer>
+	<UserControl.DataContext>
+		<vm:SkeletonCutsViewModel/>
+	</UserControl.DataContext>
 </base:Panel>

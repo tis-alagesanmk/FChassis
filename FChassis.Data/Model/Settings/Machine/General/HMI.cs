@@ -20,9 +20,9 @@ public partial class HMI : ObservableObject {
    [ObservableProperty, Prop (Prop.Type.Check, "Caption for command-bar icons")]
    bool? captionForcommandBarIcons = true;
 
-   [ObservableProperty, Prop (Prop.Type.DBGrid, "Mini player", null!, "gridItems"),
-                        DBGridColPropInfo (Prop.Type.Text, "ColumnName1", "Col1"),
-                        DBGridColPropInfo (Prop.Type.Text, "ColumnName2", "Col2")]
+   [ObservableProperty, Prop (Prop.Type.DBGrid, "Mini player", null!, "gridItems"), 
+                        DBGridColProp (Prop.Type.Text, "ColumnName1", "Col1"),
+                        DBGridColProp (Prop.Type.Text, "ColumnName2", "Col2")]
    bool? miniPlayer = true;
 
    [ObservableProperty, Prop (Prop.Type.Combo, "Language", null!, null!, ["EN", "FR"])]
@@ -33,6 +33,10 @@ public partial class HMI : ObservableObject {
 
    [ObservableProperty, Prop ("Screen size", Prop.Type.Text, "Width")]
    double? width = 10;
+   
+   partial void OnWidthChanged (double? oldValue, double? newValue) {
+     this.Width = newValue;
+   }
 
    [ObservableProperty, Prop (Prop.Type.Text, "Height")]
    double? height = 10;

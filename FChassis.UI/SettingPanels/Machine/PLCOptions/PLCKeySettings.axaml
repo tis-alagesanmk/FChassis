@@ -10,7 +10,5 @@
 		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
 		xmlns:model="using:FChassis.UI.SettingPanels.Machine.Model"
 		Background="White">
-	<ScrollViewer>
-		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
-	</ScrollViewer>
+	"PLCKeySettings"
 </base:Panel>

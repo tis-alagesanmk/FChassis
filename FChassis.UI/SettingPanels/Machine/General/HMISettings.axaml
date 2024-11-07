@@ -14,7 +14,4 @@
 	<UserControl.DataContext>
 		<vm:HMIViewModel/>
 	</UserControl.DataContext>
-	<ScrollViewer>
-		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
-	</ScrollViewer>
 </base:Panel>
