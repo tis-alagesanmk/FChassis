@@ -12,7 +12,7 @@ namespace FChassis.Data.JsonDB {
       {
          string? exePath = Assembly.GetExecutingAssembly ().Location;
          string? exeDirectory = Path.GetDirectoryName (exePath);
-         string? folderPath = Path.Combine (exeDirectory, name);
+         string? folderPath = Path.Combine (exeDirectory!, name);
        
          if (!Directory.Exists (folderPath)) 
          {

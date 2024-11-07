@@ -23,26 +23,28 @@ namespace FChassis.Data.JsonDB {
          this.data = JsonSerializer.Deserialize<DataContainer> (json)!;
 
       }
-
+       
       public void GetData(object dataContext) 
       {
-         object? context = dataContext switch 
-         {
-             HMI     => this.data.HMI = (HMI) dataContext,
-             Machine => this.data.Machine = (Machine)dataContext,
-             _       => null
-         };
+         switch (dataContext) {
+            case HMI:
+               this.data!.HMI = dataContext as HMI; break;
+            case Machine:
+               this.data!.Machine = dataContext as Machine; break;
+            default:
+               break;
+         }
       }
       public object LoadData (object dataContext) 
       {
          object? context = dataContext switch 
          {
-            HMI     => this.data.HMI ,
-            Machine => this.data.Machine,
+            HMI     => this.data?.HMI ,
+            Machine => this.data?.Machine,
             _       => null
          };
 
-         return context;
+         return context!;
       }
    }
 }
