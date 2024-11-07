@@ -8,13 +8,10 @@
 		d:DesignWidth="800"
         x:Class="FChassis.UI.Settings.Machine.TechParams.ExhaustSysSettings"
 		xmlns:base="FChassis.UI.Settings"
-		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
+		xmlns:vm="using:FChassis.Data.ViewModels.Setting.Machine.TechParams"
 		Background="White"
 		>
-	<Design.DataContext>
-		<vm:ExhaustSystemViewModel/> 
-	</Design.DataContext>
-	<ScrollViewer>
-		<Grid ColumnDefinitions="*"/>
-	</ScrollViewer>
+	<UserControl.DataContext>
+		<vm:ExhaustSystemViewModel/>
+	</UserControl.DataContext>
 </base:Panel>

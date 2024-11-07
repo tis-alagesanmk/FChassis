@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace FChassis.Data.Model.Settings.Machine.General;
 public partial class HMI : ObservableObject {
@@ -21,7 +22,7 @@ public partial class HMI : ObservableObject {
    bool? captionForcommandBarIcons = true;
 
    [ObservableProperty, Prop (Prop.Type.DBGrid, "Mini player", null!, "gridItems"), 
-                        DBGridColProp (Prop.Type.Text, "ColumnName1", "Col1"), 
+                        DBGridColProp (Prop.Type.Text, "ColumnName1", "Col1"),
                         DBGridColProp (Prop.Type.Text, "ColumnName2", "Col2")]
    bool? miniPlayer = true;
 
@@ -33,6 +34,10 @@ public partial class HMI : ObservableObject {
 
    [ObservableProperty, Prop ("Screen size", Prop.Type.Text, "Width")]
    double? width = 10;
+   
+   partial void OnWidthChanged (double? oldValue, double? newValue) {
+     this.Width = newValue;
+   }
 
    [ObservableProperty, Prop (Prop.Type.Text, "Height")]
    double? height = 10;

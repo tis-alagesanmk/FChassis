@@ -14,5 +14,4 @@
 	<UserControl.DataContext>
 		<vm:MachineViewModel/>
 	</UserControl.DataContext>
-	"Machine"
 </base:Panel>

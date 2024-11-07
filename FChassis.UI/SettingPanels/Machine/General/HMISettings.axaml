@@ -14,5 +14,4 @@
 	<UserControl.DataContext>
 		<vm:HMIViewModel/>
 	</UserControl.DataContext>
-	"HMI"
 </base:Panel>

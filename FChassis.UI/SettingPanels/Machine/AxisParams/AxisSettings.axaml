@@ -5,8 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:base="FChassis.UI.Settings"
+			 xmlns:vm="using:FChassis.Data.ViewModels.Setting.Machine.AxisParams"
+			 x:DataType="vm:AxisViewModel"
              x:Class="FChassis.UI.Settings.Machine.AxisParams.AxisSettingsPanel">
-	<ScrollViewer>
-		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
-    </ScrollViewer>
+	<UserControl.DataContext>
+		<vm:AxisViewModel/>
+	</UserControl.DataContext>
 </base:Panel>
