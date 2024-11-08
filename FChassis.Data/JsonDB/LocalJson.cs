@@ -10,7 +10,7 @@ namespace FChassis.Data.JsonDB {
          => this.data = container;
 
       public void Save () {
-         string jsondata = JsonSerializer.Serialize (this.data,new JsonSerializerOptions { WriteIndented = true});
+         string jsondata = JsonSerializer.Serialize (this.data, new JsonSerializerOptions { WriteIndented = true});
          File.WriteAllText(this.repoPath, jsondata);
       }
 

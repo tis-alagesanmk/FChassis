@@ -6,7 +6,8 @@ using FChassis.Data.JsonDB;
 namespace FChassis.UI.Settings;
 public partial class TabPanel : Panel {
    public TabPanel () {
-      AvaloniaXamlLoader.Load (this); }
+      AvaloniaXamlLoader.Load (this); 
+   }
 
    virtual protected TabControl GetTabControl () {
       TabControl tabControl = (TabControl)this.LogicalChildren[0];
@@ -32,7 +33,7 @@ public partial class TabPanel : Panel {
       }
    }
 
-  protected void TabItemSelected_Default (TabItem? tabItem, string? tabName) {
+   protected void TabItemSelected_Default (TabItem? tabItem, string? tabName) {
       if (tabName == "Close") {
          // Select first tab
          TabControl tabControl = this.GetTabControl ();
@@ -50,8 +51,7 @@ public partial class TabPanel : Panel {
       }
    }
 
-   protected void SaveAppData(TabItem tabItem,LocalJson json) 
-   {
+   protected void SaveAppData(TabItem tabItem, LocalJson json) {
       TabPanel? tabPanel = tabItem.Content as TabPanel;
       if (tabPanel is null) return;
 
@@ -65,9 +65,9 @@ public partial class TabPanel : Panel {
       json.Save ();
    } 
 
-   protected void LoadJsonData(Panel panel) 
-   {
-      if(panel is null) return;
+   protected void LoadJsonData(Panel panel) {
+      if(panel is null) 
+         return;
        
       DataContainer dataContainer = null!;
       LocalJson json = new LocalJson (dataContainer);
