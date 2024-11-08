@@ -13,7 +13,7 @@ public partial class PLCKeySettings : Panel {
          ControlInfo[] controlInfos = new ControlInfo[count * 2];
          for (int i = 0; i < count; i++) {
             groupName = $"PLCKey {i + 1}";
-            controlInfos[i * 2] = new GroupControlInfo { label = groupName };
+            controlInfos[i * 2] = new GroupControlInfo (groupName);
             controlInfos[i * 2 + 1] = createPLCKey (groupName);
          }
 

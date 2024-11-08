@@ -5,12 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
 		d:DesignWidth="800"
+		xmlns:vm="using:FChassis.Data.ViewModels.Setting.Machine.TechParams"
         x:Class="FChassis.UI.Settings.Machine.TechParams.MFuncSettings"
 		xmlns:base="FChassis.UI.Settings"
-		Background="White"
-		>
-	<ScrollViewer>
-		<Grid ColumnDefinitions="20* 20* 20* 20* 20*">
-		</Grid>
-	</ScrollViewer>
+		Background="White">
+	<UserControl.DataContext>
+		<vm:MFunctionViewModel/>
+	</UserControl.DataContext>
 </base:Panel>
