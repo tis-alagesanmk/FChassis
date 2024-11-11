@@ -32,6 +32,7 @@ namespace FChassis.Data.Model.Settings.Machine.TechParams {
       [ObservableProperty, Prop (Prop.Type.Text, "Laser HV ON Delay", null!, "s")]
       double? laserHVONDelay = 0.1;
 
+
       [ObservableProperty, Prop ("Custom Parameters 2", 
                                  Prop.Type.Text, "High Pressure Valve", null!, "bar")]
       int? highPressureValve = 25;
@@ -63,6 +64,7 @@ namespace FChassis.Data.Model.Settings.Machine.TechParams {
       [ObservableProperty, Prop (Prop.Type.Text, "Collision Delay Time", null!, "ms")]
       int? collisionDelayTime = 20;
 
+
       [ObservableProperty, Prop ("Custom Parameters 3", 
                                  Prop.Type.Text, "Gas Idle Purge Pressure", null!, "bar")]
       double? gasIdlePurgePressure = 0.2;
@@ -93,6 +95,7 @@ namespace FChassis.Data.Model.Settings.Machine.TechParams {
 
       [ObservableProperty, Prop (Prop.Type.Text, "X-Axis Limit Value for Nozzle Cleaning", null!, "mm")]
       int? xAxisLimitValueforNozzleCleaning = 0;
+
 
       [ObservableProperty, Prop ("Custom Parameters 4",
                                  Prop.Type.Text, "Piercing Sensor Delay Time", null!, "ms")]

@@ -11,6 +11,7 @@ public partial class ExhaustSys : ObservableObject {
                                  DBGridColProp (Prop.Type.Text, "Y OFF", "BindName2")]
    private string? sections;
 
+
    [ObservableProperty, Prop ("Splitters", 
                               Prop.Type.DBGrid, "Splitters", null!, "BindName"),
                                  DBGridColProp (Prop.Type.Text, "X ON", "BindName1"),
