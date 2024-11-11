@@ -2,7 +2,8 @@
 
 namespace FChassis.Data.Model.Settings.Machine.General;
 public partial class HMI : ObservableObject {
-   [ObservableProperty, Prop ("General", Prop.Type.Combo, "Orientation", null!, null!, ["Portrait", "Landscape"])]
+   [ObservableProperty, Prop ("General", 
+                              Prop.Type.Combo, "Orientation", null!, null!, ["Portrait", "Landscape"])]
    string? orientation = "Portrait";
 
    [ObservableProperty, Prop (Prop.Type.Text, "Step size to increment")]
@@ -31,13 +32,14 @@ public partial class HMI : ObservableObject {
    [ObservableProperty, Prop (Prop.Type.Combo, "Theme", null!, null!, ["Grey", "Blue"])]
    string? theme = "Grey";
 
-   [ObservableProperty, Prop ("Screen size", Prop.Type.Text, "Width")]
+   [ObservableProperty, Prop ("Screen size", 
+                              Prop.Type.Text, "Width")]
    double? width = 10;
    
-   partial void OnWidthChanged (double? oldValue, double? newValue) {
-     this.Width = newValue;
-   }
-
    [ObservableProperty, Prop (Prop.Type.Text, "Height")]
    double? height = 10;
+
+   partial void OnWidthChanged (double? oldValue, double? newValue) {
+      this.Width = newValue;
+   }
 }

@@ -8,10 +8,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Avalonia.LogicalTree;
 
 namespace FChassis.UI.Settings;
 public partial class Panel : Panels.Child {
-   internal void AddPropControls (Type type) {
+   internal void AddPropControls (Type type, object dataContext = null!) {
+      if(dataContext != null) // Set DataContext
+         this.DataContext = dataContext;
+
       Grid? grid = null!;
       if (this.LogicalChildren.Count > 0 && this.LogicalChildren[0] != null)
          grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;

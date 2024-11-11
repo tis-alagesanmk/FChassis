@@ -1,7 +1,4 @@
 using Avalonia.Controls;
-using FChassis.Data.JsonDB;
-using FChassis.Data.Model.Settings.Machine.General;
-using FChassis.Data.ViewModels;
 
 namespace FChassis.UI;
 public partial class MainWindow : Window {

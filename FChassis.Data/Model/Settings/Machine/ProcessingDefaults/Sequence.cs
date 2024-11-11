@@ -2,48 +2,53 @@
 
 namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class Sequence : ObservableObject {
-      [ObservableProperty, Prop ("Laser Sequence", Prop.Type.Combo, "Laser processing sequence", null!, null!, ["Standard", "MarkCut","PierceCut", "MarkPierceCut", "PierceMarkCut"])]
+      [ObservableProperty, Prop ("Laser Sequence", 
+                                 Prop.Type.Combo, "Laser Processing Sequence", null!, null!,
+                                 ["Standard", "MarkCut","PierceCut", "MarkPierceCut", "PierceMarkCut"])]
       string? laserProcessingSeq = "Standard";
 
-      [ObservableProperty, Prop (Prop.Type.Combo, "Laser Seq", null!, null!, ["Partwise", "PartwiseNative", "InnerFirst", "SortByCC"])]
+      [ObservableProperty, Prop (Prop.Type.Combo, "Laser Seq", null!, null!, 
+                                 ["Partwise", "PartwiseNative", "InnerFirst", "SortByCC"])]
       string? laserSeq = "PartwiseNative";
 
-      [ObservableProperty, Prop (Prop.Type.Check, "Do pre-piercing part-by-part")]
+      [ObservableProperty, Prop (Prop.Type.Check, "Do Pre-piercing Part-by-Part")]
       bool? doPrePiercingPartByPart = true;
 
 
-      [ObservableProperty, Prop ("Route Traverse", Prop.Type.Check, "Move pierce points to reduce traverse")]
+      [ObservableProperty, Prop ("Route Traverse", 
+                                 Prop.Type.Check, "Move Pierce Points to Reduce Traverse")]
       bool? movePiercePointsToReduceTraverse = true;
 
-      [ObservableProperty, Prop (Prop.Type.Check, "Move pierce points to prevent tilting")]
+      [ObservableProperty, Prop (Prop.Type.Check, "Move Pierce Points to Prevent Tilting")]
       bool? movePiercePointsToPreventTilting = true;
 
-      [ObservableProperty, Prop (Prop.Type.Check, "Microjoint nested holes if tilting")]
+      [ObservableProperty, Prop (Prop.Type.Check, "Microjoint Nested Holes if Tilting")]
       bool? microjointNestedHolesIfTilting = true;
 
-      [ObservableProperty, Prop (Prop.Type.Text, "Ignore holes smaller tha this")]
+      [ObservableProperty, Prop (Prop.Type.Text, "Ignore Holes Smaller than this")]
       double? ignoreHolesSmallerThanThis = 12.23;
 
-      [ObservableProperty, Prop (Prop.Type.Text, "Minimum cutting head height when traversing")]
+      [ObservableProperty, Prop (Prop.Type.Text, "Minimum Cutting Head Height when Traversing")]
       double? minimumCuttingHeadHeightWhenTraversing = 12.23;
 
-      [ObservableProperty, Prop (Prop.Type.Check, "Route traverse lines around holes")]
+      [ObservableProperty, Prop (Prop.Type.Check, "Route Traverse Lines around Holes")]
       bool? routeTraverseLinesAroundHoles = true;
 
-      [ObservableProperty, Prop (Prop.Type.Text, "Allowance when routing around holes")]
+      [ObservableProperty, Prop (Prop.Type.Text, "Allowance when Routing around Holes")]
       double? allowanceWhenRoutingAroundHoles = 25.23;
 
-      [ObservableProperty, Prop (Prop.Type.Text, "lift nozzle if routing penalty more than")]
+      [ObservableProperty, Prop (Prop.Type.Text, "lift Nozzle if Routing Penalty more than")]
       double? liftNozzleIfRoutingPenaltyMoreThan = 25.23;
 
-      [ObservableProperty, Prop (Prop.Type.Text, "Allowance when routing around tilting holes")]
+      [ObservableProperty, Prop (Prop.Type.Text, "Allowance when Routing around Tilting Holes")]
       double? allowanceWhenRoutingAroundTiltingHoles = 25.23;
 
-      [ObservableProperty, Prop (Prop.Type.Text, "Max.head down traverse distance")]
+      [ObservableProperty, Prop (Prop.Type.Text, "Max.head Down Traverse Distance")]
       double? maxHeadDownTraverseDistance = 25.23;
 
 
-      [ObservableProperty, Prop ("Laser Heads", Prop.Type.Check, "Cut with single head")]
+      [ObservableProperty, Prop ("Laser Heads", 
+                                 Prop.Type.Check, "Cut with single head")]
       bool? cutWithSingleHead = true;
    }
 }

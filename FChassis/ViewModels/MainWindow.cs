@@ -12,7 +12,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using static FChassis.Processes.Processor;
 using CommunityToolkit.Mvvm.Input;
 
-namespace FChassis.ViewModels;
+namespace FChassis.ViewModel;
 public partial class MainWindow : ObservableObject {
    #region "Property" ---------------------------------------------------------
    

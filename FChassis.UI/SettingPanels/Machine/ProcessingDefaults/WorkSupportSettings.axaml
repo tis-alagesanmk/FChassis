@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" 
 			 Background="White"
 			 xmlns:base="FChassis.UI.Settings"
-			 xmlns:vm="using:FChassis.Data.ViewModels.Setting.Machine.ProcessingDefaults"
+			 xmlns:vm="using:FChassis.Data.ViewModel.Setting.Machine.ProcessingDefaults"
 			 x:DataType="vm:WorkSupportViewModel"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.WorkSupportSettings">
 	<UserControl.DataContext>
