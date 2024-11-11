@@ -9,10 +9,10 @@
 		xmlns:base="FChassis.UI.Panels"
 		x:Class="FChassis.UI.ModelViewer"
 		
-		xmlns:vmc="using:FChassis.ViewModels"
+		xmlns:vmc="using:FChassis.ViewModel"
 		d:DataContext="{x:Static vmc:Context.MainWindow}"		
 		
-		xmlns:vmd="using:FChassis.ViewModels"
+		xmlns:vmd="using:FChassis.ViewModel"
 		x:DataType="vmd:MainWindow"
 		>
 	<Design.DataContext>

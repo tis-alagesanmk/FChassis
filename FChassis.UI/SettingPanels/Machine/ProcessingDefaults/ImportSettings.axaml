@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800"
 			 xmlns:base="FChassis.UI.Settings"
 			 Background="White"
-			 xmlns:vm="using:FChassis.Data.ViewModels.Setting.Machine.ProcessingDefaults"
+			 xmlns:vm="using:FChassis.Data.ViewModel.Settings.Machine.ProcessingDefaults"
 			 x:DataType="vm:ImportViewModel"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.ImportSettings">
 	<UserControl.DataContext>

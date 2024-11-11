@@ -53,7 +53,10 @@ public partial class TabPanel : Panel {
 
    protected void SaveAppData(TabItem tabItem, LocalJson json) {
       TabPanel? tabPanel = tabItem.Content as TabPanel;
-      if (tabPanel is null) return;
+      if (tabPanel is null) 
+         return;
+
+      return;
 
       Panel[] panels = tabPanel.panels;
       foreach(var panel in panels) {

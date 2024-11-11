@@ -19,7 +19,7 @@ namespace FChassis.Data.JsonDB {
             return;
 
          string? json = File.ReadAllText(this.repoPath);
-         this.data = JsonSerializer.Deserialize<DataContainer> (json)!;
+         //this.data = JsonSerializer.Deserialize<DataContainer> (json)!;
       }
 
       public void GetData(object dataContext) {

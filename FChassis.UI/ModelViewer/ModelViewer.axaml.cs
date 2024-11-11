@@ -8,7 +8,7 @@ public partial class ModelViewer : FChassis.UI.Panels.Child {
 
    public ModelViewer () {
       AvaloniaXamlLoader.Load (this);
-      this.DataContext = ViewModels.Context.MainWindow;
+      this.DataContext = ViewModel.Context.MainWindow;
 
       this.initializeControls ();
    }
@@ -17,7 +17,7 @@ public partial class ModelViewer : FChassis.UI.Panels.Child {
    #region "Implementation" ---------------------------------------------------
    void initializeControls () {
       this.initElementNameField ();
-      ViewModels.Context.MainWindow.Initialize (Avalonia.Threading.Dispatcher.UIThread, this.Files);
+      ViewModel.Context.MainWindow.Initialize (Avalonia.Threading.Dispatcher.UIThread, this.Files);
       if(this.FChassisHost != null) 
          this.FChassisHost.Content = new FChassisMainWindowHost ();
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
 		d:DesignWidth="800" 
-		xmlns:vm="using:FChassis.Data.ViewModels.Setting.Machine.TechParams"
+		xmlns:vm="using:FChassis.Data.ViewModel.Settings.Machine.TechParams"
 		x:DataType="vm:AnalogScalingViewModel"
         x:Class="FChassis.UI.Settings.Machine.TechParams.AnalogScalingSettings"
 		xmlns:base="FChassis.UI.Settings"

@@ -2,38 +2,42 @@
 
 namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class Import : ObservableObject {
-
-       [ObservableProperty,Prop ("Import settings", Prop.Type.Combo, "", null!, null!, ["mm","inch"])]
+       [ObservableProperty, Prop ("Import settings", 
+                                 Prop.Type.Combo, "", null!, null!, 
+                                 ["mm","inch"])]
        string? unitForDXFFiles = "mm";
 
-       [ObservableProperty, Prop (Prop.Type.Text, "Stitch together lines/arcs closer than this")]
+       [ObservableProperty, Prop (Prop.Type.Text, "Stitch Together Lines/Arcs Closer Than This")]
        double? stitchTogetherLinesOrArcsCloserThanThis = 0.23;
 
-       [ObservableProperty, Prop (Prop.Type.Text, "Maximum thickness for sheet-metal part")]
+       [ObservableProperty, Prop (Prop.Type.Text, "Maximum Thickness for Sheet-Metal Part")]
        double? maximumThicknessForSheetMetalPart = 21.52;
 
-       [ObservableProperty, Prop (Prop.Type.Check, "Ignore layer in DXF/DWG files")]
+       [ObservableProperty, Prop (Prop.Type.Check, "Ignore Layer in DXF/DWG Files")]
        bool? ignoreLayerInDXFOrDWGFiles = false;
 
-       [ObservableProperty, Prop (Prop.Type.Check, "Explode blocks in 2D drawing")]
+       [ObservableProperty, Prop (Prop.Type.Check, "Explode Blocks in 2D Drawing")]
        bool? explodeBlockIn2DDrawing = false;
 
-       [ObservableProperty, Prop (Prop.Type.Check, "Convert white entities to black")]
+       [ObservableProperty, Prop (Prop.Type.Check, "Convert White Entities to Black")]
        bool? convertWhiteEntitiesToBlock = true;
 
-       [ObservableProperty, Prop (Prop.Type.Check, "Darken colors during DXF import")]
+       [ObservableProperty, Prop (Prop.Type.Check, "Darken Colors during DXF Import")]
        bool? darkenColorsDuringDXFImport = true;
 
-      [ObservableProperty, Prop ("DXF Settings", Prop.Type.Check, "Angles in DXF are interior angles")]
+
+      [ObservableProperty, Prop ("DXF Settings", 
+                                 Prop.Type.Check, "Angles in DXF are Interior Angles")]
       bool? anglesInDXFAreInteriorAngles = true;
 
-      [ObservableProperty, Prop ("Spline Coversion", Prop.Type.Combo, "Covert splines on import", null!, null!, ["Off","Lines","Arcs"])]
+      [ObservableProperty, Prop ("Spline Coversion", Prop.Type.Combo, "Covert Splines on IOmport", null!, null!, 
+                                 ["Off", "Lines", "Arcs"])]
       string? covertSplinesOnImport = "Lines";
 
       [ObservableProperty, Prop ("Layer mapping", Prop.Type.Text, "Auxilary Layers Names")]
-      string? auxilaryLayersNames = "_AUX,AUX,BENDLIMIT";
+      string? auxilaryLayersNames = "_AUX, AUX, BENDLIMIT";
 
       [ObservableProperty, Prop (Prop.Type.Text, "Mark Layers Names")]
-      string? markLayersNames = "_AUX,AUX,BENDLIMIT";
+      string? markLayersNames = "_AUX, AUX, BENDLIMIT";
    }
 }

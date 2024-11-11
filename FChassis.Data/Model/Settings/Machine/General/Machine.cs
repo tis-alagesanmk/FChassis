@@ -2,7 +2,8 @@
 
 namespace FChassis.Data.Model.Settings.Machine.General; 
 public partial class Machine : ObservableObject {
-   [ObservableProperty, Prop ("General", Prop.Type.Text, "Machine Id")]
+   [ObservableProperty, Prop ("General", 
+                              Prop.Type.Text, "Machine Id")]
    string machineId = "130166";
 
    [ObservableProperty, Prop (Prop.Type.Text, "Axis emulation")]
@@ -14,13 +15,14 @@ public partial class Machine : ObservableObject {
    [ObservableProperty, Prop (Prop.Type.Text, "Presets")]
    string presets = "G122 X4;G17;S0;T0;G163;G175;M48;G31";
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Can open bit rate", "kbps")]
+   [ObservableProperty, Prop (Prop.Type.Text, "Can Open Bit Rate", "kbps")]
    string canOpenBitRate = "1000,1000";
 
-   [ObservableProperty, Prop (Prop.Type.Check, "Netdisk server IP address")]
+   [ObservableProperty, Prop (Prop.Type.Check, "Netdisk Server IP Address")]
    string netDiskServerIPAddr = "1000,1000";
 
-   [ObservableProperty, Prop (Prop.Type.Combo, "Software limit code", null!, null!, ["12", "13", "14", "15", "16"])]
+   [ObservableProperty, Prop (Prop.Type.Combo, "Software limit code", null!, null!, 
+                              ["12", "13", "14", "15", "16"])]
    string code = "14";
 
    [ObservableProperty, Prop (Prop.Type.Text, "Override limit")]
@@ -30,14 +32,14 @@ public partial class Machine : ObservableObject {
    int incrementLimitCommand;
 
 
-   [ObservableProperty, Prop ("Controller", Prop.Type.Text, "Interpolation cycle time", "ms")]
+   [ObservableProperty, Prop ("Controller", 
+                              Prop.Type.Text, "Interpolation Cycle Time", "ms")]
    string interpolationCycleTime = "1";
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Interpolation divider")]
+   [ObservableProperty, Prop (Prop.Type.Text, "Interpolation Divider")]
    string interpolationDivider = "2";
 
-
-   [ObservableProperty, Prop (Prop.Type.Text, "Handwheel filter time", "ms")]
+   [ObservableProperty, Prop (Prop.Type.Text, "Handwheel Filter Time", "ms")]
    string handWheelFilterTime = "0";
 
    [ObservableProperty, Prop (Prop.Type.Text, "Velocity", "m/min")]
@@ -49,27 +51,29 @@ public partial class Machine : ObservableObject {
    [ObservableProperty, Prop (Prop.Type.Text, "Deceleration", "m/sec²")]
    string deceleration = "40";
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Ramp time", "ms")]
+   [ObservableProperty, Prop (Prop.Type.Text, "Ramp Time", "ms")]
    string rampTime = "10";
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Position tolerance MM", "mm")]
+   [ObservableProperty, Prop (Prop.Type.Text, "Position Tolerance MM", "mm")]
    string positionToleranceMM = "0.05";
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Position tolerance Degree", "°")]
+   [ObservableProperty, Prop (Prop.Type.Text, "Position Tolerance Degree", "°")]
    string positionToleranceDDegree = "0.01";
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Quick stop time", "ms")]
-   string quickStopTime = "20";
+   [ObservableProperty, Prop (Prop.Type.Text, "Quick Stop Time", "ms")]
+   int quickStopTime = 20;
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Creep speed velocity", "m/min")]
+   [ObservableProperty, Prop (Prop.Type.Text, "Creep Speed Velocity", "m/min")]
    string creepSpeedVelocity = "1";
 
-   [ObservableProperty, Prop ("Memory reservation", Prop.Type.Text, "Block count")]
+
+   [ObservableProperty, Prop ("Memory Reservation", 
+                              Prop.Type.Text, "Block Count")]
    string blockCount = "1024";
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Reverse Block count")]
-   string reverseBlockCount = "1000";
+   [ObservableProperty, Prop (Prop.Type.Text, "Reverse Block Count")]
+   int reverseBlockCount = 1000;
 
-   [ObservableProperty, Prop (Prop.Type.Text, "Parameter aray size")]
-   string parameterArraySize = "10000";
+   [ObservableProperty, Prop (Prop.Type.Text, "Parameter Array Size")]
+   int parameterArraySize = 10000;
 }

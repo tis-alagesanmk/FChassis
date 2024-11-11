@@ -1,21 +1,12 @@
-using Avalonia.Controls;
+using FChassis.Data.ViewModel;
+using FChassis.Data.Model.Settings.Machine.AxisParams;
+
 using Avalonia.Markup.Xaml;
 
 namespace FChassis.UI.Settings.Machine.AxisParams;
 public partial class LPC1Settings : Panel {
    public LPC1Settings () {
       AvaloniaXamlLoader.Load (this);
-
-      Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
-      if (grid != null)
-         this.AddParameterControls (grid, [
-            new GroupControlInfo ("Configuration parameters"),
-            new CheckControlInfo ("Advanced", null!),
-            new ComboControlInfo ("Axis Type", null!, null!),
-            new ComboControlInfo ("Axis Connection", null!, null!),
-            new _TextControlInfo ("Axis address", null!),
-            new _TextControlInfo ("Max Laser Power", null!, "watts"),
-            new _TextControlInfo ("Average Power", null!, "watts"),
-      ]);
+      this.AddPropControls (typeof (LPC1), MainViewModel.lpc1VM);
    }
 }
