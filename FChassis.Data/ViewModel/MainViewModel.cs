@@ -21,6 +21,11 @@ public class MainViewModel {
    public static Settings.Machine.TechParams.LaserSysViewModel laserTechVM = new ();
    public static Settings.Machine.TechParams.MachineDbViewModel MachineDbVM = new ();
    
+   // PLCOptions Tab
+   public static Settings.Machine.PLCOptions.FuncParamViewModel funcParamVM = new ();
+   public static Settings.Machine.PLCOptions.ControlParamViewModel controlParamVM = new ();
+   public static Settings.Machine.PLCOptions.PLCKeyViewModel plcKeyVM = new ();
+   
    //Process Defaults
    public static Settings.Machine.ProcessingDefaults.ImportViewModel importVM = new ();
    public static Settings.Machine.ProcessingDefaults.CutCamViewModel curcamVM = new ();

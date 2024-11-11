@@ -4,7 +4,7 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class Sequence : ObservableObject {
       [ObservableProperty, Prop ("Laser Sequence", 
                                  Prop.Type.Combo, "Laser Processing Sequence", null!, null!,
-                                 ["Standard", "MarkCut","PierceCut", "MarkPierceCut", "PierceMarkCut"])]
+                                    ["Standard", "MarkCut","PierceCut", "MarkPierceCut", "PierceMarkCut"])]
       string? laserProcessingSeq = "Standard";
 
       [ObservableProperty, Prop (Prop.Type.Combo, "Laser Seq", null!, null!, 
@@ -45,7 +45,6 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
 
       [ObservableProperty, Prop (Prop.Type.Text, "Max.head Down Traverse Distance")]
       double? maxHeadDownTraverseDistance = 25.23;
-
 
       [ObservableProperty, Prop ("Laser Heads", 
                                  Prop.Type.Check, "Cut with single head")]
