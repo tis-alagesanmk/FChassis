@@ -5,10 +5,5 @@
              mc:Ignorable="d" d:DesignWidth="800" 
 			 Background="White"
 			 xmlns:base="FChassis.UI.Settings"
-			 xmlns:vm="using:FChassis.Data.ViewModel.Setting.Machine.ProcessingDefaults"
-			 x:DataType="vm:SequenceViewModel"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.SequenceSettings">
-	<UserControl.DataContext>
-		<vm:SequenceViewModel/>
-	</UserControl.DataContext>
 </base:Panel>

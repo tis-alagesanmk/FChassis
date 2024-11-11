@@ -1,5 +1,4 @@
 ﻿using FChassis.Data.Model.Settings.Machine.TechParams;
 
-namespace FChassis.Data.ViewModel.Setting.Machine.TechParams {
-   public class LaserTechViewModel : LaserTechnology {}
-}
+namespace FChassis.Data.ViewModel.Settings.Machine.TechParams;
+public partial class LaserSysViewModel : LaserSys { }

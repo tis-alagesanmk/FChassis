@@ -4,10 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800"
 			 Background="White"
-			 xmlns:vm="using:FChassis.Data.ViewModel.Setting.Machine.ProcessingDefaults"
 			 xmlns:base="FChassis.UI.Settings"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.SkeletonCutsSettings">
-	<UserControl.DataContext>
-		<vm:SkeletonCutsViewModel/>
-	</UserControl.DataContext>
 </base:Panel>
