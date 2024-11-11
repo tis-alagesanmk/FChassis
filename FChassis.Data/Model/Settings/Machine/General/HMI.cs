@@ -15,15 +15,16 @@ public partial class HMI : ObservableObject {
    [ObservableProperty, Prop (Prop.Type.Text, "Minimum storage to keep back up files")]
    int? minimumStoragetoKeepBackupFiles = 10;
 
-   [ObservableProperty, Prop (Prop.Type.Combo, "PLC messages to display", null!, null!, ["Only error", "Warn & error", "info, warn & error"])]
+   [ObservableProperty, Prop (Prop.Type.Combo, "PLC messages to display", null!, null!, 
+                              ["Only error", "Warn & error", "info, warn & error"])]
    string? plcMessagesToDisplay = "Only error";
 
    [ObservableProperty, Prop (Prop.Type.Check, "Caption for command-bar icons")]
    bool? captionForcommandBarIcons = true;
 
    [ObservableProperty, Prop (Prop.Type.DBGrid, "Mini player", null!, "gridItems"), 
-                        DBGridColProp (Prop.Type.Text, "ColumnName1", "Col1"),
-                        DBGridColProp (Prop.Type.Text, "ColumnName2", "Col2")]
+                                 DBGridColProp (Prop.Type.Text, "ColumnName1", "Col1"),
+                                 DBGridColProp (Prop.Type.Text, "ColumnName2", "Col2")]
    bool? miniPlayer = true;
 
    [ObservableProperty, Prop (Prop.Type.Combo, "Language", null!, null!, ["EN", "FR"])]

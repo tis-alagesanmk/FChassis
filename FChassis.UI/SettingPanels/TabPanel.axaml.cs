@@ -71,7 +71,9 @@ public partial class TabPanel : Panel {
    protected void LoadJsonData(Panel panel) {
       if(panel is null) 
          return;
-       
+
+      return;
+
       DataContainer dataContainer = null!;
       LocalJson json = new LocalJson (dataContainer);
 
