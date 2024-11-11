@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis.Data.Model.Settings.Machine.TechParams {
-   public partial class MachineDataBase : ObservableObject{
+   public partial class MachineDb : ObservableObject{
 
       [ObservableProperty,Prop ("General", Prop.Type.Check,"Varimode")]
       bool? varimode = true;

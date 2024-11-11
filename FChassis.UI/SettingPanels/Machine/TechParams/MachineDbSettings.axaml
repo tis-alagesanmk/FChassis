@@ -7,9 +7,5 @@
 		d:DesignWidth="800" 
         x:Class="FChassis.UI.Settings.Machine.TechParams.MachineDbSettings"
 		xmlns:base="FChassis.UI.Settings"
-		xmlns:vm="using:FChassis.Data.ViewModel.Setting.Machine.TechParams"
 		Background="White">
-	<UserControl.DataContext>
-		<vm:MachineDataBaseViewModel/>
-	</UserControl.DataContext>
 </base:Panel>

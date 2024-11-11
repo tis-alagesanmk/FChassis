@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis.Data.Model.Settings.Machine.TechParams {
-   public partial class ExhaustSystem : ObservableObject {
+   public partial class ExhaustSys : ObservableObject {
 
       [ObservableProperty, Prop (Prop.Type.DBGrid, "Sections", null!, "BindName"),
                         DBGridColProp (Prop.Type.Text, "Section Number", "BindName1"),

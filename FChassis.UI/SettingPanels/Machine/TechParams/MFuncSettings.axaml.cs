@@ -1,11 +1,12 @@
 using FChassis.Data.Model.Settings.Machine.TechParams;
+using FChassis.Data.ViewModel;
+
 using Avalonia.Markup.Xaml;
 
 namespace FChassis.UI.Settings.Machine.TechParams;
 public partial class MFuncSettings : Panel {
    public MFuncSettings () {
       AvaloniaXamlLoader.Load (this);
-
-       this.AddPropControls (typeof(MFunctions));
+      this.AddPropControls (typeof (MFunctions), MainViewModel.mFunctionsVM);
    }
 }

@@ -1,12 +1,12 @@
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using FChassis.Data.Model.Settings.Machine.TechParams;
+using FChassis.Data.ViewModel;
+
+using Avalonia.Markup.Xaml;
 
 namespace FChassis.UI.Settings.Machine.TechParams;
 public partial class MachineDbSettings : Panel {
    public MachineDbSettings () {
       AvaloniaXamlLoader.Load (this);
-
-      this.AddPropControls (typeof (MachineDataBase));
+      this.AddPropControls (typeof (MachineDb), MainViewModel.MachineDbVM);
    }
 }

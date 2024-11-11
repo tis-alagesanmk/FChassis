@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis.Data.Model.Settings.Machine.TechParams {
-   public partial class LaserTechnology : ObservableObject {
+   public partial class LaserSys : ObservableObject {
 
       [ObservableProperty, Prop ("Custom parameters 1", Prop.Type.Text, "X-axis park position","mm")]
       double? xAxisParkPosition = 12.23;
