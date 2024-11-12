@@ -7,6 +7,6 @@ namespace FChassis.UI.Settings.Machine.AxisParams;
 public partial class YSettings : Panel {
    public YSettings () {
       AvaloniaXamlLoader.Load (this);
-      this.AddPropControls (typeof (Axis), MainViewModel.yAxisVM);
+      this.AddPropControls (typeof (Axis), MainViewModel.yAxisVM, typeof (LPC1Base));
    }
 }

@@ -8,11 +8,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using Avalonia.LogicalTree;
 
 namespace FChassis.UI.Settings;
 public partial class Panel : Panels.Child {
-   internal void AddPropControls (Type type, object dataContext = null!) {
+   internal void AddPropControls (Type type, object dataContext = null!, Type baseType = null!) {
       if(dataContext != null) // Set DataContext
          this.DataContext = dataContext;
 
@@ -31,8 +30,21 @@ public partial class Panel : Panels.Child {
          scrollViewer.Content = grid;
       }
 
+      // Get Type list from Derived to Base classes
+      List<Type> types = new List<Type> ();
+      Type _type = type;
+      while (true) { 
+         types.Add (_type);
+         if (baseType == null! || _type == baseType)
+            break;
 
-      this.AddPropControls(grid!, type);
+         _type = _type.BaseType!;
+      }
+
+      // Base to Derived classes
+      types.Reverse (); 
+      foreach (var iType in types)
+        this.AddPropControls(grid!, iType);
    }
 
    internal void AddPropControls (Grid grid, Type type) {

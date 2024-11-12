@@ -3,8 +3,8 @@
 namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class Import : ObservableObject {
        [ObservableProperty, Prop ("Import settings", 
-                                 Prop.Type.Combo, "", null!, null!, 
-                                    ["mm","inch"])]
+                                  Prop.Type.Combo, "", null!, null!, 
+                                      ["mm","inch"])]
        string? unitForDXFFiles = "mm";
 
        [ObservableProperty, Prop (Prop.Type.Text, "Stitch Together Lines/Arcs Closer Than This")]
@@ -35,7 +35,9 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
                                     ["Off", "Lines", "Arcs"])]
       string? covertSplinesOnImport = "Lines";
 
-      [ObservableProperty, Prop ("Layer mapping", Prop.Type.Text, "Auxilary Layers Names")]
+
+      [ObservableProperty, Prop ("Layer mapping", 
+                                  Prop.Type.Text, "Auxilary Layers Names")]
       string? auxilaryLayersNames = "_AUX, AUX, BENDLIMIT";
 
       [ObservableProperty, Prop (Prop.Type.Text, "Mark Layers Names")]

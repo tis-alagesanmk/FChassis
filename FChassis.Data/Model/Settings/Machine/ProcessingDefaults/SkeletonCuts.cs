@@ -3,7 +3,7 @@
 namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class SkeletonCuts : ObservableObject {
       [ObservableProperty, Prop ("Sheet cutting rules", 
-                                 Prop.Type.Check, "Create sheet cut")]
+                                  Prop.Type.Check, "Create sheet cut")]
       bool? unitForDXFFiles = true;
 
       [ObservableProperty, Prop (Prop.Type.Text, "X Spacing between Vertical Sheet Cuts")]
