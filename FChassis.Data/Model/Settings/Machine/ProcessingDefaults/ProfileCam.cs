@@ -7,7 +7,7 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
 
       [ObservableProperty, Prop ("Cutting", 
                                  Prop.Type.Combo, "Choose Cutting Condition by", null!, null!, 
-                                    ["Max.Segment Length", "Avg.segment Length", "Area",])]
+                                    ["Max.Segment Length", "Avg Segment Length", "Area",])]
       string? chooseCuttingConditionBy = "Avg.segment length";
 
       [ObservableProperty, Prop (Prop.Type.Combo, "Process for Open Polylines", null!, null!, 

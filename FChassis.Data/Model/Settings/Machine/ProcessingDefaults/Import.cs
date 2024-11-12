@@ -2,12 +2,12 @@
 
 namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class Import : ObservableObject {
-       [ObservableProperty, Prop ("Import settings", 
+       [ObservableProperty, Prop ("Import Settings", 
                                   Prop.Type.Combo, "", null!, null!, 
                                       ["mm","inch"])]
        string? unitForDXFFiles = "mm";
 
-       [ObservableProperty, Prop (Prop.Type.Text, "Stitch Together Lines/Arcs Closer Than This")]
+       [ObservableProperty, Prop (Prop.Type.Text, "Stitch Together Lines/Arcs Closer than this")]
        double? stitchTogetherLinesOrArcsCloserThanThis = 0.23;
 
        [ObservableProperty, Prop (Prop.Type.Text, "Maximum Thickness for Sheet-Metal Part")]
@@ -31,7 +31,7 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
       bool? anglesInDXFAreInteriorAngles = true;
 
       [ObservableProperty, Prop ("Spline Coversion", 
-                                 Prop.Type.Combo, "Covert Splines on IOmport", null!, null!, 
+                                 Prop.Type.Combo, "Convert Splines on Import", null!, null!, 
                                     ["Off", "Lines", "Arcs"])]
       string? covertSplinesOnImport = "Lines";
 

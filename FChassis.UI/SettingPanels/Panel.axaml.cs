@@ -30,19 +30,7 @@ public partial class Panel : Panels.Child {
          scrollViewer.Content = grid;
       }
 
-      // Get Type list from Derived to Base classes
-      List<Type> types = new List<Type> ();
-      Type _type = type;
-      while (true) { 
-         types.Add (_type);
-         if (baseType == null! || _type == baseType)
-            break;
-
-         _type = _type.BaseType!;
-      }
-
-      // Base to Derived classes
-      types.Reverse (); 
+      List<Type> types = Data.Reflection.Object.GetTypeList(type, baseType);
       foreach (var iType in types)
         this.AddPropControls(grid!, iType);
    }

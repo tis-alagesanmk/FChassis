@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace FChassis.Data.Model.Settings.Machine.PLCOptions; 
 public partial class FuncParam : ObservableObject{
 
