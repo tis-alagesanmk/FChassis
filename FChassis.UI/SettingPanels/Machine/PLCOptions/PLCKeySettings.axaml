@@ -7,8 +7,5 @@
 		d:DesignWidth="800" 
         x:Class="FChassis.UI.Settings.Machine.PLCOptions.PLCKeySettings"
 		xmlns:base="FChassis.UI.Settings"
-		xmlns:vm="using:FChassis.UI.SettingPanels.Machine.ViewModel"
-		xmlns:model="using:FChassis.UI.SettingPanels.Machine.Model"
 		Background="White">
-	"PLCKeySettings"
 </base:Panel>

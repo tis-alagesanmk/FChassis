@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" 
 			 x:Class="FChassis.UI.Settings.Machine.PLCOptions.ControlParamSettings"
+			 Background="White"
 			 xmlns:base="FChassis.UI.Settings">
 	<ScrollViewer>
 		<Grid  ColumnDefinitions="20* 20* 20* 20* 20*"/>
