@@ -1,7 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 
 using FChassis.Data.Model;
@@ -11,7 +10,9 @@ namespace FChassis.Data.IO;
 using Node = LinkedListNode<object>;
 using Nodes = LinkedList<object>;
 
-class JSONFile : File {
+/// <summary>
+/// </summary>
+class JSONFileWrite : FileWrite {
    protected override bool Write (string path) {
       using var fileStream =  System.IO.File.Create(path);
       using Utf8JsonWriter writer = new (fileStream);
@@ -25,9 +26,6 @@ class JSONFile : File {
       return true;
    }
 
-   protected override bool Read (string path) {
-      return false;
-   }
 
    bool writeNodes (Utf8JsonWriter writer, Nodes nodes) {
       foreach (Node node in nodes!)
@@ -79,5 +77,14 @@ class JSONFile : File {
       }
 
       return success;
+   }
+}
+
+//-----------------------------------------------------------------------------
+/// <summary>
+/// </summary>
+class JSONFileRead : FileRead {
+   protected override bool Read (string path) {
+      return true;
    }
 }
