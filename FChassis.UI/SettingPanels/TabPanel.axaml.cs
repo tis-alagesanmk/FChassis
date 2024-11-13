@@ -2,7 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FChassis.UI.Panels;
 using FChassis.Data.JsonDB;
-using System.Collections.Generic;
 using FChassis.Data.IO;
 
 namespace FChassis.UI.Settings;
@@ -60,12 +59,12 @@ public partial class TabPanel : Panel {
    void prepareConfiguraionNodes(TreeNodes nodes) {
       nodes.Clear ();
 
-      TreeNode treeNode = new () {
-         content = "Configuration", };
+      TreeNode treeNode = new () { content = "Configuration" };
       nodes.Add(treeNode);
 
       addConfigurationObjects (treeNode, this);
 
+      #region Local function
       void addConfigurationObjects (TreeNode node, TabPanel tabPanel) {
          TabControl tabControl = tabPanel.GetTabControl ();
 
@@ -96,6 +95,7 @@ public partial class TabPanel : Panel {
             }
          }
       }
+      #endregion Local function
    }
 
    protected void SaveAppData(TabItem tabItem, LocalJson json) {

@@ -6,15 +6,20 @@ namespace FChassis.Data.IO {
       public List<TreeNode>? children = new ();
    }
 
+   //-----------------------------------------------------------------------------
    public class TreeNodes : List<TreeNode> { }
 
-   //using Nodes = LinkedList<object>;
+   //-----------------------------------------------------------------------------
+   /// <summary>
+   /// </summary>
    public abstract class File {
       // Field
       public TreeNodes nodes = new ();
    }
 
    //-----------------------------------------------------------------------------
+   /// <summary>
+   /// </summary>
    public abstract class FileRead : File {
       // Overridable
       public abstract bool Read (string path);
@@ -22,6 +27,8 @@ namespace FChassis.Data.IO {
    }
 
    //-----------------------------------------------------------------------------
+   /// <summary>
+   /// </summary>
    public abstract class FileWrite : File {
       // Overridable
       public abstract bool Write (string path);
