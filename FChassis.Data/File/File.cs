@@ -1,19 +1,29 @@
 using System.Collections.Generic;
 
-namespace FChassis.Data.IO;
-using Nodes = LinkedList<object>;
-abstract class File {
-   // Field
-   public Nodes nodes = new ();
-}
+namespace FChassis.Data.IO { 
+   public class TreeNode {
+      public object? content;
+      public List<TreeNode>? children = new ();
+   }
 
-abstract class FileRead : File {
-   // Overridable
-   protected abstract bool Read (string path);
+   public class TreeNodes : List<TreeNode> { }
 
-}
+   //using Nodes = LinkedList<object>;
+   public abstract class File {
+      // Field
+      public TreeNodes nodes = new ();
+   }
 
-abstract class FileWrite: File {
-   // Overridable
-   protected abstract bool Write (string path);
+   //-----------------------------------------------------------------------------
+   public abstract class FileRead : File {
+      // Overridable
+      public abstract bool Read (string path);
+      public abstract object CreateObject (string name);
+   }
+
+   //-----------------------------------------------------------------------------
+   public abstract class FileWrite : File {
+      // Overridable
+      public abstract bool Write (string path);
+   }
 }

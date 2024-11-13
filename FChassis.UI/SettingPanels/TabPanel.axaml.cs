@@ -2,6 +2,8 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FChassis.UI.Panels;
 using FChassis.Data.JsonDB;
+using System.Collections.Generic;
+using FChassis.Data.IO;
 
 namespace FChassis.UI.Settings;
 public partial class TabPanel : Panel {
@@ -42,11 +44,56 @@ public partial class TabPanel : Panel {
 
          Child.mainWindow?.Switch2MainPanel ();
 
+         FChassis.Data.IO.JSONFileWrite writer = new ();
+         this.prepareConfiguraionNodes (writer.nodes);
+         writer.Write ("C:/work/config.json");
+
          DataContainer dataContainer = new DataContainer ();
          LocalJson settings = new LocalJson (dataContainer);
 
          foreach (var tabitem in tabControl.Items) {
             this.SaveAppData ((tabitem as TabItem)!, settings);
+         }
+      }
+   }
+
+   void prepareConfiguraionNodes(TreeNodes nodes) {
+      nodes.Clear ();
+
+      TreeNode treeNode = new () {
+         content = "Configuration", };
+      nodes.Add(treeNode);
+
+      addConfigurationObjects (treeNode, this);
+
+      void addConfigurationObjects (TreeNode node, TabPanel tabPanel) {
+         TabControl tabControl = tabPanel.GetTabControl ();
+
+         TabItem tabItem;
+         Panel panel;
+         TreeNode childNode = null!;
+         foreach (var _tabItem in tabControl.Items) {
+            tabItem = (_tabItem as TabItem)!;
+            if (tabItem == null)
+               continue;
+
+            panel = (tabItem?.Content as Panel)!;
+            if (panel == null)
+               continue;
+
+            if (panel.DataContext != null || panel is TabPanel) {
+               if (panel.DataContext != null && node != null)
+                  node.content = panel.DataContext;
+               else if (panel is TabPanel) {
+                  childNode = new ();
+                  node?.children?.Add (childNode);
+
+                  TabPanel? childTabPanel = panel as TabPanel;
+                  addConfigurationObjects (childNode, childTabPanel!);
+               }
+
+               childNode = null!;
+            }
          }
       }
    }

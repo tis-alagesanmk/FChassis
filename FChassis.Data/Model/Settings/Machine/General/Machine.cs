@@ -7,7 +7,7 @@ public partial class Machine : ObservableObject {
    string machineId = "130166";
 
    [ObservableProperty, Prop (Prop.Type.Text, "Axis emulation")]
-   string axisEmulation = "1";
+   int axisEmulation = 1;
 
    [ObservableProperty, Prop (Prop.Type.Text, "Cfg custom tech")]
    string cfgCustomTech = "ECUT";
