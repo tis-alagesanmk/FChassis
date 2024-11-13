@@ -8,11 +8,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis.UI.Settings;
 public partial class Panel : Panels.Child {
-   internal void AddPropControls (Type type, object dataContext = null!, Type baseType = null!) {
-      if(dataContext != null) // Set DataContext
+   internal void AddPropControls (Type type, object dataContext = null!) {
+      if (dataContext != null) // Set DataContext
          this.DataContext = dataContext;
 
       Grid? grid = null!;
@@ -30,15 +31,17 @@ public partial class Panel : Panels.Child {
          scrollViewer.Content = grid;
       }
 
+      Type baseType = typeof (ObservableObject);
       List<Type> types = Data.Reflection.Object.GetTypeList(type, baseType);
       foreach (var iType in types)
-        this.AddPropControls(grid!, iType);
+         if(baseType != iType)
+            this.AddPropControls(grid!, iType);
    }
 
    internal void AddPropControls (Grid grid, Type type) {
       int row = grid.RowDefinitions.Count;
 
-      var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+      var fields = type.GetFields (BindingFlags.NonPublic | BindingFlags.Instance);
       foreach (FieldInfo f in fields) {
          var p = f.GetCustomAttribute<Prop> ()!;
          if (p == null) continue;

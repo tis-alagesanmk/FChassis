@@ -16,9 +16,8 @@ public partial class TabPanel : Panel {
    }
 
    protected void PopulateTabItemContent (Panel[] panels) {
-      this.panels = panels;
       TabControl tabControl = this.GetTabControl ();
-      this.PopulateTabItemContent (tabControl, this.panels);
+      this.PopulateTabItemContent (tabControl, panels);
    }
 
    protected void PopulateTabItemContent (TabControl tabControl, Panel[] panels) {
@@ -28,7 +27,6 @@ public partial class TabPanel : Panel {
       int t = 0;
       foreach (var panel in panels) {
          TabItem? tabItem = tabControl.Items[t++] as TabItem;
-         this.LoadJsonData (panel);
          if(tabItem != null) 
             tabItem.Content = panel;
       }
@@ -44,88 +42,9 @@ public partial class TabPanel : Panel {
          Child.mainWindow?.Switch2MainPanel ();
 
          FChassis.Data.IO.JSONFileWrite writer = new ();
-         this.prepareConfiguraionNodes (writer.nodes);
+         this.AddConfiguraionNodes (writer.node);
          writer.Write ("C:/work/config.json");
-
-         DataContainer dataContainer = new DataContainer ();
-         LocalJson settings = new LocalJson (dataContainer);
-
-         foreach (var tabitem in tabControl.Items) {
-            this.SaveAppData ((tabitem as TabItem)!, settings);
-         }
       }
-   }
-
-   void prepareConfiguraionNodes(TreeNodes nodes) {
-      nodes.Clear ();
-
-      TreeNode treeNode = new () { content = "Configuration" };
-      nodes.Add(treeNode);
-
-      addConfigurationObjects (treeNode, this);
-
-      #region Local function
-      void addConfigurationObjects (TreeNode node, TabPanel tabPanel) {
-         TabControl tabControl = tabPanel.GetTabControl ();
-
-         TabItem tabItem;
-         Panel panel;
-         TreeNode childNode = null!;
-         foreach (var _tabItem in tabControl.Items) {
-            tabItem = (_tabItem as TabItem)!;
-            if (tabItem == null)
-               continue;
-
-            panel = (tabItem?.Content as Panel)!;
-            if (panel == null)
-               continue;
-
-            if (panel.DataContext != null || panel is TabPanel) {
-               if (panel.DataContext != null && node != null)
-                  node.content = panel.DataContext;
-               else if (panel is TabPanel) {
-                  childNode = new ();
-                  node?.children?.Add (childNode);
-
-                  TabPanel? childTabPanel = panel as TabPanel;
-                  addConfigurationObjects (childNode, childTabPanel!);
-               }
-
-               childNode = null!;
-            }
-         }
-      }
-      #endregion Local function
-   }
-
-   protected void SaveAppData(TabItem tabItem, LocalJson json) {
-      TabPanel? tabPanel = tabItem.Content as TabPanel;
-      if (tabPanel is null) 
-         return;
-
-      return;
-
-      Panel[] panels = tabPanel.panels;
-      foreach(var panel in panels) {
-         var context = panel.DataContext;
-         if(context is null) continue;
-         json.GetData (context);
-      }
-
-      json.Save ();
-   } 
-
-   protected void LoadJsonData(Panel panel) {
-      if(panel is null) 
-         return;
-
-      return;
-
-      DataContainer dataContainer = null!;
-      LocalJson json = new LocalJson (dataContainer);
-
-      json.Load ();
-      panel.DataContext = json.LoadData(panel.DataContext!);
    }
 
    virtual protected void TabItemSelected (TabItem? tabItem, string? tabName) { }
@@ -137,7 +56,42 @@ public partial class TabPanel : Panel {
          this.TabItemSelected (tabItem, tabItem.Header as string);
    }
 
+   protected void AddConfiguraionNodes (TreeNode node) {
+      node?.children?.Clear ();
+      node!.content = "Configuration";
+      _addConfigurationObjects (node!, this);
+
+      #region Local function
+      void _addConfigurationObjects (TreeNode node, TabPanel tabPanel) {
+         TabControl tabControl = tabPanel.GetTabControl ();
+
+         Panel panel;
+         TabItem tabItem;
+         TreeNode childNode = null!;
+         foreach (var _tabItem in tabControl.Items) {
+            tabItem = (_tabItem as TabItem)!;
+            if (tabItem == null)
+               continue;
+
+            panel = (tabItem?.Content as Panel)!;
+            if (panel == null)
+               continue;
+
+            if (panel.DataContext != null || panel is TabPanel) {
+               if (panel.DataContext != null)
+                  childNode = new () { content = panel.DataContext };
+               else if (panel is TabPanel) {
+                  childNode = new () { content = tabItem?.Header };
+                  _addConfigurationObjects (childNode, (panel as TabPanel)!);
+               }
+
+               node?.children?.Add (childNode);
+            }
+         }
+      }
+      #endregion Local function
+   }
+
    #region "Fields"
-   protected Panel[] panels = null!;
    #endregion 
 }

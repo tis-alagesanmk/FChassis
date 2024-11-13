@@ -7,6 +7,6 @@ namespace FChassis.UI.Settings.Machine.AxisParams;
 public partial class LPC1Settings : Panel {
    public LPC1Settings () {
       AvaloniaXamlLoader.Load (this);
-      this.AddPropControls (typeof (LPC1), MainViewModel.lpc1VM, typeof(LPC1Base));
+      this.AddPropControls (typeof (LPC1), MainViewModel.lpc1VM);
    }
 }

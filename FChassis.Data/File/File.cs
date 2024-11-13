@@ -1,20 +1,20 @@
 using System.Collections.Generic;
 
-namespace FChassis.Data.IO { 
-   public class TreeNode {
-      public object? content;
-      public List<TreeNode>? children = new ();
-   }
-
+namespace FChassis.Data.IO {
    //-----------------------------------------------------------------------------
    public class TreeNodes : List<TreeNode> { }
+
+   //-----------------------------------------------------------------------------
+   public class TreeNode {
+      public object? content;
+      public TreeNodes? children = new ();
+   }
 
    //-----------------------------------------------------------------------------
    /// <summary>
    /// </summary>
    public abstract class File {
-      // Field
-      public TreeNodes nodes = new ();
+      public TreeNode node = new ();
    }
 
    //-----------------------------------------------------------------------------
@@ -23,7 +23,7 @@ namespace FChassis.Data.IO {
    public abstract class FileRead : File {
       // Overridable
       public abstract bool Read (string path);
-      public abstract object CreateObject (string name);
+      public abstract TreeNode GetObject (TreeNode node, string name);
    }
 
    //-----------------------------------------------------------------------------

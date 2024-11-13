@@ -18,7 +18,7 @@ public partial class Machine : ObservableObject {
    [ObservableProperty, Prop (Prop.Type.Text, "Can Open Bit Rate", "kbps")]
    string canOpenBitRate = "1000,1000";
 
-   [ObservableProperty, Prop (Prop.Type.Check, "Netdisk Server IP Address")]
+   [ObservableProperty, Prop (Prop.Type.Text, "Netdisk Server IP Address")]
    string netDiskServerIPAddr = "1000,1000";
 
    [ObservableProperty, Prop (Prop.Type.Combo, "Software limit code", null!, null!, 

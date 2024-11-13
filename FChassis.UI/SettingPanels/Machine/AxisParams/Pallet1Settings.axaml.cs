@@ -7,6 +7,6 @@ namespace FChassis.UI.Settings.Machine.AxisParams;
 public partial class Pallet1Settings : Panel {
    public Pallet1Settings () {
       AvaloniaXamlLoader.Load (this);
-      this.AddPropControls (typeof (Pallet1), MainViewModel.pallet1ViewModelVM, typeof(LPC1Base));
+      this.AddPropControls (typeof (Pallet1), MainViewModel.pallet1ViewModelVM);
    }
 }

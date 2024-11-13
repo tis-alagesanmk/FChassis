@@ -10,6 +10,10 @@ public partial class TabPanel : Settings.TabPanel {
          new DCAPage.Panel(),
          new RampCycles.Panel(),
       ]);
+
+      FChassis.Data.IO.JSONFileRead reader = new ();
+      this.AddConfiguraionNodes (reader.node);
+      reader.Read ("C:/work/config.json");
    }
 
    override protected void TabItemSelected (TabItem? tabItem, string? tabName) {
