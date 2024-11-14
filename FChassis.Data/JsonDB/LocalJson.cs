@@ -12,14 +12,14 @@ namespace FChassis.Data.JsonDB {
 
       public void Save () {
          string jsondata = JsonSerializer.Serialize (this.data, new JsonSerializerOptions { WriteIndented = true});
-         File.WriteAllText(this.repoPath, jsondata);
+         System.IO.File.WriteAllText(this.repoPath, jsondata);
       }
 
       public void Load () {
-         if (!File.Exists (this.repoPath))
+         if (!System.IO.File.Exists (this.repoPath))
             return;
 
-         string? json = File.ReadAllText(this.repoPath);
+         string? json = System.IO.File.ReadAllText(this.repoPath);
          this.data = JsonSerializer.Deserialize<DataContainer> (json)!;
       }
 

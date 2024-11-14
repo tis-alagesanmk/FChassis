@@ -8,7 +8,6 @@ public partial class ProfileCamSettings : Panel{
 
    public ProfileCamSettings () {
       AvaloniaXamlLoader.Load (this);
-
       this.AddPropControls (typeof(ProfileCam),MainViewModel.profileCamVM);
    }
 }

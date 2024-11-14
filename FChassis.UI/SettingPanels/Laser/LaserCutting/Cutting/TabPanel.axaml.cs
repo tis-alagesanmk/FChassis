@@ -5,6 +5,7 @@ namespace FChassis.UI.Settings.Laser.LaserCutting.Cutting;
 public partial class TabPanel : Settings.TabPanel {
    public TabPanel () {
       AvaloniaXamlLoader.Load (this);
+
       this.PopulateTabItemContent ([
          new LargeSettings(),
          new MediumSettings(),
@@ -12,10 +13,5 @@ public partial class TabPanel : Settings.TabPanel {
          new SpecialSettings(),
          new PreholeSettings(),
       ]);
-   }
-
-   override protected TabControl GetTabControl () {
-      TabControl tabControl = (TabControl)this.LogicalChildren[0].LogicalChildren[1];
-      return tabControl;
    }
 }

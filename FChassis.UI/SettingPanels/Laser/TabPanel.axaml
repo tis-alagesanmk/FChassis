@@ -8,10 +8,8 @@
         x:Class="FChassis.UI.Settings.Laser.TabPanel"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	<TabControl 
-			Margin="5"
-			TabStripPlacement="Bottom" 
-			SelectionChanged="TabControl_SelectionChanged">
+	<TabControl x:Name="TabControl" Margin="5"
+			TabStripPlacement="Bottom" SelectionChanged="TabControl_SelectionChanged">
 		<TabItem Header="Laser Cutting"/>
 		<TabItem Header="DCA Page"/>
 		<TabItem Header="Ramp Cyles"/>

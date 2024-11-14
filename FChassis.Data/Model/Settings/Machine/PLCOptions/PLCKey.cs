@@ -2,76 +2,87 @@
 
 namespace FChassis.Data.Model.Settings.PLCOptions; 
 public partial class PLCKey : ObservableObject {
+   [ObservableProperty, Prop ("PLCKey1",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey1s;
 
-   [ObservableProperty, Prop ("PLC Key1", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys1;
+   [ObservableProperty, Prop ("PLCKey2",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey2s;
 
-   [ObservableProperty, Prop ("PLC Key2", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys2;
+   [ObservableProperty, Prop ("PLCKey3",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey3s;
 
-   [ObservableProperty, Prop ("PLC Key3", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys3;
+   [ObservableProperty, Prop ("PLCKey4",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey4s;
 
-   [ObservableProperty, Prop ("PLC Key4", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys4;
+   [ObservableProperty, Prop ("PLCKey5",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey5s;
 
-   [ObservableProperty, Prop ("PLC Key5", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys5;
+   [ObservableProperty, Prop ("PLCKey6",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey6s;
 
-   [ObservableProperty, Prop ("PLC Key6", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys6;
+   [ObservableProperty, Prop ("PLCKey7",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey7s;
 
-   [ObservableProperty, Prop ("PLC Key7", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys7;
+   [ObservableProperty, Prop ("PLCKey8",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey8s;
 
-   [ObservableProperty, Prop ("PLC Key8", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys8;
+   [ObservableProperty, Prop ("PLCKey9",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey9s;
 
-   [ObservableProperty, Prop ("PLC Key9", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys9;
+   [ObservableProperty, Prop ("PLCKey10",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey10s;
 
-   [ObservableProperty, Prop ("PLC Key10", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys10;
+   [ObservableProperty, Prop ("PLCKey11",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey11s;
 
-   [ObservableProperty, Prop ("PLC Key11", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys11;
-
-   [ObservableProperty, Prop ("PLC Key12", Prop.Type.DBGrid, "", null!, "BindName"),
-                        DBGridColProp (Prop.Type.Text, "Name", "BindName1"),
-                        DBGridColProp (Prop.Type.Text, "Type", "BindName2"),
-                        DBGridColProp (Prop.Type.Text, "Function", "BindName2")]
-   private object[]? plcKeys12;
+   [ObservableProperty, Prop ("PLCKey12",
+                             Prop.Type.DBGrid, null!),
+                                   DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                   DBGridColProp (Prop.Type.Text, "Type", "Type"),
+                                   DBGridColProp (Prop.Type.Text, "Function", "Function")]
+   private object[]? plcKey12s;
 }

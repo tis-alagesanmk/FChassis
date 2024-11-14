@@ -8,12 +8,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using Avalonia.LogicalTree;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis.UI.Settings;
 public partial class Panel : Panels.Child {
    internal void AddPropControls (Type type, object dataContext = null!) {
-      if(dataContext != null) // Set DataContext
+      if (dataContext != null) // Set DataContext
          this.DataContext = dataContext;
 
       Grid? grid = null!;
@@ -24,21 +24,28 @@ public partial class Panel : Panels.Child {
          var scrollViewer = new ScrollViewer ();
          this.Content = scrollViewer;
 
-         grid = new Grid ();
+         grid = new Grid () {Name = Panel.TabControlName};
          for (int i = 0; i < 5; i++)
             grid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (20, GridUnitType.Star) });
 
          scrollViewer.Content = grid;
       }
 
-
-      this.AddPropControls(grid!, type);
+      this.AddPropControls (grid!, type);
    }
 
    internal void AddPropControls (Grid grid, Type type) {
+      Type baseType = typeof (ObservableObject);
+      List<Type> types = Data.Reflection.Object.GetTypeList (type, baseType);
+      foreach (var iType in types)
+         if (baseType != iType)
+            this.addPropControls (grid!, iType);
+   }
+
+   internal void addPropControls (Grid grid, Type type) {
       int row = grid.RowDefinitions.Count;
 
-      var fields = type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+      var fields = type.GetFields (BindingFlags.NonPublic | BindingFlags.Instance);
       foreach (FieldInfo f in fields) {
          var p = f.GetCustomAttribute<Prop> ()!;
          if (p == null) continue;
@@ -302,6 +309,10 @@ public partial class Panel : Panels.Child {
       }
       #endregion Local function
    }
+
+   #region "Fields"
+   protected const string TabControlName = "TabControl";
+   #endregion 
 }
 
 #region Run Time ControlInfo 

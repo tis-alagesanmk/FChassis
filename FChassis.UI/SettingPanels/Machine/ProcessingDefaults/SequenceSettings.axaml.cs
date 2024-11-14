@@ -7,7 +7,6 @@ public partial class SequenceSettings : Panel{
 
    public SequenceSettings () {
       AvaloniaXamlLoader.Load (this);
-
       this.AddPropControls (typeof (Sequence),MainViewModel.sequenceVM);
    }
 }

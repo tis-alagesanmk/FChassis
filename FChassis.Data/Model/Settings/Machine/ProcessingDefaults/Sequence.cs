@@ -2,8 +2,7 @@
 
 namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
    public partial class Sequence : ObservableObject {
-      [ObservableProperty, Prop ("Laser Sequence", 
-                                 Prop.Type.Combo, "Laser Processing Sequence", null!, null!,
+      [ObservableProperty, Prop ("Laser Sequence", Prop.Type.Combo, "Laser Processing Sequence", null!, null!,
                                     ["Standard", "MarkCut","PierceCut", "MarkPierceCut", "PierceMarkCut"])]
       string? laserProcessingSeq = "Standard";
 
@@ -15,8 +14,7 @@ namespace FChassis.Data.Model.Settings.Machine.ProcessingDefaults {
       bool? doPrePiercingPartByPart = true;
 
 
-      [ObservableProperty, Prop ("Route Traverse", 
-                                 Prop.Type.Check, "Move Pierce Points to Reduce Traverse")]
+      [ObservableProperty, Prop ("Route Traverse", Prop.Type.Check, "Move Pierce Points to Reduce Traverse")]
       bool? movePiercePointsToReduceTraverse = true;
 
       [ObservableProperty, Prop (Prop.Type.Check, "Move Pierce Points to Prevent Tilting")]

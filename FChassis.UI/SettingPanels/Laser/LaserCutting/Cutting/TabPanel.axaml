@@ -8,15 +8,9 @@
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.Cutting.TabPanel"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	<Grid x:Name="Grid">
-		<Grid.ColumnDefinitions>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="50"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>
-			<Panel Background="AliceBlue"/>
-		<TabControl x:Name="Tab1" Margin="5"
+	<Grid x:Name="Grid" RowDefinitions="50, *" ColumnDefinitions="*, 50">
+		<Panel Background="AliceBlue"/>
+		<TabControl x:Name="TabControl" Margin="5"
 					Grid.Row="1"
 					TabStripPlacement="Left">
 			<TabItem Header="Large"/>
@@ -25,5 +19,7 @@
 			<TabItem Header="Special"/>
 			<TabItem Header="Prehole"/>
 		</TabControl>
+		<Panel Background="Blue" 
+			   Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"/>
 	</Grid>
 </base:Panel>

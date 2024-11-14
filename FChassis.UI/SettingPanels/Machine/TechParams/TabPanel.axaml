@@ -9,6 +9,7 @@
 		xmlns:base="FChassis.UI.Settings"
 		>
 	<TabControl Margin="5"
+				x:Name="TabControl"
 				Background="AliceBlue"
 				TabStripPlacement="Left">
 		<TabItem Header="Analog Scaling"/>

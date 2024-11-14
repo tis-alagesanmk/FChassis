@@ -12,9 +12,4 @@ public partial class TabPanel : Settings.TabPanel {
          new SpecialSettings(),
       ]);
    }
-
-   override protected TabControl GetTabControl () {
-      TabControl tabControl = (TabControl)this.LogicalChildren[0].LogicalChildren[1];
-      return tabControl;
-   }
 }

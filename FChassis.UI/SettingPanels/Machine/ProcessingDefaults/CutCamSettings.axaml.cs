@@ -7,7 +7,6 @@ namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 public partial class CutCamSettings : Panel {
    public CutCamSettings () {
       AvaloniaXamlLoader.Load (this); 
-
-       this.AddPropControls (typeof(CutCam),MainViewModel.importVM);
+      this.AddPropControls (typeof(CutCam),MainViewModel.importVM);
    }
 }

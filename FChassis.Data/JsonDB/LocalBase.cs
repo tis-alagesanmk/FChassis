@@ -8,6 +8,7 @@ namespace FChassis.Data.JsonDB {
 
       public LocalBase() {
          this.repoPath = Path.Combine( this.CreateFolderPath ("JSON"), "settings.json"); 
+         //this.repoPath = this.CreateFolderPath ("JSON");
       }
 
       private string CreateFolderPath(string name) {

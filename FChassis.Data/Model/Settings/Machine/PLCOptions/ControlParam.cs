@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using FChassis.Data.Model.Settings.Machine.AxisParams;
 
 namespace FChassis.Data.Model.Settings.PLCOptions; 
 public partial class ControlParam : ObservableObject {

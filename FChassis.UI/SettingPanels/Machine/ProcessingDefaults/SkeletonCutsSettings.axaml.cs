@@ -6,7 +6,6 @@ namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 public partial class SkeletonCutsSettings : Panel{
    public SkeletonCutsSettings () {
       AvaloniaXamlLoader.Load (this);
-     
       this.AddPropControls (typeof (SkeletonCuts),MainViewModel.skeletonCutsVM);
    }
 }

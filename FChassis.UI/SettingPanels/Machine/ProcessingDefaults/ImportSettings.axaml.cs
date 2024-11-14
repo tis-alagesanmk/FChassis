@@ -7,7 +7,6 @@ public partial class ImportSettings : Panel {
 
    public ImportSettings () {
       AvaloniaXamlLoader.Load (this);
-
       this.AddPropControls (typeof (Import),MainViewModel.importVM);
-   }
+    }
 }

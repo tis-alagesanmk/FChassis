@@ -1,0 +1,10 @@
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace FChassis.Data.Model.Settings.Laser.LaserCutting.Piercing {
+   public partial class Single : ObservableObject {
+      [ObservableProperty, Prop (Prop.Type.DBGrid, null!),
+                                  DBGridColProp (Prop.Type.Text, "Name", "Name"),
+                                  DBGridColProp (Prop.Type.Text, "Single", "Single")]
+      private object[]? dataGrid1;
+   }
+}
