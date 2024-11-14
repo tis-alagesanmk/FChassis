@@ -7,6 +7,6 @@ namespace FChassis.Data.Model.Settings.Laser.LaserCutting.Piercing {
                                   DBGridColProp (Prop.Type.Text, "Power", "Power"),
                                   DBGridColProp (Prop.Type.Text, "Nozzle_Gap", "NozzleGap"),
                                   DBGridColProp (Prop.Type.Text, "RampValue", "RampValue")]
-      private object[]? dataGrid1;
+      private object[]? ramps;
    }
 }
