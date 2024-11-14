@@ -10,16 +10,20 @@ namespace FChassis.Data.JsonDB {
       public LocalJson (DataContainer container)
          => this.data = container;
 
+      private bool FileExits (string path) => System.IO.File.Exists (path);
+      private string ReadFromFile (string path) => System.IO.File.ReadAllText (path);
+      private void WriteToFile (string path,string content) => System.IO.File.WriteAllText (path,content);
+
       public void Save () {
          string jsondata = JsonSerializer.Serialize (this.data, new JsonSerializerOptions { WriteIndented = true});
-         System.IO.File.WriteAllText(this.repoPath, jsondata);
+         this.WriteToFile(this.repoPath, jsondata);
       }
 
       public void Load () {
-         if (!System.IO.File.Exists (this.repoPath))
+         if (this.FileExits (this.repoPath))
             return;
 
-         string? json = System.IO.File.ReadAllText(this.repoPath);
+         string? json = this.ReadFromFile(this.repoPath);
          this.data = JsonSerializer.Deserialize<DataContainer> (json)!;
       }
 

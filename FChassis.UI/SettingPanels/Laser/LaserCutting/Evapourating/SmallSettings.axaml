@@ -6,7 +6,5 @@
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.Evapourating.SmallSettings"
-		xmlns:base="FChassis.UI.Settings"
-		>
-	Small Settings
+		xmlns:base="FChassis.UI.Settings">
 </base:Panel>
