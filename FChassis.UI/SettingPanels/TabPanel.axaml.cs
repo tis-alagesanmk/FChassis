@@ -9,7 +9,7 @@ public partial class TabPanel : Panel {
       AvaloniaXamlLoader.Load (this);  }
 
    virtual protected TabControl GetTabControl () {
-      TabControl tabControl = this.FindNameScope ()?.Find<TabControl> (Panel.TabControlName)!;
+      TabControl tabControl = this.FindNameScope ()?.Find<TabControl> (TabPanel.TabControlName)!;
       return tabControl;
    }
 
@@ -89,4 +89,8 @@ public partial class TabPanel : Panel {
       }
       #endregion Local function
    }
+
+   #region "Fields"
+   protected const string TabControlName = "TabControl";
+   #endregion 
 }

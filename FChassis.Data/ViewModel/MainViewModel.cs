@@ -33,6 +33,15 @@ public class MainViewModel {
    public static Settings.Machine.ProcessingDefaults.WorkSupportViewModel workSupportVM = new ();
    public static Settings.Machine.ProcessingDefaults.SkeletonCutsViewModel skeletonCutsVM = new ();
 
+   //Laser db/LaserCutting/Piercing
+   public static Settings.Laser.LaserCutting.Piercing.PeckViewModel peckVM = new ();
+   public static Settings.Laser.LaserCutting.Piercing.MultipleViewModel multipleVM = new ();
+   public static Settings.Laser.LaserCutting.Piercing.RampViewModel rampVM = new ();
+   public static Settings.Laser.LaserCutting.Piercing.SingleViewModel singleVM = new ();
+   public static Settings.Laser.LaserCutting.Piercing.NormalViewModel normalVM = new ();
+   public static Settings.Laser.LaserCutting.Piercing.GentleViewModel gentleVM = new ();
+   public static Settings.Laser.LaserCutting.Piercing.DotPunchViewModel dotpunchVM = new ();
+
    // WorkOffsets ---------------------------------------------------------------------------------
    // WorkOffsets
    public static Settings.WorkOffsetsViewModel workOFfsetsVM = new ();

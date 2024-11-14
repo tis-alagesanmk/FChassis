@@ -6,11 +6,5 @@
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.Piercing.MultipleSettings"
-		xmlns:base="FChassis.UI.Settings"
-		>
-	<ScrollViewer>
-		<Grid>
-			
-		</Grid>
-	</ScrollViewer>
+		xmlns:base="FChassis.UI.Settings">
 </base:Panel>
