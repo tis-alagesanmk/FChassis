@@ -31,14 +31,18 @@ public partial class Panel : Panels.Child {
          scrollViewer.Content = grid;
       }
 
-      Type baseType = typeof (ObservableObject);
-      List<Type> types = Data.Reflection.Object.GetTypeList(type, baseType);
-      foreach (var iType in types)
-         if(baseType != iType)
-            this.AddPropControls(grid!, iType);
+      this.AddPropControls (grid!, type);
    }
 
    internal void AddPropControls (Grid grid, Type type) {
+      Type baseType = typeof (ObservableObject);
+      List<Type> types = Data.Reflection.Object.GetTypeList (type, baseType);
+      foreach (var iType in types)
+         if (baseType != iType)
+            this.addPropControls (grid!, iType);
+   }
+
+   internal void addPropControls (Grid grid, Type type) {
       int row = grid.RowDefinitions.Count;
 
       var fields = type.GetFields (BindingFlags.NonPublic | BindingFlags.Instance);

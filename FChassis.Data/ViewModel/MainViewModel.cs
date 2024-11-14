@@ -1,5 +1,6 @@
 ﻿namespace FChassis.Data.ViewModel;
 public class MainViewModel {
+   // Machine -------------------------------------------------------------------------------------
    // General Tab
    public static Settings.Machine.General.HMIViewModel hmiVM = new ();
    public static Settings.Machine.General.MachineViewModel machineVM = new ();
@@ -24,11 +25,18 @@ public class MainViewModel {
    public static Settings.Machine.PLCOptions.ControlParamViewModel controlParamVM = new ();
    public static Settings.Machine.PLCOptions.PLCKeyViewModel plcKeyVM = new ();
    
-   //Process Defaults
+   // Process Defaults
    public static Settings.Machine.ProcessingDefaults.ImportViewModel importVM = new ();
    public static Settings.Machine.ProcessingDefaults.CutCamViewModel curcamVM = new ();
    public static Settings.Machine.ProcessingDefaults.ProfileCamViewModel profileCamVM = new ();
    public static Settings.Machine.ProcessingDefaults.SequenceViewModel sequenceVM = new ();
    public static Settings.Machine.ProcessingDefaults.WorkSupportViewModel workSupportVM = new ();
    public static Settings.Machine.ProcessingDefaults.SkeletonCutsViewModel skeletonCutsVM = new ();
+
+   // WorkOffsets ---------------------------------------------------------------------------------
+   // WorkOffsets
+   public static Settings.WorkOffsetsViewModel workOFfsetsVM = new ();
+
+   // Laser ---------------------------------------------------------------------------------------
+   public static Settings.Laser.DCAPageViewModel dcaPageVM = new ();
 }

@@ -42,7 +42,7 @@ public partial class TabPanel : Panel {
          Child.mainWindow?.Switch2MainPanel ();
 
          FChassis.Data.IO.JSONFileWrite writer = new ();
-         this.AddConfiguraionNodes (writer.node);
+         this.UpdateConfiguraionNodes (writer.node);
          writer.Write ("C:/work/config.json");
       }
    }
@@ -56,7 +56,7 @@ public partial class TabPanel : Panel {
          this.TabItemSelected (tabItem, tabItem.Header as string);
    }
 
-   protected void AddConfiguraionNodes (TreeNode node) {
+   protected void UpdateConfiguraionNodes (TreeNode node) {
       node?.children?.Clear ();
       node!.content = "Configuration";
       _addConfigurationObjects (node!, this);

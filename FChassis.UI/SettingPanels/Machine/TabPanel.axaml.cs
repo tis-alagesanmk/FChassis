@@ -14,7 +14,7 @@ public partial class TabPanel : Settings.TabPanel {
       ]);
 
       FChassis.Data.IO.JSONFileRead reader = new ();
-      this.AddConfiguraionNodes (reader.node);
+      this.UpdateConfiguraionNodes (reader.node);
       reader.Read ("C:/work/config.json");
    }
 
