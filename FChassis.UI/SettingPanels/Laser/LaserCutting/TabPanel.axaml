@@ -8,7 +8,7 @@
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.TabPanel"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	<TabControl x:Name="Tab1" Margin="5">
+	<TabControl x:Name="TabControl" Margin="5">
 		<TabItem Header="Piercing"/>
 		<TabItem Header="Cutting"/>
 		<TabItem Header="Marking"/>

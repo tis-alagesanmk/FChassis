@@ -1,17 +1,15 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FChassis.UI.Panels;
-using FChassis.Data.JsonDB;
 using FChassis.Data.IO;
 
 namespace FChassis.UI.Settings;
 public partial class TabPanel : Panel {
    public TabPanel () {
-      AvaloniaXamlLoader.Load (this); 
-   }
+      AvaloniaXamlLoader.Load (this);  }
 
    virtual protected TabControl GetTabControl () {
-      TabControl tabControl = (TabControl)this.LogicalChildren[0];
+      TabControl tabControl = this.FindNameScope ()?.Find<TabControl> (Panel.TabControlName)!;
       return tabControl;
    }
 
@@ -91,7 +89,4 @@ public partial class TabPanel : Panel {
       }
       #endregion Local function
    }
-
-   #region "Fields"
-   #endregion 
 }

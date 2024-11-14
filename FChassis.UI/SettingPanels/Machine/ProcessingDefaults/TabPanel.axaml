@@ -8,9 +8,8 @@
         x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.TabPanel"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	<TabControl Margin="5"
-				Background="AliceBlue"
-				TabStripPlacement="Left">
+	<TabControl x:Name="TabControl" Margin="5"
+			Background="AliceBlue" TabStripPlacement="Left">
 		<TabItem Header="Import"/>
 		<TabItem Header="Cut CAM"/>
 		<TabItem Header="Profile CAM"/>
