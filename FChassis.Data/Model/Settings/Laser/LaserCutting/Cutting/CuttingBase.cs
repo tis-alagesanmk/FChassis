@@ -17,7 +17,7 @@ namespace FChassis.Data.Model.Settings.Laser.LaserCutting.Cutting {
       private object[]? dataGrid2;
    }
 
-   public partial class Large : CuttingBase { }
-   public partial class Medium : CuttingBase { }
-   public partial class Small : CuttingBase { }
+   public  class Large : CuttingBase { }
+   public  class Medium : CuttingBase { }
+   public  class Small : CuttingBase { }
 }

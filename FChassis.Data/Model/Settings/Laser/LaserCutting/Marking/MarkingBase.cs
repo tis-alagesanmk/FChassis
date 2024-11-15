@@ -14,7 +14,7 @@ namespace FChassis.Data.Model.Settings.Laser.LaserCutting.Marking {
       private object[]? dataGrid2;
    }
 
-   public partial class Large : MarkingBase { }
-   public partial class Medium : MarkingBase { }
-   public partial class Small : MarkingBase { }
+   public  class Large : MarkingBase { }
+   public  class Medium : MarkingBase { }
+   public  class Small : MarkingBase { }
 }
