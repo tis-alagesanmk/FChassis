@@ -33,7 +33,15 @@ public class MainViewModel {
    public static Settings.Machine.ProcessingDefaults.WorkSupportViewModel workSupportVM = new ();
    public static Settings.Machine.ProcessingDefaults.SkeletonCutsViewModel skeletonCutsVM = new ();
 
-   //Laser db/LaserCutting/Piercing
+   
+   // WorkOffsets ---------------------------------------------------------------------------------
+   public static Settings.WorkOffsetsViewModel workOFfsetsVM = new ();
+
+   // Laser ---------------------------------------------------------------------------------------
+   public static Settings.Laser.DCAPageViewModel dcaPageVM = new ();
+
+   // ---- LaserCutting
+   // --------- Piercing
    public static Settings.Laser.LaserCutting.Piercing.PeckViewModel peckVM = new ();
    public static Settings.Laser.LaserCutting.Piercing.MultipleViewModel multipleVM = new ();
    public static Settings.Laser.LaserCutting.Piercing.RampViewModel rampVM = new ();
@@ -42,10 +50,21 @@ public class MainViewModel {
    public static Settings.Laser.LaserCutting.Piercing.GentleViewModel gentleVM = new ();
    public static Settings.Laser.LaserCutting.Piercing.DotPunchViewModel dotpunchVM = new ();
 
-   // WorkOffsets ---------------------------------------------------------------------------------
-   // WorkOffsets
-   public static Settings.WorkOffsetsViewModel workOFfsetsVM = new ();
+   // --------- Cutting
+   public static Settings.Laser.LaserCutting.Cutting.LargeViewModel largeVM = new ();
+   public static Settings.Laser.LaserCutting.Cutting.MediumViewModel mediumVM = new ();
+   public static Settings.Laser.LaserCutting.Cutting.SmallViewModel smallVM = new ();
+   public static Settings.Laser.LaserCutting.Cutting.SpecialViewModel specialVM = new ();
+   public static Settings.Laser.LaserCutting.Cutting.PreHoleViewModel preholeVM = new ();
 
-   // Laser ---------------------------------------------------------------------------------------
-   public static Settings.Laser.DCAPageViewModel dcaPageVM = new ();
+   // --------- Making
+   public static Settings.Laser.LaserCutting.Marking.LargeViewModel makingLargeVM = new ();
+   public static Settings.Laser.LaserCutting.Marking.MediumViewModel makingMediumVM = new ();
+   public static Settings.Laser.LaserCutting.Marking.SmallViewModel makingSmallVM = new ();
+   public static Settings.Laser.LaserCutting.Marking.SpecialViewModel makingSpecialVM = new ();
+
+   // --------- Evapourating
+   public static Settings.Laser.LaserCutting.Evapourating.LargeViewModel evapouratingLargeVM = new ();
+   public static Settings.Laser.LaserCutting.Evapourating.MediumViewModel evapouratingMediumVM = new ();
+   public static Settings.Laser.LaserCutting.Evapourating.SmallViewModel evapouratingSmallVM = new ();
 }

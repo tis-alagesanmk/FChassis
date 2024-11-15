@@ -6,7 +6,4 @@
 			 xmlns:base="FChassis.UI.Settings"
 			 Background="White"
              x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.CutCamSettings">
-	<ScrollViewer>
-		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"/>
-	</ScrollViewer>
 </base:Panel>

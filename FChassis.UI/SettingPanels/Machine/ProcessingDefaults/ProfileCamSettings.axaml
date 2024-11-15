@@ -5,10 +5,5 @@
              mc:Ignorable="d" d:DesignWidth="800" 
 			 xmlns:base="FChassis.UI.Settings"
 			 Background="White"
-			 xmlns:vm="using:FChassis.Data.ViewModel.Settings.Machine.ProcessingDefaults"
-             x:DataType="vm:ProfileCamViewModel"
 			 x:Class="FChassis.UI.Settings.Machine.ProcessingDefaults.ProfileCamSettings">
-	<UserControl.DataContext>
-		<vm:ProfileCamViewModel/>
-	</UserControl.DataContext>
 </base:Panel>

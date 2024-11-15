@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 namespace FChassis.UI.Settings.Laser.LaserCutting.Piercing;
 public partial class RampSettings : Panel {
    public RampSettings () {
+
       AvaloniaXamlLoader.Load (this);
       this.AddPropControls (typeof(Ramp),MainViewModel.rampVM);
    }

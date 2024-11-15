@@ -11,6 +11,6 @@ public partial class TabPanel : Settings.TabPanel {
          new SmallSettings(),
          new SpecialSettings(),
          new PreholeSettings(),
-      ]);      
+      ]);
    }
 }

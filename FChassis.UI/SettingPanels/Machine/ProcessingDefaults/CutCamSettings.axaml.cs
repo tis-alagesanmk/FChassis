@@ -1,35 +1,12 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using FChassis.Data.Model.Settings.Machine.ProcessingDefaults;
+using FChassis.Data.ViewModel;
 
 namespace FChassis.UI.Settings.Machine.ProcessingDefaults;
 public partial class CutCamSettings : Panel {
    public CutCamSettings () {
       AvaloniaXamlLoader.Load (this); 
-
-      ControlInfo[] ctrlInfos = [
-         new CheckControlInfo ("Advanced", null!),
-         createFinishingRuleDGrid(),
-         new GroupControlInfo ("Microjoint settings"),
-         new _TextControlInfo  ("Microjoint length", null!)
-      ];
-
-      Grid? grid = this.LogicalChildren[0].LogicalChildren[0] as Grid;
-      if (grid != null)
-         this.AddParameterControls (grid, ctrlInfos);
-
-      #region Local Function
-      DGridControlInfo createFinishingRuleDGrid () {
-         DGridControlInfo dGridCrtlInfo = new () {
-            binding = "Finishing Rules",
-            columns = new[] {
-               new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Wire Auto"},
-               new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Contour Flags" },
-               new DGridControlInfo.ColInfo {type = ControlInfo.Type.Check, header = "Disabled"},
-               new DGridControlInfo.ColInfo {type = ControlInfo.Type.Text_, header = "Size" },
-         }};
-
-         return dGridCrtlInfo;
-      }
-      #endregion Local Function
+      this.AddPropControls (typeof(CutCam),MainViewModel.curcamVM);
    }
 }
