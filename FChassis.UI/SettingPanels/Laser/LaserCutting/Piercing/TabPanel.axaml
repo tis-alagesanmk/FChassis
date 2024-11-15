@@ -8,8 +8,7 @@
         x:Class="FChassis.UI.Settings.Laser.LaserCutting.Piercing.TabPanel"
 		xmlns:base="FChassis.UI.Settings"
 		>
-	<TabControl x:Name="TabControl" Margin="5"
-				TabStripPlacement="Left">
+	<TabControl x:Name="TabControl" Margin="5">
 		<TabItem Header="Peck"/>
 		<TabItem Header="Multiple"/>
 		<TabItem Header="Ramp"/>
