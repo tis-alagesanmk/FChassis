@@ -13,7 +13,7 @@ public partial class TabPanel : Settings.TabPanel {
 
       FChassis.Data.IO.JSONFileRead reader = new ();
       this.UpdateConfiguraionNodes (reader.node);
-      //reader.Read ("C:/work/config.json");
+      reader.Read ("C:/work/config.json");
    }
 
    override protected void TabItemSelected (TabItem? tabItem, string? tabName) {

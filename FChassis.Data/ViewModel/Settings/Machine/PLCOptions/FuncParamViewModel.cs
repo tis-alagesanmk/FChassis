@@ -1,5 +1,3 @@
-﻿using FChassis.Data.Model.Settings.Machine.PLCOptions;
-
-namespace FChassis.Data.ViewModel.Settings.Machine.PLCOptions;
-public partial class FuncParamViewModel : FuncParam { }
+﻿namespace FChassis.Data.ViewModel.Settings.Machine.PLCOptions;
+public partial class FuncParamViewModel : Model.Settings.Machine.PLCOptions.FuncParam {}
    

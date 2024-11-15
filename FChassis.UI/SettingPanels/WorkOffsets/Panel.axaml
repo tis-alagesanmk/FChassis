@@ -12,7 +12,7 @@
 		  Background="AliceBlue">
 		<TextBlock Grid.Row="0" HorizontalAlignment="Stretch"
 					Margin="5,0,0,0" Text="Work Offsets"/>
-		<Grid ColumnDefinitions="20* 20* 20* 20* 20*"
+		<Grid x:Name="offsetGrid" ColumnDefinitions="20* 20* 20* 20* 20*"
 			  Grid.Row="1" Grid.RowSpan="2"
 			  Background="White">			
 		</Grid>

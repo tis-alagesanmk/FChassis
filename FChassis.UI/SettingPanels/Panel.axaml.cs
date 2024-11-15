@@ -24,7 +24,7 @@ public partial class Panel : Panels.Child {
          var scrollViewer = new ScrollViewer ();
          this.Content = scrollViewer;
 
-         grid = new Grid () {Name = Panel.TabControlName};
+         grid = new Grid ();
          for (int i = 0; i < 5; i++)
             grid.ColumnDefinitions.Add (new ColumnDefinition { Width = new GridLength (20, GridUnitType.Star) });
 
@@ -309,10 +309,6 @@ public partial class Panel : Panels.Child {
       }
       #endregion Local function
    }
-
-   #region "Fields"
-   protected const string TabControlName = "TabControl";
-   #endregion 
 }
 
 #region Run Time ControlInfo 
