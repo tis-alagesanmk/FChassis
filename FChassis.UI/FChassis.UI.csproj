@@ -12,7 +12,6 @@
 	<OutDir>C:\FluxSDK\Bin</OutDir>
 
 	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	<IntermediateOutputPath>$(SolutionDir)\output\intermediate\$(MSBuildProjectName)</IntermediateOutputPath>
 	<BaseOutputPath>C:\FluxSDK\Bin</BaseOutputPath>
 	<PackageOutputPath>$(SolutionDir)\output\$(OutputPath)</PackageOutputPath>
 	
@@ -20,13 +19,6 @@
 	<StartupObject>FChassis.UI.Program</StartupObject>
 	  
   </PropertyGroup>
-  <ItemGroup>
-    <AvaloniaXaml Remove="obj\**" />
-    <Compile Remove="obj\**" />
-    <EmbeddedResource Remove="obj\**" />
-    <None Remove="obj\**" />
-    <Page Remove="obj\**" />
-  </ItemGroup>
   <ItemGroup>
     <AvaloniaXaml Remove="SettingPanels\Machine\PLCOptions\Panel.axaml" />
   </ItemGroup>
@@ -59,9 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\TextboxLabel.axaml.cs">
-      <DependentUpon>TextboxLabel.axaml</DependentUpon>
-    </Compile>
     <Compile Update="SettingPanels\Machine\AxisParams\AxisSettingsPanel.axaml.cs">
       <DependentUpon>AxisSettingsPanel.axaml</DependentUpon>
     </Compile>
@@ -69,9 +58,5 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="SettingPanels\Machine\ProcessingDefaults\SequenceSettings.axaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>

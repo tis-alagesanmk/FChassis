@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -12,10 +11,8 @@
 	<Company>TeckinSoft</Company>
 
 	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	<IntermediateOutputPath>$(SolutionDir)\output\intermediate\$(MSBuildProjectName)\</IntermediateOutputPath>
 	<BaseOutputPath>$(SolutionDir)\output\bin\$(MSBuildProjectName)\</BaseOutputPath>
     <PackageOutputPath>$(SolutionDir)\output\$(OutputPath)</PackageOutputPath>      
-	  
   </PropertyGroup>
 
   <ItemGroup>

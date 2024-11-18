@@ -14,6 +14,7 @@ namespace FChassis.Data.Model.Settings.Laser.LaserCutting.Evapourating {
                                   DBGridColProp (Prop.Type.Text, "Common", "Common")]
       private object[]? dataGrid2;
    }
+
    public  class Large : EvapouratingBase { }
    public  class Medium : EvapouratingBase { }
    public  class Small : EvapouratingBase { }
