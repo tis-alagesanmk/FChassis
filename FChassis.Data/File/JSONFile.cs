@@ -202,12 +202,12 @@ public class JSONFileRead : FileRead {
                break;
 
             case JsonTokenType.Number:
-               var dataType = pi.PropertyType.ToString();
+               var dataType = GetExactPropertyType(pi.PropertyType).ToString();
                value = dataType switch {
-                  "System.Int32"    => reader.GetInt32 ()!,
-                  "System.UInt32"   => reader.GetUInt32 ()!,
-                  "System.Double"   => reader.GetDouble ()!,
-                  "System.Decimal"  => reader.GetDecimal ()!,
+                  "System.Int32" => reader.GetInt32 ()!,
+                  "System.UInt32" => reader.GetUInt32 ()!,
+                  "System.Double" => reader.GetDouble ()!,
+                  "System.Decimal" => reader.GetDecimal ()!,
                   _ => null!
                };
                break;
@@ -223,6 +223,10 @@ public class JSONFileRead : FileRead {
       #region Local
       string _capitalizeFirstLetter (string str)
          => char.ToUpper (str[0]) + str.Substring (1);
+
+      Type GetExactPropertyType (Type propertyType) 
+         =>  Nullable.GetUnderlyingType (propertyType) ?? propertyType;
+ 
       #endregion Local
       return success;
    }
