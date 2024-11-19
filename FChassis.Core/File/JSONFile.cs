@@ -1,13 +1,9 @@
-using FChassis.Data.Model;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Reflection;
 
-namespace FChassis.Data.IO;
+namespace FChassis.Core.File;
 /// <summary>
 /// </summary>
 public class JSONFileWrite : FileWrite {
@@ -52,7 +48,7 @@ public class JSONFileWrite : FileWrite {
    }
 
    void writeObjectAttributes (Utf8JsonWriter writer, object obj) {
-      List<Type> types = Data.Reflection.Object.GetTypeList (obj.GetType (), typeof (ObservableObject));
+      List<Type> types = Reflection.Object.GetTypeList (obj.GetType (), typeof (ObservableObject));
       foreach (Type type in types)
          this.writeObjectTypeAttributes (writer, obj, type);
    }
@@ -60,7 +56,7 @@ public class JSONFileWrite : FileWrite {
    void writeObjectTypeAttributes (Utf8JsonWriter writer, object obj, Type type) {
       var fields = type.GetFields (BindingFlags.NonPublic | BindingFlags.Instance);
       foreach (FieldInfo fi in fields) {
-         var p = fi.GetCustomAttribute<Prop> ()!;
+         var p = fi.GetCustomAttribute<Model.Prop> ()!;
          if (p == null) continue;
 
          object attr = fi?.GetValue (obj)!;

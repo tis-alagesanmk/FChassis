@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using FChassis.Data.Model.Settings.Laser.LaserCutting.Marking;
+using FChassis.Core.Model;
 
 namespace FChassis.Data.Model.Settings.Laser.LaserCutting.Evapourating {
    public partial class EvapouratingBase : ObservableObject {

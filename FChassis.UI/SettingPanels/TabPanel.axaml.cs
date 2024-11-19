@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FChassis.UI.Panels;
-using FChassis.Data.IO;
+using FChassis.Core.File;
 
 namespace FChassis.UI.Settings;
 public partial class TabPanel : Panel {
@@ -39,7 +39,7 @@ public partial class TabPanel : Panel {
 
          Child.mainWindow?.Switch2MainPanel ();
 
-         FChassis.Data.IO.JSONFileWrite writer = new ();
+         JSONFileWrite writer = new ();
          this.UpdateConfiguraionNodes (writer.node);
          writer.Write ("C:/work/config.json");
       }

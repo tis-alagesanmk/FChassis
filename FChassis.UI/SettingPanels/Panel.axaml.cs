@@ -36,7 +36,7 @@ public partial class Panel : Panels.Child {
 
    internal void AddPropControls (Grid grid, Type type) {
       Type baseType = typeof (ObservableObject);
-      List<Type> types = Data.Reflection.Object.GetTypeList (type, baseType);
+      List<Type> types = Core.Reflection.Object.GetTypeList (type, baseType);
       foreach (var iType in types)
          if (baseType != iType)
             this.addPropControls (grid!, iType);

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using FChassis.Data.Model.Settings.Machine.AxisParams;
-using System.Diagnostics.Metrics;
+using FChassis.Core.Model;
 
 namespace FChassis.Data.Model.Settings.Machine.TechParams {
    public partial class LaserSys : ObservableObject {

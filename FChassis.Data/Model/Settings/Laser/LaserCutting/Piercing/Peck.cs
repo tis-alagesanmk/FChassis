@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FChassis.Core.Model;
+
 namespace FChassis.Data.Model.Settings.Laser.LaserCutting.Piercing {
    public partial class Peck : ObservableObject {
       [ObservableProperty, Prop ( Prop.Type.DBGrid, null!),

@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using FChassis.Core.File;
 
 namespace FChassis.UI.Settings.Machine;
 public partial class TabPanel : Settings.TabPanel {
@@ -13,7 +14,7 @@ public partial class TabPanel : Settings.TabPanel {
          new ProcessingDefaults.TabPanel(),
       ]);
 
-      FChassis.Data.IO.JSONFileRead reader = new ();
+      JSONFileRead reader = new ();
       this.UpdateConfiguraionNodes (reader.node);
       reader.Read ("C:/work/config.json");
    }
