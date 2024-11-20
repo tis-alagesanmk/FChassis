@@ -10,6 +10,11 @@ namespace FChassis.Core.File;
 /// </summary>
 public class JSONFileWrite : FileWrite {
    #region Method
+   public bool Write (string path, object obj, string objName = "Configuration") {
+      this.node.set (obj, objName);
+      return Write (path);
+   }
+
    public override bool Write (string path) {
       using var fileStream = System.IO.File.Create (path);
       JsonWriterOptions options = new () { Indented = true };
@@ -114,6 +119,11 @@ public class JSONFileWrite : FileWrite {
 /// </summary>
 public class JSONFileRead : FileRead {
    #region Method
+   public bool Read (string path, object obj, string objName = "Configuration") {
+      this.node.set (obj, objName);
+      return Read (path);
+   }
+
    public override bool Read (string path) {
       if(!System.IO.File.Exists (path))
          return false;
@@ -147,7 +157,7 @@ public class JSONFileRead : FileRead {
 
       string name = "";
       TreeNode childNode;
-      object obj = node?.content!;
+      object childObj, obj = node?.content!;
       Type objType = obj?.GetType()!;
 
       do {
@@ -155,11 +165,14 @@ public class JSONFileRead : FileRead {
             switch (reader.TokenType) {
                case JsonTokenType.StartObject:
                   if (parentNode != null! && parentNode.IsArray) {
-                     childNode = (TreeNode)parentNode?.CreateElement ()!;
-                     if (childNode == null)
+                     childObj = Activator.CreateInstance(parentNode.ElementTye)!;
+                     if (childObj == null)
                         continue;
 
+                     childNode = new () { content = childObj };
                      parentNode!.children.Add (childNode!);
+
+                     childNode.set(childNode.content!);
                   } else {
                      childNode = this.GetObject (node!, name);
                      if (childNode == null || childNode == node)
@@ -170,9 +183,6 @@ public class JSONFileRead : FileRead {
                   break;
 
                case JsonTokenType.EndObject:
-                  //if(parentNode != null && parentNode.IsArray)
-                    // parentNode.ReadElementCompleted! (node!);
-                  
                   return true; // Object read completed
 
 

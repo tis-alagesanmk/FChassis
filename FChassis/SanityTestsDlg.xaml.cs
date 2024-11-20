@@ -7,13 +7,10 @@ using System.Runtime.CompilerServices;
 using FChassis.Processes;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using CommunityToolkit.Mvvm.ComponentModel;
+using static CommunityToolkit.Mvvm.ComponentModel.__Internals.__TaskExtensions.TaskAwaitableWithoutEndValidation;
+using System.Reflection.PortableExecutable;
 
 namespace FChassis {
-   partial class Test : ObservableObject {
-      [ObservableProperty] List<SanityTestData> sanityTestDatas;
-   }
-
    public partial class SanityTestsDlg : Window, INotifyPropertyChanged {
       #region Constructor
       public SanityTestsDlg (Processor process) {
@@ -482,33 +479,14 @@ namespace FChassis {
 
       void SaveToJson (string filePath) {
          Core.File.JSONFileWrite writer = new ();
-         writer.node.Add<SanityTestData> (this.SanityTests, "SanityTestDatas");
-
-         //Test t = new Test ();
-         //t.SanityTestDatas = this.SanityTests;
-         //writer.node.Set (t);
-
-         writer.Write (filePath);
+         writer.Write (filePath, this.SanityTests, "SanityTestDatas");
       }
 
       void LoadFromJson (string filePath) {
          Core.File.JSONFileRead reader = new ();
-         reader.node.tag = this;
-         reader.node.CreateElement = () => {
-            Core.File.TreeNode node = new ();
-            node.content = new SanityTestData ();
-
-            Core.File.TreeNode mcSettingNode = new ();
-            mcSettingNode.content = new MCSettings ();
-            node.children.Add(mcSettingNode);
-            return node;
-         };
-
-         if (!reader.Read (filePath, this))
-            return;
-
-         foreach (var childNode in reader.node.children)
-            this.AddSanityTestRow ((SanityTestData)childNode.content);
+         if (reader.Read (filePath, this.SanityTests, "SanityTestDatas"))
+            foreach (var childNode in reader.node.children)
+               this.AddSanityTestRow ((SanityTestData)childNode.content);
       }
 
       void AddSanityTestRow (SanityTestData sanityTestData) {

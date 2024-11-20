@@ -47,7 +47,7 @@ public partial class MCSettings : ObservableObject {
    #region Properties
    [ObservableProperty] EHeads heads = EHeads.Both;
    [ObservableProperty] double standoff = 0.0;
-   public EKind[] ToolingPriority = [EKind.Hole, EKind.Notch, EKind.Cutout, EKind.Mark];
+   [ObservableProperty] public EKind[] toolingPriority = [EKind.Hole, EKind.Notch, EKind.Cutout, EKind.Mark];
    [ObservableProperty] double markTextPosX = 700.4;
    [ObservableProperty] double markTextPosY = 10.0;
    [ObservableProperty] string markText = "Deluxe";
