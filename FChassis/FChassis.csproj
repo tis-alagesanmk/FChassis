@@ -1,31 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>disable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+
+	  <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <OutDir>C:\FluxSDK\Bin</OutDir>
-    <PlatformTarget>x64</PlatformTarget>
-    
-	<Company>TeckinSoft</Company>
 
-	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	<BaseOutputPath>$(SolutionDir)\output\bin\$(MSBuildProjectName)\</BaseOutputPath>
-    <PackageOutputPath>$(SolutionDir)\output\$(OutputPath)</PackageOutputPath>      
+	<OutDir>C:\FluxSDK\Bin</OutDir>
   </PropertyGroup>
-
   <ItemGroup>
-    <AvaloniaXaml Remove="obj\**" />
-    <Compile Remove="obj\**" />
-    <EmbeddedResource Remove="obj\**" />
-    <None Remove="obj\**" />
-    <Page Remove="obj\**" />
+	<PackageReference Include="Avalonia" Version="11.1.3" />
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.1.3" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+    <ProjectReference Include="..\FChassis.Core\FChassis.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

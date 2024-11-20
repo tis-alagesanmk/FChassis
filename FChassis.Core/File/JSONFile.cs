@@ -1,7 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Reflection;
+using System;
 
 namespace FChassis.Core.File;
 /// <summary>
@@ -14,10 +16,8 @@ public class JSONFileWrite : FileWrite {
       using Utf8JsonWriter writer = new (fileStream, options);
 
       writer.WriteStartObject ();
-      foreach (var node in this.node.children!) {
-         if (!this.writeObject (writer, node))
-            return false;
-      }
+      if(!this.writeObject(writer, this.node))
+         return false;
 
       writer.WriteEndObject ();
       fileStream.Flush ();
@@ -26,22 +26,33 @@ public class JSONFileWrite : FileWrite {
    #endregion Method
 
    #region Implement
-   bool writeObject (Utf8JsonWriter writer, TreeNode node) {
+   bool writeObject (Utf8JsonWriter writer, TreeNode node, TreeNode parentNode = null!) {
       bool success = false;
 
       string? name = node.content as string;
       object obj = node.content! as object;
-      if (name != null)
-         writer.WriteStartObject (name);
+      if (name != null) {
+         if (node.IsArray)
+            writer.WriteStartArray (name);
+         else
+            writer.WriteStartObject (name);
+      }         
       else {
-         writer.WriteStartObject (obj.GetType ().Name);
+         if(parentNode != null && parentNode.IsArray)
+            writer.WriteStartObject ();
+         else
+            writer.WriteStartObject (obj.GetType ().Name);
+
          this.writeObjectAttributes (writer, obj);
       }
 
-      foreach (var childNode in node.children!)
-         this.writeObject (writer, childNode);
+      foreach (var childNode in node.children)
+         this.writeObject (writer, childNode, node);
 
-      writer.WriteEndObject ();
+      if (node.IsArray)
+         writer.WriteEndArray ();
+      else
+         writer.WriteEndObject ();
 
       success = true;
       return success;
@@ -56,7 +67,7 @@ public class JSONFileWrite : FileWrite {
    void writeObjectTypeAttributes (Utf8JsonWriter writer, object obj, Type type) {
       var fields = type.GetFields (BindingFlags.NonPublic | BindingFlags.Instance);
       foreach (FieldInfo fi in fields) {
-         var p = fi.GetCustomAttribute<Model.Prop> ()!;
+         var p = fi.GetCustomAttribute<ObservablePropertyAttribute> ()!;
          if (p == null) continue;
 
          object attr = fi?.GetValue (obj)!;
@@ -66,7 +77,8 @@ public class JSONFileWrite : FileWrite {
    }
 
    void writeObjectAttribute (Utf8JsonWriter writer, string name, object value) {
-      string type = value.GetType ().ToString ();
+      Type dataType = value.GetType ();
+      string type = dataType.ToString ();
       switch (type) {
          case "System.String":
             writer.WriteString (name, value.ToString ());
@@ -87,8 +99,10 @@ public class JSONFileWrite : FileWrite {
          case "System.Boolean":
             writer.WriteBoolean (name, (bool)value);
             break;
-
+            
          default:
+            if(dataType.IsEnum)
+               writer.WriteString (name, value.ToString());
             break;
       }
    }
@@ -115,13 +129,11 @@ public class JSONFileRead : FileRead {
    }
 
    public override TreeNode GetObject (TreeNode node, string name) {
-      if(node.content as string == name)
+      if(node.content as string == name || node?.content?.GetType ().Name == name)
          return node;
 
-      foreach (TreeNode childNode in node.children!) {
-         if (childNode.content as string == name)
-            return childNode;
-         else if (childNode?.content?.GetType ().Name == name)
+      foreach (TreeNode childNode in node!.children) {
+         if (childNode.content as string == name || childNode?.content?.GetType ().Name == name)
             return childNode;
       }
 
@@ -130,30 +142,47 @@ public class JSONFileRead : FileRead {
    #endregion Method
 
    #region Implement
-   bool readObject (TreeNode node, ref Utf8JsonReader reader) {
+   bool readObject (TreeNode node, ref Utf8JsonReader reader, TreeNode parentNode = null!) {
       bool success = true;
 
       string name = "";
       TreeNode childNode;
       object obj = node?.content!;
-      Type objType = obj.GetType();
+      Type objType = obj?.GetType()!;
 
       do {
          while (success && reader.Read ()) {
             switch (reader.TokenType) {
                case JsonTokenType.StartObject:
-                  childNode = this.GetObject (node!, name);
-                  if (childNode == null || childNode == node)
-                     continue;
+                  if (parentNode != null! && parentNode.IsArray) {
+                     childNode = (TreeNode)parentNode?.CreateElement ()!;
+                     if (childNode == null)
+                        continue;
 
-                  success = this.readObject (childNode!, ref reader);
+                     parentNode!.children.Add (childNode!);
+                  } else {
+                     childNode = this.GetObject (node!, name);
+                     if (childNode == null || childNode == node)
+                        continue;
+                  }
+
+                  success = this.readObject (childNode!, ref reader, parentNode!);
                   break;
 
                case JsonTokenType.EndObject:
+                  //if(parentNode != null && parentNode.IsArray)
+                    // parentNode.ReadElementCompleted! (node!);
+                  
                   return true; // Object read completed
 
-               case JsonTokenType.StartArray:
+
                case JsonTokenType.EndArray:
+                  return true; // Array read completed
+
+               case JsonTokenType.StartArray:
+                  this.readObject (null!, ref reader, node!);
+                  break;
+
                case JsonTokenType.Comment:
                   break;
 
@@ -162,7 +191,7 @@ public class JSONFileRead : FileRead {
                   break;
 
                default:
-                  success = this.readAttribute(obj, objType, name, ref reader);
+                  success = this.readAttribute(obj!, objType, name, ref reader);
                   break;
             } // switch - reader.TokenType
          } // while = reader.Read ();
@@ -212,8 +241,12 @@ public class JSONFileRead : FileRead {
                return false;
          }
 
-         if (value != null)
+         if (value != null) {
+            if(pi.PropertyType.IsEnum) 
+               value = Enum.Parse (pi.PropertyType, (string)value);
+
             pi.SetValue (obj, value);
+         }
       } while (false);
 
       #region Local

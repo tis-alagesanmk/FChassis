@@ -1,23 +1,21 @@
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis;
 
 /// <summary>All fields that can be set through the Options/Settings dialog</summary>
-public class MCSettings : INotifyPropertyChanged {
+public partial class MCSettings : ObservableObject {
    #region Constructors
    // Singleton instance
    public static MCSettings It => sIt ??= new ();
    static MCSettings sIt;
-
-   // Notify event, to bind the changes with SettingsDlg
-   public event PropertyChangedEventHandler PropertyChanged;
    #endregion
 
    #region Delegates and Events
+   public delegate void SettingValuesChangedEventHandler ();
+   
    // Any changes to the properties here will also change 
    // elsewhere where the OnSettingValuesChangedEvent is subscribed with
-   public delegate void SettingValuesChangedEventHandler ();
    public event SettingValuesChangedEventHandler OnSettingValuesChangedEvent;
    #endregion
 
@@ -25,7 +23,7 @@ public class MCSettings : INotifyPropertyChanged {
    public enum ERotate {
       Rotate0, Rotate90, Rotate180, Rotate270
    }
-
+   
    public enum EHeads {
       Left,
       Right,
@@ -40,174 +38,69 @@ public class MCSettings : INotifyPropertyChanged {
    #endregion
 
    #region Helpers 
-   // Helper method to set a property and raise the event
-   private void SetProperty<T> (ref T field, T value) {
-      if (!Equals (field, value)) {
-         field = value;
-         OnSettingValuesChangedEvent?.Invoke ();
-      }
-   }
-
-   // Method to raise the PropertyChanged event
-   protected virtual void OnPropertyChanged ([CallerMemberName] string propertyName = null) {
-      PropertyChanged?.Invoke (this, new PropertyChangedEventArgs (propertyName));
+   protected override void OnPropertyChanged (PropertyChangedEventArgs e) {
+      base.OnPropertyChanged (e);
+      OnSettingValuesChangedEvent?.Invoke ();
    }
    #endregion
 
-   #region Settings Properties
-   public EHeads Heads { 
-      get => mHeads; 
-      set => SetProperty (ref mHeads, value); }
-   EHeads mHeads = EHeads.Both;
+   #region Properties
+   [ObservableProperty] EHeads heads = EHeads.Both;
+   [ObservableProperty] double standoff = 0.0;
+   public EKind[] ToolingPriority = [EKind.Hole, EKind.Notch, EKind.Cutout, EKind.Mark];
+   [ObservableProperty] double markTextPosX = 700.4;
+   [ObservableProperty] double markTextPosY = 10.0;
+   [ObservableProperty] string markText = "Deluxe";
+   [ObservableProperty] ERotate markAngle = ERotate.Rotate0;
+   [ObservableProperty] bool optimizeSequence = false;
+   [ObservableProperty] int progNo = 1;
+   [ObservableProperty] string nCFilePath = System.IO.Directory.Exists ("W:\\FChassis\\Sample") 
+                           ?"W:\\FChassis\\Sample" : "";
 
-   /// <summary>Stand-off distance between laser nozzle tip and workpiece</summary>
-   public double Standoff { 
-      get => mStandoff;  
-      set => SetProperty (ref mStandoff, value); }
-   double mStandoff;
+   [ObservableProperty] double safetyZone;
+   [ObservableProperty] uint serialNumber;
+   [ObservableProperty] bool syncHead;
+   [ObservableProperty] bool usePingPong = true;
+   [ObservableProperty] PartConfigType partConfig = PartConfigType.LHComponent;
+   [ObservableProperty] bool optimizePartition;
+   [ObservableProperty] bool rotateX180 = false;
+   [ObservableProperty] bool showToolingNames;
+   [ObservableProperty] bool includeFlange;
+   [ObservableProperty] bool includeCutout;
+   [ObservableProperty] bool includeWeb;
+   [ObservableProperty] double partitionRatio = 0.5;
+   [ObservableProperty] double probeMinDistance;
+   [ObservableProperty] double notchApproachLength = 5.0;
+   [ObservableProperty] double approachLength = 2;
+   [ObservableProperty] double notchWireJointDistance = 2.0;
+   [ObservableProperty] double flexOffset;
+   [ObservableProperty] double stepLength = 1.0;
+   [ObservableProperty] bool enableMultipassCut = true;
+   [ObservableProperty] double maxFrameLength = 3500;
+   [ObservableProperty] bool maximizeFrameLengthInMultipass = true;
+   [ObservableProperty] bool cutHoles = true;
+   [ObservableProperty] bool cutNotches = true;
+   [ObservableProperty] bool cutCutouts = true;
+   [ObservableProperty] bool cutMarks = true;
+   [ObservableProperty] double minThresholdForPartition = 585.0;
+   [ObservableProperty] double minNotchLengthThreshold = 210;
+   [ObservableProperty] string dINFilenameSuffix = "";
+   [ObservableProperty] string workpieceOptionsFilename = @"W:\FChassis\LCM2HWorkpieceOptions.json";
+   [ObservableProperty] MachineType machine;
+   [ObservableProperty] double deadbandWidth = 600.0;
+   #endregion
 
-   public EKind[] ToolingPriority { 
-      get => mToolingPriority; 
-      set => SetProperty (ref mToolingPriority, value); }
-   EKind[] mToolingPriority;
-
-   public MCSettings () {
-      mToolingPriority = [EKind.Hole, EKind.Cutout, EKind.Notch, EKind.Mark];
-      mStandoff = 0.0;
-      mMarkText = "Deluxe";
-      mPartitionRatio = 0.5;
-      mHeads = EHeads.Both;
-      mApproachLength = 2;
-      PartConfig = PartConfigType.LHComponent;
-      MarkTextPosX = 700.4;
-      MarkTextPosY = 10.0;
-      NotchWireJointDistance = 2.0;
-      NotchApproachLength = 5.0;
+   #region JSON Read/Write Methods
+   // Method to serialize the singleton instance to a JSON file
+   public void SaveToJson (string filePath) {
+      Core.File.JSONFileWrite writer = new ();
+      writer.Write (filePath, this);
    }
 
-   public double MarkTextPosX { 
-      get => mMarkTextPosX; 
-      set => SetProperty (ref mMarkTextPosX, value); }
-   double mMarkTextPosX;
-
-   public double MarkTextPosY { 
-      get => mMarkTextPosY; 
-      set => SetProperty (ref mMarkTextPosY, value); }
-   double mMarkTextPosY;
-   
-   public string MarkText { 
-      get => mMarkText; 
-      set => SetProperty (ref mMarkText, value); }
-   string mMarkText;
-   
-   public ERotate MarkAngle { 
-      get => mMarkAngle;  
-      set => SetProperty (ref mMarkAngle, value);  }
-   ERotate mMarkAngle = ERotate.Rotate0;
-   
-   public bool OptimizeSequence { 
-      get => mOptimizeSequence; 
-      set => SetProperty (ref mOptimizeSequence, value); }
-   bool mOptimizeSequence = false;
-   
-   public int ProgNo { 
-      get => mProgNo; 
-      set => SetProperty (ref mProgNo, value); }
-   int mProgNo = 1;
-
-   public string Head1NCFilePath { 
-      get=> mHead1NCFilePath; 
-      set => SetProperty (ref mHead1NCFilePath, value); }
-   string mHead1NCFilePath;
-   
-   public string Head2NCFilePath { 
-      get=> mHead2NCFilePath; 
-      set => SetProperty (ref mHead2NCFilePath, value); }
-   string mHead2NCFilePath;
-   
-   public double SafetyZone { 
-      get=> mSafetyZone; 
-      set => SetProperty (ref mSafetyZone, value); }
-   double mSafetyZone;
-   
-   public uint SerialNumber { 
-      get=> mSerialNumber; 
-      set => SetProperty (ref mSerialNumber, value); }
-   uint mSerialNumber;
-   
-   public bool SyncHead { 
-      get=>mSyncHead; 
-      set => SetProperty (ref mSyncHead, value); }
-   bool mSyncHead;
-
-   public bool UsePingPong { 
-      get=> mUsePingPong; 
-      set => SetProperty (ref mUsePingPong, value); }
-   bool mUsePingPong = true;
-   
-   public PartConfigType PartConfig { 
-      get => mPartConfig; 
-      set => SetProperty (ref mPartConfig, value); }
-   PartConfigType mPartConfig;
-
-   public bool OptimizePartition { 
-      get=> mOptimizePartition; 
-      set => SetProperty (ref mOptimizePartition, value); }
-   bool mOptimizePartition;
-
-   public bool RotateX180 { 
-      get=> mRotateX180; 
-      set => SetProperty (ref mRotateX180, value); }
-   bool mRotateX180;
-
-   public bool IncludeFlange { 
-      get=>mIncludeFlange; 
-      set => SetProperty (ref mIncludeFlange, value); }
-   bool mIncludeFlange;
-
-   public bool IncludeCutout { 
-      get=> mIncludeCutout; 
-      set => SetProperty (ref mIncludeCutout, value); }
-   bool mIncludeCutout;
-
-   public bool IncludeWeb { 
-      get=> mIncludeWeb; 
-      set => SetProperty (ref mIncludeWeb, value);  }
-   bool mIncludeWeb;
-
-   public double PartitionRatio { 
-      get => mPartitionRatio; 
-      set => SetProperty (ref mPartitionRatio, value); }
-   double mPartitionRatio;
-
-   public double ProbeMinDistance { 
-      get=>mProbeMinDistance; 
-      set => SetProperty (ref mProbeMinDistance, value); }
-   double mProbeMinDistance;
-
-   public double NotchApproachLength { 
-      get=> mNotchApproachLength; 
-      set => SetProperty (ref mNotchApproachLength, value); }
-   double mNotchApproachLength;
-
-   public double ApproachLength { 
-      get => mApproachLength; 
-      set => mApproachLength = value; }
-   double mApproachLength;
-
-   public double NotchWireJointDistance { 
-      get=> mNotchWireDistance; 
-      set => SetProperty (ref mNotchWireDistance, value); }
-   double mNotchWireDistance;
-
-   public double FlexOffset { 
-      get => mFlexOffset; 
-      set => SetProperty (ref mFlexOffset, value); }
-   double mFlexOffset;
-
-   public double StepLength { 
-      get => mLengthPerStep; 
-      set => SetProperty (ref mLengthPerStep, value); }
-   double mLengthPerStep = 1.0;
+   // Method to deserialize from JSON and set the singleton instance
+   public void LoadFromJson (string filePath) {
+      Core.File.JSONFileRead reader = new ();
+      reader.Read (filePath, this);
+   }
    #endregion
 }

@@ -2,36 +2,21 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+	  
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <UseWindowsForms>True</UseWindowsForms>
     <UseWPF>True</UseWPF>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-	<OutDir>C:\FluxSDK\Bin</OutDir>
 
-	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	<BaseOutputPath>C:\FluxSDK\Bin</BaseOutputPath>
-	<PackageOutputPath>$(SolutionDir)\output\$(OutputPath)</PackageOutputPath>
-	
 	<PlatformTarget>x64</PlatformTarget>
 	<StartupObject>FChassis.UI.Program</StartupObject>
-	  
+	<OutDir>C:\FluxSDK\Bin</OutDir>
+
+
   </PropertyGroup>
-  <ItemGroup>
-    <AvaloniaXaml Remove="SettingPanels\Machine\PLCOptions\Panel.axaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="SettingPanels\Machine\AxisParams\Panel.axaml.cs" />
-    <Compile Remove="SettingPanels\Machine\AxisParams\Panel.axaml.cs.BASE.cs" />
-    <Compile Remove="SettingPanels\Machine\PLCOptions\Panel.axaml.cs" />
-    <Compile Remove="SettingPanels\Machine\TechParams\Panel.axaml.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="App.axaml.bak" />
-    <None Remove="FChassis.UI.csproj.bak" />
-  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.3" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.1.3" />

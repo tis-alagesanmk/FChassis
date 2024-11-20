@@ -1,19 +1,2 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-
-	<Company>TeckinSoft</Company>
-
-	<UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	<BaseOutputPath>C:\FluxSDK\Bin</BaseOutputPath>
-	<PackageOutputPath>$(SolutionDir)\output\$(OutputPath)</PackageOutputPath>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-  </ItemGroup>
-
 </Project>

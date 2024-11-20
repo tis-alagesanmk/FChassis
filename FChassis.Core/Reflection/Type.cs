@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System;
+
 namespace FChassis.Core.Reflection;
 public class Object {
    static public List<Type> GetTypeList (Type type, Type baseType) {

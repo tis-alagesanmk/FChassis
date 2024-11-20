@@ -4,7 +4,7 @@ using Avalonia.Controls;
 using FChassis.UI.Panels;
 
 namespace FChassis.UI;
-public partial class ModelViewer : FChassis.UI.Panels.Child {
+public partial class ModelViewer : Child {
 
    public ModelViewer () {
       AvaloniaXamlLoader.Load (this);
@@ -12,7 +12,6 @@ public partial class ModelViewer : FChassis.UI.Panels.Child {
 
       this.initializeControls ();
    }
-
 
    #region "Implementation" ---------------------------------------------------
    void initializeControls () {

@@ -1,4 +1,4 @@
-using FChassis.Data.Model;
+using FChassis.Core.Model;
 
 using Avalonia;
 using Avalonia.Controls;

@@ -76,6 +76,7 @@ static class WPFUtil {
       tb.Text = getter ().ToString ();
       tb.GotFocus += (s, e) => tb.SelectAll ();
       tb.LostFocus += (s, e) => setter (tb.Text);
+      tb.TextChanged += (s, e) => setter (tb.Text);
    }
 
    /// <summary>Binds a text-box to a double</summary>
@@ -92,4 +93,24 @@ static class WPFUtil {
          tb.Text = getter ().ToString ();
       };
    }
+
+   /// <summary>
+   /// Binds a ComboBox to an enum or a list of options.
+   /// </summary>
+   /// <typeparam name="T">The type of the item in the ComboBox (e.g., enum or string)</typeparam>
+   /// <param name="cb">The ComboBox to bind</param>
+   /// <param name="getter">Getter used to fetch the initial selected value</param>
+   /// <param name="setter">Setter called whenever the selected item changes</param>
+   public static void Bind<T> (this ComboBox cb, Func<T> getter, Action<T> setter) {
+      // Initialize the ComboBox with the current value from the getter
+      cb.SelectedItem = getter ();
+
+      // When the selection changes, update the bound property
+      cb.SelectionChanged += (s, e) =>{
+         if (cb.SelectedItem is T selectedItem)
+            setter (selectedItem);
+      };
+   }
+   
+   public static int IndexOf<T> (this T[] array, T item) => Array.IndexOf (array, item);
 }
