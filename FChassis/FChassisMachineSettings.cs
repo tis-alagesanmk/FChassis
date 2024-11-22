@@ -2,6 +2,9 @@ using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FChassis;
+public partial class TestC : ObservableObject {
+   [ObservableProperty] int d;
+}
 
 /// <summary>All fields that can be set through the Options/Settings dialog</summary>
 public partial class MCSettings : ObservableObject {
@@ -47,7 +50,7 @@ public partial class MCSettings : ObservableObject {
    #region Properties
    [ObservableProperty] EHeads heads = EHeads.Both;
    [ObservableProperty] double standoff = 0.0;
-   [ObservableProperty] public EKind[] toolingPriority = [EKind.Hole, EKind.Notch, EKind.Cutout, EKind.Mark];
+   [ObservableProperty] EKind[] toolingPriority = [EKind.Hole, EKind.Notch, EKind.Cutout, EKind.Mark];
    [ObservableProperty] double markTextPosX = 700.4;
    [ObservableProperty] double markTextPosY = 10.0;
    [ObservableProperty] string markText = "Deluxe";
@@ -88,6 +91,8 @@ public partial class MCSettings : ObservableObject {
    [ObservableProperty] string workpieceOptionsFilename = @"W:\FChassis\LCM2HWorkpieceOptions.json";
    [ObservableProperty] MachineType machine;
    [ObservableProperty] double deadbandWidth = 600.0;
+   [ObservableProperty] double[] bandWidth = [600.0, 600.0, 600.0];
+   [ObservableProperty] TestC[] testC = [new (){D=2}, new () {D=3}];
    #endregion
 
    #region JSON Read/Write Methods

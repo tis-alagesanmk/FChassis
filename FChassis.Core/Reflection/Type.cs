@@ -7,10 +7,10 @@ public class Object {
       List<Type> types = new List<Type> ();
       Type _type = type;
       while (true) {
-         types.Add (_type);
          if (baseType == null! || _type == baseType)
             break;
 
+         types.Add (_type);   
          _type = _type.BaseType!;
       }
 

@@ -6,12 +6,12 @@ using System.Reflection;
 using System;
 
 namespace FChassis.Core.File;
-/// <summary>
-/// </summary>
+/// <summary></summary>
 public class JSONFileWrite : FileWrite {
    #region Method
    public bool Write (string path, object obj, string objName = "Configuration") {
-      this.node.set (obj, objName);
+      this.write = true;
+      this.node.Set (obj, this.write, objName);
       return Write (path);
    }
 
@@ -73,7 +73,8 @@ public class JSONFileWrite : FileWrite {
       var fields = type.GetFields (BindingFlags.NonPublic | BindingFlags.Instance);
       foreach (FieldInfo fi in fields) {
          var p = fi.GetCustomAttribute<ObservablePropertyAttribute> ()!;
-         if (p == null) continue;
+         if (p == null) 
+            continue;
 
          object attr = fi?.GetValue (obj)!;
          if (attr != null)
@@ -108,19 +109,40 @@ public class JSONFileWrite : FileWrite {
          default:
             if(dataType.IsEnum)
                writer.WriteString (name, value.ToString());
+            else if (dataType.IsArray) {
+               if(_isUserDefinedClassArray(dataType)) 
+                  return; 
+
+               this.writeArray (writer, name, (Array)value);
+            }
             break;
       }
+
+      #region Local
+      bool _isUserDefinedClassArray(Type type) {
+         Type elemType = type.GetElementType ()!;
+         return TreeNode.IsUserDefinedClass (elemType);
+      }
+      #endregion Local
+   }
+
+   void writeArray(Utf8JsonWriter writer, string name, Array array) {
+      writer.WriteStartArray (name);
+
+      foreach (object element in array)
+         writer.WriteStringValue (element.ToString ());
+
+      writer.WriteEndArray ();
    }
    #endregion Implement
 }
 
 //-----------------------------------------------------------------------------
-/// <summary>
-/// </summary>
+/// <summary></summary>
 public class JSONFileRead : FileRead {
    #region Method
    public bool Read (string path, object obj, string objName = "Configuration") {
-      this.node.set (obj, objName);
+      this.node.Set (obj, false, objName);
       return Read (path);
    }
 
@@ -152,10 +174,9 @@ public class JSONFileRead : FileRead {
    #endregion Method
 
    #region Implement
-   bool readObject (TreeNode node, ref Utf8JsonReader reader, TreeNode parentNode = null!) {
+   bool readObject (TreeNode node, ref Utf8JsonReader reader, TreeNode parentNode = null!, string name = "") {
       bool success = true;
 
-      string name = "";
       TreeNode childNode;
       object childObj, obj = node?.content!;
       Type objType = obj?.GetType()!;
@@ -165,32 +186,43 @@ public class JSONFileRead : FileRead {
             switch (reader.TokenType) {
                case JsonTokenType.StartObject:
                   if (parentNode != null! && parentNode.IsArray) {
-                     childObj = Activator.CreateInstance(parentNode.ElementTye)!;
+                     childObj = Activator.CreateInstance(parentNode.ElementType)!;
                      if (childObj == null)
                         continue;
 
                      childNode = new () { content = childObj };
                      parentNode!.children.Add (childNode!);
 
-                     childNode.set(childNode.content!);
+                     childNode.Set(childNode.content!, false);
                   } else {
                      childNode = this.GetObject (node!, name);
                      if (childNode == null || childNode == node)
                         continue;
                   }
 
-                  success = this.readObject (childNode!, ref reader, parentNode!);
+                  success = this.readObject (childNode!, ref reader, node!);
                   break;
 
                case JsonTokenType.EndObject:
-                  return true; // Object read completed
-
-
                case JsonTokenType.EndArray:
-                  return true; // Array read completed
+                  return true;
 
                case JsonTokenType.StartArray:
-                  this.readObject (null!, ref reader, node!);
+                  string cname = this._capitalizeFirstLetter (name);
+                  PropertyInfo? pi = objType.GetProperty (cname, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                  if (pi != null) {
+                     if (pi.PropertyType.IsArray) {
+                        // Is UserDefined class array
+                        Type elementType = pi.PropertyType.GetElementType ()!;
+                        if (TreeNode.IsUserDefinedClass (elementType)) { 
+                           childNode = this.GetObject (node!, name);
+                           if (childNode != null)
+                              this.readObject (null!, ref reader, childNode!, name);
+                        }
+                        else 
+                           this.readArray (obj!, cname, pi, ref reader);
+                     }
+                  }
                   break;
 
                case JsonTokenType.Comment:
@@ -210,64 +242,93 @@ public class JSONFileRead : FileRead {
       return success;
    }
 
-   bool readAttribute (object obj, Type objType, string name, ref Utf8JsonReader reader) {
+   private bool readArray (object obj, string cname, PropertyInfo pi, ref Utf8JsonReader reader) {
       bool success = true;
-      do {
-         string cname = _capitalizeFirstLetter (name);
-         PropertyInfo pi = null!;
+      object value;
 
-         try {
-            pi = objType.GetProperty (cname, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!;
-         } catch (Exception) { }
+      Type elementType = pi.PropertyType.GetElementType ()!;
+      Type listType = typeof (List<>).MakeGenericType (elementType);
+      object list = Activator.CreateInstance (listType)!;
+      var addMethod = listType.GetMethod ("Add")!;
 
-         if (pi == null)
-            return false;
-
-         object value = null!;
+      while (success && reader.Read ()) {
          switch (reader.TokenType) {
+            case JsonTokenType.EndArray:
+               var toArrayMethod = listType.GetMethod ("ToArray")!;
+               Array array = (Array)toArrayMethod.Invoke (list, null)!;
+               pi.SetValue (obj, array);
+               return success;
+
             case JsonTokenType.String:
+            case JsonTokenType.Number:
             case JsonTokenType.True:
             case JsonTokenType.False:
-               value = reader.TokenType switch {
-                  JsonTokenType.String => reader.GetString ()!,
-                  JsonTokenType.True   => reader.GetBoolean ()!,
-                  JsonTokenType.False  => reader.GetBoolean ()!,
-                                     _ => null!
-               };
-               break;
-
-            case JsonTokenType.Number:
-               var dataType = _getExactPropertyType(pi.PropertyType).ToString();
-               value = dataType switch {
-                  "System.Int32"    => reader.GetInt32 ()!,
-                  "System.UInt32"   => reader.GetUInt32 ()!,
-                  "System.Double"   => reader.GetDouble ()!,
-                  "System.Decimal"  => reader.GetDecimal ()!,
-                  _ => null!
-               };
+               value = this.readAttributeValue (elementType, ref reader);
+               value = Convert.ChangeType (value, elementType)!;
+               addMethod.Invoke (list, [value]);
                break;
 
             default:
-               return false;
+               break;
          }
+      }
 
-         if (value != null) {
-            if(pi.PropertyType.IsEnum) 
-               value = Enum.Parse (pi.PropertyType, (string)value);
-
-            pi.SetValue (obj, value);
-         }
-      } while (false);
-
-      #region Local
-      string _capitalizeFirstLetter (string str)
-         => char.ToUpper (str[0]) + str.Substring (1);
-
-      Type _getExactPropertyType (Type propertyType) 
-         => Nullable.GetUnderlyingType (propertyType) ?? propertyType;
- 
-      #endregion Local
       return success;
    }
+
+   bool readAttribute (object obj, Type objType, string name, ref Utf8JsonReader reader) {
+      bool success = true;
+      do {
+         string cname = this._capitalizeFirstLetter (name);
+         PropertyInfo pi = objType.GetProperty (cname, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!; 
+         if (pi == null) return false;
+
+         object value = this.readAttributeValue (pi.PropertyType, ref reader);
+         pi.SetValue (obj, value);
+      } while (false);
+
+      return success;
+   }
+
+   object readAttributeValue (Type objType, ref Utf8JsonReader reader) {
+      Type MyType = typeof (int);
+      object value = null!;
+      switch (reader.TokenType) {
+         case JsonTokenType.String:
+         case JsonTokenType.True:
+         case JsonTokenType.False:
+            value = reader.TokenType switch {
+               JsonTokenType.String => reader.GetString ()!,
+               JsonTokenType.True => reader.GetBoolean ()!,
+               JsonTokenType.False => reader.GetBoolean ()!,
+               _ => null!
+            };
+            break;
+
+         case JsonTokenType.Number:
+            value = objType switch {
+               Type t when t == typeof (Int32)   => reader.GetInt32 ()!,
+               Type t when t == typeof (UInt32)  => reader.GetUInt32 ()!,
+               Type t when t == typeof (double)  => reader.GetDouble ()!,
+               Type t when t == typeof (decimal) => reader.GetDecimal ()!,
+                                               _ => null!
+            };
+            break;
+
+         default:
+            return null!;
+      }
+
+      if (value != null && objType.IsEnum) 
+         value = Enum.Parse (objType, (string)value);
+
+      return value!;
+   }
+
+   //Type _getExactPropertyType (Type propertyType)
+   //  => Nullable.GetUnderlyingType (propertyType) ?? propertyType;
+
+   string _capitalizeFirstLetter (string str)
+     => char.ToUpper (str[0]) + str.Substring (1);
    #endregion Implement
 }
