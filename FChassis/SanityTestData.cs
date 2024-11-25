@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.IO;
 using System.Text.Json;
+using System.Windows;
 
 namespace FChassis;
 
@@ -28,9 +29,10 @@ public partial class SanityTestData : ObservableObject {
       
       string filePath = element.GetProperty (nameof (FxFileName)).GetString ();
       FChassis.MCSettings mcSettings = new ();
-      
-      Core.File.JSONFileRead reader = new ();
-      reader.Read (filePath, mcSettings);
+      if (!mcSettings.LoadFromJson (filePath)) {
+         MessageBox.Show ($"Setting file '{filePath}' read failed");
+         return null;
+      }
 
       return new SanityTestData {
          FxFileName = filePath,

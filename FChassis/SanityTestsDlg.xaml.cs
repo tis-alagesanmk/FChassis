@@ -7,8 +7,6 @@ using System.Runtime.CompilerServices;
 using FChassis.Processes;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using static CommunityToolkit.Mvvm.ComponentModel.__Internals.__TaskExtensions.TaskAwaitableWithoutEndValidation;
-using System.Reflection.PortableExecutable;
 
 namespace FChassis {
    public partial class SanityTestsDlg : Window, INotifyPropertyChanged {
@@ -477,16 +475,23 @@ namespace FChassis {
          mSelectedTestIndices.Clear ();
       }
 
+      const string SanityTestDatasName = "SanityTestDatas";
       void SaveToJson (string filePath) {
          Core.File.JSONFileWrite writer = new ();
-         writer.Write (filePath, this.SanityTests, "SanityTestDatas");
+         if(!writer.Write (filePath, this.SanityTests, SanityTestDatasName))
+            MessageBox.Show ($"Setting file '{filePath}' write failed: Reason: {writer.error}");
       }
 
       void LoadFromJson (string filePath) {
          Core.File.JSONFileRead reader = new ();
-         if (reader.Read (filePath, this.SanityTests, "SanityTestDatas"))
-            foreach (var childNode in reader.node.children)
-               this.AddSanityTestRow ((SanityTestData)childNode.content);
+         if (!reader.Read (filePath, this.SanityTests, SanityTestDatasName)) {
+            MessageBox.Show ($"Setting file '{filePath}' read failed: Reason: {reader.error}");
+            return;
+         }
+
+         Core.File.TreeNode listNode = reader.node.children[0];
+         foreach (var childNode in listNode.children)
+            this.AddSanityTestRow ((SanityTestData)childNode.obj);         
       }
 
       void AddSanityTestRow (SanityTestData sanityTestData) {

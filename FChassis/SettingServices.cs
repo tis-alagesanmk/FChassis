@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Windows;
 
 namespace FChassis;
 public class SettingServices {
@@ -31,10 +32,9 @@ public class SettingServices {
    }
 
    public void SaveSettings (MCSettings settings, bool backupNew = false) {
-      if (backupNew)
-         settings.SaveToJson (settingsFilePath + ".bckup");
-      else
-         settings.SaveToJson (settingsFilePath);
+      string filePath = settingsFilePath + (backupNew ? ".bckup" : "");
+      if (!settings.SaveToJson (filePath))
+         MessageBox.Show ($"Setting file '{filePath}' write failed");
    }
 
    public void LoadSettings (MCSettings settings) {

@@ -56,7 +56,7 @@ public partial class TabPanel : Panel {
 
    protected void UpdateConfiguraionNodes (TreeNode node) {
       node?.children?.Clear ();
-      node!.content = "Configuration";
+      node!.name = "Configuration";
       _addConfigurationObjects (node!, this);
 
       #region Local function
@@ -77,9 +77,10 @@ public partial class TabPanel : Panel {
 
             if (panel.DataContext != null || panel is TabPanel) {
                if (panel.DataContext != null)
-                  childNode = new () { content = panel.DataContext };
+                  childNode = new () { name = panel.DataContext.GetType().Name,
+                                       obj = panel.DataContext };
                else if (panel is TabPanel) {
-                  childNode = new () { content = tabItem?.Header };
+                  childNode = new () { name = (string)tabItem?.Header! };
                   _addConfigurationObjects (childNode, (panel as TabPanel)!);
                }
 

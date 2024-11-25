@@ -96,16 +96,18 @@ public partial class MCSettings : ObservableObject {
    #endregion
 
    #region JSON Read/Write Methods
+   const string MCSettingName = "MCSetting";
+
    // Method to serialize the singleton instance to a JSON file
-   public void SaveToJson (string filePath) {
+   public bool SaveToJson (string filePath) {
       Core.File.JSONFileWrite writer = new ();
-      writer.Write (filePath, this);
+      return writer.Write (filePath, this, MCSettingName);
    }
 
    // Method to deserialize from JSON and set the singleton instance
-   public void LoadFromJson (string filePath) {
+   public bool LoadFromJson (string filePath) {
       Core.File.JSONFileRead reader = new ();
-      reader.Read (filePath, this);
+      return reader.Read (filePath, this, MCSettingName);
    }
    #endregion
 }
