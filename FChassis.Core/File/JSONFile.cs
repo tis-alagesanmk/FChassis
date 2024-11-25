@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text.Json;
 using System;
-using System.Xml.Linq;
 using System.Diagnostics;
 
 namespace FChassis.Core.File;
@@ -12,8 +11,7 @@ namespace FChassis.Core.File;
 public class JSONFileWrite : FileWrite {
    #region Method
    public bool Write (string path, object obj, string objName) {
-      this.write = true;
-      this.node.SetRoot (obj, this.write, objName);
+      this.node.SetRootObject (obj, true, objName);
       return Write (path);
    }
 
@@ -143,7 +141,7 @@ public class JSONFileRead : FileRead {
    #region Method
 
    public bool Read (string path, object obj, string objName) {
-      this.node.SetRoot (obj, false, objName);
+      this.node.SetRootObject (obj, false, objName);
       return Read (path);
    }
 
@@ -258,13 +256,12 @@ public class JSONFileRead : FileRead {
    }
 
    private bool readArray (object obj, string cname, PropertyInfo pi, ref Utf8JsonReader reader) {
-      object value;
-
       Type elementType = pi.PropertyType.GetElementType ()!;
       Type listType = typeof (List<>).MakeGenericType (elementType);
       object list = Activator.CreateInstance (listType)!;
       var addMethod = listType.GetMethod ("Add")!;
 
+      object value;
       while (reader.Read ()) {
          switch (reader.TokenType) {
             case JsonTokenType.EndArray:
@@ -291,13 +288,17 @@ public class JSONFileRead : FileRead {
    }
 
    bool readAttribute (object obj, Type objType, string name, ref Utf8JsonReader reader) {
+      object value;
       do {
          string cname = this._capitalizeFirstLetter (name);
          PropertyInfo pi = objType.GetProperty (cname, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!; 
          if (pi == null) 
             return setError ($"Property[{cname}] not found"); 
 
-         object value = this.readAttributeValue (pi.PropertyType, ref reader);
+         value = this.readAttributeValue (pi.PropertyType, ref reader);
+         if(value == null)
+            return false;
+
          pi.SetValue (obj, value);
       } while (false);
 
@@ -330,8 +331,7 @@ public class JSONFileRead : FileRead {
             break;
 
          default:
-            break;
-           
+            break;           
       }
 
       if(value == null) {

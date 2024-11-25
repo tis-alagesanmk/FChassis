@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Xml.Linq;
 
 namespace FChassis.Core.File;
 //-----------------------------------------------------------------------------
@@ -22,7 +21,6 @@ public partial class TreeNode {
 /// <summary></summary>
 public abstract class File {
    public TreeNode node = new ();
-   public bool write = false;
    public string? error;
 
    public bool setError(string error) {  
@@ -55,14 +53,14 @@ public partial class TreeNode {
           && type != typeof (decimal)
           && type != typeof (DateTime);
 
-   internal void SetRoot (object obj, bool write, string name) {
+   internal void SetRootObject (object obj, bool write, string name) {
       TreeNode childNode = new ();
       this.children.Add (childNode);
 
-      childNode.Set (obj, write, name, this);
+      childNode.SetObject (obj, write, name, this);
    }
 
-   internal void Set (object obj, bool write, string name = null!, TreeNode parentNode = null!) {
+   internal void SetObject (object obj, bool write, string name = null!, TreeNode parentNode = null!) {
       this.obj = obj;
       this.name = name;
 
@@ -70,9 +68,9 @@ public partial class TreeNode {
       Type elementType = null!;
       if (TreeNode.IsListType (obj, objType, ref elementType)) {
          if (write)
-            this.addList_CallMethod (this, obj, name, elementType, write);
+            this.setListObject_CallMethod (this, obj, name, elementType, write);
          else
-            this.setArray (obj, name, elementType);
+            this.setArrayObject (obj, name, elementType);
          
          return;
       }
@@ -94,14 +92,14 @@ public partial class TreeNode {
                Type elemType = propObjType.GetElementType ()!;
                if (TreeNode.IsUserDefinedClass (elemType)) {
                   propNode = new ();
-                  propNode.add (propObj, fi!.Name, elemType, write);
+                  propNode.setIteratebleObject (propObj, fi!.Name, elemType, write);
                }
             } else if (TreeNode.IsUserDefinedClass (propObjType)) {
                propNode = new ();
                if (TreeNode.IsListType (propObj, propObjType, ref elementType))
-                  this.addList_CallMethod (propNode!, propObj, fi!.Name, elementType, write);
+                  this.setListObject_CallMethod (propNode!, propObj, fi!.Name, elementType, write);
                else
-                  propNode!.Set (propObj, write, fi!.Name);
+                  propNode!.SetObject (propObj, write, fi!.Name);
             }
 
             if (propNode != null) {
@@ -127,24 +125,24 @@ public partial class TreeNode {
 
       // Add Element node
       TreeNode childNode = new ();
-      childNode.Set (childObj, write);
+      childNode.SetObject (childObj, write);
       this!.children.Add (childNode!);
 
       return childNode;
    }
 
    #region Protected
-   protected void addList<T> (List<T> list, string name, Type elementType, bool write)
-      => this.add (list, name, elementType, write);
+   protected void setListObject<T> (List<T> list, string name, Type elementType, bool write)
+      => this.setIteratebleObject (list, name, elementType, write);
 
-   protected void setArray (dynamic iteratable, string name, Type elementType) {
+   protected void setArrayObject (dynamic iteratable, string name, Type elementType) {
       this.ElementType = elementType;
       this.obj = iteratable;
       this.name = name;      
    }
 
-   protected void add (dynamic iteratable, string name, Type elementType, bool write) {
-      this.setArray(iteratable, name, elementType);
+   protected void setIteratebleObject (dynamic iteratable, string name, Type elementType, bool write) {
+      this.setArrayObject(iteratable, name, elementType);
 
       if (write) // add elements for writing
          foreach (object? obj in iteratable)
@@ -156,11 +154,11 @@ public partial class TreeNode {
    void add (object? obj, bool write) {
       TreeNode childNode = new ();
       this.children.Add (childNode);
-      childNode.Set (obj!, write);
+      childNode.SetObject (obj!, write);
    }
 
-   void addList_CallMethod (TreeNode node, object list, string arrayName, Type elementType, bool write) {
-      var method = typeof (TreeNode).GetMethod ("addList", BindingFlags.NonPublic | BindingFlags.Instance);
+   void setListObject_CallMethod (TreeNode node, object list, string arrayName, Type elementType, bool write) {
+      var method = typeof (TreeNode).GetMethod ("setListObject", BindingFlags.NonPublic | BindingFlags.Instance);
       var genericMethod = method!.MakeGenericMethod (elementType);
 
       genericMethod.Invoke (node, [list, arrayName, elementType, write]);
