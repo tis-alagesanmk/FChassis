@@ -145,20 +145,17 @@ public partial class TreeNode {
       this.setArrayObject(iteratable, name, elementType);
 
       if (write) // add elements for writing
-         foreach (object? obj in iteratable)
-            this.add (obj, write);
+         foreach (object? obj in iteratable) {
+            TreeNode childNode = new ();
+            this.children.Add (childNode);
+            childNode.SetObject (obj!, write);
+         }            
    }
    #endregion Protected
 
    #region Implemention
-   void add (object? obj, bool write) {
-      TreeNode childNode = new ();
-      this.children.Add (childNode);
-      childNode.SetObject (obj!, write);
-   }
-
    void setListObject_CallMethod (TreeNode node, object list, string arrayName, Type elementType, bool write) {
-      var method = typeof (TreeNode).GetMethod ("setListObject", BindingFlags.NonPublic | BindingFlags.Instance);
+      var method = typeof (TreeNode).GetMethod (nameof(setListObject), BindingFlags.NonPublic | BindingFlags.Instance);
       var genericMethod = method!.MakeGenericMethod (elementType);
 
       genericMethod.Invoke (node, [list, arrayName, elementType, write]);

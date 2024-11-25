@@ -36,18 +36,22 @@ public class JSONFileWrite : FileWrite {
       bool success = false;
 
       object obj = node.obj!;
-      if (node.IsArray)
-         writer.WriteStartArray (name);
-      else {
-         if (parentNode != null && parentNode.IsArray)
-            writer.WriteStartObject ();
+      if (obj != null) {
+         if (node.IsArray)
+            writer.WriteStartArray (name);
          else {
-            Debug.Assert (name != null);
-            writer.WriteStartObject (name);
-         }
+            if (parentNode != null && parentNode.IsArray)
+               writer.WriteStartObject ();
+            else {
+               Debug.Assert (name != null);
+               writer.WriteStartObject (name);
+            }
 
-         this.writeObjectAttributes (writer, obj);
-      }      
+            this.writeObjectAttributes (writer, obj);
+         }
+      }
+      else
+         writer.WriteStartObject (name);
 
       foreach (var childNode in node.children)
          this.writeObject (writer, childNode, childNode.name!, node);
