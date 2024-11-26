@@ -40,7 +40,7 @@ public partial class TabPanel : Panel {
          Child.mainWindow?.Switch2MainPanel ();
 
          JSONFileWrite writer = new ();
-         this.UpdateConfiguraionNodes (writer.node);
+         this.UpdateConfiguraionNodes (writer.rootNode);
          writer.Write ("C:/work/config.json");
       }
    }
@@ -54,10 +54,8 @@ public partial class TabPanel : Panel {
          this.TabItemSelected (tabItem, tabItem.Header as string);
    }
 
-   protected void UpdateConfiguraionNodes (TreeNode node) {
-      node?.children?.Clear ();
-      node!.name = "Configuration";
-      _addConfigurationObjects (node!, this);
+   protected void UpdateConfiguraionNodes (TreeNode rootNode) {
+      _addConfigurationObjects (rootNode!, this);
 
       #region Local function
       void _addConfigurationObjects (TreeNode node, TabPanel tabPanel) {
@@ -77,14 +75,11 @@ public partial class TabPanel : Panel {
 
             if (panel.DataContext != null || panel is TabPanel) {
                if (panel.DataContext != null)
-                  childNode = new () { name = panel.DataContext.GetType().Name,
-                                       obj = panel.DataContext };
+                  node!.AddObject (panel.DataContext.GetType ().Name, panel.DataContext);
                else if (panel is TabPanel) {
-                  childNode = new () { name = (string)tabItem?.Header! };
+                  childNode = node!.AddObject ((string)tabItem?.Header!, null!);
                   _addConfigurationObjects (childNode, (panel as TabPanel)!);
                }
-
-               node?.children?.Add (childNode);
             }
          }
       }

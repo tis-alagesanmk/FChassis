@@ -15,8 +15,8 @@ public partial class TabPanel : Settings.TabPanel {
       ]);
 
       JSONFileRead reader = new ();
-      this.UpdateConfiguraionNodes (reader.node);
-      reader.Read ("C:/work/config.json");
+      this.UpdateConfiguraionNodes (reader.rootNode);
+      bool result = reader.Read ("C:/work/config.json");
    }
 
    override protected void TabItemSelected (TabItem? tabItem, string? tabName) {

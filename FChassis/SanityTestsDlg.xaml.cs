@@ -478,20 +478,20 @@ namespace FChassis {
       const string SanityTestDatasName = "SanityTestDatas";
       void SaveToJson (string filePath) {
          Core.File.JSONFileWrite writer = new ();
-         if(!writer.Write (filePath, this.SanityTests, SanityTestDatasName))
+         if(!writer.Write (filePath, SanityTestDatasName, this.SanityTests))
             MessageBox.Show ($"Setting file '{filePath}' write failed: Reason: {writer.error}");
       }
 
       void LoadFromJson (string filePath) {
+         List<SanityTestData> sanityTests = [];
          Core.File.JSONFileRead reader = new ();
-         if (!reader.Read (filePath, this.SanityTests, SanityTestDatasName)) {
+         if (!reader.Read (filePath, sanityTests, SanityTestDatasName)) {
             MessageBox.Show ($"Setting file '{filePath}' read failed: Reason: {reader.error}");
             return;
          }
 
-         Core.File.TreeNode listNode = reader.node.children[0];
-         foreach (var childNode in listNode.children)
-            this.AddSanityTestRow ((SanityTestData)childNode.obj);         
+         foreach (var st in sanityTests)
+            this.AddSanityTestRow (st);         
       }
 
       void AddSanityTestRow (SanityTestData sanityTestData) {

@@ -101,7 +101,7 @@ public partial class MCSettings : ObservableObject {
    // Method to serialize the singleton instance to a JSON file
    public bool SaveToJson (string filePath) {
       Core.File.JSONFileWrite writer = new ();
-      return writer.Write (filePath, this, MCSettingName);
+      return writer.Write (filePath, MCSettingName, this);
    }
 
    // Method to deserialize from JSON and set the singleton instance

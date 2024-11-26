@@ -13,7 +13,7 @@ public partial class TabPanel : Settings.TabPanel {
       ]);
 
       JSONFileRead reader = new ();
-      this.UpdateConfiguraionNodes (reader.node);
+      this.UpdateConfiguraionNodes (reader.rootNode);
       reader.Read ("C:/work/config.json");
    }
 
