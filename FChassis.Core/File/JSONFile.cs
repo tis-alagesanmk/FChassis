@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text.Json;
 using System;
 using System.Diagnostics;
+using System.ComponentModel.DataAnnotations;
 
 namespace FChassis.Core.File;
 /// <summary></summary>
@@ -47,6 +48,9 @@ public class JSONFileWrite : FileWrite {
    }
 
    bool writeObject (Utf8JsonWriter writer, object obj, string name) {
+
+      writer.WriteStartObject (name);
+
       Type elementType = null!,
            objType = obj.GetType ();
 
@@ -60,6 +64,7 @@ public class JSONFileWrite : FileWrite {
       } else
          this.writeObjectAttributes (writer, obj, objType!);
 
+      writer.WriteEndObject ();
       return true;
    }
 
@@ -101,9 +106,8 @@ public class JSONFileWrite : FileWrite {
             return setError ($"Property {fi!.Name} not found");
 
          attrType = attrObj.GetType ();
-         if (TreeNode.IsListType (attrObj, attrType!, ref attrElementType!)
-               || TreeNode.IsUserDefinedClass (attrElementType)
-               || attrType.IsArray) {
+         if (TreeNode.IsUserDefinedClass (attrElementType) &&
+            (TreeNode.IsListType (attrObj, attrType!, ref attrElementType!)|| attrType.IsArray)) {
             if (!writeObject (writer, attrObj!, fi!.Name))
                return false;
          } else
@@ -114,37 +118,48 @@ public class JSONFileWrite : FileWrite {
 
    void writeObjectAttribute (Utf8JsonWriter writer, string name, object value) {
       Type dataType = value.GetType ();
-      string type = dataType.ToString ();
-      switch (type) {
-         case "System.String":
+      //string type = dataType.ToString ();
+      switch (Type.GetTypeCode(dataType)) {
+         case TypeCode.String:
             writer.WriteString (name, value.ToString ());
             break;
 
-         case "System.Int32":
+         case TypeCode.Int32:
             writer.WriteNumber(name, (Int32)value);
             break;
 
-         case "System.Double":
+         case TypeCode.Double:
             writer.WriteNumber (name, (double)value);
             break;
 
-         case "System.Decimal":
+         case TypeCode.Decimal:
             writer.WriteNumber (name, (decimal)value);
             break;
 
-         case "System.Boolean":
+         case TypeCode.Boolean:
             writer.WriteBoolean (name, (bool)value);
             break;
-            
-         default:
-            if(dataType.IsEnum)
-               writer.WriteString (name, value.ToString());
+         case TypeCode.Object:
+            if (dataType.IsEnum)
+               writer.WriteString (name, value.ToString ());
             else if (dataType.IsArray) {
-               if(_isUserDefinedClassArray(dataType)) 
-                  return; 
+               if (_isUserDefinedClassArray (dataType))
+                  return;
 
                this.writeArray (writer, name, (Array)value);
-            }
+            } else
+            this.writeObject (writer, value,name);
+            break;
+
+         default:
+            //if(dataType.IsEnum)
+            //   writer.WriteString (name, value.ToString());
+            //else if (dataType.IsArray) {
+            //   if(_isUserDefinedClassArray(dataType)) 
+            //      return; 
+
+            //   this.writeArray (writer, name, (Array)value);
+            //}
             break;
       }
 
@@ -159,9 +174,25 @@ public class JSONFileWrite : FileWrite {
    void writeArray(Utf8JsonWriter writer, string name, Array array) {
       writer.WriteStartArray (name);
 
-      foreach (object element in array)
-         writer.WriteStringValue (element.ToString ());
+      Type arrayType = array.GetType ();
+      Type elementType = arrayType.GetElementType ()!;
 
+      foreach (object element in array) {
+         switch (Type.GetTypeCode (elementType)) {
+            case TypeCode.String:
+               writer.WriteStringValue (element.ToString ());
+               break;
+
+            case TypeCode.Double:
+               writer.WriteNumberValue ((double)element);
+               break;
+            default:
+               if (elementType.IsEnum) 
+                    writer.WriteStringValue (element.ToString ());
+               break;
+         }
+      }
+        
       writer.WriteEndArray ();
    }
    #endregion Implement
