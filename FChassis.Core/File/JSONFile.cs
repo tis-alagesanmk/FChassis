@@ -142,7 +142,7 @@ public class JSONFileWrite : FileWrite {
          case TypeCode.Object:
             if (dataType.IsEnum)
                writer.WriteString (name, value.ToString ());
-            else if (dataType.IsArray) {
+            else if (dataType.IsArray && !dataType.IsClass) {
                if (_isUserDefinedClassArray (dataType))
                   return;
 
