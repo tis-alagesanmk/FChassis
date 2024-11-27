@@ -1,205 +1,243 @@
 using System.Diagnostics;
 using System.IO;
-using System.Windows;
+using FChassis.GCodeGen;
 using FChassis.Processes;
 using Flux.API;
+
 namespace FChassis;
 
 /// <summary>Implements a very basic sanity check</summary>
 /// This is just a placeholder for a more elaborate test system. For now, we just
 /// want to ensure that as we make changes to the code generator, the generated code does
 /// not start varying
-static class SanityCheck {
-   /// <summary>Global routine used to run the sanity checks</summary>
-   static public void Run (Processor processor) {
-      bool curRes = true, result = true;
-      string status = "";
+public class SanityCheck (Processor process) {
+   #region Contained Entities
+   public Processor Processor { get; private set; } = process;
+   public Part Part { get; private set; }
+   public GCodeGenerator GCodeGen { get; private set; } = process.GCodeGen;
+   #endregion
 
-      // Tests for holes, cutouts and texts -----------------------------------
-      (string, double)[] holeCutoutTextTestParams = [
-         ("Measure0",               1.0),
-         ("TRIVIAL-2",              0.3)
-      ];
-      int count = holeCutoutTextTestParams.Length;
-      for (int i = 0; i < count; i++)
-         _check_Hole_CutOuts_Texts (holeCutoutTextTestParams[i].Item1, 
-                                    holeCutoutTextTestParams[i].Item2);
+   #region Properties
+   public List<SanityTestData> SanityTests = [];
+   public List<(string DINFileHead1, string DINFileHead2)> DINFiles = [];
+   #endregion
 
-      // Tests for notches with Wire joint Distance = 2.0 ---------------------
-      (string, double)[] notchTestParams = [
-         ("FGK01014_03",            2.0),
-         ("FGK01014_04",            2.0),
-         ("SM LH IC356716_E",       0.0),
-         ("FGJ04513_05",            0.0),
-      ];
-      count = notchTestParams.Length;
-      for (int i = 0; i < count; i++)
-         _check_Notches (notchTestParams[i].Item1, 
-                         notchTestParams[i].Item2);
+   #region Action Methods
+   /// <summary>
+   /// This method loads the Fx file into the DB.
+   /// </summary>
+   /// <param name="partName">Complete part name with address</param>
+   /// <exception cref="Exception">An exception is thrown if it is invalid</exception>
+   public void LoadPart (string partName) {
+      Part = Part.Load (partName);
+      if (Part.Info.MatlName == "NONE") 
+         Part.Info.MatlName = "1.0038";
 
-      string msg = result ?"Code generation tests passed" 
-                          :"One or more Code generation tests failed";
-      MessageBox.Show ($"{msg}\n\n{status}", "FChassis", MessageBoxButton.OK, MessageBoxImage.Error);
-
-      #region inline Functions -----------------------------------------------
-      void _check_Hole_CutOuts_Texts (string fileName, double distance) {
-         processor.PartitionRatio = distance;
-         curRes = SanityCheck.check (fileName, processor);
-         status += fileName;
-         status += curRes ? "passed\n" : "failed\n";
-         result &= curRes;
-      }
-
-      void _check_Notches (string fileName, double distance) {
-         processor.NotchWireJointDistance = distance;
-         curRes = SanityCheck.check (fileName, processor,
-                                     cutHoles: false, cutNotches: true,
-                                     cutOuts: false, textMark: false);
-
-         status += fileName;
-         status += curRes ? "passed\n" : "failed\n";
-         result &= curRes;
-      }
-      #endregion inline Functions --------------------------------------------
-   }
-
-   // Internal check routine - loads a part, assigns tooling, sorts tooling,
-   // and generates code with a fixed partition ratio of 0.5
-   static bool check (string file, Processor processor, bool cutHoles = true, 
-                      bool cutOuts = true, bool cutNotches = true, bool textMark = true) {
-      var part = Part.Load ($"W:/FChassis/Sample/{file}.fx");
-      if (part.Info.MatlName == "NONE") 
-         part.Info.MatlName = "1.0038";
-      if (part.Model == null) {
-         if (part.Dwg != null) 
-            part.FoldTo3D ();
-         else if (part.SurfaceModel != null) 
-            part.SheetMetalize ();
+      if (Part.Model == null) {
+         if (Part.Dwg != null) Part.FoldTo3D ();
+         else if (Part.SurfaceModel != null) 
+            Part.SheetMetalize ();
          else 
             throw new Exception ("Invalid part");
       }
 
-      var work = new Workpiece (part.Model, part);
-      work.Align ();
-      if (cutHoles) 
-         work.DoAddHoles ();
-
-      if (textMark) 
-         work.DoTextMarking ();
-
-      if (cutNotches || cutOuts) 
-         work.DoCutNotchesAndCutouts ();
-
-      work.DoSorting ();
-
-      processor.Workpiece = work;
-      processor.CutHoles = cutHoles;
-      processor.CutNotches = cutNotches;
-      processor.CutMark = textMark;
-      processor.Cutouts = cutOuts;
-      try {
-         processor.ComputeGCode (true);
-      } catch (Exception) { }
-
-      processor.ResetGCodeGenForTesting ();
-
-      bool result = false;
-      do {
-         if (!CheckDIN ("Head1", $"{file}-(LH).din"))
-            break;
-
-         if (processor.PartitionRatio < 1)
-            if(!CheckDIN ("Head2", $"{file}-(LH).din"))
-              break;
-
-         result = true;
-      } while (false);
-
-      return result;
+      Processor.Workpiece = new Workpiece (Part.Model, Part);
    }
 
-   // Compares two generated DIN files for sameness. If any file is not matching the
-   // expected reference, we simply display a message and stop. 
-   static bool CheckDIN (string folder, string dinfile) {
-      string reference = $"W:/FChassis/TData/{folder}/{dinfile}";
-      string testfile = $"W:/FChassis/Sample/{folder}/{dinfile}";
-      if (!System.IO.File.Exists (reference)) 
-         System.IO.File.Copy (testfile, reference);
+   public ArgumentNullException GetArgumentNullException () {
+      return new (nameof (GCodeGen), "SanityCheck.Run: GCodeGen is null");
+   }
 
-      string reftext = System.IO.File.ReadAllText (reference), 
-             testtext = System.IO.File.ReadAllText (testfile);
-      bool res = true;
-      if (reftext != testtext) {
-         res = false;
-         DoDINCompare (reference, testfile);
-         //MessageBox.Show ($"Files different: {folder}-{dinfile}", "FChassis", MessageBoxButton.OK, MessageBoxImage.Error);
+   /// <summary>
+   /// This method Runs the G Code generator for the tests specified in testList
+   /// </summary>
+   /// <param name="testList">The input list of tests to be run to generate g code</param>
+   /// <param name="baselineDir">The path to the base line directory (for file comparison)</param>
+   /// <param name="forceRun">Sanity Test structure has an option <c>ToRun</c>. ForceRun optional
+   /// variable overrules it.</param>
+   /// <returns>List of Bool values, to say if the tests are successfully run. <c>True</c> if successful,
+   /// <c>False</c> otherwise</returns>
+   /// <exception cref="ArgumentNullException"></exception>
+   /// <exception cref="Exception"></exception>
+   public List<bool> Run (List<SanityTestData> testList, string baselineDir, 
+                          ArgumentNullException argumentNullException, 
+                          bool forceRun = false) {
+      if (GCodeGen == null) 
+         throw argumentNullException;
+
+      if (testList.Count == 0) 
+         throw new Exception ("SanityCheck.Run: testList is empty");
+
+      int idx = 0;
+      DINFiles = Enumerable.Repeat ((string.Empty, string.Empty), testList.Count).ToList ();
+      List<bool> runStats = Enumerable.Repeat (false, testList.Count).ToList ();
+      foreach (SanityTestData test in testList) {
+         if (!test.ToRun && !forceRun) continue;
+         try {
+            // GCode generator reset options
+            GCodeGen.ResetForTesting (test.MCSettings);
+
+            // Part loading, aligning, and cutting
+            LoadPart (test.FxFileName);
+            Processor.Workpiece.Align ();
+            if (test.MCSettings.CutHoles) 
+               Processor.Workpiece.DoAddHoles ();
+
+            if (test.MCSettings.CutMarks) 
+               Processor.Workpiece.DoTextMarking ();
+
+            if (test.MCSettings.CutNotches || test.MCSettings.CutCutouts) 
+               Processor.Workpiece.DoCutNotchesAndCutouts ();
+
+            Processor.Workpiece.DoSorting ();
+
+            // Compute G Code
+            Utils.ComputeGCode (GCodeGen, testing: true);
+            var headData = ((GCodeGen.DINFileNameHead1, GCodeGen.DINFileNameHead2));
+            DINFiles[idx] = headData;
+            var diff = Diff (baselineDir, idx, launchWinmerge: false);
+            if (!diff) 
+               runStats[idx] = true;
+         } catch (Exception) { }
+
+         idx++;
       }
+      return runStats;
+   }
 
+   /// <summary>
+   /// This file is the entry point to perform the file compare
+   /// </summary>
+   /// <param name="baselineDir">The path to the baseline files.</param>
+   /// <param name="index">The index of the DINFiles[]</param>
+   /// <param name="launchWinmerge">Optional parameter to launch WinMerge. This is <c>False</c> by default</param>
+   /// <returns>Returns <c>false</c> if there are no changes between the files and the baseline; otherwise, returns <c>true</c>. </returns>
+   public bool Diff (string baselineDir, int index, bool launchWinmerge = false) {
+      // Further more, compare the DIN with baseline and populate the runStats.
+      string DINFilenameHead1 = "", DINFilenameHead2 = "";
+      if (GCodeGen.Heads == MCSettings.EHeads.Both) {
+         DINFilenameHead1 = Path.GetFileName (DINFiles[index].DINFileHead1);
+         DINFilenameHead2 = Path.GetFileName (DINFiles[index].DINFileHead2);
+      } else if (GCodeGen.Heads == MCSettings.EHeads.Left)
+         DINFilenameHead1 = Path.GetFileName (DINFiles[index].DINFileHead1);
+      else if (GCodeGen.Heads == MCSettings.EHeads.Right)
+         DINFilenameHead2 = Path.GetFileName (DINFiles[index].DINFileHead2);
+
+      string head1DINBaselineAbsFile = "", head2DINBaselineAbsFile = "";
+      if (!string.IsNullOrEmpty (DINFiles[index].DINFileHead1))
+         head1DINBaselineAbsFile = Path.Combine (baselineDir, "Head1", DINFilenameHead1);
+
+      if (!string.IsNullOrEmpty (DINFiles[index].DINFileHead2))
+         head2DINBaselineAbsFile = Path.Combine (baselineDir, "Head2", DINFilenameHead2);
+
+      var res = CheckDINs (head1DINBaselineAbsFile, DINFiles[index].DINFileHead1, 
+                           head2DINBaselineAbsFile, DINFiles[index].DINFileHead2, 
+                           launchWinmerge);
+      return res;
+   }
+
+   /// <summary>
+   /// This is a wrapoper method to perform the file compare between the baseline
+   /// and the test files. First, the files texts are compared. If they differ
+   /// </summary>
+   /// <param name="baselineDINFileHead1">baseline file Head1</param>
+   /// <param name="testDINFileHead1">Test file Head1</param>
+   /// <param name="baselineDINFileHead2">Baseline file Head2</param>
+   /// <param name="testDINFileHead2">Test file Head2</param>
+   /// <param name="launchWinmerge">Optional parameter to launch WinMerge. This is <c>False</c> by default</param>
+   /// <returns>Returns <c>false</c> if there are no changes between the files and the baseline; otherwise, returns <c>true</c>. </returns>
+   bool CheckDINs (string baselineDINFileHead1, string testDINFileHead1, 
+                   string baselineDINFileHead2, string testDINFileHead2, 
+                   bool launchWinmerge = false) {
+      if (!System.IO.File.Exists (baselineDINFileHead1) 
+            && System.IO.File.Exists (testDINFileHead1)) 
+         System.IO.File.Copy (testDINFileHead1, baselineDINFileHead1);
+
+      if (!System.IO.File.Exists (baselineDINFileHead2) 
+          && System.IO.File.Exists (testDINFileHead2)) 
+         System.IO.File.Copy (testDINFileHead2, baselineDINFileHead2);
+
+      string reftextH1 = System.IO.File.ReadAllText (baselineDINFileHead1), 
+             testtextH1 = System.IO.File.ReadAllText (testDINFileHead1),
+             reftextH2 = System.IO.File.ReadAllText (baselineDINFileHead2), 
+             testtextH2 = System.IO.File.ReadAllText (testDINFileHead2);
+      bool res = false;
+
+      if (reftextH1 != testtextH1 || reftextH2 != testtextH2) {
+         res = true;
+         if (launchWinmerge)
+            DoDINCompare (baselineDINFileHead1, testDINFileHead1, 
+                          baselineDINFileHead2, testDINFileHead2);
+      }
       return res;
    }
 
    /// <summary>
    /// This method performs a comparison between the G Code files and the baseline under the
    /// following condition
-   /// <list type="number">
-   /// <item>
-   /// <description>In DEBUG configuration:
-   /// <list type="bullet">
-   /// <item>If the <c>FC_REG_DIFF_COMPARE</c> flag is set to <c>True</c> and <c>WinmergeU.exe</c> 
-   /// is available in the environment variable <c>PATH</c>, 
-   /// the method uses WinMerge to display the differences.</item>
-   /// <item>If the flag is not set or <c>WinmergeU.exe</c> is not found, 
-   /// direct string comparison is performed.</item>
-   /// </list>
-   /// </description>
-   /// </item>
-   /// <item>
-   /// <description>In RELEASE configuration:
-   /// <list type="bullet">
-   /// <item>The method always performs a direct string comparison 
-   /// between the G Code files and the baseline.</item>
-   /// </list>
-   /// </description>
-   /// </item>
-   /// </list>
    /// </summary>
-   /// <param name="reference">The path to the reference G Code file (baseline).</param>
-   /// <param name="testfile">The path to the test G Code file to be compared.</param>
-   /// <returns>Returns <c>true</c> if there are no changes 
-   /// between the G Code files and the baseline; 
-   /// otherwise, returns <c>false</c>.</returns>
-
-   static bool DoDINCompare (string reference, string testfile) {
+   /// <param name="reference1">The path to the reference G Code file (baseline) for Head1</param>
+   /// <param name="testfile1">The path to the test G Code file to be compared for Head2</param>
+   /// <param name="reference2">The path to the reference G Code file (baseline) for Head1</param>
+   /// <param name="testfile2">The path to the test G Code file to be compared for Head2</param>
+   /// <returns>Returns <c>false</c> if there are no changes between the G Code files and the baseline; otherwise, returns <c>true</c>.</returns>
+   bool DoDINCompare (string reference1, string testfile1, string reference2, string testfile2) {
       bool res = false;
-#if DEBUG
-      string winmergePath = SanityCheck.isFileComparerInstalled ();
-      if (!string.IsNullOrEmpty (winmergePath)) {
-         if (!System.IO.File.Exists (winmergePath)) {
-            Console.WriteLine ("Winmerge is not installed");
-            return res;
-         }
+      string winmergePath = IsFileComparerInstalled ();
 
-         ProcessStartInfo startInfo = new() {
+      if (!string.IsNullOrEmpty (winmergePath)) {
+         if (!System.IO.File.Exists (winmergePath))
+            throw new Exception ("WINMERGE_NOT_INSTALLED");
+
+         // Start comparison for both file pairs in the same instance
+         ProcessStartInfo startInfo = new () {
             FileName = winmergePath,
-            Arguments = $"\"{reference}\" \"{testfile}\"",
-            UseShellExecute = false
+            Arguments = $"/e /u /dl \"Reference\" /dr \"Test\" \"{reference1}\" \"{testfile1}\"",
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            CreateNoWindow = true
          };
 
          try {
             using (Process process = Process.Start (startInfo)) {
-               Console.WriteLine ("WinMergeU.exe started successfully.");
-
-               // Wait for the process to exit
                process.WaitForExit ();
 
-               Console.WriteLine ("WinMergeU.exe has exited.");
-               res = true;
+               // WinMerge exit codes:
+               // 0 = files are identical
+               // 1 = files are different
+               // 2 = files are identical, but binary is different (only if using a binary comparison)
+               // -1 = error occurred
+               int exitCode = process.ExitCode;
+               res = exitCode == 1 || exitCode == 2 || exitCode == -1; // True if files differ
             }
-         } catch (Exception ex) {
-            Console.WriteLine ($"Error starting WinMergeU.exe: {ex.Message}");
+         } catch (Exception) {
+            throw new Exception ("WINMERGE_LAUNCH_FAILED");
+         }
+
+         startInfo = new () {
+            FileName = winmergePath,
+            Arguments = $"/e /u /dl \"Reference\" /dr \"Test\" \"{reference2}\" \"{testfile2}\"",
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            CreateNoWindow = true
+         };
+
+         try {
+            using (Process process = Process.Start (startInfo)) {
+               process.WaitForExit ();
+               // WinMerge exit codes:
+               // 0 = files are identical
+               // 1 = files are different
+               // 2 = files are identical, but binary is different (only if using a binary comparison)
+               // -1 = error occurred
+               int exitCode = process.ExitCode;
+               res = exitCode == 1 || exitCode == 2 || exitCode == -1; // True if files differ
+            }
+         } catch (Exception) {
+            throw new Exception ("WINMERGE_LAUNCH_FAILED");
          }
       }
-#endif
+
       return res;
    }
 
@@ -208,18 +246,9 @@ static class SanityCheck {
    /// is set to TRUE and if the winmergeu.exe is available.
    /// </summary>
    /// <returns>The path to the WinMergeU.exe</returns>
-   static string isFileComparerInstalled () {
-      string swtch = Environment.GetEnvironmentVariable ("FC_REG_DIFF_COMPARE");
-      if (string.IsNullOrEmpty (swtch) 
-         || string.Equals (swtch, "true", StringComparison.OrdinalIgnoreCase)) 
-         return "";
-
-      string pathEnv = Environment.GetEnvironmentVariable ("PATH");
-      if (pathEnv == null) {
-         Console.WriteLine ("PATH environment variable is not set.");
-         return "";
-      }
-
+   public static string IsFileComparerInstalled () {
+      string pathEnv = Environment.GetEnvironmentVariable ("PATH")?? throw new Exception ("PATH_ENV_DOESNT_EXIST");
+      
       // Split the PATH environment variable into individual directories
       string[] paths = pathEnv.Split (Path.PathSeparator);
 
@@ -233,11 +262,10 @@ static class SanityCheck {
          }
       }
 
-      if (winMergePath == null) {
-         Console.WriteLine ("WinMergeU.exe not found in PATH directories.");
-         return "";
-      }
+      if (winMergePath == null)
+         throw new Exception ("WINMERGE_NOT_FOUND");
 
       return winMergePath;
    }
+   #endregion
 }

@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using FChassis.Core.File;
 
 namespace FChassis.UI.Settings.Laser;
 public partial class TabPanel : Settings.TabPanel {
@@ -11,8 +12,8 @@ public partial class TabPanel : Settings.TabPanel {
          new RampCycles.Panel(),
       ]);
 
-      FChassis.Data.IO.JSONFileRead reader = new ();
-      this.UpdateConfiguraionNodes (reader.node);
+      JSONFileRead reader = new ();
+      this.UpdateConfiguraionNodes (reader.rootNode);
       reader.Read ("C:/work/config.json");
    }
 

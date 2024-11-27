@@ -1,0 +1,60 @@
+{
+  "heads": "Both",
+  "standoff": 100,
+  "toolingPriority": [
+    {},
+    {},
+    {},
+    {}
+  ],
+  "markTextPosX": 700.4,
+  "markTextPosY": 10,
+  "markText": "Deluxe",
+  "markAngle": "Rotate0",
+  "optimizeSequence": false,
+  "progNo": 1,
+  "nCFilePath": "W:\\FChassis\\Sample",
+  "safetyZone": 0,
+  "syncHead": false,
+  "usePingPong": true,
+  "partConfig": "LHComponent",
+  "optimizePartition": false,
+  "rotateX180": false,
+  "showToolingNames": false,
+  "includeFlange": false,
+  "includeCutout": false,
+  "includeWeb": false,
+  "partitionRatio": 0.5,
+  "probeMinDistance": 0,
+  "notchApproachLength": 5,
+  "approachLength": 2,
+  "notchWireJointDistance": 2,
+  "flexOffset": 0,
+  "stepLength": 1,
+  "enableMultipassCut": true,
+  "maxFrameLength": 3500,
+  "maximizeFrameLengthInMultipass": true,
+  "cutHoles": true,
+  "cutNotches": true,
+  "cutCutouts": true,
+  "cutMarks": true,
+  "minThresholdForPartition": 585,
+  "minNotchLengthThreshold": 210,
+  "dINFilenameSuffix": "",
+  "workpieceOptionsFilename": "W:\\FChassis\\LCM2HWorkpieceOptions.json",
+  "machine": "LCMLegacy",
+  "deadbandWidth": 600,
+  "bandWidth": [
+    {},
+    {},
+    {}
+  ],
+  "testC": [
+    {
+      "d": 2
+    },
+    {
+      "d": 3
+    }
+  ]
+}

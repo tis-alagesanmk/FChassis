@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FChassis.UI.Panels;
-using FChassis.Data.IO;
+using FChassis.Core.File;
 
 namespace FChassis.UI.Settings;
 public partial class TabPanel : Panel {
@@ -39,8 +39,8 @@ public partial class TabPanel : Panel {
 
          Child.mainWindow?.Switch2MainPanel ();
 
-         FChassis.Data.IO.JSONFileWrite writer = new ();
-         this.UpdateConfiguraionNodes (writer.node);
+         JSONFileWrite writer = new ();
+         this.UpdateConfiguraionNodes (writer.rootNode);
          writer.Write ("C:/work/config.json");
       }
    }
@@ -54,10 +54,8 @@ public partial class TabPanel : Panel {
          this.TabItemSelected (tabItem, tabItem.Header as string);
    }
 
-   protected void UpdateConfiguraionNodes (TreeNode node) {
-      node?.children?.Clear ();
-      node!.content = "Configuration";
-      _addConfigurationObjects (node!, this);
+   protected void UpdateConfiguraionNodes (TreeNode rootNode) {
+      _addConfigurationObjects (rootNode!, this);
 
       #region Local function
       void _addConfigurationObjects (TreeNode node, TabPanel tabPanel) {
@@ -77,13 +75,11 @@ public partial class TabPanel : Panel {
 
             if (panel.DataContext != null || panel is TabPanel) {
                if (panel.DataContext != null)
-                  childNode = new () { content = panel.DataContext };
+                  node!.AddObject (panel.DataContext.GetType ().Name, panel.DataContext);
                else if (panel is TabPanel) {
-                  childNode = new () { content = tabItem?.Header };
+                  childNode = node!.AddObject ((string)tabItem?.Header!, null!);
                   _addConfigurationObjects (childNode, (panel as TabPanel)!);
                }
-
-               node?.children?.Add (childNode);
             }
          }
       }

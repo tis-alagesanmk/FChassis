@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using FChassis.Core.Model;
 
 namespace FChassis.Data.Model.Settings.Machine.AxisParams;
 public partial class LPC1Base : ObservableObject {

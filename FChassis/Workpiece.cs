@@ -3,6 +3,9 @@ using System.IO;
 using static System.Math;
 using System.ComponentModel;
 using System;
+using System.Diagnostics;
+using FChassis.GCodeGen;
+using static FChassis.MCSettings;
 namespace FChassis;
 
 public class Workpiece : INotifyPropertyChanged {
@@ -54,6 +57,10 @@ public class Workpiece : INotifyPropertyChanged {
       if (-mModel.Bound.ZMin < mModel.Bound.ZMax) 
          Apply (Matrix3.Rotation (EAxis.X, Geo.PI));
 
+      // Additional 180 degrees rotation if the user has prescribed
+      if (MCSettings.It.RotateX180)
+         Apply (Matrix3.Rotation (EAxis.Z, Geo.PI));
+
       // Now shift the origin:
       var (mbound, pbound) = (mModel.Bound, mModel.Baseplane.Bound);
       double dx = -mbound.XMin;        // Model stretches from X=0 to X=Len
@@ -70,10 +77,9 @@ public class Workpiece : INotifyPropertyChanged {
       }
    }
 
-   public void DoAddHoles () {
+   public bool DoAddHoles () {
       if (HoleCutsComplete) 
-         return;
-
+         return false;
       int cutIndex = Cuts.Count + 1;
       foreach (var ep in mModel.Entities.OfType<E3Plane> ()) {
          foreach (var con in ep.Contours.Skip (1)) {
@@ -94,16 +100,20 @@ public class Workpiece : INotifyPropertyChanged {
 
             Tooling cut = new (this, ep, shape, EKind.Hole);
             Cuts.Add (cut);
-            var name = $"Tooling-{cutIndex++} - {Utils.GetFlangeType (Cuts[^1])} - {Cuts[^1].Kind}";
+            var name = $"Tooling-{cutIndex++}";
+            var featType = $"{Utils.GetFlangeType (Cuts[^1],
+               MCSettings.It.PartConfig == PartConfigType.LHComponent 
+                                                ? GCodeGenerator.LHCSys 
+                                                : GCodeGenerator.RHCSys)} - {Cuts[^1].Kind}";
             Cuts[^1].Name = name;
+            Cuts[^1].FeatType = featType;
          }
       }
-
       foreach (var ef in mModel.Entities.OfType<E3Flex> ()) {
          var bound = new Bound2 (ef.Trims.Select (a => a.Bound));
          foreach (var con in ef.Trims) {
             var b2 = con.Bound;
-            // [Alag:Review] need to use OR and combinue "continue"
+            // [Alag:Review] can use OR and combinue "continue"
             if (b2.XMin.EQ (bound.XMin, 0.01) || b2.XMax.EQ (bound.XMax, 0.01)) 
                continue;
 
@@ -113,41 +123,60 @@ public class Workpiece : INotifyPropertyChanged {
             var shape = con.Clone ().Cleanup (threshold: 1e-3);
             if (shape.Winding == EWinding.CW) shape.Reverse ();
             Cuts.Add (new Tooling (this, ef, shape, EKind.Hole));
-            Cuts[^1].Name = $"Tooling-{cutIndex++} - {Utils.GetFlangeType (Cuts[^1])} - {Cuts[^1].Kind}";
+            Cuts[^1].Name = $"Tooling-{cutIndex++}";
+            Cuts[^1].FeatType = $"{Utils.GetFlangeType (Cuts[^1],
+               MCSettings.It.PartConfig == PartConfigType.LHComponent ? GCodeGenerator.LHCSys : GCodeGenerator.RHCSys)} - {Cuts[^1].Kind}";
          }
       }
-
-      // In the case of FlexHoles, since the segments happen
-      // on E3Plane and E3Flex and the resultantlist of segments
-      // are not owned by any one E3Entity, the segments' start points are projected
-      // onto the plane away from E3Flex either by 45 deg or by -45 deg.
-      // This is decided by the mid normal to the E3Flex.
-      // The windiwng of the polygon on the projected plane is used to check if the
+      
+      // In the case of FlexHoles, since the segments happen on E3Plane and E3Flex and the resultant
+      // list of segments are not owned by any one E3Entity, the segments' start points are projected
+      // onto the plane away from E3Flex either by 45 deg or by -45 deg. This is decided by the mid normal
+      // to the E3Flex. The windiwng of the polygon on the projected plane is used to check if the
       // Traces of the tooling has to be reversed.
+      Stopwatch swRevTool = Stopwatch.StartNew ();
+      Stopwatch swCalcBound = Stopwatch.StartNew ();
+      TimeSpan tsRevTool = new (); TimeSpan tsCalcBound = new ();
       foreach (var cut in Cuts) {
-         var cutSegs = Cuts[^1].Segs.ToList ();
+         var cutSegs = cut.Segs.ToList ();
          bool yNegFlex = cutSegs.Any (cutSeg => cutSeg.Vec0.Normalized ().Y < -0.1);
-         if (cut.Kind == EKind.Hole && Utils.GetFlangeType (cut) == Utils.EFlange.Flex) {
+         if (cut.Kind == EKind.Hole && Utils.GetFlangeType (cut,
+            MCSettings.It.PartConfig == PartConfigType.LHComponent 
+                                             ? GCodeGenerator.LHCSys 
+                                             : GCodeGenerator.RHCSys) == Utils.EFlange.Flex) {
             Vector3 n = new (0.0, Math.Sqrt (2.0), Math.Sqrt (2.0));
             Point3 q = new (0.0, mBound.YMax - 10.0, mBound.ZMax + 10.0);
             if (yNegFlex) {
                n = new Vector3 (0.0, -Math.Sqrt (2.0), Math.Sqrt (2.0));
                q = new Point3 (0.0, mBound.YMin - 10.0, mBound.ZMax + 10.0);
             }
-
-            if (Geom.GetToolingWinding (n, q, cutSegs) == Geom.ToolingWinding.CW) 
+            
+            if (Geom.GetToolingWinding (n, q, cutSegs) == Geom.ToolingWinding.CW) {
+               swRevTool.Start ();
                cut.Reverse ();
+               swRevTool.Stop ();
+               tsRevTool += swRevTool.Elapsed;
+            }
          }
+         
+         // Calculate the bound3 for each cut
+         swCalcBound.Start ();
+         cut.Bound3 = Utils.CalculateBound3 (cutSegs, Model.Bound);
+         swCalcBound.Stop ();
+         tsCalcBound += swCalcBound.Elapsed;
       }
+      
+      //sw.Stop ();
+      //TimeSpan ts = sw.Elapsed;
 
       HoleCutsComplete = true;
       Dirty ();
+      return true;
    }
 
-   public void DoTextMarking () {
+   public bool DoTextMarking () {
       if (MarkingsComplete) 
-         return;
-
+         return false;
       int cutIndex = Cuts.Count + 1;
       var bp = mModel.Baseplane;
       var xfm = bp.Xfm.GetInverse () * Matrix3.Translation (0, 0, Offset);
@@ -159,11 +188,18 @@ public class Workpiece : INotifyPropertyChanged {
       foreach (var pline in e2t.Plines) {
          Pline p2 = pline.Xformed (xfm);
          Cuts.Add (new Tooling (this, mModel.Baseplane, p2, EKind.Mark));
-         Cuts[^1].Name = $"Tooling-{cutIndex++} - {Utils.GetFlangeType (Cuts[^1])} - {Cuts[^1].Kind}";
+         Cuts[^1].Name = $"Tooling-{cutIndex++}";
+         Cuts[^1].FeatType = $"{Utils.GetFlangeType (Cuts[^1],
+                                MCSettings.It.PartConfig == PartConfigType.LHComponent 
+                                                               ? GCodeGenerator.LHCSys 
+                                                               : GCodeGenerator.RHCSys)} - {Cuts[^1].Kind}";
+         // Calculate the bound3 for each cut
+         Cuts[^1].Bound3 = Utils.CalculateBound3 ([.. Cuts[^1].Segs], Model.Bound);
       }
 
       MarkingsComplete = true;
       Dirty ();
+      return true;
    }
 
    public void DoSorting () {
@@ -171,7 +207,7 @@ public class Workpiece : INotifyPropertyChanged {
       mCuts = [.. mCuts.OrderBy (a => a.Start.Pt.X)];
       for (int i = 0; i < mCuts.Count; i++) 
          mCuts[i].SeqNo = i;
-
+      
       var box = mBound;
       for (int i = 1; i < mCuts.Count; i++) {
          Tooling prevTooling = mCuts[i - 1], currTooling = mCuts[i];
@@ -208,17 +244,15 @@ public class Workpiece : INotifyPropertyChanged {
                break;
          }
 
-         pts.Add (new (currToolingStartPlusClearance, currTooling.Start.Vec)); 
-         pts.Add (currTooling.Start);
+         pts.Add (new (currToolingStartPlusClearance, currTooling.Start.Vec)); pts.Add (currTooling.Start);
       }
 
       sortingComplete = true;
    }
 
-   public void DoCutNotchesAndCutouts () {
+   public bool DoCutNotchesAndCutouts () {
       if (NotchCutsComplete) 
-         return;
-
+         return false;
       int cutIndex = Cuts.Count + 1;
       var mb = mBound;
       List<Tooling> cuts = [];
@@ -234,17 +268,11 @@ public class Workpiece : INotifyPropertyChanged {
                     _ => (new Point3 (mb.XMin, pb.YMin, pb.ZMin), 
                           new Point3 (mb.XMax, pb.YMin, pb.ZMax)),
          };
-
-         (Point2 p3, Point2 p4) = (Unproject (p1), Unproject (p2));
+         
+         (Point2 p3, Point2 p4) = (Tooling.Unproject (p1, ep), Tooling.Unproject (p2, ep));
          Bound2 rect = new (p3, p4);
          foreach (var notch in GetNotches (rect, ep.Contours[0])) {
             cuts.Add (new Tooling (this, ep, notch, EKind.Notch));
-         }
-
-         // Helper ...............................
-         Point2 Unproject (Point3 pt) {
-            var pt2 = pt * ep.Xfm.GetInverse ();
-            return new (pt2.X, pt2.Y);
          }
       }
 
@@ -274,10 +302,11 @@ public class Workpiece : INotifyPropertyChanged {
                if (t1 == null) 
                   continue;
 
-               Tooling tm = t0.JoinTo (t1, Tooling.mNotchJoinableLengthToClose)
+               Tooling tm = t0.JoinTo (t1, Tooling.mNotchJoinableLengthToClose) 
                               ?? t1.JoinTo (t0, Tooling.mNotchJoinableLengthToClose);
                if (tm != null) {
-                  cuts.Add (tm); cuts[i] = cuts[j] = null; 
+                  cuts.Add (tm); 
+                  cuts[i] = cuts[j] = null;                                     
                   done = false;
                }
             }
@@ -286,58 +315,78 @@ public class Workpiece : INotifyPropertyChanged {
                continue;
          }
       }
-
       foreach (var cut in cuts) {
          if (cut != null) {
             cut.IdentifyCutout ();
-            cut.Name = $"Tooling-{cutIndex++} - {Utils.GetFlangeType (cut)} - {cut.Kind}";
+            cut.Name = $"Tooling-{cutIndex++}";
+            cut.FeatType = $"{Utils.GetFlangeType (cut,
+                                                   MCSettings.It.PartConfig == PartConfigType.LHComponent 
+                                                         ? GCodeGenerator.LHCSys 
+                                                         : GCodeGenerator.RHCSys)} - {cut.Kind}";
             var cutSegs = cut.Segs.ToList ();
-            bool YNegPlaneNotch = cutSegs.Any (cutSeg => Math.Abs (cutSeg.Vec0.Normalized ().Y + 1.0).EQ (0));
-            bool YPosPlaneNotch = cutSegs.Any (cutSeg => Math.Abs (cutSeg.Vec0.Normalized ().Y - 1.0).EQ (0));
-            bool TopPlaneNotch = cutSegs.Any (cutSeg => Math.Abs (cutSeg.Vec0.Normalized ().Z - 1.0).EQ (0));
-            bool FlexPlaneNotch = !YNegPlaneNotch && !YPosPlaneNotch && !TopPlaneNotch;
+            //bool YNegPlaneFeat = cutSegs.Any (cutSeg => Math.Abs (cutSeg.Vec0.Normalized ().Y + 1.0).EQ (0));
+            //bool YPosPlaneFeat = cutSegs.Any (cutSeg => Math.Abs (cutSeg.Vec0.Normalized ().Y - 1.0).EQ (0));
+            //bool TopPlaneFeat = cutSegs.Any (cutSeg => Math.Abs (cutSeg.Vec0.Normalized ().Z - 1.0).EQ (0));
+            //bool FlexPlaneFeat = !YNegPlaneFeat && !YPosPlaneFeat && !TopPlaneFeat;
             if (cut.Kind == EKind.Cutout) {
+               if (!MCSettings.It.CutCutouts) 
+                  continue;
+               
                // In the case of Cutouts, ( closed notches ) since the segments happen on 
                // E3Plane and E3Flex and the resultant list of segments are not owned by any one
                // E3Entity, the segments' start point are projected onto the plane away from E3Flex
                // in 45 deg or -45 deg. The windiwng of the polygon on the projected plane is used
                // to check if the Traces of the tooling has to be reversed.
-               Vector3 n = Utils.GetEPlaneNormal (cut);
+               Vector3 n = Utils.GetEPlaneNormal (cut,
+                                                  MCSettings.It.PartConfig == PartConfigType.LHComponent 
+                                                      ? GCodeGenerator.LHCSys 
+                                                      : GCodeGenerator.RHCSys);
                Point3 q = new (0.0, mBound.YMax + 10.0, mBound.ZMax + 10.0);
                bool yNegFlexFeat = cutSegs.Any (cutSeg => cutSeg.Vec0.Normalized ().Y < -0.1);
                if (yNegFlexFeat) 
                   q = new Point3 (0.0, mBound.YMin - 10.0, mBound.ZMax + 10.0);
+                  
                if (Geom.GetToolingWinding (n, q, cutSegs) == Geom.ToolingWinding.CW) 
                   cut.Reverse ();
+                  
+               cut.CutoutKind = Tooling.GetCutKind (cut);
             } else {
-               if (TopPlaneNotch && YNegPlaneNotch) 
-                  cut.NotchKind = ENotchKind.TopToYNeg;
-               else if (TopPlaneNotch && YPosPlaneNotch) 
-                  cut.NotchKind = ENotchKind.TopToYPos;
-               else if (TopPlaneNotch && YPosPlaneNotch && YNegPlaneNotch) 
-                  cut.NotchKind = ENotchKind.YNegToYPos;
-               else if (TopPlaneNotch) 
-                  cut.NotchKind = ENotchKind.Top;
-               else if (YNegPlaneNotch) 
-                  cut.NotchKind = ENotchKind.YNeg;
-               else if (YPosPlaneNotch) 
-                  cut.NotchKind = ENotchKind.YPos;
-               else if (FlexPlaneNotch) 
-                  cut.NotchKind = ENotchKind.Flex;
-               else {
-                  // Unsupported type
-                  throw new Exception ("Unsupported Notch Type");
+               if (!MCSettings.It.CutNotches) 
+                  continue;
+               cut.NotchKind = Tooling.GetCutKind (cut);
+               cut.ProfileKind = Tooling.GetCutKindWRTPartOrigin (cut);
+               var NotchStFlType = Utils.GetArcPlaneFlangeType (cutSegs.First ().Vec0,
+                                                                MCSettings.It.PartConfig == PartConfigType.LHComponent 
+                                                                     ? GCodeGenerator.LHCSys 
+                                                                     : GCodeGenerator.RHCSys);
+               var NotchEndFlType = Utils.GetArcPlaneFlangeType (cutSegs.Last ().Vec1,
+                                                                 MCSettings.It.PartConfig == PartConfigType.LHComponent 
+                                                                     ? GCodeGenerator.LHCSys 
+                                                                     : GCodeGenerator.RHCSys);
+               if (NotchStFlType != Utils.EFlange.Flex && NotchEndFlType != Utils.EFlange.Flex) {
+                  var endX = cutSegs.Last ().Curve.End.X;
+                  if (endX - mBound.XMin < mBound.XMax - endX && cutSegs.First ().Curve.Start.X > endX) 
+                     cut.Reverse ();
+                  else if (mBound.XMax - endX < endX - mBound.XMin && cutSegs.First ().Curve.Start.X < endX) 
+                     cut.Reverse ();
+               }
+               
+               if (cut.ProfileKind == ECutKind.Top) {
+                  if (cutSegs.First ().Curve.Start.Y > cutSegs.Last ().Curve.End.Y) 
+                     cut.Reverse ();
                }
             }
-
+            
+            // Calculate the bound3 for each cut
+            cut.Bound3 = Utils.CalculateBound3 (cutSegs, Model.Bound);
             mCuts.Add (cut);
          }
       }
 
-      var segs = mCuts[1].Segs.ToList ();
-      int count = segs.Count;
       NotchCutsComplete = true;
       Dirty ();
+      
+      return true;
    }
    #endregion
 
@@ -381,17 +430,14 @@ public class Workpiece : INotifyPropertyChanged {
             continue; 
          }
 
-         //[Alag:Review] need to use OR and combine "continue"
-         if (seg.A.Y.EQ (b.YMin, E) && seg.B.Y.EQ (b.YMin, E)) // Bottom edge
+         //[Alag:Review] CAN use OR and combine "continue"
+         if (seg.A.Y.EQ (b.YMin, E) && seg.B.Y.EQ (b.YMin, E))    // Bottom edge
             continue;      
-
-         if (seg.A.Y.EQ (b.YMax, E) && seg.B.Y.EQ (b.YMax, E)) // Top edge
+         if (seg.A.Y.EQ (b.YMax, E) && seg.B.Y.EQ (b.YMax, E))    // Top edge
             continue;      
-
-         if (seg.A.X.EQ (b.XMin, E) && seg.B.X.EQ (b.XMin, E)) // Left edge
+         if (seg.A.X.EQ (b.XMin, E) && seg.B.X.EQ (b.XMin, E))    // Left edge
             continue;      
-
-         if (seg.A.X.EQ (b.XMax, E) && seg.B.X.EQ (b.XMax, E)) // Right edge
+         if (seg.A.X.EQ (b.XMax, E) && seg.B.X.EQ (b.XMax, E))    // Right edge
             continue;      
 
          output.Add (seg.ToPline ());

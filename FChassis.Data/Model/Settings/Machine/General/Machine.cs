@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using FChassis.Core.Model;
 
 namespace FChassis.Data.Model.Settings.Machine.General; 
 public partial class Machine : ObservableObject {

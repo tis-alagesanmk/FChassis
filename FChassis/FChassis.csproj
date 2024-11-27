@@ -22,6 +22,9 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FChassis.Core\FChassis.Core.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Flux.API">

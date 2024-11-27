@@ -5,7 +5,6 @@ using Avalonia.Threading;
 
 using Flux.API;
 using FChassis.Processes;
-using FChassis.Core;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -65,9 +64,9 @@ public partial class MainWindow : ObservableObject {
 
       files.ItemsSource = Directory.GetFiles (mSrcDir, "*.fx").Select (Path.GetFileName);
 
-      _process = new Processor ();
-      _process.TriggerRedraw += TriggerRedraw;
-      _process.SetSimulationStatus += (status) => simulationStatus = status;
+      //_process = new Processor ();
+      //_process.TriggerRedraw += TriggerRedraw;
+      //_process.SetSimulationStatus += (status) => simulationStatus = status;
    }
    #endregion "Method"
 
@@ -121,13 +120,13 @@ public partial class MainWindow : ObservableObject {
       }
    }
 
-   void OpenSettings ()
-      => new SettingsDlg ().ShowDialog ();
+   //void OpenSettings ()
+   //   => new SettingsDlg ().ShowDialog ();
 
-   void SanityCheck () {
-      _process.ResetGCodeGenForTesting ();
-      FChassis.SanityCheck.Run (_process);
-   }
+   //void SanityCheck () {
+   //   _process.ResetGCodeGenForTesting ();
+   //   FChassis.SanityCheck.Run (_process);
+   //}
 
    [RelayCommand]
    protected void Align ()  {
