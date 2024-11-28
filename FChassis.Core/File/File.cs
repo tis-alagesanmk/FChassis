@@ -89,7 +89,8 @@ public partial class ObjectNode {
    }
 
    static internal bool IsUserDefinedClass (System.Type type)
-      => type.IsClass
+      =>  type is not null
+          && !type.IsClass
           && !type.IsPrimitive
           && !type.IsEnum
           && !type.IsArray
