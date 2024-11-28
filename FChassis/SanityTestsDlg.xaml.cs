@@ -483,14 +483,13 @@ namespace FChassis {
       }
 
       void LoadFromJson (string filePath) {
-         List<SanityTestData> sanityTests = [];
          Core.File.JSONFileRead reader = new ();
-         if (!reader.Read (filePath, sanityTests, SanityTestDatasName)) {
+         if (!reader.Read (filePath, this.SanityTests, SanityTestDatasName)) {
             MessageBox.Show ($"Setting file '{filePath}' read failed: Reason: {reader.error}");
             return;
          }
 
-         foreach (var st in sanityTests)
+         foreach (var st in this.SanityTests)
             this.AddSanityTestRow (st);         
       }
 

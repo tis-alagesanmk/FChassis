@@ -54,16 +54,16 @@ public partial class TabPanel : Panel {
          this.TabItemSelected (tabItem, tabItem.Header as string);
    }
 
-   protected void UpdateConfiguraionNodes (TreeNode rootNode) {
+   protected void UpdateConfiguraionNodes (ObjectNode rootNode) {
       _addConfigurationObjects (rootNode!, this);
 
       #region Local function
-      void _addConfigurationObjects (TreeNode node, TabPanel tabPanel) {
+      void _addConfigurationObjects (ObjectNode node, TabPanel tabPanel) {
          TabControl tabControl = tabPanel.GetTabControl ();
 
          Panel panel;
          TabItem tabItem;
-         TreeNode childNode = null!;
+         ObjectNode childNode = null!;
          foreach (var _tabItem in tabControl.Items) {
             tabItem = (_tabItem as TabItem)!;
             if (tabItem == null)
@@ -75,9 +75,9 @@ public partial class TabPanel : Panel {
 
             if (panel.DataContext != null || panel is TabPanel) {
                if (panel.DataContext != null)
-                  node!.AddObject (panel.DataContext.GetType ().Name, panel.DataContext);
+                  node!.Add (panel.DataContext.GetType ().Name, panel.DataContext);
                else if (panel is TabPanel) {
-                  childNode = node!.AddObject ((string)tabItem?.Header!, null!);
+                  childNode = node!.AddNode ((string)tabItem?.Header!, null!);  // Container Node
                   _addConfigurationObjects (childNode, (panel as TabPanel)!);
                }
             }
