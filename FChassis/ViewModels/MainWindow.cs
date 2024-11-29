@@ -175,7 +175,7 @@ public partial class MainWindow : ObservableObject {
          _process.ComputeGCode ();
 #else
          try {
-            mProcess.ComputeGCode ();
+            _process.ComputeGCode ();
          } catch (Exception ex) {
             if (ex is NegZException) MessageBox.Show ("Part might not be aligned", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             else MessageBox.Show ("G Code generation failed", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

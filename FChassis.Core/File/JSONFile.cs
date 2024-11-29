@@ -32,22 +32,24 @@ public class JSONFileWrite : FileWrite {
    #region Implement
    bool writeNodeChildren (Utf8JsonWriter writer, ObjectNode node) {
       bool success = true;
+
       string name;
       object srcObj, obj;
-
       ObjectNode? childNode;
-      writer.WriteStartObject ();
+
+      #region Write Object -----------------------------------------------
+      writer.WriteStartObject (); 
       foreach (var pair in node.children) {
          obj = srcObj = pair.Value;
          name = pair.Key;
 
          childNode = srcObj as ObjectNode;
-         if (childNode != null)        // ObjectNode ----------------
+         if (childNode != null)   // ObjectNode ----------------
             obj = childNode.obj!;
 
-         if (obj != null)              // Object or Object Node -----
+         if (obj != null)           // Object or Object Node ---
             success = this.writeObject (writer, obj, name);
-         else if (node != null)        // Container Node ------------
+         else if (node != null)     // Container Node ----------
             success = this.writeNodeChildren (writer, node);
 
          if(!success)
@@ -55,28 +57,30 @@ public class JSONFileWrite : FileWrite {
       }
 
       writer.WriteEndObject ();
+      #endregion            
+
       return success;
    }
 
    bool writeObject (Utf8JsonWriter writer, object obj, string name) {
       Type objType = obj.GetType ();
 
-      #region Array/List Type -----------------------------
+      #region Write Array/List Type -----------------------
       Type elementType = null!;
       if (!this.writeArray (writer, obj!, objType, ref elementType, name)) 
          return false;
 
       if (elementType != null)      // Array or List written
          return true;
-      #endregion Array/List Type
+      #endregion
 
-      #region Object Type ---------------------------------
+      #region Otherwise Write Object Type -----------------
       writer.WriteStartObject (name);
       if (!this.writeObjectClassAttributes (writer, obj, objType))
          return false;
 
       writer.WriteEndObject ();
-      #endregion Object Type 
+      #endregion
 
       return true;
    }
@@ -84,26 +88,28 @@ public class JSONFileWrite : FileWrite {
    // For List and Array
    bool writeArray (Utf8JsonWriter writer, object obj, Type objType, 
                     ref Type elementType, string name) {
-      if (!ObjectNode.IsListType (obj, objType!, ref elementType) && !objType.IsArray)
+      if (!objType.IsArray && !ObjectNode.IsListType (obj, objType!, ref elementType))
          return true;               //  Not List or Array
 
       if (objType.IsArray)
-         elementType = objType.GetElementType ()!;      
+         elementType = objType.GetElementType ()!;
 
-      writer.WriteStartArray (name); // Start -------------
+      #region Write Object or Prop Array -------------
+      writer.WriteStartArray (name); // Start ---
       dynamic iteratable = obj;
       if (ObjectNode.IsUserDefinedClass (elementType)) 
          foreach (var element in iteratable)
-            __writeObjectElement (element, ref elementType);
+            writeObjectElement__l (element, ref elementType);
       else
          foreach (var element in iteratable)
-            this.writeElement (writer, element, elementType);
+            this.writePropElement (writer, element, elementType);
 
-      writer.WriteEndArray ();   // End ------------------
+      writer.WriteEndArray ();             // End
+      #endregion
       return true;
 
       #region Local
-      bool __writeObjectElement (object element, ref Type elementType) {
+      bool writeObjectElement__l (object element, ref Type elementType) {
          writer.WriteStartObject ();
          if (!this.writeObjectClassAttributes (writer, element, elementType))
             return false;
@@ -111,11 +117,11 @@ public class JSONFileWrite : FileWrite {
          writer.WriteEndObject ();
          return true;
       }
-      #endregion Local
+      #endregion Local     
    }
 
-   bool writeElement (Utf8JsonWriter writer, object element, 
-                           Type elementType) {
+   bool writePropElement (Utf8JsonWriter writer, object element, 
+                          Type elementType) {
       if (elementType.IsEnum) {
          writer.WriteStringValue (element.ToString ());
          return true;
@@ -196,17 +202,22 @@ public class JSONFileWrite : FileWrite {
          object attrObj = fi?.GetValue (obj)!;
          if (attrObj == null) {
             //continue;
-            return setError ($"Property '{fi!.Name}' not found");
+            return setError ($"Attribute '{fi!.Name}' not found");
          }
 
+         #region Write Object Attribute 
          attrType = attrObj.GetType ();
          if (ObjectNode.IsListType (attrObj, attrType!, ref attrElementType!)
                || ObjectNode.IsUserDefinedClass (attrType)
                || attrType.IsArray) {
             if (!this.writeObject (writer, attrObj!, fi!.Name))
                return false;
-         } else
-            this.writeObjectAttribute (writer, attrObj, attrType, fi?.Name!);
+            continue;
+         }
+         #endregion
+
+         // Other Write Attribute
+         this.writeObjectAttribute (writer, attrObj, attrType, fi?.Name!);
       }
 
       return true;
@@ -283,6 +294,7 @@ public class JSONFileRead : FileRead {
    }
 
    public override bool Read (string path) {
+      return true;
       if (!System.IO.File.Exists (path))
          return false;
 
@@ -357,17 +369,17 @@ public class JSONFileRead : FileRead {
       object childObj = ObjectNode.GetObject (node, name);
       return childObj == null
                   ? setError ($"Object '{name}' not found")
-                  : __readArray (ref reader);
+                  : readArray__l (ref reader);
 
       #region Local
-      bool __readArray (ref Utf8JsonReader reader) {
+      bool readArray__l (ref Utf8JsonReader reader) {
          ObjectNode? childNode = childObj as ObjectNode;
          if (childNode == null)
-            return setError ("Array/List object should be added as Object Node");
+            return setError ($"Array/List '{name}' object should be added as Object Node");
 
          childObj = childNode.obj!;
          if (childObj == null)
-            return setError ("Should not be Container Node for Array/List object");
+            return setError ($"'{name}' Should not be Container Node for Array/List object");
 
          Type elementType = null!,
               childObjType = childObj.GetType ();
@@ -383,8 +395,9 @@ public class JSONFileRead : FileRead {
          }
 
          if (ObjectKind.obj == childKind)
-            return setError ("object should be Array/List");
+            return setError ($"Object '{name}' should be Array/List");
 
+         // Set Array 
          childNode.obj = this.readArray (list, childObj, childKind, elementType, name, ref reader);
          return true;
       }
@@ -397,11 +410,11 @@ public class JSONFileRead : FileRead {
       PropertyInfo? pi = objType.GetProperty (cname, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
       return pi == null
-         ? setError ($"Property '{cname}' not found")
-         : __readArray (ref reader);
+         ? setError ($"Attribute '{cname}' not found")
+         : readArray__l (ref reader);
 
       #region Local
-      bool __readArray (ref Utf8JsonReader reader) {
+      bool readArray__l (ref Utf8JsonReader reader) {
          ObjectKind attrKind = ObjectKind.obj;
          Type elementType = null!;
          if (pi.PropertyType.IsArray) {
@@ -410,12 +423,13 @@ public class JSONFileRead : FileRead {
          } else if (ObjectNode.IsListType (pi.PropertyType, ref elementType))
             attrKind = ObjectKind.list;
          else
-            return setError ("Attribute should not be Array/List");
+            return setError ($"Attribute '{name}' should not be Array/List");
 
          object iteratable = this.readArray (null!, obj, attrKind, elementType, name, ref reader);
          if (iteratable == null)
             return false;
-           
+
+         // Set Array 
          pi.SetValue (obj, iteratable);
          return true;
       };
@@ -433,7 +447,7 @@ public class JSONFileRead : FileRead {
 
       bool result = ObjectNode.IsUserDefinedClass (elementType) // Is UserDefined class array
                      ? this.readObjectElements (propObj, elementType, list, addMethod, ref reader)
-                     : this.readElements (propObj!, elementType, list, addMethod, ref reader);
+                     : this.readPropElements (propObj!, elementType, list, addMethod, ref reader);
       if (!result)
          return null!;
 
@@ -455,7 +469,7 @@ public class JSONFileRead : FileRead {
          switch (reader.TokenType) {
             case JsonTokenType.StartObject:
                if ((childObj = Activator.CreateInstance (elementType)!) == null)
-                  return setError ("Object Element create failed");
+                  return setError ($"Object Element '{elementType.Name}' create failed");
 
                addMethod.Invoke (list, new object[] { childObj });
                success = this.readObject (childObj, null!, ref reader);
@@ -473,9 +487,9 @@ public class JSONFileRead : FileRead {
       return success;
    }
 
-   bool readElements (object obj, Type elementType, 
-                      object list, MethodInfo addMethod, 
-                      ref Utf8JsonReader reader) {
+   bool readPropElements (object obj, Type elementType, 
+                          object list, MethodInfo addMethod, 
+                          ref Utf8JsonReader reader) {
       object value;
       while (reader.Read ()) {
          switch (reader.TokenType) {
@@ -503,7 +517,7 @@ public class JSONFileRead : FileRead {
       string cname = this._capitalizeFirstLetter (name);
       PropertyInfo attrPI = objType.GetProperty (cname, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!; 
       if (attrPI == null) 
-         return setError ($"Property '{cname}' not found");
+         return setError ($"Attribute '{name}' not found");
 
       object value = this.readAttributeValue (attrPI.PropertyType, ref reader);
       if (value == null)

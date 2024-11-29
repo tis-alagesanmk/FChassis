@@ -17,8 +17,9 @@ public partial class ModelViewer : Child {
    void initializeControls () {
       this.initElementNameField ();
       ViewModel.Context.MainWindow.Initialize (Avalonia.Threading.Dispatcher.UIThread, this.Files);
-      if(this.FChassisHost != null) 
-         this.FChassisHost.Content = new FChassisMainWindowHost ();
+      if(this.FChassisHost != null)
+         //this.FChassisHost.Content = new FChassisMainWindowHost ();
+         this.FChassisHost.Content = new Coin3DViewerHost ();
 
       Logger.SetControl (this.LogTextBlock);
 

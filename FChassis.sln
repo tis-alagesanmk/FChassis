@@ -32,6 +32,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FChassis.Insaller", "FChass
 		{EBAA7200-5C9A-4BC3-B754-63965B47DEC7} = {EBAA7200-5C9A-4BC3-B754-63965B47DEC7}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Coin3D", "Coin3D\Coin3D.vcxproj", "{AE084A85-1CD2-4717-922F-E2531C98C67A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,12 +104,25 @@ Global
 		{4AD5A041-ABDD-414C-AA3E-54AF96448C8C}.Release|x64.Build.0 = Release|x64
 		{4AD5A041-ABDD-414C-AA3E-54AF96448C8C}.Release|x86.ActiveCfg = Release|Win32
 		{4AD5A041-ABDD-414C-AA3E-54AF96448C8C}.Release|x86.Build.0 = Release|Win32
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Debug|Any CPU.Build.0 = Debug|x64
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Debug|x64.ActiveCfg = Debug|x64
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Debug|x64.Build.0 = Debug|x64
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Debug|x86.ActiveCfg = Debug|Win32
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Debug|x86.Build.0 = Debug|Win32
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Release|Any CPU.ActiveCfg = Release|x64
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Release|Any CPU.Build.0 = Release|x64
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Release|x64.ActiveCfg = Release|x64
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Release|x64.Build.0 = Release|x64
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Release|x86.ActiveCfg = Release|Win32
+		{AE084A85-1CD2-4717-922F-E2531C98C67A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EBAA7200-5C9A-4BC3-B754-63965B47DEC7} = {E93025EC-C266-4E53-BA0E-1BE97B5E2231}
+		{AE084A85-1CD2-4717-922F-E2531C98C67A} = {E93025EC-C266-4E53-BA0E-1BE97B5E2231}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D1F4E69-AD6C-4223-B2EE-D7A4D7A79327}

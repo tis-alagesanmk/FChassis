@@ -16,6 +16,12 @@
 
 
   </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaXaml Remove="ModelViewer\Coin3DViewer.axaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ModelViewer\Coin3dViewer.axaml.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.3" />
@@ -27,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Coin3D\Coin3D.vcxproj" />
     <ProjectReference Include="..\FChassis.Core\FChassis.Core.csproj" />
     <ProjectReference Include="..\FChassis.Data\FChassis.Data.csproj" />
     <ProjectReference Include="..\FChassis\FChassis.csproj" />
