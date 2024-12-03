@@ -197,6 +197,7 @@ public class Workpiece : INotifyPropertyChanged {
          Cuts[^1].Bound3 = Utils.CalculateBound3 ([.. Cuts[^1].Segs], Model.Bound);
       }
 
+
       MarkingsComplete = true;
       Dirty ();
       return true;

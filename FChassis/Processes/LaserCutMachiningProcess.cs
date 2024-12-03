@@ -68,7 +68,7 @@ public class Processor : INotifyPropertyChanged {
    public event TriggerRedrawDelegate TriggerRedraw;
    public event Action SimulationFinished;
    public event SetSimulationStatusDelegate SetSimulationStatus;
-   readonly Dispatcher mDispatcher;
+   readonly dynamic mDispatcher;
    ESimulationStatus mSimulationStatus = ESimulationStatus.NotRunning;
    public ESimulationStatus SimulationStatus {
       get => mSimulationStatus;
@@ -88,8 +88,8 @@ public class Processor : INotifyPropertyChanged {
    #endregion
 
    #region Constructor
-   public Processor (Dispatcher dispatcher) {
-      mDispatcher = dispatcher;
+   public Processor (dynamic dispatcher = null) {
+      //mDispatcher = dispatcher;
       MachiningTool = new Nozzle (9.0, 100.0, 100);
       mGCodeGenerator = new GCodeGenerator (this, true/* Left to right machining*/);
       mGCodeParser = new GCodeParser ();
@@ -408,7 +408,7 @@ public class Processor : INotifyPropertyChanged {
       if (cutScopeTooling[1].Count > 0) 
          listOfListOfDrawables.Add (cutScopeTooling[1]);
       
-      List<Action> drawActions = [];
+      //List<Action> drawActions = [];
       List<Point3> G0DrawPoints = [], G1DrawPoints = [];
       List<List<Point3>> G2DrawPoints = [], G3DrawPoints = [];
       foreach (var drawables in listOfListOfDrawables) {
@@ -445,8 +445,8 @@ public class Processor : INotifyPropertyChanged {
             }
          }
       }
-      
-      mDispatcher.Invoke (() => {
+
+      AppUI.ThreadDispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G3SegColor;
          foreach (var arcPoints in G3DrawPoints) {
@@ -458,8 +458,8 @@ public class Processor : INotifyPropertyChanged {
             Lux.Draw (EDraw.LineStrip, [arcPoints[^1], arcPoints[^1]]);
          }
       });
-      
-      mDispatcher.Invoke (() => {
+
+      AppUI.ThreadDispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G2SegColor;
          foreach (var arcPoints in G2DrawPoints) {
@@ -471,14 +471,14 @@ public class Processor : INotifyPropertyChanged {
             Lux.Draw (EDraw.LineStrip, [arcPoints[^1], arcPoints[^1]]);
          }
       });
-      
-      mDispatcher.Invoke (() => {
+
+      AppUI.ThreadDispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G0SegColor;
          Lux.Draw (EDraw.Lines, G0DrawPoints);
       });
-      
-      mDispatcher.Invoke (() => {
+
+      AppUI.ThreadDispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G1SegColor;
          Lux.Draw (EDraw.Lines, G1DrawPoints);

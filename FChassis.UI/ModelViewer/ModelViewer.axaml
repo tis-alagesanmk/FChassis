@@ -60,19 +60,25 @@
 						Click="CloseBtn_Click"/>
 			</StackPanel>
 		</Grid>
-		<ContentControl x:Name="FChassisHost"
-						Grid.Row="1" Grid.Column="1"
-						Background="LightGray"
-						HorizontalAlignment="Stretch"
-						HorizontalContentAlignment="Stretch"/>
+		<Grid ColumnDefinitions="*,*" Grid.Row="1" Grid.Column="1">
+			<ContentControl x:Name="FChassisHost"
+							Background="LightGray"
+							HorizontalAlignment="Stretch"
+							HorizontalContentAlignment="Stretch"/>
+			<ContentControl Grid.Column="1"
+							x:Name="Coin3dHost"
+							Background="LightGray"
+							HorizontalAlignment="Stretch"
+							HorizontalContentAlignment="Stretch"/>
+		</Grid>
 		<ScrollViewer x:Name="LogTextBlocks"
-					  Grid.Row="2" Grid.Column="1"
-					  DockPanel.Dock="Bottom" Height="100"
-					  HorizontalScrollBarVisibility="Disabled"
-					  VerticalScrollBarVisibility="Auto">
+						Grid.Row="2" Grid.Column="1"
+						DockPanel.Dock="Bottom" Height="100"
+						HorizontalScrollBarVisibility="Disabled"
+						VerticalScrollBarVisibility="Auto">
 			<TextBlock x:Name="LogTextBlock"
-					   HorizontalAlignment="Stretch"
-					   VerticalAlignment="Stretch"/>
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"/>
 		</ScrollViewer>
 	</Grid>
 </base:Child>
