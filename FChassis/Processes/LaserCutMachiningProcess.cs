@@ -366,14 +366,15 @@ public class Processor : INotifyPropertyChanged {
    #region GCode Draw Implementation
    public void DrawGCode () {
       foreach (var cutScopeTooling in CutScopeTraces) 
-         DrawGCode (cutScopeTooling);
+        DrawGCode (cutScopeTooling);
    }
 
    public void DrawGCodeForCutScope () {
       // If simulation runs and when a new part is loaded, this 
       // check is necessary
-      if (CutScopeTraces.Count > 0) 
-         DrawGCode (CutScopeTraces[GetCutScopeIndex ()]);
+      if (CutScopeTraces.Count > 0)
+        DrawGCode (CutScopeTraces[GetCutScopeIndex ()]);
+      
    }
 
    private int mCutScopeIndex = 0;
@@ -401,52 +402,86 @@ public class Processor : INotifyPropertyChanged {
    }
 
    public void DrawGCode (List<GCodeSeg>[] cutScopeTooling) {
-      List<List<GCodeSeg>> listOfListOfDrawables = [];
-      if (cutScopeTooling[0].Count > 0) 
-         listOfListOfDrawables.Add (cutScopeTooling[0]);
-      
-      if (cutScopeTooling[1].Count > 0) 
-         listOfListOfDrawables.Add (cutScopeTooling[1]);
-      
-      List<Action> drawActions = [];
+      //List<List<GCodeSeg>> listOfListOfDrawables = [];
+      //if (cutScopeTooling[0].Count > 0) 
+      //   listOfListOfDrawables.Add (cutScopeTooling[0]);
+
+      //if (cutScopeTooling[1].Count > 0) 
+      //   listOfListOfDrawables.Add (cutScopeTooling[1]);
+
+      var cusScopeToolins = cutScopeTooling.Where (cut => cut.Count > 0);
+      //List<Action> drawActions = [];
       List<Point3> G0DrawPoints = [], G1DrawPoints = [];
       List<List<Point3>> G2DrawPoints = [], G3DrawPoints = [];
-      foreach (var drawables in listOfListOfDrawables) {
-         foreach (var gcseg in drawables) {
-            var seg = gcseg;
-            if (ReferenceCS == RefCSys.MCS)
-               seg = seg.XfmToMachineNew (mGCodeGenerator);
-            Color32 segColor = Color32.Nil;
+      foreach (var drawables in cusScopeToolins) {
+         var drwableSelect = drawables.Select (seg => seg = (ReferenceCS == RefCSys.MCS) ? seg.XfmToMachineNew (mGCodeGenerator) : seg).ToList ();
 
-            if (seg.IsLine ()) {
-               if (seg.GCode == EGCode.G0 || seg.MoveType == EMove.Retract2Machining) {
-                  segColor = new Color32 (255, 255, 255);
-                  G0DrawPoints.Add (seg.StartPoint);
-                  G0DrawPoints.Add (seg.EndPoint);
-               } else {
-                  segColor = Color32.Blue;
-                  G1DrawPoints.Add (seg.StartPoint);
-                  G1DrawPoints.Add (seg.EndPoint);
-               }
-            } else if (seg.IsArc ()) {
-               var arcPointVecs = Utils.DiscretizeArc (seg, 50);
-               List<Point3> arcPts = [];
-               if (seg.GCode == EGCode.G3) {
-                  segColor = Color32.Cyan;
-                  foreach (var ptVec in arcPointVecs) arcPts.Add (ptVec.Item1);
-                  G3DrawPoints.Add (arcPts);
-               } else {
-                  segColor = Color32.Magenta;
-                  foreach (var ptVec in arcPointVecs) 
-                     arcPts.Add (ptVec.Item1);
-                  
-                  G2DrawPoints.Add (arcPts);
-               }
+         var resultDrawables = new {
+            lines = drawables.Where (seg => seg.IsLine()).ToList (),
+            arcs = drawables.Where (seg => seg.IsArc ()).ToList (),
+         };
+
+         //lines
+         var result = new {
+            G0 = resultDrawables.lines.Where (seg => seg.GCode == EGCode.G0 || seg.MoveType == EMove.Retract2Machining).ToList (),
+            G1 = resultDrawables.lines.Where (seg => seg.GCode != EGCode.G0 && seg.MoveType != EMove.Retract2Machining).ToList (),
+         };
+        
+         foreach (var g0 in result.G0) {
+            G0DrawPoints.Add (g0.StartPoint);
+            G0DrawPoints.Add (g0.EndPoint);
+         }
+         foreach (var g1 in result.G1) {
+            G0DrawPoints.Add (g1.StartPoint);
+            G0DrawPoints.Add (g1.EndPoint);
+         }
+
+         //Arcs
+         foreach (var arc in resultDrawables.arcs) {
+            var arcPointVecs = Utils.DiscretizeArc (arc, 50);
+            if (arc.GCode == EGCode.G3) {
+               var arcPts = arcPointVecs.Select (x => x.Item1).ToList ();
+               G3DrawPoints.Add (arcPts);
+            } else {
+               var arcPts = arcPointVecs.Select (x => x.Item1).ToList ();
+               G2DrawPoints.Add (arcPts);
             }
          }
+
+         //foreach (var gcseg in drawables) {
+         //   var seg = gcseg;
+         //   if (ReferenceCS == RefCSys.MCS)
+         //      seg = seg.XfmToMachineNew (mGCodeGenerator);
+         //   Color32 segColor = Color32.Nil;
+
+         //   if (seg.IsLine ()) {
+         //      if (seg.GCode == EGCode.G0 || seg.MoveType == EMove.Retract2Machining) {
+         //         segColor = new Color32 (255, 255, 255);
+         //         G0DrawPoints.Add (seg.StartPoint);
+         //         G0DrawPoints.Add (seg.EndPoint);
+         //      } else {
+         //         segColor = Color32.Blue;
+         //         G1DrawPoints.Add (seg.StartPoint);
+         //         G1DrawPoints.Add (seg.EndPoint);
+         //      }
+         //   } else if (seg.IsArc ()) {
+         //      var arcPointVecs = Utils.DiscretizeArc (seg, 50);
+         //      List<Point3> arcPts = [];
+         //      if (seg.GCode == EGCode.G3) {
+         //         segColor = Color32.Cyan;
+         //         foreach (var ptVec in arcPointVecs) arcPts.Add (ptVec.Item1);
+         //         G3DrawPoints.Add (arcPts);
+         //      } else {
+         //         segColor = Color32.Magenta;
+         //         foreach (var ptVec in arcPointVecs)
+         //            arcPts.Add (ptVec.Item1);
+
+         //         G2DrawPoints.Add (arcPts);
+         //      }
+         //   }
+         //}
       }
-      
-      mDispatcher.Invoke (() => {
+      Application.Current.Dispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G3SegColor;
          foreach (var arcPoints in G3DrawPoints) {
@@ -459,7 +494,7 @@ public class Processor : INotifyPropertyChanged {
          }
       });
       
-      mDispatcher.Invoke (() => {
+      Application.Current.Dispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G2SegColor;
          foreach (var arcPoints in G2DrawPoints) {
@@ -471,14 +506,14 @@ public class Processor : INotifyPropertyChanged {
             Lux.Draw (EDraw.LineStrip, [arcPoints[^1], arcPoints[^1]]);
          }
       });
-      
-      mDispatcher.Invoke (() => {
+
+      Application.Current.Dispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G0SegColor;
          Lux.Draw (EDraw.Lines, G0DrawPoints);
       });
-      
-      mDispatcher.Invoke (() => {
+
+      Application.Current.Dispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G1SegColor;
          Lux.Draw (EDraw.Lines, G1DrawPoints);
