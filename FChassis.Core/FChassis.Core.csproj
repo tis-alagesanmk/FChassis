@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<ItemGroup>
+	<PropertyGroup>
+		<OutDir>C:\FluxSDK\Bin</OutDir>
+	</PropertyGroup>
+	<ItemGroup>		
 		<Reference Include="Flux.API">
 			<HintPath>C:\FluxSDK\Bin\Flux.API.dll</HintPath>
 		</Reference>

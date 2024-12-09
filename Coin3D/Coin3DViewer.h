@@ -22,12 +22,12 @@ using namespace Flux::API;
 class GCodeDrawing { 
 public:
 	typedef void (*FNCreateShape)(SoSeparator* pSep, int count);
-	void createShape (SoSeparator* root, SoSeparator*& contianer,
+	void createShape (SoSeparator* root, SoSeparator*& container,
 					  SoMaterial*& rpMaterial, SoCoordinate3*& rpCoord3,
 					  FNCreateShape pCreateShapeFN, int count = 0)	{ 
 		//assert(pCreateShape);
-		SoSeparator* pSep = &*contianer;
-		if (nullptr != pSep) {
+		SoSeparator* pSep = container;
+		if (nullptr == pSep) {
 			pSep = new SoSeparator();
 
 			rpMaterial = new SoMaterial;
@@ -37,9 +37,9 @@ public:
 			pSep->addChild(rpCoord3);
 
 			pCreateShapeFN(pSep, count);
-
+			 
 			root->addChild(pSep);
-			contianer = pSep;
+			container = pSep;
 		}
 		else {
 			rpMaterial = (SoMaterial*)pSep->getChild(0);
@@ -170,9 +170,9 @@ public:
 			color.B / 255.0f); }
 
 public: 
-	SoSeparator* lineSegs[4];
-	SoSeparator* wayPoints[2];
-	SoSeparator* segs[1];
+	SoSeparator* lineSegs[4] = {nullptr, nullptr, nullptr, nullptr};
+	SoSeparator* wayPoints[2] = { nullptr };
+	SoSeparator* segs[1] = { nullptr };
 };
 
 namespace Coin3D { namespace Inventor {

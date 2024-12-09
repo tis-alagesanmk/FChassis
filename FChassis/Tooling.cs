@@ -48,9 +48,9 @@ public class Tooling {
       Kind = kind; Work = wp; }
       
    public Tooling Clone () {
-      PointVecList pointVecs = new ();
-      var _postRoute = this.PostRoute.Select (pv => new PointVec (pv.Pt, pv.Vec)).ToList ();
-      pointVecs.AddRange(_postRoute);
+      PointVecList _postRoute = new ();
+      var _postRouteCopy = this.PostRoute.Select (pv => new PointVec (pv.Pt, pv.Vec)).ToList ();
+      _postRoute.AddRange(_postRouteCopy);
 
       // Create a new Tooling object
       var clonedTooling = new Tooling (this.Work, this.Kind) {
@@ -65,7 +65,7 @@ public class Tooling {
          IsSingleHead1 = this.IsSingleHead1,
          IsSingleHead2 = this.IsSingleHead2,
          mHead = this.mHead,
-         PostRoute = pointVecs,
+         PostRoute = _postRoute,
          ShouldConsiderReverseRef = this.ShouldConsiderReverseRef
       };
 
@@ -219,15 +219,15 @@ public class Tooling {
       for (int i = 1; i < pvs.Count; i++) {
          PointVec pv0 = pvs[i - 1].PV, pv1 = pvs[i].PV;
          Lux.Draw (EDraw.Lines, [pv0.Pt + pv0.Vec * height, pv1.Pt + pv1.Vec * height]);
-         ptList.Add (pv0.Pt + pv0.Vec * height);
-         ptList.Add (pv1.Pt + pv1.Vec * height);
+         //ptList.Add (pv0.Pt + pv0.Vec * height);
+         //ptList.Add (pv1.Pt + pv1.Vec * height);
       }
 
       foreach (var (pv, stencil) in pvs) {
          if (stencil) {
             Lux.Draw (EDraw.Lines, [pv.Pt, pv.Pt + pv.Vec * height]);
-            ptList.Add (pv.Pt);
-            ptList.Add (pv.Pt + pv.Vec * height);
+            //ptList.Add (pv.Pt);
+            //ptList.Add (pv.Pt + pv.Vec * height);
          }
       }
 
