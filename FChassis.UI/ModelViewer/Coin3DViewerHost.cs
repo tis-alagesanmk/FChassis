@@ -1,5 +1,8 @@
-﻿using Avalonia.Controls;
+﻿using FChassis.Processes;
+
+using Avalonia.Controls;
 using Avalonia.Platform;
+
 using System;
 using System.Runtime.InteropServices;
 
@@ -9,7 +12,8 @@ public partial class Coin3DViewerHost : NativeControlHost {
    protected override IPlatformHandle CreateNativeControlCore (IPlatformHandle hostHandle) {
       if (RuntimeInformation.IsOSPlatform (OSPlatform.Windows)) {
          var nativeHandle = ((IPlatformHandle)hostHandle).Handle;
-         this.viewer = new Coin3D.Inventor.Viewer ();
+         this.viewer = Processor.viewer;
+         //new Coin3D.Inventor.Viewer ();
          IntPtr handle = this.viewer.Create (nativeHandle);
 
          return new PlatformHandle (handle, "Handle");
@@ -23,6 +27,7 @@ public partial class Coin3DViewerHost : NativeControlHost {
          WinApi.DestroyWindow (control.Handle); // destroy the win32 window
          return;
       }
+
       base.DestroyNativeControlCore (control);
    }
 }

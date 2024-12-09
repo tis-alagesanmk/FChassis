@@ -1,11 +1,12 @@
 ﻿using FChassis.GCodeGen;
 using FChassis.Tools;
+using FChassis.Core.Drawing;
+
 using Flux.API;
-using System.Collections.Generic;
+
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
-using System.Windows.Threading;
+
 namespace FChassis.Processes;
 
 /// <summary>Processor is used to generate G-Code, and the Traces for simulation</summary>
@@ -400,6 +401,7 @@ public class Processor : INotifyPropertyChanged {
       }
    }
 
+   public static Coin3D.Inventor.Viewer viewer = new ();
    public void DrawGCode (List<GCodeSeg>[] cutScopeTooling) {
       List<List<GCodeSeg>> listOfListOfDrawables = [];
       if (cutScopeTooling[0].Count > 0) 
@@ -409,8 +411,8 @@ public class Processor : INotifyPropertyChanged {
          listOfListOfDrawables.Add (cutScopeTooling[1]);
       
       //List<Action> drawActions = [];
-      List<Point3> G0DrawPoints = [], G1DrawPoints = [];
-      List<List<Point3>> G2DrawPoints = [], G3DrawPoints = [];
+      Point3List G0DrawPoints = [], G1DrawPoints = [];
+      Point3ListList G2DrawPoints = [], G3DrawPoints = [];
       foreach (var drawables in listOfListOfDrawables) {
          foreach (var gcseg in drawables) {
             var seg = gcseg;
@@ -430,7 +432,7 @@ public class Processor : INotifyPropertyChanged {
                }
             } else if (seg.IsArc ()) {
                var arcPointVecs = Utils.DiscretizeArc (seg, 50);
-               List<Point3> arcPts = [];
+               Point3List arcPts = [];
                if (seg.GCode == EGCode.G3) {
                   segColor = Color32.Cyan;
                   foreach (var ptVec in arcPointVecs) arcPts.Add (ptVec.Item1);
@@ -447,6 +449,14 @@ public class Processor : INotifyPropertyChanged {
       }
 
       AppUI.ThreadDispatcher.Invoke (() => {
+         viewer.UpdateGCodeLines (0, Utils.G0SegColor, G0DrawPoints, null);
+         viewer.UpdateGCodeLines (1, Utils.G1SegColor, G1DrawPoints, null);
+         viewer.UpdateGCodeLines (2, Utils.G2SegColor, null, G2DrawPoints);
+         viewer.UpdateGCodeLines (3, Utils.G3SegColor, null, G3DrawPoints);
+      });
+
+
+      /*AppUI.ThreadDispatcher.Invoke (() => {
          Lux.HLR = true;
          Lux.Color = Utils.G3SegColor;
          foreach (var arcPoints in G3DrawPoints) {
@@ -482,7 +492,7 @@ public class Processor : INotifyPropertyChanged {
          Lux.HLR = true;
          Lux.Color = Utils.G1SegColor;
          Lux.Draw (EDraw.Lines, G1DrawPoints);
-      });
+      });*/
    }
    #endregion
 }

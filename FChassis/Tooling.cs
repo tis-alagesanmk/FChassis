@@ -1,15 +1,9 @@
 ﻿using FChassis.GCodeGen;
+using FChassis.Core.Drawing;
 using Flux.API;
-using System.ComponentModel;
-namespace FChassis;
+using FChassis.Processes;
 
-public readonly struct PointVec {
-   public PointVec (Point3 pt, Vector3 vec) => (Pt, Vec) = (pt, vec);
-   public readonly Point3 Pt;
-   public readonly Vector3 Vec;
-   public readonly Point3 Lift (double offset) => Pt + Vec * offset;
-   public readonly double DistTo (PointVec rhs) => Pt.DistTo (rhs.Pt);
-}
+namespace FChassis;
 
 public enum EKind { Hole, Notch, Mark, Cutout };
 public enum ECutKind { YNegFlex, YNegToYPos, Top, 
@@ -54,6 +48,10 @@ public class Tooling {
       Kind = kind; Work = wp; }
       
    public Tooling Clone () {
+      PointVecList pointVecs = new ();
+      var _postRoute = this.PostRoute.Select (pv => new PointVec (pv.Pt, pv.Vec)).ToList ();
+      pointVecs.AddRange(_postRoute);
+
       // Create a new Tooling object
       var clonedTooling = new Tooling (this.Work, this.Kind) {
          SeqNo = this.SeqNo,
@@ -67,7 +65,7 @@ public class Tooling {
          IsSingleHead1 = this.IsSingleHead1,
          IsSingleHead2 = this.IsSingleHead2,
          mHead = this.mHead,
-         PostRoute = this.PostRoute.Select (pv => new PointVec (pv.Pt, pv.Vec)).ToList (),
+         PostRoute = pointVecs,
          ShouldConsiderReverseRef = this.ShouldConsiderReverseRef
       };
 
@@ -118,7 +116,7 @@ public class Tooling {
    public PointVec End 
       => Project (Traces[^1].Ent, Traces[^1].Trace.P2);
 
-   public List<PointVec> PostRoute = [];
+   public PointVecList PostRoute = [];
 
    public bool ShouldConsiderReverseRef { get; set; }
    void OffsetStartingTraceToE3PlaneRef () {
@@ -160,6 +158,13 @@ public class Tooling {
    }
 
    public void DrawWaypoints (Color32 color, double height) {
+      Color32 lineColor = new (96, color.R, color.G, color.B);
+      Point3List ptList = new ();
+      foreach (var ptVec in this.PostRoute)
+         ptList.Add (ptVec.Pt);
+
+      //Processor.viewer.UpdateToolWayPoints (lineColor, color, ptList, height);
+
       Lux.HLR = true;
       Lux.Color = new Color32 (96, color.R, color.G, color.B);
       for (int i = 1; i < PostRoute.Count; i++) {
@@ -209,16 +214,24 @@ public class Tooling {
          Lux.Draw (EDraw.Quad, [pv0.Pt, pv1.Pt, pv1.Pt + pv1.Vec * height, pv0.Pt + pv0.Vec * height]);
       }
 
+      Point3List ptList = new ();
       Lux.Color = color;
       for (int i = 1; i < pvs.Count; i++) {
          PointVec pv0 = pvs[i - 1].PV, pv1 = pvs[i].PV;
          Lux.Draw (EDraw.Lines, [pv0.Pt + pv0.Vec * height, pv1.Pt + pv1.Vec * height]);
+         ptList.Add (pv0.Pt + pv0.Vec * height);
+         ptList.Add (pv1.Pt + pv1.Vec * height);
       }
 
       foreach (var (pv, stencil) in pvs) {
-         if (stencil) 
+         if (stencil) {
             Lux.Draw (EDraw.Lines, [pv.Pt, pv.Pt + pv.Vec * height]);
+            ptList.Add (pv.Pt);
+            ptList.Add (pv.Pt + pv.Vec * height);
+         }
       }
+
+      //Processor.viewer.UpdateSegs (color, ptList);
    }
 
    public void DrawSeqNo (double height) {

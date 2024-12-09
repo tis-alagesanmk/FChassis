@@ -20,8 +20,8 @@ public partial class ModelViewer : Child {
       if(this.FChassisHost != null)
          this.FChassisHost.Content = new FChassisMainWindowHost ();
 
-      if(this.Coin3dHost != null)
-         this.Coin3dHost.Content = new Coin3DViewerHost ();
+      if(this.Coin3DHost != null)
+         this.Coin3DHost.Content = new Coin3DViewerHost ();
 
       Logger.SetControl (this.LogTextBlock);
 
@@ -56,11 +56,11 @@ public partial class ModelViewer : Child {
       this.Files = this.FindControl<ListBox> ("Files");
       this.LogTextBlock = this.FindControl<TextBlock> ("LogTextBlock");
       this.FChassisHost = this.FindControl<ContentControl> ("FChassisHost");
-      this.Coin3dHost = this.FindControl<ContentControl> ("Coin3dHost");
+      this.Coin3DHost = this.FindControl<ContentControl> ("Coin3DHost");
    }
 
    ContentControl? FChassisHost = null!;
-   ContentControl? Coin3dHost = null!;
+   ContentControl? Coin3DHost = null!;
    TextBlock? LogTextBlock = null!;
    ListBox? Files = null!;
    #endregion "Element NameField"

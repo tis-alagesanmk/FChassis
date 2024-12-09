@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
+	<ItemGroup>
+		<Reference Include="Flux.API">
+			<HintPath>C:\FluxSDK\Bin\Flux.API.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 </Project>

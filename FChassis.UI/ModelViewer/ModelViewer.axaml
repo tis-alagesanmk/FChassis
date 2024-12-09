@@ -66,7 +66,7 @@
 							HorizontalAlignment="Stretch"
 							HorizontalContentAlignment="Stretch"/>
 			<ContentControl Grid.Column="1"
-							x:Name="Coin3dHost"
+							x:Name="Coin3DHost"
 							Background="LightGray"
 							HorizontalAlignment="Stretch"
 							HorizontalContentAlignment="Stretch"/>

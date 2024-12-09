@@ -16,6 +16,7 @@
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Coin3D\Coin3D.vcxproj" />
     <ProjectReference Include="..\FChassis.Core\FChassis.Core.csproj" />
   </ItemGroup>
 

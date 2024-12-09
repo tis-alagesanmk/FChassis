@@ -152,6 +152,16 @@
   <ItemGroup>
     <Image Include="app.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FChassis.Core\FChassis.Core.csproj">
+      <Project>{b6acd112-6eb7-4649-b291-f8fe1ad5d8d7}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Flux.API">
+      <HintPath>C:\FluxSDK\bin\Flux.API.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
