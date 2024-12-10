@@ -293,6 +293,7 @@ public class JSONFileRead : FileRead {
       return Read (path);
    }
 
+#pragma warning disable CS0162
    public override bool Read (string path) {
       return true;
       if (!System.IO.File.Exists (path))
@@ -311,6 +312,7 @@ public class JSONFileRead : FileRead {
 
       return this.readObject (this.rootNode, null!, ref reader);
    }
+#pragma warning restore CS0162
    #endregion Method
 
    #region Implement

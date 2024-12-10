@@ -49,44 +49,51 @@ public:
 
 	void UpdateSepDraw(SoSeparator* root, SoSeparator** ppArray, int index, Color32 color,
 				       Point3List^ pts, Point3ListList^ ptsList = nullptr, 
-					   Point3List^ ptQuadList = nullptr, double height = 0) {
+					   Point3List^ ptQuadList = nullptr) {
 		SoMaterial* pMaterial; SoCoordinate3* pCoord3;
-
-		if(nullptr != pts || nullptr != ptsList)
+		if (nullptr != pts || nullptr != ptsList) {
 			this->createShape(root, ppArray[index], pMaterial, pCoord3, _createLineSet);
+			this->_setColor(pMaterial, color);
 
-		this->_setColor(pMaterial, color);
+			/*const float hc[][3] = {
+				{1.1f, 2.2f, 3.3f},
+				{4.4f, 5.5f, 6.6f},
+				{117.7f, 8.8f, 119.9f} };
+			pCoord3->point.setValues(0, 3, hc);-*/
+		}
+
 		if (nullptr != pts)
-			this->_drawLines(pCoord3, pts);
+			this->_updateCoord3Values(pCoord3, pts);
 
 		if (nullptr != ptsList)
 			for each (auto pts in ptsList)
-				this->_drawLines(pCoord3, pts);
+				this->_updateCoord3Values(pCoord3, pts); 
 
-		if (nullptr != ptQuadList) {
+		if (nullptr != ptQuadList && ptQuadList->Count > 0) {
 			this->createShape(root, ppArray[index], pMaterial, pCoord3, _createQuadMesh);
-			this->_drawQuads(pCoord3, ptQuadList, height);
+			this->_setColor(pMaterial, color);
+			this->_updateCoord3Values(pCoord3, ptQuadList, false);
 		}
 	}
 
 	void UpdateGCodeLines(SoSeparator* root, int index, Color32 color,
-					     Point3List^ pts, Point3ListList^ ptsList) {
-		UpdateSepDraw(root, this->lineSegs, index, color, pts, ptsList); }
-
-	void UpdateToolWayPoints(SoSeparator* root, Color32 lineColor, Color32 quadColor,
-						     Point3List^ ptList, double height) {
-		// Draw Line
-		UpdateSepDraw(root, this->wayPoints, 0, lineColor, ptList);
-
-		// Draw Quad
-		UpdateSepDraw(root, this->wayPoints, 1, quadColor, ptList,
-					  nullptr, nullptr, height);
+					      Point3List^ pts, Point3ListList^ ptsList) {
+		UpdateSepDraw(root, this->lineSegs, index, color, pts);
+		UpdateSepDraw(root, this->lineSegs, index, color, nullptr, ptsList);
 	}
 
-	void UpdateSegs(SoSeparator* root, Color32 color,
-					Point3List^ ptList) {
-		// Draw Line
-		UpdateSepDraw(root, this->segs, 0, color, ptList); }
+	void UpdateToolWayPoints(SoSeparator* root, 
+							 Color32 lineColor, Point3List^ linePtList, 
+							 Color32 quadColor, Point3List^ quadPtList) {
+		UpdateSepDraw(root, this->wayPoints, 0, lineColor, linePtList);
+		UpdateSepDraw(root, this->wayPoints, 1, quadColor, nullptr, nullptr, quadPtList);
+	}
+
+	void UpdateSegs(SoSeparator* root, 
+				    Color32 lineColor, Point3List^ linePtList,
+					Color32 quadColor, Point3List^ quadPtList) {
+		UpdateSepDraw(root, this->segs, 0, lineColor, linePtList);
+		UpdateSepDraw(root, this->segs, 1, quadColor, nullptr, nullptr, quadPtList); }
 
 	static void _createLineSet(SoSeparator* pSep, int count) {
 		SoLineSet* pLineSet = new SoLineSet();
@@ -100,68 +107,32 @@ public:
 
 		pSep->addChild(mesh); }
 
-	void _drawLines (SoCoordinate3* pCoord3, Point3List^ pts) {
-		if (pts->Count <= 0)
-			return;
-
-		int p = 0;
-		float(*xyzs)[3] = new float[pts->Count + 1][3];
-		for each (auto pt in pts)
-			_updateValues(xyzs[p++], pt);
-
-		_updateValues(xyzs[0], pts[0]);
-
-		pCoord3->point.setValues(0, pts->Count + 1, xyzs);
-		delete[] xyzs;		
-	}
-
-	void _updateValues (float* xyzs, Point3 pt) {
-		float* xyz = xyzs;
-		*xyz++ = (float)pt.X;
-		*xyz++ = (float)pt.Y;
-		*xyz++ = (float)pt.Z;
-	}
-
-	void _drawQuads(SoCoordinate3* pCoord3, Point3List^ ptList, double height) {
+	void _updateCoord3Values(SoCoordinate3* pCoord3, Point3List^ ptList, bool forLine = true) {
 		if (ptList->Count <= 0)
 			return;
 
 		int p = 0;
-		Point3^ pt = gcnew Point3();
-		Point3^ pt0;
-		Point3^ pt1;
-		float(*xyzs)[3] = new float[ptList->Count * 5][3];
-		for each (auto _pt in ptList) {
-			pt1 = pt;
-			if (p > 0) {
-				_updateValues(xyzs[p++], pt0);
-				_updateValues(xyzs[p++], pt1);
+		int count = ptList->Count + forLine ? 1 : 0;
+		float* xyzs = new float[count * 3];
+		float* xyz = xyzs;
+		for each(auto pt in ptList) {
+			//_updateCoord3Value(xyz, pt);
+			//xyz[p++] = (float)pt.X;
+			//xyz[p++] = (float)pt.Y;
+			//xyz[p++] = (float)pt.Z;
+		}
 
-				pt = *(gcnew Point3 (pt1->X + pt1->X * height,
-									 pt1->Y + pt1->Y * height,
-									 pt1->Z + pt1->Z * height));
-				_updateValues(xyzs[p++], pt);
+		/*if (forLine)
+			_updateCoord3Value (xyz, ptList[0]);*/
 
-				pt = *(gcnew Point3(pt0->X + pt0->X * height,
-									pt0->Y + pt0->Y * height,
-									pt0->Z + pt0->Z * height));
-				_updateValues(xyzs[p++], pt);
-
-				_updateValues(xyzs[p++], pt0);
-			}
-			
-			pt0 = pt1; 
-		}		
-
-		pCoord3->point.setValues(0, ptList->Count, xyzs);
+		pCoord3->point.setValues (0, count, reinterpret_cast<const float(*)[3]>(xyzs));
 		delete[] xyzs;
 	}
 
-	void _updateValues(float* xyzs, Point3^ pt) {
-		float* xyz = xyzs;
-		*xyz++ = (float)pt->X;
-		*xyz++ = (float)pt->Y;
-		*xyz++ = (float)pt->Z;
+	void _updateCoord3Value (float*& xyz, Point3 pt) {
+		*xyz++ = (float)pt.X;
+		*xyz++ = (float)pt.Y;
+		*xyz++ = (float)pt.Z;
 	}
 
 	void _setColor(SoMaterial* pMaterial, Color32 color) { 
@@ -171,8 +142,8 @@ public:
 
 public: 
 	SoSeparator* lineSegs[4] = {nullptr, nullptr, nullptr, nullptr};
-	SoSeparator* wayPoints[2] = { nullptr };
-	SoSeparator* segs[1] = { nullptr };
+	SoSeparator* wayPoints[2] = { nullptr, nullptr };
+	SoSeparator* segs[2] = { nullptr, nullptr };
 };
 
 namespace Coin3D { namespace Inventor {
@@ -233,13 +204,17 @@ public:
 	void UpdateGCodeLines(int index, Color32 color, Point3List^ pts, Point3ListList^ ptsList) {
 		this->gcodeDrawing->UpdateGCodeLines(this->root, index, color, pts, ptsList); }
 
-	void UpdateToolWayPoints(Color32 lineColor, Color32 quadColor, 
-							 Point3List^ ptList, double height) {
-		this->gcodeDrawing->UpdateToolWayPoints(this->root, lineColor, quadColor, 
-												ptList, height); }
+	void UpdateToolWayPoints(Color32 lineColor, Point3List^ linePtList, 
+							 Color32 quadColor, Point3List^ quadPtList) {
+		this->gcodeDrawing->UpdateToolWayPoints(this->root, 
+												lineColor, linePtList, 
+												quadColor, quadPtList); }
 
-	void UpdateSegs(Color32 color, Point3List^ ptList) {
-		this->gcodeDrawing->UpdateSegs(this->root, color, ptList); }
+	void UpdateSegs(Color32 lineColor, Point3List^ linePtList, 
+					Color32 quadColor, Point3List^ quadPtList) {
+		this->gcodeDrawing->UpdateSegs(this->root, 
+									   lineColor, linePtList,
+									   quadColor, quadPtList); }
 
 protected:
 	SoWinExaminerViewer* renderarea = NULL;

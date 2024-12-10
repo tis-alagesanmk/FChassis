@@ -158,20 +158,21 @@ public class Tooling {
    }
 
    public void DrawWaypoints (Color32 color, double height) {
-      Color32 lineColor = new (96, color.R, color.G, color.B);
-      Point3List ptList = new ();
-      foreach (var ptVec in this.PostRoute)
-         ptList.Add (ptVec.Pt);
-
-      //Processor.viewer.UpdateToolWayPoints (lineColor, color, ptList, height);
-
       Lux.HLR = true;
-      Lux.Color = new Color32 (96, color.R, color.G, color.B);
+      Color32 quadColor = new (96, color.R, color.G, color.B);
+      Lux.Color = quadColor;
+      Point3List quadPtList = new ();
       for (int i = 1; i < PostRoute.Count; i++) {
          PointVec pv0 = PostRoute[i - 1], pv1 = PostRoute[i];
          Lux.Draw (EDraw.Quad, [pv0.Pt, pv1.Pt, 
                                 pv1.Pt + pv1.Vec * height, 
                                 pv0.Pt + pv0.Vec * height]);
+
+         quadPtList.Add (pv0.Pt);
+         quadPtList.Add (pv1.Pt);
+         quadPtList.Add (pv1.Pt + pv1.Vec * height);
+         quadPtList.Add (pv0.Pt + pv0.Vec * height);
+         quadPtList.Add (pv0.Pt);
       }
 
       Lux.Color = color;
@@ -179,6 +180,12 @@ public class Tooling {
          PointVec pv0 = PostRoute[i - 1], pv1 = PostRoute[i];
          Lux.Draw (EDraw.Lines, [pv0.Pt, pv1.Pt]);
       }
+
+      Point3List linePtList = new ();
+      foreach (var ptVec in this.PostRoute)
+         linePtList.Add (ptVec.Pt);
+
+      //Processor.viewer.UpdateToolWayPoints (color, linePtList, quadColor, quadPtList);
    }
 
    public double Perimeter {
@@ -208,30 +215,40 @@ public class Tooling {
             pvs.Add ((new (Curve.End, Vec1), true));
       }
 
-      Lux.Color = new Color32 (96, color.R, color.G, color.B);
+      Point3List quadPtList = new ();
+      Color32 quadColor = new Color32 (96, color.R, color.G, color.B);
+      Lux.Color = quadColor;
       for (int i = 1; i < pvs.Count; i++) {
          PointVec pv0 = pvs[i - 1].PV, pv1 = pvs[i].PV;
          Lux.Draw (EDraw.Quad, [pv0.Pt, pv1.Pt, pv1.Pt + pv1.Vec * height, pv0.Pt + pv0.Vec * height]);
+
+         quadPtList.Add (pv0.Pt);
+         quadPtList.Add (pv1.Pt);
+         quadPtList.Add (pv1.Pt + pv1.Vec * height);
+         quadPtList.Add (pv0.Pt + pv0.Vec * height);
+         quadPtList.Add (pv0.Pt);
       }
 
-      Point3List ptList = new ();
+      Point3List linePtList = new ();
       Lux.Color = color;
       for (int i = 1; i < pvs.Count; i++) {
          PointVec pv0 = pvs[i - 1].PV, pv1 = pvs[i].PV;
          Lux.Draw (EDraw.Lines, [pv0.Pt + pv0.Vec * height, pv1.Pt + pv1.Vec * height]);
-         //ptList.Add (pv0.Pt + pv0.Vec * height);
-         //ptList.Add (pv1.Pt + pv1.Vec * height);
+
+         linePtList.Add (pv0.Pt + pv0.Vec * height);
+         linePtList.Add (pv1.Pt + pv1.Vec * height);
       }
 
       foreach (var (pv, stencil) in pvs) {
          if (stencil) {
             Lux.Draw (EDraw.Lines, [pv.Pt, pv.Pt + pv.Vec * height]);
-            //ptList.Add (pv.Pt);
-            //ptList.Add (pv.Pt + pv.Vec * height);
+
+            linePtList.Add (pv.Pt);
+            linePtList.Add (pv.Pt + pv.Vec * height);
          }
       }
 
-      //Processor.viewer.UpdateSegs (color, ptList);
+      //Processor.viewer.UpdateSegs (color, linePtList, quadColor, quadPtList);
    }
 
    public void DrawSeqNo (double height) {

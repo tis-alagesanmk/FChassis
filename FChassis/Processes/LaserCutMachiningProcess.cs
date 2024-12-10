@@ -448,12 +448,12 @@ public class Processor : INotifyPropertyChanged {
          }
       }
 
-      AppUI.ThreadDispatcher.Invoke (() => {
+      //AppUI.ThreadDispatcher.Invoke (() => {
          viewer.UpdateGCodeLines (0, Utils.G0SegColor, G0DrawPoints, null);
-         viewer.UpdateGCodeLines (1, Utils.G1SegColor, G1DrawPoints, null);
-         viewer.UpdateGCodeLines (2, Utils.G2SegColor, null, G2DrawPoints);
-         viewer.UpdateGCodeLines (3, Utils.G3SegColor, null, G3DrawPoints);
-      });
+         //viewer.UpdateGCodeLines (1, Utils.G1SegColor, G1DrawPoints, null);
+         //viewer.UpdateGCodeLines (2, Utils.G2SegColor, null, G2DrawPoints);
+         //viewer.UpdateGCodeLines (3, Utils.G3SegColor, null, G3DrawPoints);
+      //});
 
 
       /*AppUI.ThreadDispatcher.Invoke (() => {

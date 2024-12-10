@@ -13,4 +13,9 @@
   <ItemGroup>
     <ProjectReference Include="..\FChassis.Core\FChassis.Core.csproj" />
   </ItemGroup>
+
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);MSB3277</NoWarn>
+		<ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+	</PropertyGroup>
 </Project>
